@@ -9,6 +9,8 @@ import LiveAuction from '../components/layouts/home-3/LiveAuction';
 
 
 import 'react-tabs/style/react-tabs.css';
+import ReactHtmlParser from 'react-html-parser';
+
 
 import TodayPicks from '../components/layouts/explore-03/TodayPicks';
 import todayPickData from '../assets/fake-data/data-today-pick';
@@ -76,7 +78,7 @@ const ItemDetails01 = () => {
                             <div className="content-right">
                                 <div className="sc-item-details">
                                     <h2 className="style2">{itemData.title} </h2>
-                                   <div> {itemData.body}</div>
+                                   <div>   {ReactHtmlParser(itemData.body)}</div>
                                     <div className="meta-item-details style2">
                                         <div className="item meta-price">
                                             <span className="heading">Price</span>
@@ -88,11 +90,26 @@ const ItemDetails01 = () => {
                                         </div>
                                         
                                     </div>
-                                    <Link to="/wallet-connect" className="sc-button loadmore style bag fl-button pri-3"><span>Book Via Whatsapp Now</span></Link>
+                                    <Link to="/wallet-connect" className="sc-button loadmore style bag fl-button pri-3"><span>Chat to us via Whatsapp</span></Link>
+                                    <h2 className="tf-title-heading style-2 mg-bt-12">
+                                        Write a review for this experience                         
+                                    </h2>
+                                   
+                                    <div className="form-inner">
+                                        <form id="contactform" noValidate="novalidate" className="form-submit" >
+                                            <input id="name" name="name" tabIndex="1" aria-required="true" type="text" placeholder="Your Name" required />
+                                            <input id="email" name="email" tabIndex="2"  aria-required="true" type="email" placeholder="Your Email Address" required />
+                                            
+                                            <textarea id="message" name="message" tabIndex="3" aria-required="true" required placeholder="Message"></textarea>
+                                            <button className="submit">What do you have to say about this experience?</button>
+                                        </form>
+                                    </div>
                                     <div className="flat-tabs themesflat-tabs">
                                     
                                     </div>
+                                    
                                 </div>
+                                
                             </div>
                             
                         </div>
@@ -107,28 +124,29 @@ const ItemDetails01 = () => {
                     <div className="row">
                      
                         <div className="col-xl-12 col-md-12">
+                            
                             <div className="content-right">
                                 <div className="sc-item-details">
-                                <h2 className="tf-title-heading style-2 mg-bt-12">
-                    Ready to book your experience?                            
-                </h2>
-                <h5 className="sub-title style-1">
-                    Then fill out that form below and we will get back to you asap! 
-                </h5>
-                <div className="form-inner">
-                    <form id="contactform" noValidate="novalidate" className="form-submit" >
-                        <input id="name" name="name" tabIndex="1" aria-required="true" type="text" placeholder="Your Full Name" required />
-                        <input id="email" name="email" tabIndex="2"  aria-required="true" type="email" placeholder="Your Email Address" required />
-                        <input id="number" name="number" tabIndex="2"  aria-required="true" type="text" placeholder="Your Contact Number" required />
+                                    <h2 className="tf-title-heading style-2 mg-bt-12">
+                                        Ready to book your experience?                            
+                                    </h2>
+                                    <h5 className="sub-title style-1">
+                                        Then fill out that form below and we will get back to you asap! 
+                                    </h5>
+                                    <div className="form-inner">
+                                        <form id="contactform" noValidate="novalidate" className="form-submit" >
+                                            <input id="name" name="name" tabIndex="1" aria-required="true" type="text" placeholder="Your Full Name" required />
+                                            <input id="email" name="email" tabIndex="2"  aria-required="true" type="email" placeholder="Your Email Address" required />
+                                            <input id="number" name="number" tabIndex="2"  aria-required="true" type="text" placeholder="Your Contact Number" required />
 
-                        
-                        <textarea id="message" name="message" tabIndex="3" aria-required="true" required placeholder="Message"></textarea>
-                        <button className="submit">Send message</button>
-                    </form>
-                </div>
+                                            
+                                            <textarea id="message" name="message" tabIndex="3" aria-required="true" required placeholder="Message"></textarea>
+                                            <button className="submit">Send message</button>
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
                             
+                            </div>
                         </div>
                         
                     </div>

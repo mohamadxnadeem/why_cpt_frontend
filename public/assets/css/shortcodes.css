@@ -1701,7 +1701,7 @@
 -------------------------------------------------------------- */
 .flat-title-page {
   position: relative;
-  background: url(../images/backgroup-secsion/img_bg_page_title.jpg) center
+  background: url(../images/backgroup-secsion/banner.png) center
     center no-repeat;
   background-size: cover;
   padding: 100px 0 20px;
@@ -1972,12 +1972,12 @@
 .flat-title-page.inner {
   padding: 139px 0 59px;
   position: relative;
-  background: url(../images/backgroup-secsion/img_bg_page_title_inner.jpg)
+  background: url(../images/backgroup-secsion/banner.png)
     center center no-repeat;
   background-size: cover;
 }
 .is_dark .flat-title-page.inner {
-  background: url(../images/backgroup-secsion/img_bg_page_title_dark.jpg) center
+  background: url(../images/backgroup-secsion/banner.png) center
     center no-repeat;
   background-size: cover;
 }

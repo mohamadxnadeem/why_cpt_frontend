@@ -2,9 +2,11 @@ import React, { useState, Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import Rating from '../../Rating'
 
 const TodayPicks = () => {
   const [data, setData] = useState([]);
+  
 
   useEffect(() => {
     // Fetch data from your API
@@ -51,7 +53,7 @@ const TodayPicks = () => {
                 pagination={{ clickable: true }}
                 scrollbar={{ draggable: true }}
               >
-                {data.slice(0, 7).map((item, index) => (
+                {data.slice(0, 10).map((item, index) => (
                   <SwiperSlide key={index}>
                     <div className="swiper-container show-shadow carousel auctions">
                       <div className="swiper-wrapper">
@@ -68,6 +70,16 @@ const TodayPicks = () => {
                                   <Link to={`/itemDetails01/${item.id}`}>{item.title}</Link>
                                 </h5>
                               </div>
+                              <div className="meta-info">
+                                <div className="author">
+                                  <div className="price">
+                                    <span>Usual Price</span>
+                                    <h5>{item.price}</h5>
+                                  </div>
+                                  
+                                </div>
+                              </div>
+
                               <div className="meta-info">
                                 <div className="author">
                                   <div className="price">
