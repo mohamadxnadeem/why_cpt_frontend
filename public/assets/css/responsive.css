@@ -694,8 +694,7 @@
   .swiper-pagination-bullets,
   .swiper-button-prev,
   .swiper-button-next{
-    display: none !important;
-  }
+padding-top: 100px;  }
   .content-left .media img,
   .tf-item-details.style-2 .content-right .meta-item-details .item-style-2,
   .tf-item-details.style-2 .meta-item .left,

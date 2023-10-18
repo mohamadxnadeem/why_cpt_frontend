@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 import { Link } from 'react-router-dom';
-import liveAuctionData from '../assets/fake-data/data-live-auction';
 import LiveAuction from '../components/layouts/home-3/LiveAuction';
+import Rating from '../components/Rating'
 
 
 import 'react-tabs/style/react-tabs.css';
 import ReactHtmlParser from 'react-html-parser';
 
 
-import TodayPicks from '../components/layouts/explore-03/TodayPicks';
-import todayPickData from '../assets/fake-data/data-today-pick';
 
-
+// ... (import statements)
 
 
 const ItemDetails01 = () => {
@@ -23,23 +20,30 @@ const ItemDetails01 = () => {
   const [itemData, setItemData] = useState(null);
   const [loading, setLoading] = useState(true);
 
+
   useEffect(() => {
-      fetch(`http://127.0.0.1:8000/api/experiences/${id}`)
+      fetch(`https://web-production-1ab9.up.railway.app/api/experiences/${id}/with-reviews`)
           .then((response) => response.json())
           .then((data) => {
               setItemData(data);
+              console.log('reviews data:', data)
+
               setLoading(false);
           })
           .catch((error) => {
               console.error('Error fetching data:', error);
           });
+
+       
+        
   }, [id]);
+
+
 
   if (loading) {
       return <p>Loading...</p>;
   }
 
-  console.log('this is the data:', itemData)
    
     return (
         <div className='item-details'>
@@ -50,13 +54,12 @@ const ItemDetails01 = () => {
                     <div className="row">
                         <div className="col-md-12">
                             <div className="page-title-heading mg-bt-12">
-                                <h1 className="heading text-center">Item Details 1</h1>
+                                <h1 className="heading text-center"> <Rating value={itemData.average_rating} color={'#f8e825'} /> {}</h1>
                             </div>
                             <div className="breadcrumbs style2">
                                 <ul>
-                                    <li><Link to="/">Home</Link></li>
-                                    <li><Link to="#">Explore</Link></li>
-                                    <li>Item Details 1</li>
+                                   
+                                    <li>Based on {itemData.reviews.length} reviews</li>
                                 </ul>
                             </div>
                         </div>
@@ -70,28 +73,55 @@ const ItemDetails01 = () => {
                         <div className="col-xl-6 col-md-12">
                             <div className="content-left">
                                 <div className="media">
-                                  <img src={itemData.cover_photo} alt={itemData.title} /> 
+                                  <img src={itemData.experience.cover_photo} alt={itemData.experience.title} /> 
                                 </div>
                             </div>
                         </div>
                         <div className="col-xl-6 col-md-12">
                             <div className="content-right">
+
                                 <div className="sc-item-details">
-                                    <h2 className="style2">{itemData.title} </h2>
-                                   <div>   {ReactHtmlParser(itemData.body)}</div>
+                                    <h2 className="style2">{itemData.experience.title} </h2>
+                                   <div>   {ReactHtmlParser(itemData.experience.body)}</div>
+
                                     <div className="meta-item-details style2">
                                         <div className="item meta-price">
-                                            <span className="heading">Price</span>
+                                            <span className="heading">Was</span>
                                             <div className="price">
                                                 <div className="price-box">
-                                                    <h5> {itemData.price}</h5>
+                                                    <s><h5> ${itemData.experience.price}</h5></s>
                                                 </div>
+                                                
                                             </div>
+                                            <span className="heading"> Now</span>
+
+                                            <div className="price">
+                                                <div className="price-box">
+                                                    <h5> ${itemData.experience.discountedprice}</h5>
+                                                </div>
+                                                
+                                            </div>
+
+                                            <span className="heading"> You Save</span>
+
+                                            <div className="saving">
+                                                <div className="price-box">
+                                                    <h5> ${itemData.what_you_save}</h5>
+                                                    
+                                                </div>
+                                                
+                                            </div>
+
+
                                         </div>
-                                        
                                     </div>
-                                    <Link to="/wallet-connect" className="sc-button loadmore style bag fl-button pri-3"><span>Chat to us via Whatsapp</span></Link>
-                                    <h2 className="tf-title-heading style-2 mg-bt-12">
+
+                                   
+
+                                    
+                                    <Link target='__blank' to="https://wa.link/1vg32z" className="sc-button loadmore style  fl-button pri-3"><span>Enquire via whatsapp</span></Link>
+
+                                    {/* <h2 className="tf-title-heading style-2 mg-bt-12">
                                         Write a review for this experience                         
                                     </h2>
                                    
@@ -104,10 +134,8 @@ const ItemDetails01 = () => {
                                             <button className="submit">What do you have to say about this experience?</button>
                                         </form>
                                     </div>
-                                    <div className="flat-tabs themesflat-tabs">
-                                    
-                                    </div>
-                                    
+                                 
+                                     */}
                                 </div>
                                 
                             </div>
@@ -117,9 +145,9 @@ const ItemDetails01 = () => {
                     </div>
                 </div>
             </div>
-            <LiveAuction data={liveAuctionData} />
+            <LiveAuction data={itemData.reviews} />
 
-            <div className="tf-section tf-item-details">
+            {/* <div className="tf-section tf-item-details">
                 <div className="themesflat-container">
                     <div className="row">
                      
@@ -156,12 +184,12 @@ const ItemDetails01 = () => {
             <br></br>
             <br></br>
 
-            </div>
+            </div> */}
            
             
 
             {/* <LiveAuction data={liveAuctionData} /> */}
-            <Footer />
+            {/* <Footer /> */}
         </div>
     );
 }

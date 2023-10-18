@@ -5,13 +5,13 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import Countdown from "react-countdown";
 import CardModal from '../CardModal';
+import Rating from '../../Rating'
 
 import 'swiper/scss';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 
-const LiveAuction = props => {
-    const data = props.data;
+const LiveAuction = ({data}) => {
 
     const [modalShow, setModalShow] = useState(false);
 
@@ -58,19 +58,22 @@ const LiveAuction = props => {
                                                             <div className="slider-item">										
                                                                 <div className="sc-card-product">
                                                                     <div className="card-media">
-                                                                        <img src={item.img} alt="axies" />
+                                                                        <img src={item.cover_photo} alt="axies" />
                                                                         
                                                                         
                                                                         
                                                                     </div>
                                                                     <div className="card-title">
-                                                                        <h5>{item.title}</h5>
+                                                                        <h5>{item.name}</h5>
+                                                                    </div>
+                                                                    <div className="card-title">
+                                                                        <h5><Rating value={item.rating} color={'#f8e825'} /></h5>
                                                                     </div>
                                                                     <div className="meta-info">
                                                                         <div className="author">
                                                                             
                                                                             <div className="info">
-                                                                                <h6> "{item.nameAuthor}""
+                                                                                <h6> "{item.comment}""
                                                                                  </h6>
                                                                             </div>
                                                                         </div>

@@ -248,6 +248,12 @@ p {
     color      : var(--primary-color4);
 }
 
+.saving{
+    background-color: red;
+    padding: 5px;
+    border-radius: 10px;
+}
+
 
 strong,
 b,

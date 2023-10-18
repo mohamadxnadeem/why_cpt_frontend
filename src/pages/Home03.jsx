@@ -1,12 +1,11 @@
 import React from 'react';
 import Header from '../components/header/Header';
-import liveAuctionData from '../assets/fake-data/data-live-auction';
 import heroSliderData from '../assets/fake-data/data-slider-3';
-import LiveAuction from '../components/layouts/home-3/LiveAuction';
 import Slider from '../components/slider/Slider';
 
 import TodayPicks from '../components/layouts/explore-03/TodayPicks';
 import Footer from '../components/footer/Footer';
+import FlipMove from 'react-flip-move'
 
 
 import ReactGA from "react-ga4";
@@ -58,8 +57,8 @@ const Home03 = () => {
                                                     
                 </div>
             </section>
-
-            <TodayPicks  />
+            
+                <TodayPicks  />
             
 
             {/* Accomodation Component */}
@@ -71,9 +70,8 @@ const Home03 = () => {
 
             
            
-            <LiveAuction data={liveAuctionData} />
 
-            <Footer />
+            {/* <Footer /> */}
 
 
             
