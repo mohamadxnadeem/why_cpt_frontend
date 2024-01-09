@@ -254,6 +254,9 @@ p {
     border-radius: 10px;
 }
 
+.saving h5{
+    color: white;
+}
 
 strong,
 b,
@@ -1068,7 +1071,7 @@ label.error { color: red; }
 }
 
 .pad-420{
-    padding: 0 420px;
+    padding: 0 220px;
 }
 
 .mg-t-10 {
@@ -2090,7 +2093,7 @@ header{
     box-shadow: 1px 1px 5px 0px rgb(0 0 0 / 30%);
     z-index   : 9999;
     background: linear-gradient(
-        227.3deg, #8A208C 0%, #181B81 100.84%);
+        227.3deg, #3889b8 0%, #0b3cc4 100.84%);
     border: none;
     opacity: 1;
     -webkit-transition: all 0.5s ease;
@@ -2323,7 +2326,7 @@ header{
 }
 
 .sub-title.small {
-    font-size: 14px;
+    font-size: 19px;
     line-height: 22px;
 }
 

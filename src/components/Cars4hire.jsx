@@ -1,24 +1,52 @@
+// Import necessary dependencies at the top of your file
 import React, { useState, useEffect, forwardRef, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-import Rating from '../../Rating';
+import Rating from './Rating';
 import FlipMove from 'react-flip-move';
+import { Blurhash } from 'react-blurhash';
 
-const TodayPicks = forwardRef((ref) => {
+const Cars4Hire = forwardRef((ref) => {
   const [data, setData] = useState([]);
+  const [blurhashArray, setBlurhashArray] = useState([]);
 
   useEffect(() => {
     // Fetch data from your API
-    fetch('https://web-production-1ab9.up.railway.app/api/experiences/with-reviews/')
+    fetch('https://web-production-1ab9.up.railway.app/api/cars-for-hire/all/')
       .then((response) => response.json())
       .then((data) => {
         setData(data);
+        console.log('this is the item data:', data)
+
+        // Fetch blurhash for each item
+        const blurhashPromises = data.slice(0, 10).map((item) =>
+          generateBlurhash(item.cover_photos[0].cover_photos)
+        );
+
+        Promise.all(blurhashPromises)
+          .then((hashArray) => setBlurhashArray(hashArray))
+          .catch((error) => console.error('Error fetching blurhash:', error));
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
+
+      console.log('this is the new ', data)
   }, []);
+
+  const generateBlurhash = async (imageUrl, width, height) => {
+    try {
+      const response = await fetch(imageUrl);
+      const blob = await response.blob();
+      const buffer = await blob.arrayBuffer();
+      const blurhash = Blurhash.encode(new Uint8Array(buffer), width, height);
+      return blurhash;
+    } catch (error) {
+      console.error('Error generating Blurhash:', error);
+      return null;
+    }
+  };
 
   return (
     <FlipMove>
@@ -27,9 +55,9 @@ const TodayPicks = forwardRef((ref) => {
           <div className="themesflat-container">
             <div className="row">
               <div className="col-12">
-                <h2 className="tf-title-heading ct style-2 mg-bt-13">Best Tours in Cape Town:</h2>
+                <h2 className="tf-title-heading ct style-2 mg-bt-13">Or rent a car with us: </h2>
                 <p className="sub-title ct small mg-bt-20 pad-420">
-                  Slide to see all the tours we offer and click for more info:
+                  Swipe to see our selections of vehicles available for you to hire and click for more info: 
                 </p>
                 <Swiper
                   modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -50,20 +78,32 @@ const TodayPicks = forwardRef((ref) => {
                         <div className="swiper-wrapper">
                           <div className="swiper-slide">
                             <div className="slider-item">
-                              <div className={`sc-card-product ${item.experience.feature ? 'comingsoon' : ''}`}>
+                              <div className={`sc-card-product ${item.car.feature ? 'comingsoon' : ''}`}>
                                 <div className="card-media">
-                                  <Link to={`/experience/${item.experience.id}`}>
-                                    <img
-                                      src={item.cover_photos[0].cover_photos}
-                                      alt={item.experience.title}
-                                      loading="lazy"
-                                      style={{ width: '100%', height: '100%' }}
-                                    />
+                                  <Link to={`/car-for-hire/${item.car.id}`}>
+
+                                    {blurhashArray[index] ? (
+                                      <Blurhash
+                                        hash={'LEHV6nWB2yk8pyo0adR*.7kCMdnj'}
+                                        width="100%"
+                                        height="100%"
+                                        resolutionX={32}
+                                        resolutionY={32}
+                                      />
+                                    ) : (
+                                      <img
+                                        src={item.cover_photos[0].cover_photos}
+                                        alt={item.car.title}
+                                        loading="lazy"
+                                        style={{ width: '100%', height: '100%' }}
+                                      />
+                                    )}
                                   </Link>
+
                                 </div>
                                 <div className="card-title">
                                   <h5 className="style2">
-                                    <Link to={`/experience/${item.experience.id}`}>{item.experience.title}</Link>
+                                    <Link to={`/car-for-hire/${item.car.id}`}>{item.car.title}</Link>
                                   </h5>
                                 </div>
                                 <div className="meta-info">
@@ -79,7 +119,7 @@ const TodayPicks = forwardRef((ref) => {
                                 <div className="meta-info">
                                   <div className="author">
                                     <div className="price">
-                                      <h5>Starting From ${item.experience.price}</h5>
+                                      <h5>Starting From ${item.car.price}</h5>
                                     </div>
                                   </div>
                                 </div>
@@ -100,4 +140,5 @@ const TodayPicks = forwardRef((ref) => {
   );
 });
 
-export default TodayPicks;
+export default Cars4Hire;
+

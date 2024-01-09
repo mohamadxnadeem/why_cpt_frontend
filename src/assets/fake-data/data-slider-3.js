@@ -11,7 +11,7 @@ const heroSliderData = [
     {
         title_1: "Discover Cape Town's",
         title_2: "Best Kept Secrets",
-        title_3: "with us 🤫",
+        title_3: "with us ",
         description: "Marketplace for monster character cllections non fungible token NFTs",
         class:'center'
     },

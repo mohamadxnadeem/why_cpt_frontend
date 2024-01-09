@@ -2,12 +2,10 @@ import React , { useRef , useState , useEffect } from 'react';
 import { Link , useLocation } from "react-router-dom";
 import menus from "../../pages/menu";
 import DarkMode from './DarkMode';
-import logoheader from '../../assets/images/logo/whycpt.png'
-import logoheader2x from '../../assets/images/logo/whycpt.png'
-import logodark from '../../assets/images/logo/whycpt.png'
-import logodark2x from '../../assets/images/logo/whycpt.png'
-import imgsun from '../../assets/images/icon/sun.png'
-import avt from '../../assets/images/avatar/avt-2.jpg'
+import logoheader from '../../assets/images/logo/logo.svg'
+import logoheader2x from '../../assets/images/logo/logo.svg'
+import logodark from '../../assets/images/logo/logo.svg'
+import logodark2x from '../../assets/images/logo/logo.svg'
 
 
 const Header = () => {
@@ -58,9 +56,12 @@ const Header = () => {
                                             <img className='logo-dark'  id="logo_header" src={logodark} srcSet={`${logodark2x}`} alt="nft-gaming" />
                                             <img className='logo-light'  id="logo_header" src={logoheader} srcSet={`${logoheader2x}`} alt="nft-gaming" />
                                         </Link>
+                                        
                                     </div>
+                                    <DarkMode />
+
                                 </div>
-                                <div className="mobile-button" ref={btnToggle} onClick={menuToggle}><span></span></div>
+                                {/* <div className="mobile-button" ref={btnToggle} onClick={menuToggle}><span></span></div> */}
                                 
                                 
                             </div> 
@@ -68,7 +69,6 @@ const Header = () => {
                     </div>
                 </div>
             </div>
-            <DarkMode />
         </header>
     );
 }

@@ -22,7 +22,7 @@ const LiveAuction = ({data}) => {
                     <div className="row">
                         <div className="col-md-12">
                             <div className="">
-                                <h2 className="tf-title">Here's what some of our clients have to say: </h2>
+                                <h2 className="tf-title">What our clients say about this tour: </h2>
                                 <div className="heading-line"></div>
                             </div>
                         </div>

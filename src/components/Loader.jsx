@@ -1,8 +1,20 @@
 import React from 'react'
+import { Spinner } from 'react-bootstrap'
 
 function Loader() {
   return (
-    <div>Loader</div>
+    <Spinner
+      animation='border'
+      role='status'
+      style={{
+        height:'100px',
+        width:'100px',
+        margin:'auto',
+        display:'block',
+      }}
+    >
+
+    </Spinner>
   )
 }
 

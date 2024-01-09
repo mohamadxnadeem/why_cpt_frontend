@@ -6,46 +6,12 @@ import 'swiper/scss';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 
-import img1 from '../../assets/images/box-item/img_cart_item3.png'
-import img2 from '../../assets/images/box-item/img_cart_item4.png'
-import img3 from '../../assets/images/box-item/img_cart_item5.png'
 
 
-const SliderStyle2 = () => {
-    const [data] = useState(
-        [
-            {
-                title: 'CYBER ART',
-                category: 'Graphic Art 3D',
-                img: img1
-            },
-            {
-                title: 'HOT lAVA',
-                category: 'Graphic Art 3D',
-                img: img2
-            },
-            {
-                title: 'LIVE ARTS',
-                category: 'Graphic Art 3D',
-                img: img3
-            },
-            {
-                title: 'CYBER ART',
-                category: 'Graphic Art 3D',
-                img: img1
-            },
-            {
-                title: 'HOT lAVA',
-                category: 'Graphic Art 3D',
-                img: img2
-            },
-            {
-                title: 'LIVE ARTS',
-                category: 'Graphic Art 3D',
-                img: img3
-            },
-        ]
-    )
+
+const SliderStyle2 = ({data}) => {
+    console.log('this is the slider data', data)
+
     return (
         <div>
             <section className="flat-cart-item home6 style2 mainslider">
@@ -96,7 +62,7 @@ const SliderItem = props => (
                     <div className="cart_item style2 style3">
                         <div className="inner-cart">
                             <div className="overlay"></div>
-                            <img src={props.item.img} alt="Axies" />
+                            <img src={props.item.cover_photos} alt="Axies" />
                             <div className="content">
                                 <div className="fs-16"><Link to="/item-details-01">{props.item.title}</Link></div>
                                 <p>{props.item.category}</p>

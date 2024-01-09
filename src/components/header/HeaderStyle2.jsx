@@ -52,7 +52,7 @@ const HeaderStyle2 = () => {
                                         </Link>
                                     </div>
                                 </div>
-                                <div className="mobile-button" ref={btnToggle} onClick={menuToggle}><span></span></div>
+                                {/* <div className="mobile-button" ref={btnToggle} onClick={menuToggle}><span></span></div> */}
                                 <div className="question-form">
                                     <form action="#" method="get">
                                         <input type="text" placeholder="Type to search..." required />
