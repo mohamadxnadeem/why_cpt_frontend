@@ -7,7 +7,7 @@ import Rating from './Rating';
 import FlipMove from 'react-flip-move';
 import { Blurhash } from 'react-blurhash';
 
-const Cars4Hire = forwardRef((ref) => {
+const TipsInCPT = forwardRef((ref) => {
   const [data, setData] = useState([]);
   const [blurhashArray, setBlurhashArray] = useState([]);
 
@@ -55,8 +55,10 @@ const Cars4Hire = forwardRef((ref) => {
           <div className="themesflat-container">
             <div className="row">
               <div className="col-12">
-                <h2 className="tf-title-heading ct style-2 mg-bt-13">Choose your dream car for a few days in Paradise </h2>
-            
+                <h2 className="tf-title-heading ct style-2 mg-bt-13">Or rent a car with us: </h2>
+                <p className="sub-title ct small mg-bt-20 pad-420">
+                  Swipe to see our selections of vehicles available for you to hire and click for more info: 
+                </p>
                 <Swiper
                   modules={[Navigation, Pagination, Scrollbar, A11y]}
                   spaceBetween={30}
@@ -138,5 +140,5 @@ const Cars4Hire = forwardRef((ref) => {
   );
 });
 
-export default Cars4Hire;
+export default TipsInCPT;
 

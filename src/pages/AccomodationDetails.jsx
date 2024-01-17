@@ -7,7 +7,6 @@ import LiveAuction from '../components/layouts/home-3/LiveAuction';
 import Rating from '../components/Rating';
 import Loader from '../components/Loader';
 import SliderStyle3 from '../components/slider/SliderStyle3';
-import Cars4Hire from '../components/Cars4hire';
 
 
 
@@ -19,17 +18,18 @@ import ReactHtmlParser from 'react-html-parser';
 // ... (import statements)
 
 
-const ItemDetails01 = () => {
+const LuxAccomodation = () => {
   const { id } = useParams();
   const [itemData, setItemData] = useState(null);
   const [loading, setLoading] = useState(true);
 
 
   useEffect(() => {
-      fetch(`https://web-production-1ab9.up.railway.app/api/experiences/${id}/with-reviews`)
+      fetch(`https://web-production-1ab9.up.railway.app/api/accomodation-for-hire/${id}/details/`)
           .then((response) => response.json())
           .then((data) => {
               setItemData(data);
+              console.log('reviews data:', data)
 
               setLoading(false);
           })
@@ -81,14 +81,14 @@ const ItemDetails01 = () => {
                             <div className="content-center">
 
                                 <div className="sc-item-details">
-                                   <div>   {ReactHtmlParser(itemData.experience.body)}</div>
+                                   <div>   {ReactHtmlParser(itemData.accomodation.body)}</div>
 
                                     <div className="meta-item-details style2">
                                         <div className="item meta-price">
                                             <span className="heading">Prices Starting from</span>
                                             <div className="price">
                                                 <div className="price-box">
-                                                    <h5> ${itemData.experience.price}</h5>
+                                                    <h5> ${itemData.accomodation.min_price}</h5>
                                                 </div>
                                                 
                                             </div>
@@ -104,7 +104,7 @@ const ItemDetails01 = () => {
                                     <Link target='__blank' to="https://wa.link/1vg32z" className="sc-button loadmore style  fl-button pri-3"><span>Enquire via whatsapp</span></Link>
 
                                     {/* <h2 className="tf-title-heading style-2 mg-bt-12">
-                                        Write a review for this experience                         
+                                        Write a review for this accomodation                         
                                     </h2>
                                    
                                     <div className="form-inner">
@@ -113,7 +113,7 @@ const ItemDetails01 = () => {
                                             <input id="email" name="email" tabIndex="2"  aria-required="true" type="email" placeholder="Your Email Address" required />
                                             
                                             <textarea id="message" name="message" tabIndex="3" aria-required="true" required placeholder="Message"></textarea>
-                                            <button className="submit">What do you have to say about this experience?</button>
+                                            <button className="submit">What do you have to say about this accomodation?</button>
                                         </form>
                                     </div>
                                  
@@ -129,7 +129,7 @@ const ItemDetails01 = () => {
             </div>
             <LiveAuction data={itemData.reviews} />
 
-            <Cars4Hire />
+           
 
             {/* <div>
             <div id="TA_cdswritereviewlgvi411" class="TA_cdswritereviewlgvi">
@@ -154,7 +154,7 @@ const ItemDetails01 = () => {
                             <div className="content-right">
                                 <div className="sc-item-details">
                                     <h2 className="tf-title-heading style-2 mg-bt-12">
-                                        Ready to book your experience?                            
+                                        Ready to book your accomodation?                            
                                     </h2>
                                     <h5 className="sub-title style-1">
                                         Then fill out that form below and we will get back to you asap! 
@@ -192,4 +192,4 @@ const ItemDetails01 = () => {
     );
 }
 
-export default ItemDetails01; 
+export default LuxAccomodation; 

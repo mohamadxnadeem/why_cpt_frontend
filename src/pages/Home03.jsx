@@ -3,11 +3,15 @@ import Header from '../components/header/Header';
 import heroSliderData from '../assets/fake-data/data-slider-3';
 import Slider from '../components/slider/Slider';
 
-import TodayPicks from '../components/layouts/explore-03/TodayPicks';
+
 import Footer from '../components/footer/Footer'
 
 
 import ReactGA from "react-ga4";
+import LuxuryAccomodation from '../components/LuxuryAccomodation';
+import Tours from '../components/Tours';
+import Cars4Hire from '../components/Cars4hire';
+
 
 
 
@@ -25,47 +29,13 @@ const Home03 = () => {
                 <div className="row">
                     <div className="col-12">
                         <h2 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                        Explore the best of the Cape in just 3 Days!
-                        </h2>
+                        You just found the best place to discover all Cape Town's secrets!                         </h2>
                        
 
                         <p className="sub-title ct small mg-bt-20 pad-420">
-                        If it's your first time in Cape Town and you don't want to miss out on all the hidden gems, then we have some good news for you. 
-
+                        You will find the best luxury accommodations, hidden gems, top restaurants and tours to show you "Why Cape Town" is the best city in the world! 
                         </p>
-                        <p className="sub-title ct small mg-bt-20 pad-420">
-                        You found the right website,
-                        </p>
-
-                        
-                    
-                        <p className="sub-title ct small mg-bt-20 pad-420">
-                        Because...                        
-                         </p>
-
-                        <h2 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                        We have over 40 Years experience,
-
-                        </h2>
                        
-
-                        <p className="sub-title ct small mg-bt-20 pad-420">
-                        And put together a few Tours to show you all the best spots in Cape Town, conducted by 100% local guides with good energy to make you laugh, take all your pictures and share the secrets of Cape Town with you, 
-                        </p>
-
-                        
-                        <h2 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                        We Guarantee a safe, fun experience that you'll never forget. 
-
-                        </h2>
-                       
-
-                       
-
-                        <p className="sub-title ct small mg-bt-20 pad-420">
-
-                        So book some of our tours so we can show you the secrets of our beautiful city and why Cape Town is the best city in the world! 
-                        </p>
 
 
 
@@ -78,9 +48,11 @@ const Home03 = () => {
                 </div>
             </section>
 
+                <LuxuryAccomodation/>   
+                <Tours  />
+                <Cars4Hire/>
 
-                <TodayPicks  />
-            
+                         
 
             {/* Accomodation Component */}
             {/* Experiences Component */}

@@ -18,6 +18,7 @@ const TodayPicks = forwardRef((ref) => {
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
+      console.log('data for experiences:', data)
   }, []);
 
   return (
