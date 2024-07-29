@@ -12,7 +12,7 @@ import Cars4Hire from '../components/Cars4hire';
 
 
 import 'react-tabs/style/react-tabs.css';
-import ReactHtmlParser from 'react-html-parser';
+import parse from 'html-react-parser';
 
 
 
@@ -88,7 +88,7 @@ const ItemDetails01 = () => {
                             <div className="content-center">
 
                                 <div className="sc-item-details">
-                                   <div>   {ReactHtmlParser(itemData.experience.body)}</div>
+                                   <div>   {parse(itemData.experience.body)}</div>
 
                                    
 

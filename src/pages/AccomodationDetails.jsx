@@ -11,7 +11,7 @@ import SliderStyle3 from '../components/slider/SliderStyle3';
 
 
 import 'react-tabs/style/react-tabs.css';
-import ReactHtmlParser from 'react-html-parser';
+import parse from 'html-react-parser';
 
 
 
@@ -81,7 +81,7 @@ const LuxAccomodation = () => {
                             <div className="content-center">
 
                                 <div className="sc-item-details">
-                                   <div>   {ReactHtmlParser(itemData.accomodation.body)}</div>
+                                   <div>   {parse(itemData.accomodation.body)}</div>
 
                                     {/* <div className="meta-item-details style2">
                                         <div className="item meta-price">
@@ -105,7 +105,7 @@ const LuxAccomodation = () => {
                                         <br></br>
                                         <br></br>
                                         <br></br>
-                                        
+
                                     {/* <h2 className="tf-title-heading style-2 mg-bt-12">
                                         Write a review for this accomodation                         
                                     </h2>

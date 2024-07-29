@@ -11,7 +11,7 @@ import SliderStyle3 from '../components/slider/SliderStyle3';
 
 
 import 'react-tabs/style/react-tabs.css';
-import ReactHtmlParser from 'react-html-parser';
+import parse from 'html-react-parser';
 
 
 
@@ -81,7 +81,7 @@ const CarDetails = () => {
                             <div className="content-center">
 
                                 <div className="sc-item-details">
-                                   <div>   {ReactHtmlParser(itemData.car.body)}</div>
+                                   <div>   {parse(itemData.car.body)}</div>
 
                                     <div className="meta-item-details style2">
                                         <div className="item meta-price">
