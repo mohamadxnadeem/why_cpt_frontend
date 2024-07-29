@@ -29,7 +29,7 @@ const Tours = forwardRef((ref) => {
             <div className="themesflat-container">
               <div className="row">
                 <div className="col-12">
-                  <h2 className="tf-title-heading ct style-2 mg-bt-13">And the Top 10 Accomodations are: </h2>
+                  <h2 className="tf-title-heading ct style-2 mg-bt-13">Swipe to see more </h2>
                 
                   <Swiper
                     modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -66,7 +66,8 @@ const Tours = forwardRef((ref) => {
                                       <Link to={`/accomodation/${item.accomodation.id}`}>{item.accomodation.title}</Link>
                                     </h5>
                                   </div>
-                                  <div className="meta-info">
+
+                                  {/* <div className="meta-info">
                                     <div className="author">
                                       <div className="review">
                                         <span>Based on {item.reviews.length} reviews</span>
@@ -82,7 +83,8 @@ const Tours = forwardRef((ref) => {
                                         <h5>From ${item.accomodation.min_price} Per Night</h5>
                                       </div>
                                     </div>
-                                  </div>
+                                  </div> */}
+
                                 </div>
                               </div>
                             </div>

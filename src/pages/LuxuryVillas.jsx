@@ -64,7 +64,11 @@ const LuxuryVillas = () => {
                 <div className="themesflat-container">
                         <div className="post">
                             <div className="inner-content">
-                                <h2 className="title-post">Perfect for Honeymooners, families and boys trips</h2>
+                                <h2 className="title-post">Perfect for: </h2>
+                                <h2 className="title-post">Romantic Getaways for newly weds,</h2>
+                                <h2 className="title-post">Family vacations,</h2>
+                                <h2 className="title-post">and Girls Trips!</h2>
+
                                 <div className="divider"></div>
                               
                                 {/* <div className="image">
@@ -72,11 +76,8 @@ const LuxuryVillas = () => {
                                 </div>  */}
                                 <div className="inner-post mg-t-40">
                                     <p className="mg-bt-24">
-                                    Experience the ultimate in luxury and comfort with Cape Town's top 3 accommodations, tailored to suit every occasion. Whether you're celebrating a honeymoon, enjoying a family vacation, or planning a boys' trip, these exclusive retreats offer everything you need for a memorable stay.
-
-
-
-</p>
+                                    We've put together the top luxury self catering accomadtions that Cape Town has to offer! Check out the accomodations below to find one that best suits your needs for the perfect vacation in the worlds top rated city.
+                                </p>
                                     {/* <h3 className="heading mg-bt-16">then you're at the right place! </h3>     */}
 
                                    

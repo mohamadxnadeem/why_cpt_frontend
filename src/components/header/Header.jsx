@@ -7,17 +7,20 @@ import logoheader2x from '../../assets/images/logo/logo.svg'
 import logodark from '../../assets/images/logo/logo.svg'
 import logodark2x from '../../assets/images/logo/logo.svg'
 
-
 const Header = () => {
     const { pathname } = useLocation();
 
-    const headerRef = useRef (null)
+    const headerRef = useRef(null);
+    const googleTranslateButton = useRef(null);
+
     useEffect(() => {
         window.addEventListener('scroll', isSticky);
+        initializeGoogleTranslate();
         return () => {
             window.removeEventListener('scroll', isSticky);
         };
-    });
+    }, []);
+
     const isSticky = (e) => {
         const header = document.querySelector('.js-header');
         const scrollTop = window.scrollY;
@@ -25,18 +28,36 @@ const Header = () => {
         scrollTop >= 400 ? header.classList.add('is-small') : header.classList.remove('is-small');
     };
 
-    const menuLeft = useRef(null)
-    const btnToggle = useRef(null)
-    const btnSearch = useRef(null)
+    const initializeGoogleTranslate = () => {
+        if (!window.googleTranslateElementInit) {
+            window.googleTranslateElementInit = function() {
+                new window.google.translate.TranslateElement({
+                    pageLanguage: 'en',
+                    includedLanguages: 'en,es,pt,de,ar',
+                    layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
+                    autoDisplay: false
+                }, 'google_translate_element');
+            };
+
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+            script.async = true;
+            document.body.appendChild(script);
+        }
+    };
+
+    const menuLeft = useRef(null);
+    const btnToggle = useRef(null);
 
     const menuToggle = () => {
         menuLeft.current.classList.toggle('active');
         btnToggle.current.classList.toggle('active');
-    }
-
-    const searchBtn = () => {
-        btnSearch.current.classList.toggle('active');
-    }
+        if (googleTranslateButton.current) {
+            googleTranslateButton.current.style.display = 
+                googleTranslateButton.current.style.display === 'none' ? 'block' : 'none';
+        }
+    };
 
     const [activeIndex, setActiveIndex] = useState(null);
     const handleOnClick = index => {
@@ -53,55 +74,50 @@ const Header = () => {
                                 <div id="site-logo" className="clearfix">
                                     <div id="site-logo-inner">
                                         <Link to="/" rel="home" className="main-logo">
-                                            <img className='logo-dark'  id="logo_header" src={logodark} srcSet={`${logodark2x}`} alt="nft-gaming" />
-                                            <img className='logo-light'  id="logo_header" src={logoheader} srcSet={`${logoheader2x}`} alt="nft-gaming" />
+                                            <img className='logo-dark' id="logo_header" src={logodark} srcSet={`${logodark2x}`} alt="nft-gaming" />
+                                            <img className='logo-light' id="logo_header" src={logoheader} srcSet={`${logoheader2x}`} alt="nft-gaming" />
                                         </Link>
-                                        
                                     </div>
                                     <div className="mobile-button" ref={btnToggle} onClick={menuToggle}><span></span></div>
 
                                     <nav id="main-nav" className="main-nav" ref={menuLeft}>
-    <ul id="menu-primary-menu" className="menu">
-        <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-            <Link to="/airport-transfers">Airport Transfers</Link>
-        </li>
-        <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-            <Link to="/luxury-villas">Luxury Villa's</Link>
-        </li>
-        {/* 
-
-        <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-            <Link to="/student-accomodation">Student Accomodation</Link>
-        </li>
-        <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-            <Link to="/event-venues">Event Venues</Link>
-        </li>
-        <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-            <Link to="/garden-route">Garden Route</Link>
-        </li>
-        <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-            <Link to="/vehicle-hire">Vehicle Hire</Link>
-        </li>
-        <li onClick={() => handleOnClick(1)} className={`menu-item ${activeIndex === 1 ? 'active' : ''}`}>
-            <Link to="/stays">Accommodation</Link>
-        </li>
-        <li onClick={() => handleOnClick(2)} className={`menu-item ${activeIndex === 2 ? 'active' : ''}`}>
-            <Link to="/tours">Tours</Link>
-        </li> */}
-    </ul>
-</nav>
+                                        <ul id="menu-primary-menu" className="menu">
+                                            <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
+                                                <Link to="/airport-transfers">Airport Transfers</Link>
+                                            </li>
+                                            <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
+                                                <Link to="/luxury-villas">Luxury Accomodation</Link>
+                                            </li>
+                                            {/* 
+                                            <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
+                                                <Link to="/student-accomodation">Student Accomodation</Link>
+                                            </li>
+                                            <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
+                                                <Link to="/event-venues">Event Venues</Link>
+                                            </li>
+                                            <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
+                                                <Link to="/garden-route">Garden Route</Link>
+                                            </li>
+                                            <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
+                                                <Link to="/vehicle-hire">Vehicle Hire</Link>
+                                            </li>
+                                            <li onClick={() => handleOnClick(1)} className={`menu-item ${activeIndex === 1 ? 'active' : ''}`}>
+                                                <Link to="/stays">Accommodation</Link>
+                                            </li>
+                                            <li onClick={() => handleOnClick(2)} className={`menu-item ${activeIndex === 2 ? 'active' : ''}`}>
+                                                <Link to="/tours">Tours</Link>
+                                            </li> */}
+                                        </ul>
+                                    </nav>
 
                                     <DarkMode />
-
                                 </div>
-                                {/* <div className="mobile-button" ref={btnToggle} onClick={menuToggle}><span></span></div> */}
-                                
-                                
-                            </div> 
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div id="google_translate_element" ref={googleTranslateButton}></div>
         </header>
     );
 }

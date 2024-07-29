@@ -58,13 +58,13 @@ const LuxAccomodation = () => {
                 <div className="themesflat-container">
                     <div className="row">
                         <div className="col-md-12">
-                            <div className="page-title-heading mg-bt-12">
+                            {/* <div className="page-title-heading mg-bt-12">
                                 <h1 className="heading text-center"> <Rating value={itemData.average_rating} color={'#f8e825'} /> {}</h1>
-                            </div>
+                            </div> */}
                             <div className="breadcrumbs style2">
                                 <ul>
                                    
-                                    <li>Based on {itemData.reviews.length} reviews</li>
+                                    <h4>  {itemData.accomodation.title}</h4>
                                 </ul>
                             </div>
                         </div>
@@ -83,7 +83,7 @@ const LuxAccomodation = () => {
                                 <div className="sc-item-details">
                                    <div>   {ReactHtmlParser(itemData.accomodation.body)}</div>
 
-                                    <div className="meta-item-details style2">
+                                    {/* <div className="meta-item-details style2">
                                         <div className="item meta-price">
                                             <span className="heading">Prices Starting from</span>
                                             <div className="price">
@@ -96,13 +96,16 @@ const LuxAccomodation = () => {
 
 
                                         </div>
-                                    </div>
+                                    </div> */}
 
                                    
 
                                     
                                     <Link target='__blank' to="https://wa.link/1vg32z" className="sc-button loadmore style  fl-button pri-3"><span>Enquire via whatsapp</span></Link>
-
+                                        <br></br>
+                                        <br></br>
+                                        <br></br>
+                                        
                                     {/* <h2 className="tf-title-heading style-2 mg-bt-12">
                                         Write a review for this accomodation                         
                                     </h2>
@@ -127,7 +130,7 @@ const LuxAccomodation = () => {
                     </div>
                 </div>
             </div>
-            <LiveAuction data={itemData.reviews} />
+            {/* <LiveAuction data={itemData.reviews} /> */}
 
            
 
