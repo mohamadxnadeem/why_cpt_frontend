@@ -65,9 +65,9 @@ const LuxuryVillas = () => {
                         <div className="post">
                             <div className="inner-content">
                                 <h2 className="title-post">Perfect for: </h2>
-                                <h2 className="title-post">Romantic Getaways for newly weds,</h2>
+                                <h2 className="title-post">Romantic Getaways,</h2>
                                 <h2 className="title-post">Family vacations,</h2>
-                                <h2 className="title-post">and Girls Trips!</h2>
+                                <h2 className="title-post">and Girls or Boys Trips!</h2>
 
                                 <div className="divider"></div>
                               
