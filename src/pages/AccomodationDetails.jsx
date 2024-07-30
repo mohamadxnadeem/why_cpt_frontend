@@ -12,6 +12,8 @@ import SliderStyle3 from '../components/slider/SliderStyle3';
 
 import 'react-tabs/style/react-tabs.css';
 import parse from 'html-react-parser';
+import Tours from '../components/Tours';
+
 
 
 
@@ -100,8 +102,11 @@ const LuxAccomodation = () => {
 
                                    
 
-                                    
-                                    <Link target='__blank' to="https://wa.link/1vg32z" className="sc-button loadmore style  fl-button pri-3"><span>Enquire via whatsapp</span></Link>
+                                    <center>
+
+                                        <Link target='__blank' to="https://wa.link/1vg32z" className="sc-button loadmore style  fl-button pri-3"><span>Enquire via whatsapp</span></Link>
+                                    </center>
+
                                         <br></br>
                                         <br></br>
                                         <br></br>
@@ -190,6 +195,9 @@ const LuxAccomodation = () => {
             
 
             {/* <LiveAuction data={liveAuctionData} /> */}
+            <Tours/>
+
+
             <Footer />
         </div>
     );

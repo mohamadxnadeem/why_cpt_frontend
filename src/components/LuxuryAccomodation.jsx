@@ -66,6 +66,8 @@ const Tours = forwardRef((ref) => {
                                       <Link to={`/accomodation/${item.accomodation.id}`}>{item.accomodation.title}</Link>
                                     </h5>
                                   </div>
+                                  <Link to={`/accomodation/${item.accomodation.id}`} className="sc-button loadmore style  fl-button pri-3"><span>More Info</span></Link>
+
 
                                   {/* <div className="meta-info">
                                     <div className="author">

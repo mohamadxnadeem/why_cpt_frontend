@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your guide to Cape Town, it's secrets, top 5 attractions and best experiences</title>
-  <meta name="description" content="Discover why Cape Town is consistently ranked the world's best city. From breathtaking landscapes to vibrant culture, explore our guide to Cape Town for the best experience."/>
+  <meta name="description" content="Discover why Cape Town is consistently ranked the world's best city. From breathtaking landscapes to vibrant culture, explore our guide to Cape Town for the best experience. "/>
   <meta name="googlebot-news" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://www.whycapetown.com" />
   <meta property="og:title" content="Your guide to Cape Town, it's secrets, top 5 attractions and best experiences" />
@@ -12,21 +12,7 @@
   <meta property="og:description" content="Discover why Cape Town is consistently ranked the world's best city. From breathtaking landscapes to vibrant culture, explore our guide to Cape Town for the best experience."/>
   <meta property="og:image" content="https://whycapetown.s3.eu-central-1.amazonaws.com/IMG_9840.JPG"/>
 
-  <!-- Other meta tags, favicon, and stylesheets -->
   <link rel="stylesheet" href="%PUBLIC_URL%/../assets/css/style.css">
-
-  <!-- Google Translate API Script -->
-  <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'en',
-        includedLanguages: 'en,es,pt,de,ar',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-        autoDisplay: false
-      }, 'google_translate_element');
-    }
-  </script>
-  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
   <style>
     body, html {
@@ -67,13 +53,26 @@
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
+  <div id="google_translate_element"></div>
 
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,es,pt,de,ar',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
 
-  <!-- Your existing content -->
-  <!-- Make sure this content is within the body and not causing overflow issues -->
-
-  <script>
-    // Your existing JavaScript code
+    (function() {
+      var gtScript = document.createElement('script');
+      gtScript.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+      gtScript.type = 'text/javascript';
+      gtScript.async = true;
+      document.head.appendChild(gtScript);
+    })();
   </script>
 </body>
 </html>
+

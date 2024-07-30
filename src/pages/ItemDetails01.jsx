@@ -58,11 +58,15 @@ const ItemDetails01 = () => {
                 <div className="themesflat-container">
                     <div className="row">
                         <div className="col-md-12">
+                            <center>
+
                             <div className="page-title-heading mg-bt-12">
-                            <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">{itemData.experience.title}</h1>
+                            <h4 className="tf-title-heading ct style-2 fs-30 mg-bt-10">{itemData.experience.title}</h4>
 
                                 <h1 className="heading text-center"> <Rating value={itemData.average_rating} color={'#f8e825'} /> {}</h1>
                             </div>
+                            </center>
+
                             <div className="breadcrumbs style2">
                                 <ul>
                                    

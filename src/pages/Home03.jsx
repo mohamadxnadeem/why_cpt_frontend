@@ -284,22 +284,19 @@ const Home03 = () => {
                                 <div className="image-grid">
                                     <div className="image-box">
                                         <center>
-                                            <p>Mr <a href='https://www.instagram.com/kaziabidur/' target='__blank'>Kazi Abidur, </a> CEO of <a href='https://www.instagram.com/sunnamusk/' target='__blank'>Sunnah Musk</a>, and James Bond</p>
                                             <img className="homeImages" src={hof1} alt="Axies" />
                                         </center>
                                     </div>
                                     <div className="image-box">
                                         <center>
-                                        <p><a href='https://www.instagram.com/mr_cool_7/' target='__blank'>Mr Cool  </a>from Oman </p>
-                                        <p>Napata wapi kuku kapanda baiskeli! </p>
+                                     
 
                                         <img className="homeImages" src={hof2} alt="Axies" />
                                         </center>
                                     </div>
                                     <div className="image-box">
                                         <center>
-                                            <p>Mr Abid </p>
-                                            <p>Head of Marketing for <a href='https://islamchannel.tv' target='__blank'>Islam Channel</a></p>
+                                            
                                             <img className="homeImages" src={hof} alt="Axies" />
                                         </center>
                                     </div>
@@ -441,23 +438,20 @@ const Home03 = () => {
                                 <div className="image-grid">
                                     <div className="image-box">
                                         <center>
-                                            <p>The Pilot</p>
-                                            <p>NAC Helicopters</p>
+                                           
 
                                             <img className="homeImages" src={chopper} alt="helicopter ride in cape town" />
                                         </center>
                                     </div>
                                     <div className="image-box">
                                         <center>
-                                        <p><a href='' target='__blank'>Mr Mampuru </a> </p>
-                                        <p>The big boss in platinum mining</p>
+                                       
                                         <img className="homeImages" src={cobra} alt="cobra experience around chapmans peak" />
                                         </center>
                                     </div>
                                     <div className="image-box">
                                         <center>
-                                            <p><a href='' target='__blank'>Nour and Nadine </a> </p>
-                                            <p>2 students from Egypt</p>
+                                           
                                             <img className="homeImages" src={bokaap} alt="bokaap" />
                                         </center>
                                     </div>

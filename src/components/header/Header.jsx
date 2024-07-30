@@ -1,5 +1,5 @@
-import React , { useRef , useState , useEffect } from 'react';
-import { Link , useLocation } from "react-router-dom";
+import React, { useRef, useState, useEffect } from 'react';
+import { Link, useLocation } from "react-router-dom";
 import menus from "../../pages/menu";
 import DarkMode from './DarkMode';
 import logoheader from '../../assets/images/logo/logo.svg'
@@ -9,17 +9,18 @@ import logodark2x from '../../assets/images/logo/logo.svg'
 
 const Header = () => {
     const { pathname } = useLocation();
-
     const headerRef = useRef(null);
-    const googleTranslateButton = useRef(null);
 
     useEffect(() => {
         window.addEventListener('scroll', isSticky);
-        initializeGoogleTranslate();
         return () => {
             window.removeEventListener('scroll', isSticky);
         };
-    }, []);
+    });
+
+    useEffect(() => {
+        initializeGoogleTranslate();
+    }, [pathname]);
 
     const isSticky = (e) => {
         const header = document.querySelector('.js-header');
@@ -28,34 +29,26 @@ const Header = () => {
         scrollTop >= 400 ? header.classList.add('is-small') : header.classList.remove('is-small');
     };
 
-    const initializeGoogleTranslate = () => {
-        if (!window.googleTranslateElementInit) {
-            window.googleTranslateElementInit = function() {
-                new window.google.translate.TranslateElement({
-                    pageLanguage: 'en',
-                    includedLanguages: 'en,es,pt,de,ar',
-                    layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
-                    autoDisplay: false
-                }, 'google_translate_element');
-            };
-
-            const script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-            script.async = true;
-            document.body.appendChild(script);
-        }
-    };
-
     const menuLeft = useRef(null);
     const btnToggle = useRef(null);
 
     const menuToggle = () => {
         menuLeft.current.classList.toggle('active');
         btnToggle.current.classList.toggle('active');
-        if (googleTranslateButton.current) {
-            googleTranslateButton.current.style.display = 
-                googleTranslateButton.current.style.display === 'none' ? 'block' : 'none';
+        const googleTranslateElement = document.getElementById("google_translate_element");
+        if (googleTranslateElement) {
+            googleTranslateElement.style.display = googleTranslateElement.style.display === "none" ? "block" : "none";
+        }
+    };
+
+    const initializeGoogleTranslate = () => {
+        if (window.google && window.google.translate && window.google.translate.TranslateElement) {
+            new window.google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,es,pt,de,ar',
+                layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
         }
     };
 
@@ -74,8 +67,8 @@ const Header = () => {
                                 <div id="site-logo" className="clearfix">
                                     <div id="site-logo-inner">
                                         <Link to="/" rel="home" className="main-logo">
-                                            <img className='logo-dark' id="logo_header" src={logodark} srcSet={`${logodark2x}`} alt="nft-gaming" />
-                                            <img className='logo-light' id="logo_header" src={logoheader} srcSet={`${logoheader2x}`} alt="nft-gaming" />
+                                            <img className='logo-dark'  id="logo_header" src={logodark} srcSet={`${logodark2x}`} alt="nft-gaming" />
+                                            <img className='logo-light'  id="logo_header" src={logoheader} srcSet={`${logoheader2x}`} alt="nft-gaming" />
                                         </Link>
                                     </div>
                                     <div className="mobile-button" ref={btnToggle} onClick={menuToggle}><span></span></div>
@@ -86,38 +79,18 @@ const Header = () => {
                                                 <Link to="/airport-transfers">Airport Transfers</Link>
                                             </li>
                                             <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-                                                <Link to="/luxury-villas">Luxury Accomodation</Link>
+                                                <Link to="/luxury-villas">Luxury Accommodation</Link>
                                             </li>
-                                            {/* 
-                                            <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-                                                <Link to="/student-accomodation">Student Accomodation</Link>
-                                            </li>
-                                            <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-                                                <Link to="/event-venues">Event Venues</Link>
-                                            </li>
-                                            <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-                                                <Link to="/garden-route">Garden Route</Link>
-                                            </li>
-                                            <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-                                                <Link to="/vehicle-hire">Vehicle Hire</Link>
-                                            </li>
-                                            <li onClick={() => handleOnClick(1)} className={`menu-item ${activeIndex === 1 ? 'active' : ''}`}>
-                                                <Link to="/stays">Accommodation</Link>
-                                            </li>
-                                            <li onClick={() => handleOnClick(2)} className={`menu-item ${activeIndex === 2 ? 'active' : ''}`}>
-                                                <Link to="/tours">Tours</Link>
-                                            </li> */}
                                         </ul>
                                     </nav>
 
                                     <DarkMode />
                                 </div>
-                            </div>
+                            </div> 
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="google_translate_element" ref={googleTranslateButton}></div>
         </header>
     );
 }
