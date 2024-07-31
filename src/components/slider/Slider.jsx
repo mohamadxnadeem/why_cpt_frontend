@@ -53,11 +53,11 @@ const SliderItem = props => (
                         <div className="themesflat-container ">
                             <div className="wrap-heading flat-slider flex">
                                 <div className="content">
-                                    <h2 className="heading">The Ultimate Guide to Cape Town</h2>	
-                                    <h1 className="heading mb-style"><span className="tf-text s1">Must Do Experiences for 1st Time Visitors</span>                                          
+                                    <h2 className="heading">How to have the most fun in Cape Town</h2>	
+                                    <h1 className="heading mb-style"><span className="tf-text s1">And all the Must Do Experiences for 1st Time Visitors</span>                                          
                                     </h1>
-                                    <h1 className="heading mb-style"><span className="tf-text s1">And 5 Attractions you don't want to regret missing.</span>                                          
-                                    </h1>
+                                    {/* <h1 className="heading mb-style"><span className="tf-text s1">And 5 Attractions you don't want to regret missing.</span>                                          
+                                    </h1> */}
 
 
                                   

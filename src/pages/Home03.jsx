@@ -193,9 +193,9 @@ const Home03 = () => {
                                 </h1>
                                 
 
-                                <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    - AKA the best city in the world
-                                </h1>
+                                {/* <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                                    As you should be because it is the best city in the world!
+                                </h1> */}
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
                                     And in just a few moments, you're going to find out everything you need to know about Cape Town.
@@ -284,19 +284,23 @@ const Home03 = () => {
                                 <div className="image-grid">
                                     <div className="image-box">
                                         <center>
+                                            <h4>Table Mountain</h4>
+                                            <br></br>
                                             <img className="homeImages" src={hof1} alt="Axies" />
                                         </center>
                                     </div>
                                     <div className="image-box">
                                         <center>
                                      
-
+                                        <h4>Aquila Safari</h4>
+                                        <br></br>
                                         <img className="homeImages" src={hof2} alt="Axies" />
                                         </center>
                                     </div>
                                     <div className="image-box">
                                         <center>
-                                            
+                                            <h4>Chapmans Peak</h4>
+                                            <br></br>
                                             <img className="homeImages" src={hof} alt="Axies" />
                                         </center>
                                     </div>
@@ -438,20 +442,23 @@ const Home03 = () => {
                                 <div className="image-grid">
                                     <div className="image-box">
                                         <center>
-                                           
+                                            <h4>Helicopter Tour</h4>
+                                            <br></br>
 
                                             <img className="homeImages" src={chopper} alt="helicopter ride in cape town" />
                                         </center>
                                     </div>
                                     <div className="image-box">
                                         <center>
-                                       
+                                        <h4>Chapmans Peak with a Cobra</h4>
+                                        <br></br>
                                         <img className="homeImages" src={cobra} alt="cobra experience around chapmans peak" />
                                         </center>
                                     </div>
                                     <div className="image-box">
                                         <center>
-                                           
+                                            <h4>Bokaap</h4>
+                                            <br></br>
                                             <img className="homeImages" src={bokaap} alt="bokaap" />
                                         </center>
                                     </div>
