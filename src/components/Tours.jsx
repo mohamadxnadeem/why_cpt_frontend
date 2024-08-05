@@ -28,14 +28,11 @@ const Tours = forwardRef((ref) => {
             <div className="row">
               <div className="col-12">
                 <center>
-<h2 className="tf-title-heading ct style-2 mg-bt-13">Free Full-Day Itineraries: 
+<h2 className="tf-title-heading ct style-2 mg-bt-13">What to do in Cape Town:
 
 </h2>
 
-<h2 className="tf-title-heading ct style-2 mg-bt-13">Your Ultimate Guide to Cape Town
-
-</h2>
-                  <p  className="sub-title ct small mg-bt-20 pad-420"> Planning your trip just got easier. Our complimentary full-day itineraries cover all of Cape Town’s top attractions, the finest restaurants, and secret spots only locals know. Discover the best experiences this vibrant city has to offer, curated especially for discerning travelers like you.</p>
+                  <p  className="sub-title ct small mg-bt-20 pad-420"> Planning your trip just got easier. Our complimentary full-day itineraries cover all of Cape Town’s top attractions, best restaurants, and secret spots to add to your bucket list.</p>
 
                 </center>
                 

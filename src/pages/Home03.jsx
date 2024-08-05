@@ -189,7 +189,7 @@ const Home03 = () => {
                             <div className="text-container">
 
                                 <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    Excited to plan your first trip to Cape Town?
+                                    Our goal is to help you have the best experience in Cape Town!
                                 </h1>
                                 
 
@@ -198,33 +198,49 @@ const Home03 = () => {
                                 </h1> */}
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    And in just a few moments, you're going to find out everything you need to know about Cape Town.
+                                    This is why we've partnered with all of Cape Town's top tour operators, luxury accommodations, hotels and chauffeur services to get you exclusive discounts of up to 30% when you sign up for our VIP membership for only £99! 
                                 </p>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Top attractions, 
+                                    After signing up for our membership you will get a connection to our VIP concierge services to help you plan the best trip to Cape Town and exclusive discounts listed below:                                </p>
+                                
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    - 30% off all chauffeur services and tours                                
                                 </p>
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    best restaurants, 
+                                    - 20% off all luxury accommodations                                
                                 </p>
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    safety tips 
+                                    - 20% off Helicopter tours                                
                                 </p>
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    and the common mistakes all the first-time visitors make, but not you.
+                                    - 15% off safari tours                                
                                 </p>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    - 10% off tandem paragliding                                
+                                </p>
+
+
+
+                              
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    This membership would expire within 12 months of booking and you get to make an unlimited amount of bookings for you or your friends after signing up.  
+                                </p>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    Please note that the membership is non-transferable and you would need to make the booking for your friends or family to get access to your membership discount.  
+                                </p>
+                                
+
+                                <h2 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                            ANY QUESTIONS?                          </h2>
+                            <p  className="sub-title ct small mg-bt-20 pad-420"> Please reach out to us via WhatsApp for more information or if you are ready to sign up by clicking the button below:   </p>
+
+
+                            <center>
+                                <Link target='__blank' to="https://wa.link/252zbt" className="sc-button loadmore style  fl-button pri-3"><span>Whatsapp Us Now</span></Link>
+                            </center> 
                       
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Because you just found the holy grail of all guides to Cape Town.
-                                </p>
-
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    And before we get into that, let's first check out some of the photographs taken for our clients by some of our tour guides at the most iconic attractions in Cape Town.
-
-                                </p>
-
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                </p>
+                               
                                 <br></br>
                                 <br></br>
                                 <br></br>
@@ -418,15 +434,7 @@ const Home03 = () => {
 
 
                                 
-                            <h2 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                            GET A FREE QUOTE                            </h2>
-                            <p  className="sub-title ct small mg-bt-20 pad-420">If you're ready to get a taste of the luxury life in Cape Town then,  </p>
-
-                            <p  className="sub-title ct small mg-bt-20 pad-420">Contact us via WhatsApp to get a free, no-obligation quote for your trip to Cape Town. Best Price Guaranteed.  </p>
-
-                            <center>
-                                <Link target='__blank' to="https://wa.link/zi8605" className="sc-button loadmore style  fl-button pri-3"><span>Contact Us Now</span></Link>
-                            </center> 
+                           
                             <br></br>
                             <br></br>
                             <br></br>
