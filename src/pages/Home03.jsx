@@ -38,6 +38,9 @@ import marie from '../assets/images/blog/marie.jpg'
 import micheal from '../assets/images/blog/micheal.jpg'
 import dan from '../assets/images/blog/dan.jpg'
 
+import emailjs from 'emailjs-com';
+
+
 
 
 
@@ -50,6 +53,8 @@ import dan from '../assets/images/blog/dan.jpg'
 
 const Home03 = () => {
     const [modalShow, setModalShow] = useState(false);
+    const [formSubmitted, setFormSubmitted] = useState(false); // Add state to manage form submission status
+
 
     const socialList = [
      
@@ -161,6 +166,60 @@ const Home03 = () => {
         
     ];
 
+    const [formData, setFormData] = useState({
+        name: '',
+        fromWhere: '',
+        isStudent: '',
+        honeymoon: '',
+        familyVacation: '',
+        businessTrip: '',
+        stayDuration: '',
+        soloTrip: '',
+        accommodationPreference: '',
+        budget: '',
+        email: '',
+        message: ''
+    });
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        emailjs.sendForm(
+            'service_ptqtluk', // Replace with your EmailJS service ID
+            'template_138c67b', // Replace with your EmailJS template ID
+            e.target,
+            'apNJP_9sXnff2q82W' // Replace with your EmailJS user ID
+        ).then((result) => {
+            console.log('Email successfully sent!', result.text);
+            setFormSubmitted(true); // Set formSubmitted to true on successful submission
+        }, (error) => {
+            console.error('There was an error sending the email:', error.text);
+            alert('Failed to send enquiry. Please try again later.');
+        });
+
+        // Optionally reset form data here if needed
+        setFormData({
+            name: '',
+            fromWhere: '',
+            isStudent: '',
+            honeymoon: '',
+            familyVacation: '',
+            businessTrip: '',
+            stayDuration: '',
+            soloTrip: '',
+            accommodationPreference: '',
+            budget: '',
+            email: '',
+            message: ''
+        });
+    };
 
    
     
@@ -189,56 +248,70 @@ const Home03 = () => {
                             <div className="text-container">
 
                                 <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    Our goal is to help you have the best experience in Cape Town!
+                                    Accommodation, Transport, Tours and Experiences
                                 </h1>
+                                <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                                    To fit every budget!
+                                </h1>
+
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    We started as a family-run business offering transport services over 4 generations,  
+                                </p>
+
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    hosted every type of traveller, from high-profile clients like <a target='__blank' href=''>Abid Kazil</a> to students on a tight budget!
+                                </p>
+
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    and have since evolved into a travel agency specializing in providing complete travel packages that include Accommodation, Transport, Tours and Experiences.                   
+                                </p>
+
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    For clients from the UK, USA, Oman, Bahrain, Kuwait, UAE, Brazil, Argentina, Spain and Germany.                                
+                                </p>
+                                
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    Why should you book a complete travel package with us instead of booking everything separately?
+                                </p>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    Now that's a good question! 
+                                </p>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    Because we've been in business for over 5 decades, forged special relationships with tour operators and accommodations to offer you the best prices on the market.                               
+                                </p>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    Scroll down to check out some of Cape Town's most Iconic attractions,                                
+                                </p>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    what our clients say about us,                              
+                                </p>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    And everything you need to add to your Cape Town bucket list!                               
+                                </p>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    Please note all pictures on our website were taken by us of actual clients on real tours.                                
+                                </p>
+
+
                                 
 
-                                {/* <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    As you should be because it is the best city in the world!
-                                </h1> */}
 
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    This is why we've partnered with all of Cape Town's top tour operators, luxury accommodations, hotels and chauffeur services to get you exclusive discounts of up to 30% when you sign up for our VIP membership for only £99! 
-                                </p>
 
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    After signing up for our membership you will get a connection to our VIP concierge services to help you plan the best trip to Cape Town and exclusive discounts listed below:                                </p>
-                                
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    - 30% off all chauffeur services and tours                                
-                                </p>
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    - 20% off all luxury accommodations                                
-                                </p>
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    - 20% off Helicopter tours                                
-                                </p>
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    - 15% off safari tours                                
-                                </p>
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    - 10% off tandem paragliding                                
-                                </p>
+                             
 
 
 
                               
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    This membership would expire within 12 months of booking and you get to make an unlimited amount of bookings for you or your friends after signing up.  
-                                </p>
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Please note that the membership is non-transferable and you would need to make the booking for your friends or family to get access to your membership discount.  
-                                </p>
+                             
+                                
+                                
                                 
 
-                                <h2 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                            ANY QUESTIONS?                          </h2>
-                            <p  className="sub-title ct small mg-bt-20 pad-420"> Please reach out to us via WhatsApp for more information or if you are ready to sign up by clicking the button below:   </p>
+            
 
+                                
 
-                            <center>
-                                <Link target='__blank' to="https://wa.link/252zbt" className="sc-button loadmore style  fl-button pri-3"><span>Whatsapp Us Now</span></Link>
-                            </center> 
+           
                       
                                
                                 <br></br>
@@ -471,6 +544,45 @@ const Home03 = () => {
                                         </center>
                                     </div>
                                 </div>
+
+                                <br></br>
+                                <br></br>
+                                <br></br>
+                                <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                                    Ready to plan your trip to Cape Town?
+                                </h1>
+                                
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    then just fill out that form below to give us the correct information to plan the perfect trip for you!                               
+                                </p>
+                            
+
+
+                                {formSubmitted ? (
+                                <div className="thank-you-message">
+                                    <h2>Thank You!</h2>
+                                    <p>Your enquiry has been successfully submitted. We will get back to you soon.</p>
+                                </div>
+                            ) : (
+
+                                <div className="form-inner">
+                                    <form id="contactform" onSubmit={handleSubmit}>
+                                        <input name="name" value={formData.name} onChange={handleChange} type="text" placeholder="Your Name" required />
+                                        <input name="fromWhere" value={formData.fromWhere} onChange={handleChange} type="text" placeholder="Where are you coming from?" required />
+                                        <input name="isStudent" value={formData.isStudent} onChange={handleChange} type="text" placeholder="Are you a student?" required />
+                                        <input name="honeymoon" value={formData.honeymoon} onChange={handleChange} type="text" placeholder="Are you coming on honeymoon?" required />
+                                        <input name="familyVacation" value={formData.familyVacation} onChange={handleChange} type="text" placeholder="Are you coming for a family vacation?" required />
+                                        <input name="businessTrip" value={formData.businessTrip} onChange={handleChange} type="text" placeholder="Are you coming on a business trip?" required />
+                                        <input name="stayDuration" value={formData.stayDuration} onChange={handleChange} type="text" placeholder="How many days are you planning to stay in Cape Town?" required />
+                                        <input name="soloTrip" value={formData.soloTrip} onChange={handleChange} type="text" placeholder="Are you coming for a solo trip? If not, what is the size of your group?" required />
+                                        <input name="accommodationPreference" value={formData.accommodationPreference} onChange={handleChange} type="text" placeholder="Would you prefer a hotel, penthouse, or luxury villa?" required />
+                                        <input name="budget" value={formData.budget} onChange={handleChange} type="text" placeholder="What is your budget?" required />
+                                        <input name="email" value={formData.email} onChange={handleChange} type="email" placeholder="Your Email Address" required />
+                                        <textarea name="message" value={formData.message} onChange={handleChange} placeholder="Please let us know any other important information or special requests you might have, or if you have any questions." required />
+                                        <button type="submit" className="submit sub-title ct small mg-bt-20 pad-420">Submit Enquiry Now</button>
+                                    </form>
+                                </div>
+                            )}
 
                         
                             </div>
