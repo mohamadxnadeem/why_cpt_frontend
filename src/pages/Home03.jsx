@@ -259,7 +259,7 @@ const Home03 = () => {
                                 </p>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    hosted every type of traveller, from high-profile clients like <a target='__blank' href=''>Abid Kazil</a> to students on a tight budget!
+                                    hosted every type of traveller, from high-profile clients like <a target='__blank' href='https://www.instagram.com/kaziabidur/'>Abid Kazil</a> to students on a tight budget!
                                 </p>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
