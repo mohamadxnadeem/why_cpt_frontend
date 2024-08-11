@@ -56,7 +56,7 @@ const Footer = () => {
                                         
                                     </Link>
                                 </div>
-                                <p className="sub-widget-logo">Secure your bookings with us to avoid dissapointment, book now and pay later </p>
+                                <p className="sub-widget-logo">We Accept Crypto, EFT and Card Payments </p>
                             </div>
                         </div>
                         <div className="col-lg-2 col-md-4 col-sm-5 col-5">
@@ -70,7 +70,6 @@ const Footer = () => {
                         </div>
                         <div className="col-lg-3 col-md-6 col-sm-7 col-12">
                             <div className="widget widget-subcribe">
-                                <h5 className="title-widget">Follow us on Instagram for some behind the scenes adventures in Cape Town:</h5>
                                
                                 <div className="widget-social style-1 mg-t32">
                                     <ul>

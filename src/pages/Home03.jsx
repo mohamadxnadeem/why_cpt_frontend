@@ -259,7 +259,7 @@ const Home03 = () => {
                                 </p>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    hosted every type of traveller, from high-profile clients like <a target='__blank' href='https://www.instagram.com/kaziabidur/'>Abid Kazil</a> to students on a tight budget!
+                                    hosted every type of traveller, from high-profile clients like <a target='__blank' href='https://www.instagram.com/kaziabidur/'>Kazi Abidur</a> to students on a tight budget!
                                 </p>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
@@ -292,36 +292,9 @@ const Home03 = () => {
                                     Please note all pictures on our website were taken by us of actual clients on real tours.                                
                                 </p>
 
-
-                                
-
-
-
-                             
-
-
-
-                              
-                             
-                                
-                                
-                                
-
-            
-
-                                
-
-           
-                      
-                               
                                 <br></br>
                                 <br></br>
                                 <br></br>
-
-                              
-
-
-
 
                                 {/* <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
                                     Discover Cape Town's Top 10 Attractions and Best Kept Secrets
@@ -375,7 +348,7 @@ const Home03 = () => {
                                         <center>
                                             <h4>Table Mountain</h4>
                                             <br></br>
-                                            <img className="homeImages" src={hof1} alt="Axies" />
+                                            <img className="homeImages" src={hof1} alt="table mountain" />
                                         </center>
                                     </div>
                                     <div className="image-box">
@@ -383,14 +356,14 @@ const Home03 = () => {
                                      
                                         <h4>Aquila Safari</h4>
                                         <br></br>
-                                        <img className="homeImages" src={hof2} alt="Axies" />
+                                        <img className="homeImages" src={hof2} alt="aquila safari" />
                                         </center>
                                     </div>
                                     <div className="image-box">
                                         <center>
                                             <h4>Chapmans Peak</h4>
                                             <br></br>
-                                            <img className="homeImages" src={hof} alt="Axies" />
+                                            <img className="homeImages" src={hof} alt="chapmans peak" />
                                         </center>
                                     </div>
                                 </div>
@@ -516,10 +489,6 @@ const Home03 = () => {
                             <br></br>
 
 
-                        
-                                
-
-
                                 <div className="image-grid">
                                     <div className="image-box">
                                         <center>
@@ -579,7 +548,7 @@ const Home03 = () => {
                                         <input name="budget" value={formData.budget} onChange={handleChange} type="text" placeholder="What is your budget?" required />
                                         <input name="email" value={formData.email} onChange={handleChange} type="email" placeholder="Your Email Address" required />
                                         <textarea name="message" value={formData.message} onChange={handleChange} placeholder="Please let us know any other important information or special requests you might have, or if you have any questions." required />
-                                        <button type="submit" className="submit sub-title ct small mg-bt-20 pad-420">Submit Enquiry Now</button>
+                                        <button type="submit" className="sc-button loadmore style  fl-button pri-3">Let's Do This!</button>
                                     </form>
                                 </div>
                             )}
