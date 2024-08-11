@@ -3,6 +3,7 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import routes from './pages/index';
 import ReactGA from "react-ga4";
+import { injectSpeedInsights } from '@vercel/speed-insights';
 
 function App() {
     const TRACKING_ID = 'G-LCC52EM33V'; // Tracking ID
@@ -34,6 +35,11 @@ function App() {
 
         // Initialize Google Analytics
         ReactGA.initialize(TRACKING_ID);
+    }, []);
+
+    // Use injectSpeedInsights here
+    useEffect(() => {
+        injectSpeedInsights();
     }, []);
 
     return (

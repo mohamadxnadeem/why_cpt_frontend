@@ -22,7 +22,7 @@ const LiveAuction = ({data}) => {
                     <div className="row">
                         <div className="col-md-12">
                             <div className="">
-                                <h2 className="tf-title">What they say about this experience: </h2>
+                                <h2 className="tf-title">What they say these places: </h2>
                                 <div className="heading-line"></div>
                             </div>
                         </div>
@@ -58,7 +58,7 @@ const LiveAuction = ({data}) => {
                                                             <div className="slider-item">										
                                                                 <div className="sc-card-product">
                                                                     <div className="card-media">
-                                                                        <img src={item.cover_photo} alt="axies" />
+                                                                        {/* <img src={item.cover_photo} alt="axies" /> */}
                                                                         
                                                                         
                                                                         
