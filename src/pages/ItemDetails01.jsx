@@ -72,8 +72,8 @@ const ItemDetails01 = () => {
           <div style={{ position: 'relative' }}>
             <Blurhash
               hash={blurhash}
-              width={400}
-              height={300}
+              width={500}
+              height={325}
               resolutionX={32}
               resolutionY={32}
               punch={1}
