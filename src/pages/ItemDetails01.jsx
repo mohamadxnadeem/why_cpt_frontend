@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
@@ -11,6 +11,9 @@ import { Blurhash } from 'react-blurhash';
 import 'react-tabs/style/react-tabs.css';
 import parse from 'html-react-parser';
 import styled from 'styled-components';
+import emailjs from 'emailjs-com';
+import Tours from '../components/Tours';
+import { Helmet } from 'react-helmet';
 
 const LoaderWrapper = styled.div`
   position: fixed;
@@ -29,6 +32,14 @@ const ItemDetails01 = () => {
   const { id } = useParams();
   const [itemData, setItemData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const [formData, setFormData] = useState({
+    name: '',
+    contactNumber: '',
+    serviceType: '', // Initially empty, will be updated once data is fetched
+    email: '',
+  });
 
   useEffect(() => {
     fetch(`https://web-production-1ab9.up.railway.app/api/experiences/${id}/with-reviews`)
@@ -37,11 +48,38 @@ const ItemDetails01 = () => {
         console.log('Fetched data:', data); // Ensure data is logged
         setItemData(data);
         setLoading(false);
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          serviceType: ` ${data.experience.title}`,
+        }));
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
   }, [id]);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .send('service_ptqtluk', 'template_uyicl9l', formData, 'apNJP_9sXnff2q82W')
+      .then(
+        (result) => {
+          console.log('Email successfully sent!');
+          setFormSubmitted(true);
+        },
+        (error) => {
+          console.log('There was an error sending the email:', error);
+        }
+      );
+  };
 
   const heroSliderData = itemData && itemData.cover_photos
     ? itemData.cover_photos.map((coverPhoto) => ({
@@ -60,6 +98,15 @@ const ItemDetails01 = () => {
 
   return (
     <div className='item-details'>
+       <Helmet>
+                <title>Don't miss out on this experience if you're in Cape Town</title>
+                <meta
+                    name="description"
+                    content={itemData.experience.title + ('click for more info')}
+                />
+                <meta property="og:title" content="Look what I found" />
+                
+            </Helmet>
       <Header />
       <section className="flat-title-page inner">
         <div className="overlay"></div>
@@ -120,12 +167,6 @@ const ItemDetails01 = () => {
               <div className="content-center">
                 <div className="sc-item-details">
                   <div>{parse(itemData.experience.body)}</div>
-                  <br />
-                  <center>
-                    <Link target='__blank' to="https://wa.link/f1ufwx" className="sc-button loadmore style fl-button pri-3">
-                      <span>Plan your adventure with us</span>
-                    </Link>
-                  </center>
                 </div>
               </div>
             </div>
@@ -134,9 +175,91 @@ const ItemDetails01 = () => {
       </div>
 
       <LiveAuction data={itemData.reviews} />
+
+      <div className="tf-section tf-item-details">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              <div className="content-center">
+                <div className="sc-item-details">
+                  {formSubmitted ? (
+                    <div className="thank-you-message">
+                      <h2>Thank You!</h2>
+                      <p>Your enquiry has been successfully submitted. We will get back to you soon.</p>
+                    </div>
+                  ) : (
+                    <Fragment>
+                      <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                        Do you want to have the best experience?
+                      </h1>
+                      <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                        Then book with us using the form below:
+                      </h1>
+
+                      <div className="form-inner">
+                        <form
+                          id="contactform"
+                          noValidate="novalidate"
+                          className="form-submit"
+                          onSubmit={handleSubmit}
+                        >
+                          <input
+                            id="name"
+                            name="name"
+                            tabIndex="1"
+                            aria-required="true"
+                            type="text"
+                            placeholder="Your Name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            required
+                          />
+                          <input
+                            id="contactNumber"
+                            name="contactNumber"
+                            tabIndex="1"
+                            aria-required="true"
+                            type="text"
+                            placeholder="Your Contact Number"
+                            value={formData.contactNumber}
+                            onChange={handleChange}
+                            required
+                          />
+                          <input
+                            id="email"
+                            name="email"
+                            tabIndex="2"
+                            aria-required="true"
+                            type="email"
+                            placeholder="Your Email Address"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                          />
+
+                          <button
+                            type="submit"
+                            className="sc-button loadmore style fl-button pri-3"
+                          >
+                            Submit
+                          </button>
+                        </form>
+                      </div>
+                    </Fragment>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <Tours />
+      </div>
       <Footer />
     </div>
   );
-}
+};
 
 export default ItemDetails01;

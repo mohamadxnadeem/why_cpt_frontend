@@ -1,15 +1,12 @@
 import React, { useState, Fragment } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import CardModal from '../components/layouts/CardModal';
+
 import Rating from '../components/Rating';
-import { Link } from 'react-router-dom';
+
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 
-import img1 from '../assets/images/box-item/icon1-recont-post.jpg';
-import img2 from '../assets/images/box-item/icon2-recont-post.jpg';
-import img3 from '../assets/images/box-item/icon3-recont-post.jpg';
-import img4 from '../assets/images/box-item/icon4-recont-post.jpg';
+
 
 import imgblog1 from '../assets/images/blog/audi.png';
 
@@ -23,6 +20,8 @@ import Tours from '../components/Tours';
 
 import emailjs from 'emailjs-com';
 
+import { Helmet } from 'react-helmet';
+
 
 const AirportTransfers = () => {
     const [modalShow, setModalShow] = useState(false);
@@ -32,7 +31,7 @@ const AirportTransfers = () => {
     const [formData, setFormData] = useState({
         name: '',
         contactNumber: '',
-        serviceType: '',
+        serviceType: 'Airport Transfer',
         email: '',
     });
 
@@ -108,6 +107,21 @@ const AirportTransfers = () => {
 
     return (
         <div className='home-3'>
+            <Helmet>
+                <title>Reliable Airport Transfers in Cape Town</title>
+                <meta
+                    name="description"
+                    content="Experience stress-free and reliable airport transfers in Cape Town with our professional drivers and comfortable vehicles. Ideal for sophisticated professionals."
+                />
+                <meta property="og:title" content="Reliable Airport Transfers in Cape Town" />
+                <meta
+                    property="og:description"
+                    content="Experience stress-free and reliable airport transfers in Cape Town with our professional drivers and comfortable vehicles. Ideal for sophisticated professionals."
+                />
+                <meta property="og:image" content={imgblog1} /> {/* Use your image URL here */}
+                <meta property="og:url" content="http://yourwebsite.com/airport-transfers" /> {/* Replace with your page URL */}
+                <meta property="og:type" content="website" />
+            </Helmet>
             <Header />
             <section className="flat-title-page inner">
                 <div className="overlay"></div>
@@ -226,17 +240,29 @@ const AirportTransfers = () => {
 
                             <div className="inner-post mg-t-40">
                                 <p className="mg-bt-24"><strong>Woodstock</strong> to Airport:  R399.95 / ( $21.79)</p>
+                                <div className="divider"></div>
                                 <p className="mg-bt-24">
                                     <strong>Cape Town Central</strong> to Airport: R399.95 / ( $21.79)
                                 </p>
+                                <div className="divider"></div>
+
                                 <p className="mg-bt-24"><strong>Century City</strong> to Airport: R399.95 / ( $21.79)</p>
+                                <div className="divider"></div>
+
                                 <p className="mg-bt-24"><strong>Bokaap</strong> to Airport: R399.95 /  ($21.79)</p>
+                                <div className="divider"></div>
 
                                 <p className="mg-bt-24">
                                 <strong>Sea Point</strong> to Airport: R499.95 /  ($27.25)
                                 </p>
+                                <div className="divider"></div>
+
                                 <p className="mg-bt-24"><strong>Simons Town</strong> to Airport: R799.95 ( $43.64 )</p>
+                                <div className="divider"></div>
+
                                 <p className="mg-bt-24"><strong>Camps Bay</strong> to Airport: R899.95  ( $49.10 )</p>
+                                <div className="divider"></div>
+
 
                             </div>
 
@@ -280,17 +306,7 @@ const AirportTransfers = () => {
                     onChange={handleChange}
                     required
                 />
-                <input
-                    id="serviceType"
-                    name="serviceType"
-                    tabIndex="1"
-                    aria-required="true"
-                    type="text"
-                    placeholder="Do you need an airport pick up or drop off?"
-                    value={formData.serviceType}
-                    onChange={handleChange}
-                    required
-                />
+                
                 <input
                     id="email"
                     name="email"
