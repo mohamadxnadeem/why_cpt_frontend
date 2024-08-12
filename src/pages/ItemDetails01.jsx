@@ -12,71 +12,17 @@ import 'react-tabs/style/react-tabs.css';
 import parse from 'html-react-parser';
 import styled from 'styled-components';
 
-const ItemDetailsContainer = styled.div`
-  position: relative;
-  min-height: 100vh;
-  background-color: #fff;
-`;
-
-const Section = styled.section`
-  .flat-title-page {
-    position: relative;
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-    }
-    .themesflat-container {
-      padding: 20px;
-    }
-  }
-`;
-
-const TitleHeading = styled.div`
-  text-align: center;
-  margin-bottom: 20px;
-`;
-
-const Breadcrumbs = styled.div`
-  text-align: center;
-  margin-bottom: 20px;
-`;
-
 const LoaderWrapper = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #000;
-  padding: 20px;
-  border-radius: 10px;
-`;
-
-const ItemDetailsContent = styled.div`
-  text-align: center;
-  padding: 20px;
-`;
-
-const StyledLink = styled(Link)`
-  display: inline-block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  background: #f8e825;
-  color: #000;
-  text-decoration: none;
-  border-radius: 5px;
-  &:hover {
-    background: #e2d00b;
-  }
-`;
-
-const SliderWrapper = styled.div`
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: auto;
+  height: 100%;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; // Ensure it appears above other content
 `;
 
 const ItemDetails01 = () => {
@@ -99,8 +45,8 @@ const ItemDetails01 = () => {
 
   const heroSliderData = itemData && itemData.cover_photos
     ? itemData.cover_photos.map((coverPhoto) => ({
-        src: coverPhoto.image.cover_photos,
-        blurhash: coverPhoto.blurhash,
+        src: coverPhoto.image.cover_photos, // Correctly map to `src`
+        blurhash: coverPhoto.blurhash, // Include Blurhash
       }))
     : [];
 
@@ -113,35 +59,35 @@ const ItemDetails01 = () => {
   }
 
   return (
-    <ItemDetailsContainer>
+    <div className='item-details'>
       <Header />
-      <Section>
-        <div className="flat-title-page inner">
-          <div className="overlay"></div>
-          <div className="themesflat-container">
-            <div className="row">
-              <div className="col-md-12">
-                <TitleHeading>
-                  <h4>{itemData.experience.title}</h4>
-                  <h1>
+      <section className="flat-title-page inner">
+        <div className="overlay"></div>
+        <div className="themesflat-container">
+          <div className="row">
+            <div className="col-md-12">
+              <center>
+                <div className="page-title-heading mg-bt-12">
+                  <h4 className="tf-title-heading ct style-2 fs-30 mg-bt-10">{itemData.experience.title}</h4>
+                  <h1 className="heading text-center">
                     <Rating value={itemData.average_rating} color={'#f8e825'} />
                   </h1>
-                </TitleHeading>
-                <Breadcrumbs>
-                  <ul>
-                    <li>Based on {itemData.reviews.length} reviews</li>
-                  </ul>
-                </Breadcrumbs>
+                </div>
+              </center>
+              <div className="breadcrumbs style2">
+                <ul>
+                  <li>Based on {itemData.reviews.length} reviews</li>
+                </ul>
               </div>
             </div>
           </div>
         </div>
-      </Section>
+      </section>
 
       <SliderStyle3
         data={heroSliderData}
         renderImage={(src, blurhash) => (
-          <SliderWrapper>
+          <div style={{ position: 'relative' }}>
             <Blurhash
               hash={blurhash}
               width={500}
@@ -163,21 +109,33 @@ const ItemDetails01 = () => {
                 console.log('Image loaded successfully:', src); // Confirm image loaded
               }}
             />
-          </SliderWrapper>
+          </div>
         )}
       />
 
-      <ItemDetailsContent>
-        <div>{parse(itemData.experience.body)}</div>
-        <br />
-        <StyledLink target='__blank' to="https://wa.link/f1ufwx">
-          Plan your adventure with us
-        </StyledLink>
-      </ItemDetailsContent>
+      <div className="tf-section tf-item-details">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              <div className="content-center">
+                <div className="sc-item-details">
+                  <div>{parse(itemData.experience.body)}</div>
+                  <br />
+                  <center>
+                    <Link target='__blank' to="https://wa.link/f1ufwx" className="sc-button loadmore style fl-button pri-3">
+                      <span>Plan your adventure with us</span>
+                    </Link>
+                  </center>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <LiveAuction data={itemData.reviews} />
       <Footer />
-    </ItemDetailsContainer>
+    </div>
   );
 }
 
