@@ -15,15 +15,12 @@ import ReactGA from "react-ga4";
 import Tours from '../components/Tours';
 import { Accordion } from 'react-bootstrap-accordion'
 
-import imgblog2 from '../assets/images/blog/airport2.jpeg'
+
 
 import hof1 from '../assets/images/blog/hof1.jpg'
 import hof2 from '../assets/images/blog/hof2.jpg'
 import hof from '../assets/images/blog/hof.jpg'
-import hof4 from '../assets/images/blog/hof4.png'
-import hof5 from '../assets/images/blog/hof5.png'
-import hof6 from '../assets/images/blog/hof6.png'
-import hof7 from '../assets/images/blog/hof7.png'
+
 
 import cobra from '../assets/images/blog/cobra.jpg'
 import chopper from '../assets/images/blog/chopper.jpg'
@@ -524,6 +521,8 @@ const Home03 = () => {
                                 <p className="sub-title ct small mg-bt-20 pad-420">
                                     then just fill out that form below to give us the correct information to plan the perfect trip for you!                               
                                 </p>
+
+                                {/* Contact form */}
                             
 
 

@@ -1,10 +1,5 @@
 
 
-import img1 from '../images/slider/slide_1.png';
-import img2 from '../images/slider/slide_2.png';
-import imgbg1 from '../images/slider/cpt.jpg'
-import imgbg2 from '../images/slider/cpt.jpg'
-
 
 
 const heroSliderData = [

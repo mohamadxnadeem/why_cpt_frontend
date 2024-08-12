@@ -3,14 +3,8 @@ import { Link } from 'react-router-dom';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 
-import img1 from '../assets/images/box-item/icon1-recont-post.jpg'
-import img2 from '../assets/images/box-item/icon2-recont-post.jpg'
-import img3 from '../assets/images/box-item/icon3-recont-post.jpg'
-import img4 from '../assets/images/box-item/icon4-recont-post.jpg'
+
 import imgblog1 from '../assets/images/blog/carhire.jpg'
-import imgblog2 from '../assets/images/blog/airport2.jpeg'
-import imgblogdetail1 from '../assets/images/blog/4.png'
-import imgblogdetail2 from '../assets/images/blog/airport4.jpeg'
 
 const VehicleHire = () => {
    

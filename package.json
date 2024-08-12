@@ -5,7 +5,7 @@
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
+    "@testing-library/react": "^16.0.0",
     "@testing-library/user-event": "^13.5.0",
     "@vercel/speed-insights": "^1.0.12",
     "axios": "^0.24.0",
@@ -28,9 +28,10 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "react-slick": "^0.29.0",
-    "react-tabs": "^3.2.3",
+    "react-tabs": "^6.0.2",
     "react-transition-group": "^4.4.2",
     "slick-carousel": "^1.8.1",
+    "styled-components": "^6.1.12",
     "swiper": "^7.4.1",
     "web-vitals": "^2.1.2"
   },

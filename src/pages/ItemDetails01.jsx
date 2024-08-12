@@ -7,7 +7,6 @@ import LiveAuction from '../components/layouts/home-3/LiveAuction';
 import Rating from '../components/Rating';
 import Loader from '../components/Loader';
 import SliderStyle3 from '../components/slider/SliderStyle3';
-import Cars4Hire from '../components/Cars4hire';
 import { Blurhash } from 'react-blurhash';
 import 'react-tabs/style/react-tabs.css';
 import parse from 'html-react-parser';
@@ -21,17 +20,20 @@ const ItemDetails01 = () => {
     fetch(`https://web-production-1ab9.up.railway.app/api/experiences/${id}/with-reviews`)
       .then((response) => response.json())
       .then((data) => {
+        console.log('Fetched data:', data); // Ensure data is logged
         setItemData(data);
         setLoading(false);
       })
       .catch((error) => {
-        
         console.error('Error fetching data:', error);
       });
   }, [id]);
 
   const heroSliderData = itemData && itemData.cover_photos
-    ? itemData.cover_photos.map((coverPhoto) => coverPhoto)
+    ? itemData.cover_photos.map((coverPhoto) => ({
+        src: coverPhoto.image.cover_photos, // Correctly map to `src`
+        blurhash: coverPhoto.blurhash, // Include Blurhash
+      }))
     : [];
 
   if (loading) {
@@ -65,10 +67,7 @@ const ItemDetails01 = () => {
       </section>
 
       <SliderStyle3
-        data={heroSliderData.map((photo) => ({
-          ...photo,
-          blurhash: photo.blurhash, // Ensure your data includes blurhash property
-        }))}
+        data={heroSliderData}
         renderImage={(src, blurhash) => (
           <div style={{ position: 'relative' }}>
             <Blurhash
@@ -82,10 +81,14 @@ const ItemDetails01 = () => {
             />
             <img
               src={src}
-              alt=""
+              alt="Cover"
               style={{ width: '100%', height: 'auto', position: 'relative', zIndex: 2 }}
+              onError={(e) => {
+                console.error('Error loading image:', e);
+                e.target.style.display = 'none'; // Hide broken images
+              }}
               onLoad={() => {
-                // Optionally, add logic here to handle image load events
+                console.log('Image loaded successfully:', src); // Confirm image loaded
               }}
             />
           </div>
