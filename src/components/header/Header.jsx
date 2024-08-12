@@ -75,12 +75,15 @@ const Header = () => {
 
                                     <nav id="main-nav" className="main-nav" ref={menuLeft}>
                                         <ul id="menu-primary-menu" className="menu">
+                                        <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
+                                                <Link to="/">Home</Link>
+                                            </li>
                                             <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
                                                 <Link to="/airport-transfers">Airport Transfers</Link>
                                             </li>
-                                            <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
+                                            {/* <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
                                                 <Link to="/luxury-villas">Luxury Accommodation</Link>
-                                            </li>
+                                            </li> */}
                                         </ul>
                                     </nav>
 
