@@ -246,7 +246,7 @@ const Home03 = () => {
                                 </p>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Why us?                              
+                                    <strong>Why us? </strong>                        
                                 </p>
                                 <p className="sub-title ct small mg-bt-20 pad-420">
                                     We started as a family-run business offering transport services and have been in the travel business for four generations,  
@@ -274,7 +274,7 @@ const Home03 = () => {
                                     <strong> - And everything you need to add to your Cape Town bucket list!   </strong>                               
                                 </p>
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Please note that all pictures on our website are authentic and taken by our founder @mohamad_nadeem while on tour with real clients.                                
+                                    Please note that all pictures on our website are authentic and taken by our founder and Cape Town's best Tour Guide <a href='https://www.instagram.com/king_mo_97/' target='__blank'>Mohamad Nadeem</a>  while on tour with real clients.                                
                                 </p>
                                 
                                
