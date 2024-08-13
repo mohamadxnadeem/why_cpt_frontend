@@ -226,69 +226,55 @@ const Home03 = () => {
                                 </h1>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    We started as a family-run business offering transport services and have been in the travel business for four generations,                                
+                                    If you're a positive person who loves travelling and has a taste for life.                                
                                 </p>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    hosted every type of traveller, 
+                                    Then we have some good news for you. You're at the right place! 
                                 </p>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    from high-profile millionaire clients like <a href='https://www.instagram.com/kaziabidur/' target='_blank'> Kazi Abidur</a> to students from Saudi Arabia studying English in Cape Town on a tight budget!
+                                    Our goal at "Why Cape Town" is to guide you to the best experiences in Cape Town so you can go home and tell all your friends about your adventure in the world's best city!
                                 </p>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    So, if you're from England, Oman, Bahrain, USA, Brazil or Germany,                                 
+                                    Ready to plan the adventure of a lifetime? Want to find all of Cape Town's most Iconic Attractions on a private tour with the best tour guide skilled in photography?                                 
                                 </p>
                                 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    And,                                
+                                    We can arrange everything you need to guarantee the best experience in Cape Town.                                
                                 </p>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    You enjoy exploring the world,                                
+                                    Why us?                              
                                 </p>
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    You want to taste the best foods in Cape Town,                                  
+                                    We started as a family-run business offering transport services and have been in the travel business for four generations,  
                                 </p>
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Find all the Instagram Worthy spots with a private tour guide skilled in photography,                                
+                                    Hosted every type of traveller,                                 
                                 </p>
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    To have the  best experience in Cape Town,                                 
+                                    From high-profile millionaire clients like Kazi Abidur to students from Saudi Arabia studying English in Cape Town on a tight budget!                                 
                                 </p>
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    then,                                 
+                                    So, If you're ready to find out "Why Cape Town" is the best city in the world,                                 
                                 </p>
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    you're at the right place!                                
+                                    Then scroll down to check out:                                
+                                </p>
+                                
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    <strong>- Cape Town's most Iconic attractions,    </strong>                             
                                 </p>
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Because,                                
+                                    <strong> - What our clients say about us,      </strong>                            
                                 </p>
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    We can arrange everything for you to have the best experience in Cape Town without breaking the budget!                                
+                                    <strong> - And everything you need to add to your Cape Town bucket list!   </strong>                               
                                 </p>
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    So,                                 
-                                </p>
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    If you're ready to find out "Why Cape Town" is the best city in the world,                                
-                                </p>
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Then scroll down to check out:
-                                </p>
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Cape Town's most Iconic attractions,                                  
-                                </p>
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    what our clients say about us,                                  
-                                </p>
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    And everything you need to add to your Cape Town bucket list!                                 
-                                </p>
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Please note that all pictures on our website are authentic and taken by our founder <a href='https://www.instagram.com/king_mo_97/' target='_blank' > Mohamad Nadeem</a>  while on tour with real clients.                                 
+                                    Please note that all pictures on our website are authentic and taken by our founder @mohamad_nadeem while on tour with real clients.                                
                                 </p>
                                 
                                
