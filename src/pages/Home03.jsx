@@ -3,49 +3,24 @@ import Header from '../components/header/Header';
 import heroSliderData from '../assets/fake-data/data-slider-3';
 import Slider from '../components/slider/Slider';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-import { Link } from 'react-router-dom';
 import CardModal from '../components/layouts/CardModal';
 import Rating from '../components/Rating'
-
 import Footer from '../components/footer/Footer'
-
-
-import ReactGA from "react-ga4";
 import Tours from '../components/Tours';
 import { Accordion } from 'react-bootstrap-accordion'
-
-
-
 import hof1 from '../assets/images/blog/hof1.jpg'
 import hof2 from '../assets/images/blog/hof2.jpg'
 import hof from '../assets/images/blog/hof.jpg'
-
-
 import cobra from '../assets/images/blog/cobra.jpg'
 import chopper from '../assets/images/blog/chopper.jpg'
 import bokaap from '../assets/images/blog/bokaap.jpg'
-
-
-
 import jana from '../assets/images/blog/jana.jpg'
 import tim from '../assets/images/blog/tim.jpg'
 import rachel from '../assets/images/blog/becca.jpg'
 import marie from '../assets/images/blog/marie.jpg'
 import micheal from '../assets/images/blog/micheal.jpg'
 import dan from '../assets/images/blog/dan.jpg'
-
 import emailjs from 'emailjs-com';
-
-
-
-
-
-
-
-
-
-
 
 
 const Home03 = () => {
@@ -245,49 +220,78 @@ const Home03 = () => {
                             <div className="text-container">
 
                                 <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    Accommodation, Transport, Tours and Experiences
-                                </h1>
+                                    Accommodation, Transport, Tours and Photography in Cape Town                                </h1>
                                 <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
                                     To fit every budget!
                                 </h1>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    We started as a family-run business offering transport services over 4 generations,  
+                                    We started as a family-run business offering transport services and have been in the travel business for four generations,                                
                                 </p>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    hosted every type of traveller, from high-profile clients like <a target='__blank' href='https://www.instagram.com/kaziabidur/'>Kazi Abidur</a> to students on a tight budget!
+                                    hosted every type of traveller, 
                                 </p>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    and have since evolved into a travel agency specializing in providing complete travel packages that include Accommodation, Transport, Tours and Experiences.                   
+                                    from high-profile millionaire clients like <a href='https://www.instagram.com/kaziabidur/' target='_blank'> Kazi Abidur</a> to students from Saudi Arabia studying English in Cape Town on a tight budget!
                                 </p>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    For clients from the UK, USA, Oman, Bahrain, Kuwait, UAE, Brazil, Argentina, Spain and Germany.                                
+                                    So, if you're from England, Oman, Bahrain, USA, Brazil or Germany,                                 
                                 </p>
                                 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Why should you book a complete travel package with us instead of booking everything separately?
+                                    And,                                
+                                </p>
+
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    You enjoy exploring the world,                                
                                 </p>
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Now that's a good question! 
+                                    You want to taste the best foods in Cape Town,                                  
                                 </p>
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Because we've been in business for over 5 decades, forged special relationships with tour operators and accommodations to offer you the best prices on the market.                               
+                                    Find all the Instagram Worthy spots with a private tour guide skilled in photography,                                
                                 </p>
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Scroll down to check out some of Cape Town's most Iconic attractions,                                
+                                    To have the  best experience in Cape Town,                                 
                                 </p>
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    what our clients say about us,                              
+                                    then,                                 
                                 </p>
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    And everything you need to add to your Cape Town bucket list!                               
+                                    you're at the right place!                                
                                 </p>
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Please note all pictures on our website were taken by us of actual clients on real tours.                                
+                                    Because,                                
                                 </p>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    We can arrange everything for you to have the best experience in Cape Town without breaking the budget!                                
+                                </p>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    So,                                 
+                                </p>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    If you're ready to find out "Why Cape Town" is the best city in the world,                                
+                                </p>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    Then scroll down to check out:
+                                </p>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    Cape Town's most Iconic attractions,                                  
+                                </p>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    what our clients say about us,                                  
+                                </p>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    And everything you need to add to your Cape Town bucket list!                                 
+                                </p>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    Please note that all pictures on our website are authentic and taken by our founder <a href='https://www.instagram.com/king_mo_97/' target='_blank' > Mohamad Nadeem</a>  while on tour with real clients.                                 
+                                </p>
+                                
+                               
 
                                 <br></br>
                                 <br></br>

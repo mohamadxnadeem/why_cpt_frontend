@@ -119,7 +119,7 @@ const AirportTransfers = () => {
                     content="Experience stress-free and reliable airport transfers in Cape Town with our professional drivers and comfortable vehicles. Ideal for sophisticated professionals."
                 />
                 <meta property="og:image" content={imgblog1} /> {/* Use your image URL here */}
-                <meta property="og:url" content="http://yourwebsite.com/airport-transfers" /> {/* Replace with your page URL */}
+                <meta property="og:url" content="http://whycapetown.com/airport-transfers" /> {/* Replace with your page URL */}
                 <meta property="og:type" content="website" />
             </Helmet>
             <Header />
