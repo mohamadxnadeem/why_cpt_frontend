@@ -6,6 +6,9 @@ import AccomodationDetails from './AccomodationDetails';
 
 import Stays from './Stays';
 import AirportTransfers from './AirportTransfers';
+
+import WhereToGetCannabis from './where-to-get-cannabis';
+
 import Tours from './Tours';
 
 import LuxuryVillas from './LuxuryVillas';
@@ -27,6 +30,7 @@ const routes = [
 
   { path: '/stays/', component: <Stays />},
   { path: '/airport-transfers', component: <AirportTransfers />},
+  { path: '/where-to-get-cannabis', component: <WhereToGetCannabis />},
 
   { path: '/luxury-villas', component: <LuxuryVillas />},
   { path: '/student-accomodation', component: <StudentAccomodation />},
