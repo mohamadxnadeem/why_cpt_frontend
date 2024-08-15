@@ -118,12 +118,12 @@ const WhereToGetCannabis = () => {
                 <title>Premium Medical grade cannabis in Cape Town</title>
                 <meta
                     name="description"
-                    content="Experience stress-free and reliable airport transfers in Cape Town with our professional drivers and comfortable vehicles. Ideal for sophisticated professionals."
+                    content="discrete deliveries delivered at your convenience"
                 />
                 <meta property="og:title" content="Premium Medical grade cannabis in Cape Town" />
                 <meta
                     property="og:description"
-                    content="Experience stress-free and reliable airport transfers in Cape Town with our professional drivers and comfortable vehicles. Ideal for sophisticated professionals."
+                    content="discrete deliveries delivered at your convenience"
                 />
                 <meta property="og:image" content={imgblog1} /> {/* Use your image URL here */}
                 <meta property="og:url" content="http://whycapetown.com/where-to-get-cannabis" /> {/* Replace with your page URL */}
