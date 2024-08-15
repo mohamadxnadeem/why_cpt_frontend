@@ -65,9 +65,9 @@ const WhereToGetCannabis = () => {
             cover_photo: imgblog1,
             name: 'Super Cheese',
             info: 'https://www.leafly.com/strains/slurricane',
-            price: '$99 for 10 grams',
+            price: '$49 for 5 grams',
             grade: 'AAA Grade',
-            rating: 5,
+            rating: 4.5,
             comment: 'Super Cheese, an indica-dominant hybrid, blends skunky musk with pungent blue cheese flavors. Bred by Positronics, its a nostalgic nod to Amsterdams 1980s strains offering a smooth, earthy buttermilk taste.',
         },
         
@@ -75,7 +75,7 @@ const WhereToGetCannabis = () => {
             cover_photo: imgblog1,
             name: 'Slurricane',
             info: 'https://www.leafly.com/strains/slurricane',
-            price: '$99 for 10 grams',
+            price: '$49 for 5 grams',
             grade: 'AAA Grade',
             thc: '21%',
             cbg: '1%',
@@ -87,7 +87,7 @@ const WhereToGetCannabis = () => {
             cover_photo: imgblog1,
             name: 'Kosher Kush',
             info: 'https://www.leafly.com/strains/slurricane',
-            price: '$99 for 10 grams',
+            price: '$49 for 5 grams',
             grade: 'AAA Grade',
             thc: '21%',
             cbg: '1%',
@@ -99,7 +99,7 @@ const WhereToGetCannabis = () => {
             cover_photo: imgblog1,
             name: 'AK-47',
             info: 'https://www.leafly.com/strains/slurricane',
-            price: '$99 for 10 grams',
+            price: '$49 for 5 grams',
             grade: 'AAA Grade',
             thc: '19%',
             cbg: '1%',
@@ -164,11 +164,9 @@ const WhereToGetCannabis = () => {
                                     Checkout what suits your needs,
                                 </p>
                                 <p className="mg-bt-24">
-                                    Same day delivery available within 10km radius of the CBD,
+                                    Same day delivery available within 10km radius of the CBD.
                                 </p>
-                                <p className="mg-bt-24">
-                                    Click the "Order Now" button to connect you to your plug and place your order via whatsapp,
-                                </p>
+                                
                                 
                                 
                             </div>
@@ -247,8 +245,9 @@ const WhereToGetCannabis = () => {
                                                                                     <div className="card-title">
                                                                                         <h5>{item.price}</h5>
                                                                                     </div>
+                                                                                   
                                                                                     <center>
-                                                                                    <Link target='__blank' to="https://wa.link/252zbt" className="sc-button loadmore style fl-button pri-3"><span>Whatsapp Us Now</span></Link>
+                                                                                    <Link target='__blank' to="https://wa.link/252zbt" className="sc-button loadmore style fl-button pri-3"><span>Order Now</span></Link>
                                                                                     </center>
                                                                                     
                                                                                 </div>
