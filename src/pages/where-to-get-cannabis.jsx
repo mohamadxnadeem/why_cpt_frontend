@@ -248,9 +248,7 @@ const WhereToGetCannabis = () => {
                                                                                         <h5>{item.price}</h5>
                                                                                     </div>
                                                                                     <center>
-                                                                                        <Link to={`/https://wa.link/tkqy8h`} className="sc-button loadmore style fl-button pri-3">
-                                                                                            <span>I WANT THIS</span>
-                                                                                        </Link>
+                                                                                    <Link target='__blank' to="https://wa.link/252zbt" className="sc-button loadmore style fl-button pri-3"><span>Whatsapp Us Now</span></Link>
                                                                                     </center>
                                                                                     
                                                                                 </div>
