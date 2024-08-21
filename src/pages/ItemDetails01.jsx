@@ -14,6 +14,7 @@ import styled from 'styled-components';
 import emailjs from 'emailjs-com';
 import Tours from '../components/Tours';
 import { Helmet } from 'react-helmet';
+import Cars4Hire from '../components/Cars4hire';
 
 const LoaderWrapper = styled.div`
   position: fixed;
@@ -175,6 +176,8 @@ const ItemDetails01 = () => {
       </div>
 
       <LiveAuction data={itemData.reviews} />
+
+      <Cars4Hire/>
 
       <div className="tf-section tf-item-details">
         <div className="container">

@@ -22,6 +22,8 @@ import emailjs from 'emailjs-com';
 
 import { Helmet } from 'react-helmet';
 
+import Cars4Hire from '../components/Cars4hire';
+
 
 const AirportTransfers = () => {
     const [modalShow, setModalShow] = useState(false);
@@ -133,7 +135,7 @@ const AirportTransfers = () => {
                                 <br />
 
                                 <h1 className="heading text-center">
-                                    Reliable Airport Transfers in Cape Town
+                                    Luxury Chauffeured Drives for VIPs in Cape Town
                                 </h1>
                             </div>
                         </div>
@@ -145,27 +147,54 @@ const AirportTransfers = () => {
                     <div className="post">
                         <div className="inner-content">
                             <h2 className="title-post">
-                                For sophisticated professionals
+                                Warning! Not for brokies.
                             </h2>
                             <div className="divider"></div>
 
                             <div className="inner-post mg-t-40">
-                                <p className="mg-bt-24">
-                                    We specialize in providing punctual airport pick ups and drop offs,
-                                </p>
-                                <p className="mg-bt-24">
-                                    in clean and comfortable vehicles with professional drivers,
-                                </p>
-                                <p className="mg-bt-24">
-                                    to make sure you have an easy stress free journey.
-                                </p>
+
+                            <p className="mg-bt-24">
+                                If you're flying on the economy, don't value your safety, don't value relationships and have a broke scarcity mindset,                            </p>
+                            <p className="mg-bt-24">
+                                Then our services are not for you because we offer elite-level chauffeur services in premium vehicles to clients with class.                            </p>
+                               
+                            <p className="mg-bt-24">
+                                So, if you're a sophisticated intellectual who enjoys the finer things in life, then book with us and discover the secrets of Cape Town with us.                            </p>
+                            <p className="mg-bt-24">
+                                Request King Mo ( our top tour guide ) if you would like to include photography services.                             </p>
+                               
+                               
                             </div>
 
-                            <div className="image">
-                                <img src={imgblog1} alt="audi" />
+                            
+                            <br />
+                            <br />
+
+                            <Cars4Hire/>
+                            <div className="inner-post mg-t-40">
+                                <h2 className="title-post">
+                                    Why so expensive?
+                                </h2>
+                                <br></br>
+                                <br></br>
+
+                                <p className="mg-bt-24">
+                                    We're not expensive. We offer Premiums services to high-profile clients who value time and experiences over money.
+                                </p>
+                                <p className="mg-bt-24">
+                                    Infact we guarantee we can offer you the best value for money on the market.  
+                                </p>
+                                
+                                
+                               
+                               
+                             
+                               
+
+
+                                
+                               
                             </div>
-                            <br />
-                            <br />
 
                             <Fragment>
                                 <section className="tf-section live-auctions">
@@ -174,7 +203,7 @@ const AirportTransfers = () => {
                                             <div className="col-md-12">
                                                 <div className="">
                                                     <h2 className="tf-title">
-                                                        Airport Transfer Reviews
+                                                        Reviews
                                                     </h2>
                                                     <div className="heading-line"></div>
                                                 </div>
@@ -235,38 +264,11 @@ const AirportTransfers = () => {
                                 </section>
                             </Fragment>
 
-                            <h2 className="title-post">Our Pricing Guide:</h2>
-                            <div className="divider"></div>
+                           
 
-                            <div className="inner-post mg-t-40">
-                                <p className="mg-bt-24"><strong>Woodstock</strong> to Airport:  R399.95 / ( $21.79)</p>
-                                <div className="divider"></div>
-                                <p className="mg-bt-24">
-                                    <strong>Cape Town Central</strong> to Airport: R399.95 / ( $21.79)
-                                </p>
-                                <div className="divider"></div>
+                            
 
-                                <p className="mg-bt-24"><strong>Century City</strong> to Airport: R399.95 / ( $21.79)</p>
-                                <div className="divider"></div>
-
-                                <p className="mg-bt-24"><strong>Bokaap</strong> to Airport: R399.95 /  ($21.79)</p>
-                                <div className="divider"></div>
-
-                                <p className="mg-bt-24">
-                                <strong>Sea Point</strong> to Airport: R499.95 /  ($27.25)
-                                </p>
-                                <div className="divider"></div>
-
-                                <p className="mg-bt-24"><strong>Simons Town</strong> to Airport: R799.95 ( $43.64 )</p>
-                                <div className="divider"></div>
-
-                                <p className="mg-bt-24"><strong>Camps Bay</strong> to Airport: R899.95  ( $49.10 )</p>
-                                <div className="divider"></div>
-
-
-                            </div>
-
-                            {formSubmitted ? (
+                            {/* {formSubmitted ? (
     <div className="thank-you-message">
         <h2>Thank You!</h2>
         <p>Your enquiry has been successfully submitted. We will get back to you soon.</p>
@@ -328,7 +330,7 @@ const AirportTransfers = () => {
             </form>
         </div>
     </Fragment>
-)}
+)} */}
 
 
                         </div>

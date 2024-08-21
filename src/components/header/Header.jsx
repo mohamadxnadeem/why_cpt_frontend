@@ -79,10 +79,14 @@ const Header = () => {
                                                 <Link to="/">Home</Link>
                                             </li>
                                             <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-                                                <Link to="/airport-transfers">Airport Transfers</Link>
+                                                <Link to="/luxury-villas">Luxury Accommodation</Link>
+                                            </li>
+                                            
+                                            <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
+                                                <Link to="/luxury-chauffeured-drives-and-airport-transfers">Luxury Chauffeured Drives</Link>
                                             </li>
                                             {/* <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-                                                <Link to="/luxury-villas">Luxury Accommodation</Link>
+                                                <Link to="/where-to-get-cannabis">Cannabis Tours</Link>
                                             </li> */}
                                         </ul>
                                     </nav>

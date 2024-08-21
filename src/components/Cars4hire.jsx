@@ -1,51 +1,86 @@
-// Import necessary dependencies at the top of your file
 import React, { useState, useEffect, forwardRef, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-import Rating from './Rating';
 import FlipMove from 'react-flip-move';
 import { Blurhash } from 'react-blurhash';
+import styled from 'styled-components';
+import Loader from './Loader'; // Import the Loader component
+
+// Styled components
+const SlideContainer = styled.div`
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9; /* 16:9 aspect ratio for landscape */
+  border-radius: 10px;
+  overflow: hidden;
+`;
+
+const BlurhashStyled = styled(Blurhash)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: opacity 1s ease-in-out;
+  opacity: ${(props) => (props.loaded ? 0 : 1)};
+`;
+
+const ImageStyled = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures image covers the container */
+  z-index: 2;
+  opacity: ${(props) => (props.imageLoaded ? 1 : 0)};
+  transition: opacity 1s ease-in-out;
+  border-radius: 10px;
+`;
 
 const Cars4Hire = forwardRef((ref) => {
   const [data, setData] = useState([]);
-  const [blurhashArray, setBlurhashArray] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch data from your API
     fetch('https://web-production-1ab9.up.railway.app/api/cars-for-hire/all/')
       .then((response) => response.json())
       .then((data) => {
-        setData(data);
-        console.log('this is the item data:', data)
-
-        // Fetch blurhash for each item
-        const blurhashPromises = data.slice(0, 10).map((item) =>
-          generateBlurhash(item.cover_photos[0].cover_photos)
-        );
-
-        Promise.all(blurhashPromises)
-          .then((hashArray) => setBlurhashArray(hashArray))
-          .catch((error) => console.error('Error fetching blurhash:', error));
+        const updatedData = data.map(item => ({
+          ...item,
+          firstPhoto: item.cover_photos.length > 0 ? item.cover_photos[0] : null,
+        }));
+        setData(updatedData);
+        setLoading(false); // Set loading to false after data is fetched
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
+        setLoading(false); // Set loading to false if there's an error
       });
-
-      console.log('this is the new ', data)
   }, []);
 
-  const generateBlurhash = async (imageUrl, width, height) => {
-    try {
-      const response = await fetch(imageUrl);
-      const blob = await response.blob();
-      const buffer = await blob.arrayBuffer();
-      const blurhash = Blurhash.encode(new Uint8Array(buffer), width, height);
-      return blurhash;
-    } catch (error) {
-      console.error('Error generating Blurhash:', error);
-      return null;
-    }
+  const handleImageLoad = (carId) => {
+    setData(prevData => {
+      return prevData.map(item => {
+        if (item.car.id === carId && item.firstPhoto) {
+          return {
+            ...item,
+            firstPhoto: {
+              ...item.firstPhoto,
+              imageLoaded: true,
+            }
+          };
+        }
+        return item;
+      });
+    });
+  };
+
+  const handleImageError = (e) => {
+    console.error('Error loading image:', e.target.src, e);
+    e.target.style.display = 'none'; // Hide broken images
   };
 
   return (
@@ -55,88 +90,98 @@ const Cars4Hire = forwardRef((ref) => {
           <div className="themesflat-container">
             <div className="row">
               <div className="col-12">
-                <h2 className="tf-title-heading ct style-2 mg-bt-13">Want a private chauffeur drive for the day? </h2>
-                <p  className="sub-title ct small mg-bt-20 pad-420">Find Your Perfect Ride Below with a professional local guide for a stress free journey: </p>
+                <center>
+                  <h2 className="tf-title-heading ct style-2 mg-bt-13">
+                    Chauffeured Drives
+                  </h2>
+                  <p className="sub-title ct small mg-bt-20 pad-420">
+                    Premium Vehicles. Local Guides. Stress Free Journey. Best Value for Money Garunteed.
+                  </p>
+                </center>
 
-                <Swiper
-                  modules={[Navigation, Pagination, Scrollbar, A11y]}
-                  spaceBetween={30}
-                  breakpoints={{
-                    0: { slidesPerView: 1 },
-                    767: { slidesPerView: 2 },
-                    991: { slidesPerView: 3 },
-                    1200: { slidesPerView: 4 },
-                  }}
-                  navigation
-                  pagination={{ clickable: true }}
-                  scrollbar={{ draggable: true }}
-                >
-                  {data.slice(0, 10).map((item, index) => (
-                    <SwiperSlide key={index}>
-                      <div className="swiper-container show-shadow carousel auctions">
-                        <div className="swiper-wrapper">
-                          <div className="swiper-slide">
-                            <div className="slider-item">
-                              <div className={`sc-card-product ${item.car.feature ? 'comingsoon' : ''}`}>
-                                <div className="card-media">
-                                 
+                {loading ? (
+                  <Loader /> // Show the loader while loading
+                ) : (
+                  <Swiper
+                    modules={[Navigation, Pagination, Scrollbar, A11y]}
+                    spaceBetween={30}
+                    breakpoints={{
+                      0: { slidesPerView: 1 },
+                      767: { slidesPerView: 2 },
+                      991: { slidesPerView: 3 },
+                      1200: { slidesPerView: 4 },
+                    }}
+                    navigation
+                    pagination={{ clickable: true }}
+                    scrollbar={{ draggable: true }}
+                  >
+                    {data.slice(0, 10).map((item, index) => (
+                      <SwiperSlide key={index}>
+                        <div className="swiper-container show-shadow carousel auctions">
+                          <div className="swiper-wrapper">
+                            <div className="swiper-slide">
+                              <div className="slider-item">
+                                <div className={`sc-card-product ${item.car.feature ? 'comingsoon' : ''}`}>
+                                  <div className="card-media">
+                                    <Link to={`/car/${item.car.id}`}>
+                                      <SlideContainer>
+                                        {item.firstPhoto && (
+                                          <React.Fragment>
+                                            <BlurhashStyled
+                                              hash={item.firstPhoto.blurhash}
+                                              resolutionX={32}
+                                              resolutionY={32}
+                                              width={500} /* Match with container width */
+                                              height={281} /* Match with container height for 16:9 */
+                                              punch={1}
+                                              loaded={item.firstPhoto.imageLoaded}
+                                            />
+                                            <ImageStyled
+                                              src={item.firstPhoto.image.cover_photos}
+                                              alt={item.car.title}
+                                              onLoad={() => handleImageLoad(item.car.id)}
+                                              onError={handleImageError}
+                                              imageLoaded={item.firstPhoto.imageLoaded}
+                                            />
+                                          </React.Fragment>
+                                        )}
+                                      </SlideContainer>
+                                    </Link>
+                                  </div>
+                                  <div className="card-title">
+                                    <h5 className="style2">
+                                      <Link to={`/car/${item.car.id}`}>{item.car.title}</Link>
+                                    </h5>
+                                  </div>
 
-                                    {blurhashArray[index] ? (
-                                      <Blurhash
-                                        hash={'LEHV6nWB2yk8pyo0adR*.7kCMdnj'}
-                                        width="100%"
-                                        height="100%"
-                                        resolutionX={32}
-                                        resolutionY={32}
-                                      />
-                                    ) : (
-                                      <img
-                                        src={item.cover_photos[0].cover_photos}
-                                        alt={item.car.title}
-                                        loading="lazy"
-                                        style={{ width: '100%', height: '100%' }}
-                                      />
-                                    )}
-                                 
-
-                                </div>
-                                <div className="card-title">
-                                  <h5 className="style2">
-                               {item.car.title}
-                                  </h5>
-                                </div>
-                               
-                                
-                                {/* <div className="meta-info">
-                                  <div className="author">
-                                    <div className="review">
-                                      <span>Based on {item.reviews.length} reviews</span>
-                                      <h5>
-                                        <Rating value={item.average_rating} color={'#f8e825'} />
-                                      </h5>
+                                  <div className="meta-info">
+                                    <div className="author">
+                                      <div className="price" style={{ textAlign: 'left' }}>
+                                        <h5>Airport Transfer:</h5>
+                                        <p>- ${item.car.number_of_seats}</p>
+                                        <h5>Chauffeured Drive:</h5>
+                                        <p>- ${item.car.price}</p>
+                                      </div>
                                     </div>
                                   </div>
-                                </div> */}
-                                <div className="meta-info">
-                                  <div className="author">
-                                    <div className="price">
-                                      <h5>From ${item.car.price} Per Day</h5>
-
-                                    </div>
-                                  </div>
+                                  <center>
+                                    <Link
+                                      target="__blank"
+                                      to={`https://wa.link/kdchjk`}
+                                      className="sc-button loadmore style fl-button pri-3"
+                                    >
+                                      <span>Reserve Now</span>
+                                    </Link>
+                                  </center>
                                 </div>
-                                <center>
-                                <Link  target='__blank' to={`https://wa.link/kdchjk`} className="sc-button loadmore style  fl-button pri-3"><span>Reserve Vehicle Now</span></Link>
-
-                                </center>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                )}
               </div>
             </div>
           </div>
@@ -147,4 +192,3 @@ const Cars4Hire = forwardRef((ref) => {
 });
 
 export default Cars4Hire;
-

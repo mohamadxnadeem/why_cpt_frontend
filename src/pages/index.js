@@ -5,7 +5,7 @@ import CarDetails from './CarDetails';
 import AccomodationDetails from './AccomodationDetails';
 
 import Stays from './Stays';
-import AirportTransfers from './AirportTransfers';
+import AirportTransfers from './luxury-chauffeured-drives-and-airport-transfers';
 
 import WhereToGetCannabis from './where-to-get-cannabis';
 
@@ -29,7 +29,7 @@ const routes = [
   { path: '/accomodation/:id', component: <AccomodationDetails />},
 
   { path: '/stays/', component: <Stays />},
-  { path: '/airport-transfers', component: <AirportTransfers />},
+  { path: '/luxury-chauffeured-drives-and-airport-transfers', component: <AirportTransfers />},
   { path: '/where-to-get-cannabis', component: <WhereToGetCannabis />},
 
   { path: '/luxury-villas', component: <LuxuryVillas />},
