@@ -154,7 +154,7 @@ const AirportTransfers = () => {
                             <div className="inner-post mg-t-40">
 
                             <p className="mg-bt-24">
-                                If you're flying on the economy, don't value your safety, don't value relationships and have a broke scarcity mindset,                            </p>
+                                If you're flying on economy, don't value your safety, don't value relationships and have a broke scarcity mindset,                            </p>
                             <p className="mg-bt-24">
                                 Then our services are not for you because we offer elite-level chauffeur services in premium vehicles to clients with class.                            </p>
                                
