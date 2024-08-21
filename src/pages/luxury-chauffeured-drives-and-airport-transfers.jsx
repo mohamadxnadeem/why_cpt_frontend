@@ -179,7 +179,7 @@ const AirportTransfers = () => {
                                 <br></br>
 
                                 <p className="mg-bt-24">
-                                    We're not expensive. We offer Premiums services to high-profile clients who value time and experiences over money.
+                                    We're not expensive. We offer Premium services to high-profile clients who value time and experiences over money.
                                 </p>
                                 <p className="mg-bt-24">
                                     Infact we guarantee we can offer you the best value for money on the market.  
