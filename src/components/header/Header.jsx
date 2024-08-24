@@ -16,7 +16,7 @@ const Header = () => {
         return () => {
             window.removeEventListener('scroll', isSticky);
         };
-    });
+    }, []); // Added empty dependency array
 
     useEffect(() => {
         initializeGoogleTranslate();
@@ -25,9 +25,25 @@ const Header = () => {
     const isSticky = (e) => {
         const header = document.querySelector('.js-header');
         const scrollTop = window.scrollY;
-        scrollTop >= 300 ? header.classList.add('is-fixed') : header.classList.remove('is-fixed');
-        scrollTop >= 400 ? header.classList.add('is-small') : header.classList.remove('is-small');
+        console.log('Scroll Position:', scrollTop); // Check the scroll position
+        
+        if (scrollTop >= 300) {
+            header.classList.add('is-fixed');
+            console.log('is-fixed class added'); // Log when the class is added
+        } else {
+            header.classList.remove('is-fixed');
+            console.log('is-fixed class removed'); // Log when the class is removed
+        }
+        
+        if (scrollTop >= 400) {
+            header.classList.add('is-small');
+            console.log('is-small class added'); // Log when the is-small class is added
+        } else {
+            header.classList.remove('is-small');
+            console.log('is-small class removed'); // Log when the is-small class is removed
+        }
     };
+    
 
     const menuLeft = useRef(null);
     const btnToggle = useRef(null);
@@ -78,9 +94,9 @@ const Header = () => {
                                         <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
                                                 <Link to="/">Home</Link>
                                             </li>
-                                            <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
+                                            {/* <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
                                                 <Link to="/luxury-villas">Luxury Accommodation</Link>
-                                            </li>
+                                            </li> */}
                                             
                                             <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
                                                 <Link to="/luxury-chauffeured-drives-and-airport-transfers">Luxury Chauffeured Drives</Link>

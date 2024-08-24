@@ -147,22 +147,27 @@ const AirportTransfers = () => {
                     <div className="post">
                         <div className="inner-content">
                             <h2 className="title-post">
-                                Warning! Not for brokies.
+                                Warning! We're expensive!
                             </h2>
                             <div className="divider"></div>
 
                             <div className="inner-post mg-t-40">
 
                             <p className="mg-bt-24">
-                                If you're flying on economy, don't value your safety, don't value relationships and have a broke scarcity mindset,                            </p>
+                                We offer premium airport transfers, chauffeured drives and tours in and around Cape Town.               </p>
                             <p className="mg-bt-24">
-                                Then our services are not for you because we offer elite-level chauffeur services in premium vehicles to clients with class.                            </p>
+                                With professional guides and drivers in top of the line vehicles.               
+                            </p>
+                           
+                            <p className="mg-bt-24">
+                                For sophisticated professionals and international Millionaires.  
+                            </p>
+                            <p className="mg-bt-24">
+                                So book with us to guarantee your safety and a fun time in Cape Town for the best experience.   
+                            </p>
+                            
                                
-                            <p className="mg-bt-24">
-                                So, if you're a sophisticated intellectual who enjoys the finer things in life, then book with us and discover the secrets of Cape Town with us.                            </p>
-                            <p className="mg-bt-24">
-                                Request King Mo ( our top tour guide ) if you would like to include photography services.                             </p>
-                               
+              
                                
                             </div>
 
@@ -171,30 +176,7 @@ const AirportTransfers = () => {
                             <br />
 
                             <Cars4Hire/>
-                            <div className="inner-post mg-t-40">
-                                <h2 className="title-post">
-                                    Why so expensive?
-                                </h2>
-                                <br></br>
-                                <br></br>
-
-                                <p className="mg-bt-24">
-                                    We're not expensive. We offer Premium services to high-profile clients who value time and experiences over money.
-                                </p>
-                                <p className="mg-bt-24">
-                                    Infact we guarantee we can offer you the best value for money on the market.  
-                                </p>
-                                
-                                
-                               
-                               
-                             
-                               
-
-
-                                
-                               
-                            </div>
+                            
 
                             <Fragment>
                                 <section className="tf-section live-auctions">

@@ -95,7 +95,7 @@ const Cars4Hire = forwardRef((ref) => {
                     Chauffeured Drives
                   </h2>
                   <p className="sub-title ct small mg-bt-20 pad-420">
-                    Premium Vehicles. Local Guides. Stress Free Journey. Best Value for Money Garunteed.
+                    Pricing to fit every budget.
                   </p>
                 </center>
 
