@@ -110,18 +110,18 @@ const AirportTransfers = () => {
     return (
         <div className='home-3'>
             <Helmet>
-                <title>Reliable Airport Transfers in Cape Town</title>
+                <title>Luxury chauffeured drives and Tours in Cape Town</title>
                 <meta
                     name="description"
-                    content="Experience stress-free and reliable airport transfers in Cape Town with our professional drivers and comfortable vehicles. Ideal for sophisticated professionals."
+                    content="Best value for money, check website for pricing"
                 />
-                <meta property="og:title" content="Reliable Airport Transfers in Cape Town" />
+                <meta property="og:title" content="Luxury tours and transport in Cape Town to fit every budget" />
                 <meta
                     property="og:description"
-                    content="Experience stress-free and reliable airport transfers in Cape Town with our professional drivers and comfortable vehicles. Ideal for sophisticated professionals."
+                    content="Best value for money, check website for pricing"
                 />
                 <meta property="og:image" content={imgblog1} /> {/* Use your image URL here */}
-                <meta property="og:url" content="http://whycapetown.com/airport-transfers" /> {/* Replace with your page URL */}
+                <meta property="og:url" content="http://whycapetown.com/luxury-chauffeured-drives-airport-transfers" /> {/* Replace with your page URL */}
                 <meta property="og:type" content="website" />
             </Helmet>
             <Header />
@@ -147,7 +147,7 @@ const AirportTransfers = () => {
                     <div className="post">
                         <div className="inner-content">
                             <h2 className="title-post">
-                                Warning! We're expensive!
+                                Premium and budget vehicles available
                             </h2>
                             <div className="divider"></div>
 
