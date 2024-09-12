@@ -156,27 +156,31 @@ const Home03 = () => {
         message: ''
     });
 
- // Load Calendly script dynamically
- useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://assets.calendly.com/assets/external/widget.js';
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-        document.body.removeChild(script); // Clean up script on component unmount
+    useEffect(() => {
+        const script = document.createElement('script');
+        script.src = 'https://assets.calendly.com/assets/external/widget.js';
+        script.async = true;
+        document.body.appendChild(script);
+    
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, []);
+    
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent); // Check if it's a mobile device
+    
+    const openCalendlyPopup = (e) => {
+        e.preventDefault();
+        if (isMobile) {
+            // For mobile, we can redirect to the Calendly page instead of opening a popup
+            window.location.href = 'https://calendly.com/mohamadxnadeem/30min';
+        } else if (window.Calendly) {
+            window.Calendly.initPopupWidget({ url: 'https://calendly.com/mohamadxnadeem/30min' });
+        } else {
+            console.error("Calendly is not loaded yet");
+        }
+        return false;
     };
-}, []);
-
-// Function to handle the Calendly pop-up
-const openCalendlyPopup = () => {
-    if (window.Calendly) {
-        window.Calendly.initPopupWidget({ url: 'https://calendly.com/mohamadxnadeem/30min' });
-        return false; // Prevent default link behavior
-    } else {
-        console.error("Calendly is not loaded yet");
-    }
-};
 
     const handleChange = (e) => {
         setFormData({
