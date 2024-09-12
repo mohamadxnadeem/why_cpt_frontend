@@ -161,20 +161,21 @@ const Home03 = () => {
         script.src = 'https://assets.calendly.com/assets/external/widget.js';
         script.async = true;
         document.body.appendChild(script);
-    
+
         return () => {
             document.body.removeChild(script);
         };
     }, []);
-    
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent); // Check if it's a mobile device
-    
+
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
     const openCalendlyPopup = (e) => {
         e.preventDefault();
         if (isMobile) {
-            // For mobile, we can redirect to the Calendly page instead of opening a popup
-            window.location.href = 'https://calendly.com/mohamadxnadeem/30min';
+            // Open Calendly link in a new tab for mobile devices
+            window.open('https://calendly.com/mohamadxnadeem/30min', '_blank');
         } else if (window.Calendly) {
+            // Trigger Calendly popup for desktop users
             window.Calendly.initPopupWidget({ url: 'https://calendly.com/mohamadxnadeem/30min' });
         } else {
             console.error("Calendly is not loaded yet");
