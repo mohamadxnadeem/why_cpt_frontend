@@ -4,6 +4,7 @@ import heroSliderData from '../assets/fake-data/data-slider-3';
 import Slider from '../components/slider/Slider';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import CardModal from '../components/layouts/CardModal';
+import ImageBar from '../components/ImageBar';
 import Rating from '../components/Rating'
 import Footer from '../components/footer/Footer'
 import Tours from '../components/Tours';
@@ -21,6 +22,7 @@ import marie from '../assets/images/blog/marie.jpg'
 import micheal from '../assets/images/blog/micheal.jpg'
 import dan from '../assets/images/blog/dan.jpg'
 import emailjs from 'emailjs-com';
+import IGimage from '../assets/images/slider/@whycapetown.svg'
 import { Link } from 'react-router-dom';
 
 import CardList from '../components/CardList'
@@ -82,11 +84,7 @@ const Home03 = () => {
                 title: 'What are the best places and attractions to visit in Cape Town?',
                 text: 'You cant travel all the way to Cape Town and not visit Table Mountain, Cape of Goodhope, Chapmans Peak, Stellenbosch and the V and A Waterfront',
             },
-            {
-                key: "7",
-                title: 'Do you offer photography services?',
-                text: 'Yes, all our tour guides has special photography skills. 99% of all the images of our website were taken by our tourguides. So if you happy with those angles and quality.',
-            },
+           
            
           
            
@@ -158,6 +156,12 @@ const Home03 = () => {
         message: ''
     });
 
+    // Function to handle the Calendly pop-up
+    const openCalendlyPopup = () => {
+        Calendly.initPopupWidget({ url: 'https://calendly.com/mohamadxnadeem/30min' });
+        return false;
+    };
+
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -205,6 +209,11 @@ const Home03 = () => {
 
             <Header />
             <Slider data={heroSliderData} />
+            <ImageBar 
+                imageUrl={IGimage}   // Replace with your image link
+                linkUrl="https://www.instagram.com/whycapetown/"             // Replace with the target link
+                altText="Why Cape Town Instagram"                    // Replace with your alt text
+            />
 
             <section className="tf-help-left tf-section">
                 <div className="themesflat-container">
@@ -231,7 +240,7 @@ const Home03 = () => {
                               
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    is to show you "why cape town" is the best city in the world.                                
+                                    Cape Town has been voted the 2nd best city in the world this year. Our mission is to create the best and safest experience to reclaim that number 1 position and to show you "Why Cape Town " is the best city on this planet.                                
                                 </p>
 
                                 <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
@@ -239,8 +248,9 @@ const Home03 = () => {
                                 </h1>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    We specialize in curating tailor made packages to your requirements that includes: 
+                                    We specialize in curating tailor-made packages to your requirements that include:        
                                 </p>
+
 
                                 
                                 
@@ -269,20 +279,26 @@ const Home03 = () => {
                                     - Exclusive Art Tours,
                                 </p>
 
-
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    and any other specail request you might have.                                
+                                    and any other special requests you might have.
                                 </p>
 
                                 <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    How to book your trip to Cape Town?                              
+                                    How to plan your trip to Cape Town?                              
                                 </h1>
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Click the button below to schedule a virtual meeting with one of our travel experts to assist you with booking the best package to Cape Town                              
-                                </p>
+                                    Click the button below to schedule a virtual meeting with one of our travel experts to assist you with booking your package to Cape Town.                               
+                                 </p>
 
                                 <center>
-                                <Link target='__blank' to="https://calendly.com/mohamadxnadeem/30min" className="sc-button loadmore style  fl-button pri-3"><span>Schedule Free Consultation with a Travel Expert</span></Link>
+
+                                 <Link
+                                    to="#"
+                                    onClick={openCalendlyPopup}
+                                    className="sc-button loadmore style fl-button pri-3"
+                                >
+                                    <span>Schedule Free Consultation with a Travel Expert</span>
+                                </Link>
 
                                   </center>
                                 
@@ -471,8 +487,30 @@ const Home03 = () => {
   
                         </div> */}
                     </div>
+                    
                 </div>
             </section>
+
+                                 <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                                    Ready to plan your trip to Cape Town?                              
+                                </h1>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    Click the button below to schedule a virtual meeting with one of our travel experts to assist you with booking your package to Cape Town.                               
+                                 </p>
+
+                                <center>
+
+                                 <Link
+                                    to="#"
+                                    onClick={openCalendlyPopup}
+                                    className="sc-button loadmore style fl-button pri-3"
+                                >
+                                    <span>Schedule Free Consultation with a Travel Expert</span>
+                                </Link>
+
+                                  </center>
+
+            
 
 
                                 
