@@ -107,7 +107,7 @@ const Header = () => {
                                         </ul>
                                     </nav>
 
-                                    <DarkMode />
+                                    {/* <DarkMode /> */}
                                 </div>
                             </div> 
                         </div>

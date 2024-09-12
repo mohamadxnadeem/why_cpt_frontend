@@ -227,7 +227,7 @@ button,
 input,
 select,
 textarea {
-    font-family            : 'Urbanist', sans-serif;
+    font-family            : 'Helvetica', 'Arial', sans-serif; ;
     color                  : var(--primary-color2);
     -webkit-font-smoothing : antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -242,10 +242,10 @@ img {
 }
 
 p {
-    font-weight: 400;
+    font-weight: 200;
     font-size  : 18px;
     line-height: 28px;
-    color      : var(--primary-color4);
+    color      : black;
 }
 
 .saving{
@@ -447,6 +447,56 @@ p>object,
 p>video {
     margin-bottom: 0;
 }
+
+/* custom cards */
+
+/* Card.css */
+.card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card-icon {
+    font-size: 2rem;
+    color: #007bff; /* Adjust as needed */
+    margin-bottom: 8px;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    color: #333;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* CardList.css */
+.card-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .card {
+        flex: 1 1 calc(50% - 16px);
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        flex: 1 1 100%;
+    }
+}
+
 
 /* Forms
 -------------------------------------------------------------- */
@@ -1367,15 +1417,15 @@ a:focus {
 
 :root {
     /* color */
-    --primary-color : #fff;
+    --primary-color : #F8F8F8;
     --primary-color2: #1F1F2C;
     --primary-color3: #5142FC;
     --primary-color4: #7A798A;
     --primary-color5: #F8F8F8;
     --primary-color6: #14141F;
     --primary-color7: #F8F8F8;
-    --bg-section : #fff;
-    --bg-section2 : #f8f8f8;
+    --bg-section : #F8F8F8;
+    --bg-section2 : #F8F8F8;
     --primary-color8: #7A798A;
     --primary-color9: #7A798A;
 }
@@ -1881,7 +1931,7 @@ header{
     
     .main-nav.active .menu-item-has-children.current-menu-item .arrow:before {
     background: linear-gradient(
-        216.56deg,#0bdae9 5.32%,#08c4f3 94.32%);
+        216.56deg,#b10000 5.32%,#08c4f3 94.32%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
     }
@@ -2135,7 +2185,7 @@ header{
     width     : 100%;
     box-shadow: 1px 1px 5px 0px rgb(0 0 0 / 30%);
     z-index   : 9999; /* This should ensure your header is above all other elements */
-    background: linear-gradient(227.3deg, #3889b8 0%, #0b3cc4 100.84%);
+    background: linear-gradient(227.3deg, #197048 0%, #0B3F28 100.84%);
     border    : none;
     opacity   : 1;
     -webkit-transition: all 0.5s ease;
@@ -2166,7 +2216,7 @@ header{
     width     : 100%;
     box-shadow: 1px 1px 5px 0px rgb(0 0 0 / 30%);
     z-index   : 9999;
-    background-color: rgb(81 66 252 / 93%);
+    background-color: rgba(8, 0, 100, 0.93);
     -webkit-transition: all 0.5s ease;
     -moz-transition   : all 0.5s ease;
     -ms-transition    : all 0.5s ease;
@@ -2281,7 +2331,7 @@ header{
     -ms-border-radius    : 50%;
     -o-border-radius     : 50%;
     cursor               : pointer;
-    background-color: #5142FC;
+    background-color: #197048;
 }
 .is_dark #scroll-top {
     background: #fff;

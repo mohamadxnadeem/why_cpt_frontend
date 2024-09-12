@@ -21,6 +21,9 @@ import marie from '../assets/images/blog/marie.jpg'
 import micheal from '../assets/images/blog/micheal.jpg'
 import dan from '../assets/images/blog/dan.jpg'
 import emailjs from 'emailjs-com';
+import { Link } from 'react-router-dom';
+
+import CardList from '../components/CardList'
 
 
 const Home03 = () => {
@@ -39,6 +42,8 @@ const Home03 = () => {
         
 
     ]
+
+ 
 
     const [data] = useState(
         [
@@ -220,64 +225,68 @@ const Home03 = () => {
                             <div className="text-container">
 
                                 <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    Accommodation, Transport, Tours and Photography in Cape Town                                </h1>
+                                    Our Mission                              
+                                </h1>
+
+                              
+
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    is to show you "why cape town" is the best city in the world.                                
+                                </p>
+
                                 <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    To fit every budget!
+                                    How can we help you?                              
                                 </h1>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    If you're a positive person who loves travelling and has a taste for life.                                
+                                    We specialize in curating tailor made packages to your requirements that includes: 
                                 </p>
 
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Then we have some good news for you. You're at the right place! 
-                                </p>
-
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Our goal at "Why Cape Town" is to guide you to the best experiences in Cape Town so you can go home and tell all your friends about your adventure in the world's best city!
-                                </p>
-
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Ready to plan the adventure of a lifetime? Want to find all of Cape Town's most Iconic Attractions on a private tour with the best tour guide skilled in photography?                                 
-                                </p>
+                                
                                 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    We can arrange everything you need to guarantee the best experience in Cape Town.                                
+                                    - Luxury Accomodation,
+                                </p>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    - Chauffeured Drives,
+                                </p>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    - Tours with local guides,
+                                </p>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    - Safaris,
+                                </p>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    - Helicopter rides,
+                                </p>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    - Private Yactch charters,
+                                </p>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    - Photography,
+                                </p>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    - Exclusive Art Tours,
                                 </p>
 
+
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    <strong>Why us? </strong>                        
+                                    and any other specail request you might have.                                
                                 </p>
+
+                                <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                                    How to book your trip to Cape Town?                              
+                                </h1>
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    We started as a family-run business offering transport services and have been in the travel business for four generations,  
+                                    Click the button below to schedule a virtual meeting with one of our travel experts to assist you with booking the best package to Cape Town                              
                                 </p>
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Hosted every type of traveller,                                 
-                                </p>
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    From high-profile millionaire clients like Kazi Abidur to students from Saudi Arabia studying English in Cape Town on a tight budget!                                 
-                                </p>
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    So, If you're ready to find out "Why Cape Town" is the best city in the world,                                 
-                                </p>
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Then scroll down to check out:                                
-                                </p>
+
+                                <center>
+                                <Link target='__blank' to="https://calendly.com/mohamadxnadeem/30min" className="sc-button loadmore style  fl-button pri-3"><span>Schedule Free Consultation with a Travel Expert</span></Link>
+
+                                  </center>
                                 
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    <strong>- Cape Town's most Iconic attractions,    </strong>                             
-                                </p>
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    <strong> - What our clients say about us,      </strong>                            
-                                </p>
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    <strong> - And everything you need to add to your Cape Town bucket list!   </strong>                               
-                                </p>
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Please note that all pictures on our website are authentic and taken by our founder and Cape Town's best Tour Guide <a href='https://www.instagram.com/king_mo_97/' target='__blank'>Mohamad Nadeem</a>  while on tour with real clients.                                
-                                </p>
                                 
-                               
 
                                 <br></br>
                                 <br></br>
@@ -500,47 +509,6 @@ const Home03 = () => {
                                         </center>
                                     </div>
                                 </div>
-
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    Ready to plan your trip to Cape Town?
-                                </h1>
-                                
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    then just fill out that form below to give us the correct information to plan the perfect trip for you!                               
-                                </p>
-
-                                {/* Contact form */}
-                            
-
-
-                                {formSubmitted ? (
-                                <div className="thank-you-message">
-                                    <h2>Thank You!</h2>
-                                    <p>Your enquiry has been successfully submitted. We will get back to you soon.</p>
-                                </div>
-                            ) : (
-
-                                <div className="form-inner">
-                                    <form id="contactform" onSubmit={handleSubmit}>
-                                        <input name="name" value={formData.name} onChange={handleChange} type="text" placeholder="Your Name" required />
-                                        <input name="fromWhere" value={formData.fromWhere} onChange={handleChange} type="text" placeholder="Where are you coming from?" required />
-                                        <input name="isStudent" value={formData.isStudent} onChange={handleChange} type="text" placeholder="Are you a student?" required />
-                                        <input name="honeymoon" value={formData.honeymoon} onChange={handleChange} type="text" placeholder="Are you coming on honeymoon?" required />
-                                        <input name="familyVacation" value={formData.familyVacation} onChange={handleChange} type="text" placeholder="Are you coming for a family vacation?" required />
-                                        <input name="businessTrip" value={formData.businessTrip} onChange={handleChange} type="text" placeholder="Are you coming on a business trip?" required />
-                                        <input name="stayDuration" value={formData.stayDuration} onChange={handleChange} type="text" placeholder="How many days are you planning to stay in Cape Town?" required />
-                                        <input name="soloTrip" value={formData.soloTrip} onChange={handleChange} type="text" placeholder="Are you coming for a solo trip? If not, what is the size of your group?" required />
-                                        <input name="accommodationPreference" value={formData.accommodationPreference} onChange={handleChange} type="text" placeholder="Would you prefer a hotel, penthouse, or luxury villa?" required />
-                                        <input name="budget" value={formData.budget} onChange={handleChange} type="text" placeholder="What is your budget?" required />
-                                        <input name="email" value={formData.email} onChange={handleChange} type="email" placeholder="Your Email Address" required />
-                                        <textarea name="message" value={formData.message} onChange={handleChange} placeholder="Please let us know any other important information or special requests you might have, or if you have any questions." required />
-                                        <button type="submit" className="sc-button loadmore style  fl-button pri-3">Let's Do This!</button>
-                                    </form>
-                                </div>
-                            )}
 
                         
                             </div>

@@ -25,7 +25,7 @@
 
 .tf-section {
   padding: 80px 0;
-  background: var(--bg-section);
+  background: #F8F8F8;
   margin-bottom: 0 !important;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
@@ -135,8 +135,9 @@
 
 .tf-title-heading {
   position: relative;
+  font-weight: bolder;
   line-height: 44px;
-  color: var(--primary-color2);
+  color:black;
 }
 
 .box-right {
@@ -151,8 +152,8 @@
 
 .sub-title {
   line-height: 28px;
-  font-weight: 400;
-  color: var(--primary-color4);
+  font-weight: 150;
+  color: black;
 }
 
 .sub-title.style-1 {
@@ -334,8 +335,8 @@
 
 
 .sc-button.loadmore {
-  background-color: #1d3abd;
-  border: 2px solid #1d3abd;
+  background-color: #197048;
+  border: 2px solid #197048;
   padding: 14px 40px;
   position: relative;
 }
@@ -1233,8 +1234,8 @@
 
 .sc-button.fl-button.pri-3:hover,
 .sc-button.style-place-bid.fl-button.pri-3:hover {
-  border-color:#4bbae6;
-  background:  #4bbae6
+  border-color:#0B3E27;
+  background:  #0B3E27
 }
 
 .is_dark .sc-button.style-place-bid.fl-button.pri-3:hover {
@@ -1269,7 +1270,7 @@
 }
 
 .is_dark .sc-button.bag.fl-button:hover span::before {
-  color: #5142fc;
+  color: white;
 }
 
 /* sc card collection
