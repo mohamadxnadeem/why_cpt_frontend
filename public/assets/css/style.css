@@ -867,9 +867,7 @@ label.error { color: red; }
     width: 100%;
 }
 .center,
-.text-center {
-    text-align: center;
-}
+
 
 .fs-30 {
     font-size: 30px !important;

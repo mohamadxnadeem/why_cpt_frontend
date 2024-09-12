@@ -72,7 +72,10 @@ const SliderItem = ({ item, isMobile }) => (
                         <div className="themesflat-container">
                             <div className="wrap-heading flat-slider flex">
                                 <div className="content">
-                                    <h2 className="heading">Luxury Travel Packages to Cape Town</h2>
+                                    <h2 className="heading">99% SAFE AND 100% FUN</h2>
+                                    <h2 className="heading">WHEN YOU PLAN YOUR TRIP</h2>
+                                    <h2 className="heading">TO CAPE TOWN WITH US</h2>
+
                                 </div>
                                 <div className="image">
                                     <img className="img-bg" src={isMobile ? mobileImage : desktopImage} alt="cape town" />
