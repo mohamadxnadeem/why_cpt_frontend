@@ -1,4 +1,4 @@
-import React , { useState , Fragment } from 'react';
+import React , { useState , Fragment, useEffect } from 'react';
 import Header from '../components/header/Header';
 import heroSliderData from '../assets/fake-data/data-slider-3';
 import Slider from '../components/slider/Slider';
@@ -156,11 +156,27 @@ const Home03 = () => {
         message: ''
     });
 
-    // Function to handle the Calendly pop-up
-    const openCalendlyPopup = () => {
-        Calendly.initPopupWidget({ url: 'https://calendly.com/mohamadxnadeem/30min' });
-        return false;
+ // Load Calendly script dynamically
+ useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+        document.body.removeChild(script); // Clean up script on component unmount
     };
+}, []);
+
+// Function to handle the Calendly pop-up
+const openCalendlyPopup = () => {
+    if (window.Calendly) {
+        window.Calendly.initPopupWidget({ url: 'https://calendly.com/mohamadxnadeem/30min' });
+        return false; // Prevent default link behavior
+    } else {
+        console.error("Calendly is not loaded yet");
+    }
+};
 
     const handleChange = (e) => {
         setFormData({
