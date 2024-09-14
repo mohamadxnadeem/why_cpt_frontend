@@ -1,15 +1,9 @@
 import React, { useState, Fragment } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
 import Rating from '../components/Rating';
-
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-
-
-
 import imgblog1 from '../assets/images/blog/audi.png';
-
 import jana from '../assets/images/blog/jana.jpg';
 import tim from '../assets/images/blog/tim.jpg';
 import rachel from '../assets/images/blog/becca.jpg';
@@ -17,18 +11,16 @@ import marie from '../assets/images/blog/marie.jpg';
 import micheal from '../assets/images/blog/micheal.jpg';
 import dan from '../assets/images/blog/dan.jpg';
 import Tours from '../components/Tours';
-
 import emailjs from 'emailjs-com';
-
 import { Helmet } from 'react-helmet';
-
 import Cars4Hire from '../components/Cars4hire';
 
+// Import the background image correctly
+import backgroundImage from '../assets/images/item-background/benz.jpg'; 
 
 const AirportTransfers = () => {
     const [modalShow, setModalShow] = useState(false);
-    const [formSubmitted, setFormSubmitted] = useState(false); // Add this state
-
+    const [formSubmitted, setFormSubmitted] = useState(false);
 
     const [formData, setFormData] = useState({
         name: '',
@@ -52,14 +44,13 @@ const AirportTransfers = () => {
             .then(
                 (result) => {
                     console.log('Email successfully sent!');
-                    setFormSubmitted(true); // Show the thank-you message
+                    setFormSubmitted(true);
                 },
                 (error) => {
                     console.log('There was an error sending the email:', error);
                 }
             );
     };
-    
 
     const items = [
         {
@@ -104,28 +95,22 @@ const AirportTransfers = () => {
             rating: 5,
             comment: 'Great service! My driver was right on time, the car was clean, and the ride was smooth. It made getting to the airport hassle-free, which is exactly what I needed after a long day.'
         },
-        // Other review items...
     ];
 
     return (
         <div className='home-3'>
             <Helmet>
                 <title>Luxury chauffeured drives and Tours in Cape Town</title>
-                <meta
-                    name="description"
-                    content="Best value for money, check website for pricing"
-                />
+                <meta name="description" content="Best value for money, check website for pricing" />
                 <meta property="og:title" content="Luxury tours and transport in Cape Town to fit every budget" />
-                <meta
-                    property="og:description"
-                    content="Best value for money, check website for pricing"
-                />
-                <meta property="og:image" content={imgblog1} /> {/* Use your image URL here */}
-                <meta property="og:url" content="http://whycapetown.com/luxury-chauffeured-drives-airport-transfers" /> {/* Replace with your page URL */}
+                <meta property="og:description" content="Best value for money, check website for pricing" />
+                <meta property="og:image" content={imgblog1} />
+                <meta property="og:url" content="http://whycapetown.com/luxury-chauffeured-drives-airport-transfers" />
                 <meta property="og:type" content="website" />
             </Helmet>
             <Header />
-            <section className="flat-title-page inner">
+            
+            <section className="flat-title-page inner" style={{ background: `url(${backgroundImage}) center center no-repeat`, backgroundSize: 'cover', padding: '100px 0 20px', position: 'relative' }}>
                 <div className="overlay"></div>
                 <div className="themesflat-container">
                     <div className="row">
@@ -133,51 +118,44 @@ const AirportTransfers = () => {
                             <div className="page-title-heading mg-bt-12">
                                 <br />
                                 <br />
-
-                                <h1 className="heading text-center">
+                                {/* <h1 className="heading text-center">
                                     Luxury Chauffeured Drives for VIPs in Cape Town
-                                </h1>
+                                </h1> */}
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+
             <div className="tf-section post-details">
                 <div className="themesflat-container">
                     <div className="post">
                         <div className="inner-content">
                             <h2 className="title-post">
-                                Premium and budget vehicles available
+                                Luxury vehicle hire and chauffeured drives in Cape Town
                             </h2>
                             <div className="divider"></div>
 
                             <div className="inner-post mg-t-40">
-
-                            <p className="mg-bt-24">
-                                We offer premium airport transfers, chauffeured drives and tours in and around Cape Town.               </p>
-                            <p className="mg-bt-24">
-                                With professional guides and drivers in top of the line vehicles.               
-                            </p>
-                           
-                            <p className="mg-bt-24">
-                                For sophisticated professionals and international Millionaires.  
-                            </p>
-                            <p className="mg-bt-24">
-                                So book with us to guarantee your safety and a fun time in Cape Town for the best experience.   
-                            </p>
-                            
-                               
-              
-                               
+                                <p className="mg-bt-24">
+                                    We offer premium vehicle hire, airport transfers, chauffeured drives and tours in and around Cape Town.
+                                </p>
+                                <p className="mg-bt-24">
+                                    With professional guides and drivers in top of the line vehicles.
+                                </p>
+                                <p className="mg-bt-24">
+                                    For sophisticated professionals and international Millionaires.
+                                </p>
+                                <p className="mg-bt-24">
+                                    So book with us to guarantee your safety and a fun time in Cape Town for the best experience.
+                                </p>
                             </div>
 
-                            
                             <br />
                             <br />
 
-                            <Cars4Hire/>
+                            <Cars4Hire />
                             
-
                             <Fragment>
                                 <section className="tf-section live-auctions">
                                     <div className="themesflat-container">
@@ -245,76 +223,6 @@ const AirportTransfers = () => {
                                     </div>
                                 </section>
                             </Fragment>
-
-                           
-
-                            
-
-                            {/* {formSubmitted ? (
-    <div className="thank-you-message">
-        <h2>Thank You!</h2>
-        <p>Your enquiry has been successfully submitted. We will get back to you soon.</p>
-    </div>
-) : (
-    <Fragment>
-        <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-            Ready to book your Airport Transfer?
-        </h1>
-
-        <div className="form-inner">
-            <form
-                id="contactform"
-                noValidate="novalidate"
-                className="form-submit"
-                onSubmit={handleSubmit}
-            >
-                <input
-                    id="name"
-                    name="name"
-                    tabIndex="1"
-                    aria-required="true"
-                    type="text"
-                    placeholder="Your Name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                />
-                <input
-                    id="contactNumber"
-                    name="contactNumber"
-                    tabIndex="1"
-                    aria-required="true"
-                    type="text"
-                    placeholder="Your Contact Number"
-                    value={formData.contactNumber}
-                    onChange={handleChange}
-                    required
-                />
-                
-                <input
-                    id="email"
-                    name="email"
-                    tabIndex="2"
-                    aria-required="true"
-                    type="email"
-                    placeholder="Your Email Address"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                />
-
-                <button
-                    type="submit"
-                    className="sc-button loadmore style fl-button pri-3"
-                >
-                    Submit
-                </button>
-            </form>
-        </div>
-    </Fragment>
-)} */}
-
-
                         </div>
                     </div>
 
