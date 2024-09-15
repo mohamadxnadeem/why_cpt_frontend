@@ -157,9 +157,11 @@ const Cars4Hire = forwardRef((ref) => {
                                   <div className="meta-info">
                                     <div className="author">
                                       <div className="price" style={{ textAlign: 'left' }}>
-                                        <h5>${item.car.number_of_seats} - Airport Transfer</h5>
+                                        <p>${item.car.airport_transfer} - Airport Transfer</p>
                                         
-                                        <h5>${item.car.price} - Full Day Tour:</h5>
+                                        <p>${item.car.price} - Full Day Tour:</p>
+
+                                        <p>${item.car.safari_transfer} - Aquila Safari Transfer:</p>
                                        
                                       </div>
                                     </div>

@@ -175,7 +175,7 @@ const Top3Tours = () => {
 
                             <div className="inner-post mg-t-40">
                                 <p className="mg-bt-24">
-                                    We specialize in providing private tours to new honey moon couples, boys / girls trips and international millionares who wants to dicover:
+                                    We specialize in providing private tours to new honey moon couples, girls trips, business executives and international millionares who wants to dicover:
                                 </p>
                                
                                     <p className="mg-bt-24">
