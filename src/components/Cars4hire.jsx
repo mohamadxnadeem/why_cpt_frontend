@@ -159,9 +159,9 @@ const Cars4Hire = forwardRef((ref) => {
                                       <div className="price" style={{ textAlign: 'left' }}>
                                         <p>${item.car.airport_transfer} - Airport Transfer</p>
                                         
-                                        <p>${item.car.price} - Full Day Tour:</p>
+                                        <p>${item.car.price} - Full Day Tour</p>
 
-                                        <p>${item.car.safari_transfer} - Aquila Safari Transfer:</p>
+                                        <p>${item.car.safari_transfer} - Aquila Safari Transfer</p>
                                        
                                       </div>
                                     </div>
