@@ -159,7 +159,7 @@ const Cars4Hire = forwardRef((ref) => {
                                       <div className="price" style={{ textAlign: 'left' }}>
                                         <h5>Airport Transfer:</h5>
                                         <p>- ${item.car.number_of_seats}</p>
-                                        <h5>Chauffeured Drive:</h5>
+                                        <h5>Full Day Tour:</h5>
                                         <p>- ${item.car.price}</p>
                                       </div>
                                     </div>
