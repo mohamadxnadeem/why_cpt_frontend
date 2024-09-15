@@ -46,6 +46,34 @@ const Tours = forwardRef((ref) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+        document.body.removeChild(script);
+    };
+}, []);
+
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+const openCalendlyPopup = (e) => {
+    e.preventDefault();
+    if (isMobile) {
+        // Open Calendly link in a new tab for mobile devices
+        window.open('https://calendly.com/mohamadxnadeem/30min', '_blank');
+    } else if (window.Calendly) {
+        // Trigger Calendly popup for desktop users
+        window.Calendly.initPopupWidget({ url: 'https://calendly.com/mohamadxnadeem/30min' });
+    } else {
+        console.error("Calendly is not loaded yet");
+    }
+    return false;
+};
+
+
+  useEffect(() => {
     fetch('https://web-production-1ab9.up.railway.app/api/experiences/with-reviews/')
       .then((response) => response.json())
       .then((data) => {
@@ -91,15 +119,14 @@ const Tours = forwardRef((ref) => {
           <div className="themesflat-container">
             <div className="row">
               <div className="col-12">
-                <center>
+                
                   <h2 className="tf-title-heading ct style-2 mg-bt-13">
-                    What to do in Cape Town:
+                    5 of the Best Tours:
                   </h2>
-                  <p className="sub-title ct small mg-bt-20 pad-420">
-                    Planning your trip just got easier. Our complimentary full-day itineraries cover all of Cape Town’s top attractions, best restaurants, and secret spots to add to your bucket list.
-                  </p>
-                </center>
-
+                  {/* <p className="sub-title ct small mg-bt-20 pad-420">
+                    If it's your first ti
+                  </p> */}
+                
                 {loading ? (
                   <Loader /> // Show the loader while loading
                 ) : (

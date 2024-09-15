@@ -90,14 +90,14 @@ const Cars4Hire = forwardRef((ref) => {
           <div className="themesflat-container">
             <div className="row">
               <div className="col-12">
-                <center>
+                
                   <h2 className="tf-title-heading ct style-2 mg-bt-13">
-                    Chauffeured Drives
+                    Whats the cost?
                   </h2>
                   <p className="sub-title ct small mg-bt-20 pad-420">
-                    Pricing to fit every budget.
+                    We offer luxury vehicle hire and chauffeured drives with local tour guides. Details below:
                   </p>
-                </center>
+                  
 
                 {loading ? (
                   <Loader /> // Show the loader while loading

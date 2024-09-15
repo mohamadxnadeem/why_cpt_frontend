@@ -16,9 +16,9 @@ import { Helmet } from 'react-helmet';
 import Cars4Hire from '../components/Cars4hire';
 
 // Import the background image correctly
-import backgroundImage from '../assets/images/item-background/benz.jpg'; 
+import backgroundImage from '../assets/images/item-background/vacay.jpg'; 
 
-const AirportTransfers = () => {
+const FullPackagesToCapeTown = () => {
     const [modalShow, setModalShow] = useState(false);
     const [formSubmitted, setFormSubmitted] = useState(false);
 
@@ -226,7 +226,7 @@ const AirportTransfers = () => {
                         </div>
                     </div>
 
-                    
+                    <Tours />
                 </div>
             </div>
             <Footer />
@@ -234,4 +234,4 @@ const AirportTransfers = () => {
     );
 };
 
-export default AirportTransfers;
+export default FullPackagesToCapeTown;

@@ -43,6 +43,35 @@ const ItemDetails01 = () => {
   });
 
   useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+        document.body.removeChild(script);
+    };
+}, []);
+
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+const openCalendlyPopup = (e) => {
+    e.preventDefault();
+    if (isMobile) {
+        // Open Calendly link in a new tab for mobile devices
+        window.open('https://calendly.com/mohamadxnadeem/30min', '_blank');
+    } else if (window.Calendly) {
+        // Trigger Calendly popup for desktop users
+        window.Calendly.initPopupWidget({ url: 'https://calendly.com/mohamadxnadeem/30min' });
+    } else {
+        console.error("Calendly is not loaded yet");
+    }
+    return false;
+};
+
+
+
+  useEffect(() => {
     fetch(`https://web-production-1ab9.up.railway.app/api/experiences/${id}/with-reviews`)
       .then((response) => response.json())
       .then((data) => {
@@ -178,12 +207,35 @@ const ItemDetails01 = () => {
               </div>
             </div>
           </div>
+          <br></br>
+          <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+          Book Your Tour Now                             
+      </h1>
+      <p className="sub-title ct small mg-bt-20 pad-420">
+        Schedule a quick meeting with one of our local travel experts to plan a private tour to  your requirements now. 
+      </p>
+      <p className="sub-title ct small mg-bt-20 pad-420">
+        Limited Vehicles Available      
+      </p>
+
+      <center>
+
+        <Link
+          to="#"
+          onClick={openCalendlyPopup}
+          className="sc-button loadmore style fl-button pri-3"
+        >
+            <span>Schedule Free Consultation with a Travel Expert</span>
+        </Link>
+
+      </center>
         </div>
+        
       </div>
 
       <LiveAuction data={itemData.reviews} />
 
-      <Cars4Hire/>
+      
 
       {/* <div className="tf-section tf-item-details">
         <div className="container">

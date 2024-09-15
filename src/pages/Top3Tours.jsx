@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Rating from '../components/Rating';
 import Header from '../components/header/Header';
@@ -13,12 +13,16 @@ import dan from '../assets/images/blog/dan.jpg';
 import Tours from '../components/Tours';
 import emailjs from 'emailjs-com';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 import Cars4Hire from '../components/Cars4hire';
 
 // Import the background image correctly
-import backgroundImage from '../assets/images/item-background/benz.jpg'; 
+import backgroundImage from '../assets/images/item-background/tour.jpeg'; 
 
-const AirportTransfers = () => {
+const Top3Tours = () => {
+
+    
+
     const [modalShow, setModalShow] = useState(false);
     const [formSubmitted, setFormSubmitted] = useState(false);
 
@@ -28,6 +32,35 @@ const AirportTransfers = () => {
         serviceType: 'Airport Transfer',
         email: '',
     });
+
+    useEffect(() => {
+        const script = document.createElement('script');
+        script.src = 'https://assets.calendly.com/assets/external/widget.js';
+        script.async = true;
+        document.body.appendChild(script);
+
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, []);
+
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    const openCalendlyPopup = (e) => {
+        e.preventDefault();
+        if (isMobile) {
+            // Open Calendly link in a new tab for mobile devices
+            window.open('https://calendly.com/mohamadxnadeem/30min', '_blank');
+        } else if (window.Calendly) {
+            // Trigger Calendly popup for desktop users
+            window.Calendly.initPopupWidget({ url: 'https://calendly.com/mohamadxnadeem/30min' });
+        } else {
+            console.error("Calendly is not loaded yet");
+        }
+        return false;
+    };
+
+    
 
     const handleChange = (e) => {
         setFormData({
@@ -100,7 +133,7 @@ const AirportTransfers = () => {
     return (
         <div className='home-3'>
             <Helmet>
-                <title>Luxury chauffeured drives and Tours in Cape Town</title>
+                <title>4 Tours you have to add to your Cape Town bucket list</title>
                 <meta name="description" content="Best value for money, check website for pricing" />
                 <meta property="og:title" content="Luxury tours and transport in Cape Town to fit every budget" />
                 <meta property="og:description" content="Best value for money, check website for pricing" />
@@ -132,29 +165,62 @@ const AirportTransfers = () => {
                     <div className="post">
                         <div className="inner-content">
                             <h2 className="title-post">
-                                Luxury vehicle hire and chauffeured drives in Cape Town
+                                5 of the Best Private Tours 
                             </h2>
+                            <h2 className="title-post">
+                                In luxury vehicles with local guides. 
+                            </h2>
+                           
                             <div className="divider"></div>
 
                             <div className="inner-post mg-t-40">
                                 <p className="mg-bt-24">
-                                    We offer premium vehicle hire, airport transfers, chauffeured drives and tours in and around Cape Town.
+                                    We specialize in providing private tours to new honey moon couples, boys / girls trips and international millionares who wants to dicover:
                                 </p>
-                                <p className="mg-bt-24">
-                                    With professional guides and drivers in top of the line vehicles.
-                                </p>
-                                <p className="mg-bt-24">
-                                    For sophisticated professionals and international Millionaires.
-                                </p>
-                                <p className="mg-bt-24">
-                                    So book with us to guarantee your safety and a fun time in Cape Town for the best experience.
-                                </p>
+                               
+                                    <p className="mg-bt-24">
+                                        - All the top attractions,
+                                    </p>
+                                    <p className="mg-bt-24">
+                                        - Instagram worthy locations,
+                                    </p>
+                                    <p className="mg-bt-24">
+                                        - Best resturants,
+                                    </p>
+                                    <p className="mg-bt-24">
+                                        - Secret spots,
+                                    </p><p className="mg-bt-24">
+                                        - And hidden gems,
+                                    </p>
+                                
+                               
                             </div>
+                            <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                                    Ready to secure your Private Tour?                              
+                                </h1>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    Then click the button below to book a quick meeting to plan your private tours to your requirments now. 
+                                 </p>
 
-                            <br />
-                            <br />
+                                <center>
+
+                                 <Link
+                                    to="#"
+                                    onClick={openCalendlyPopup}
+                                    className="sc-button loadmore style fl-button pri-3"
+                                >
+                                    <span>Schedule Free Consultation with a Travel Expert</span>
+                                </Link>
+
+                                  </center>
+                            <Tours />
 
                             <Cars4Hire />
+
+                            <br />
+                            <br />
+
+                            
                             
                             <Fragment>
                                 <section className="tf-section live-auctions">
@@ -234,4 +300,4 @@ const AirportTransfers = () => {
     );
 };
 
-export default AirportTransfers;
+export default Top3Tours;
