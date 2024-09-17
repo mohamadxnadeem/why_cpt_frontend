@@ -201,7 +201,7 @@ const openCalendlyPopup = (e) => {
                                   </div>
                                   <center>
                                     <Link to={`/experience/${item.experience.id}`} className="sc-button loadmore style fl-button pri-3">
-                                      <span>MORE INFO</span>
+                                      <span>MORE INFO ON EXCLUSIVE DEAL</span>
                                     </Link>
                                   </center>
                                 </div>

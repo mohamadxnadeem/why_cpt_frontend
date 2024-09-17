@@ -215,7 +215,6 @@ const Top3Tours = () => {
                                   </center>
                             <Tours />
 
-                            <Cars4Hire />
 
                             <br />
                             <br />
