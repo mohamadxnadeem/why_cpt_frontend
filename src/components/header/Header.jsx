@@ -100,7 +100,7 @@ const Header = () => {
                                             </li>  */}
 
                                             <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-                                                <Link to="/top-3-tours">Private Tours</Link>
+                                                <Link to="/best-tours-and-experience-in-cape-town">Private Tours</Link>
                                             </li> 
 
                                             {/* <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>

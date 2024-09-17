@@ -42,7 +42,7 @@ const routes = [
   { path: '/where-to-get-cannabis', component: <WhereToGetCannabis />},
 
   { path: '/full-packages-to-cape-town', component: <FullPackagesToCapeTown />},
-  { path: '/top-3-tours', component: <Top3Tours />},
+  { path: '/best-tours-and-experience-in-cape-town', component: <Top3Tours />},
   { path: '/safari', component: <Safari />},
 
   { path: '/luxury-villas', component: <LuxuryVillas />},
