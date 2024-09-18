@@ -165,17 +165,17 @@ const Top3Tours = () => {
                     <div className="post">
                         <div className="inner-content">
                             <h2 className="title-post">
-                                5 of the Best Private Tours 
+                                The Best Tours   
                             </h2>
                             <h2 className="title-post">
-                                In luxury vehicles with local guides. 
+                                And most Exclusive Experiences in Cape Town 
                             </h2>
                            
                             <div className="divider"></div>
 
                             <div className="inner-post mg-t-40">
                                 <p className="mg-bt-24">
-                                    We specialize in providing private tours to new honey moon couples, girls trips, business executives and international millionares who wants to dicover:
+                                    We specialize in providing private tours to new honey moon couples, girls trips, guys trips, business executives and international millionares who wants a luxury stay in Cape Town and to dicover:
                                 </p>
                                
                                     <p className="mg-bt-24">
@@ -189,8 +189,12 @@ const Top3Tours = () => {
                                     </p>
                                     <p className="mg-bt-24">
                                         - Secret spots,
-                                    </p><p className="mg-bt-24">
-                                        - And hidden gems,
+                                    </p>
+                                    <p className="mg-bt-24">
+                                        - hidden gems,
+                                    </p>
+                                    <p className="mg-bt-24">
+                                        - and more...
                                     </p>
                                 
                                
