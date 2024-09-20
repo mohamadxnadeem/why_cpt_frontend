@@ -225,7 +225,7 @@ const Top3Tours = () => {
 
                             
                             
-                            <Fragment>
+                            {/* <Fragment>
                                 <section className="tf-section live-auctions">
                                     <div className="themesflat-container">
                                         <div className="row">
@@ -291,7 +291,7 @@ const Top3Tours = () => {
                                         </div>
                                     </div>
                                 </section>
-                            </Fragment>
+                            </Fragment> */}
                         </div>
                     </div>
 
