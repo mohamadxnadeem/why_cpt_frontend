@@ -133,7 +133,7 @@ const Top3Tours = () => {
     return (
         <div className='home-3'>
             <Helmet>
-                <title>4 Tours you have to add to your Cape Town bucket list</title>
+                <title>5 Tours you have to add to your Cape Town bucket list</title>
                 <meta name="description" content="Best value for money, check website for pricing" />
                 <meta property="og:title" content="Luxury tours and transport in Cape Town to fit every budget" />
                 <meta property="og:description" content="Best value for money, check website for pricing" />

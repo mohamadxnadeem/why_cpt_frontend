@@ -9,6 +9,8 @@ import Rating from '../components/Rating'
 import Footer from '../components/footer/Footer'
 import Tours from '../components/Tours';
 import { Accordion } from 'react-bootstrap-accordion'
+import Packages from '../components/Packages';
+
 import hof1 from '../assets/images/blog/hof1.jpg'
 import hof2 from '../assets/images/blog/hof2.jpg'
 import hof from '../assets/images/blog/hof.jpg'
@@ -21,6 +23,7 @@ import rachel from '../assets/images/blog/becca.jpg'
 import marie from '../assets/images/blog/marie.jpg'
 import micheal from '../assets/images/blog/micheal.jpg'
 import dan from '../assets/images/blog/dan.jpg'
+
 import emailjs from 'emailjs-com';
 import IGimage from '../assets/images/slider/@whycapetown.svg'
 import { Link } from 'react-router-dom';
@@ -575,7 +578,7 @@ const Home03 = () => {
 
             </section>
 
-            <Tours />
+            <Packages />
 
            
 

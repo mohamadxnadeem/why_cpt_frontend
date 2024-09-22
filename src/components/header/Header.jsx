@@ -95,9 +95,9 @@ const Header = () => {
                                                 <Link to="/">Home</Link>
                                             </li>
 
-                                            {/* <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
+                                            <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
                                                 <Link to="/full-packages-to-cape-town">Full Packages</Link>
-                                            </li>  */}
+                                            </li>
 
                                             <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
                                                 <Link to="/best-tours-and-experience-in-cape-town">Exclusive Experiences</Link>

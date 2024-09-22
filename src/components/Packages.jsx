@@ -2,6 +2,7 @@ import React, { useState, useEffect, forwardRef, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import Rating from './Rating';
 import FlipMove from 'react-flip-move';
 import { Blurhash } from 'react-blurhash';
 import styled from 'styled-components';
@@ -40,12 +41,40 @@ const ImageStyled = styled.img`
   border-radius: 10px;
 `;
 
-const Cars4Hire = forwardRef((ref) => {
+const Packages = forwardRef((ref) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('https://web-production-1ab9.up.railway.app/api/cars-for-hire/all/')
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+        document.body.removeChild(script);
+    };
+}, []);
+
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+const openCalendlyPopup = (e) => {
+    e.preventDefault();
+    if (isMobile) {
+        // Open Calendly link in a new tab for mobile devices
+        window.open('https://calendly.com/mohamadxnadeem/30min', '_blank');
+    } else if (window.Calendly) {
+        // Trigger Calendly popup for desktop users
+        window.Calendly.initPopupWidget({ url: 'https://calendly.com/mohamadxnadeem/30min' });
+    } else {
+        console.error("Calendly is not loaded yet");
+    }
+    return false;
+};
+
+
+  useEffect(() => {
+    fetch('https://web-production-1ab9.up.railway.app/api/full-travel-packages/with-reviews/')
       .then((response) => response.json())
       .then((data) => {
         const updatedData = data.map(item => ({
@@ -61,10 +90,10 @@ const Cars4Hire = forwardRef((ref) => {
       });
   }, []);
 
-  const handleImageLoad = (carId) => {
+  const handleImageLoad = (fullpackageId) => {
     setData(prevData => {
       return prevData.map(item => {
-        if (item.car.id === carId && item.firstPhoto) {
+        if (item.fullpackage.id === fullpackageId && item.firstPhoto) {
           return {
             ...item,
             firstPhoto: {
@@ -92,13 +121,12 @@ const Cars4Hire = forwardRef((ref) => {
               <div className="col-12">
                 
                   <h2 className="tf-title-heading ct style-2 mg-bt-13">
-                    Whats the cost?
+                    Find the right package to Cape Town for you:
                   </h2>
                   <p className="sub-title ct small mg-bt-20 pad-420">
-                    We offer luxury vehicle hire and chauffeured drives with local tour guides. Details below:
-                  </p>
-                  
-
+                    swipe to see more
+                  </p> 
+                
                 {loading ? (
                   <Loader /> // Show the loader while loading
                 ) : (
@@ -121,9 +149,9 @@ const Cars4Hire = forwardRef((ref) => {
                           <div className="swiper-wrapper">
                             <div className="swiper-slide">
                               <div className="slider-item">
-                                <div className={`sc-card-product ${item.car.feature ? 'comingsoon' : ''}`}>
+                                <div className={`sc-card-product ${item.fullpackage.feature ? 'comingsoon' : ''}`}>
                                   <div className="card-media">
-                                    
+                                    <Link to={`/travel-package/${item.fullpackage.id}`}>
                                       <SlideContainer>
                                         {item.firstPhoto && (
                                           <React.Fragment>
@@ -138,41 +166,42 @@ const Cars4Hire = forwardRef((ref) => {
                                             />
                                             <ImageStyled
                                               src={item.firstPhoto.image.cover_photos}
-                                              alt={item.car.title}
-                                              onLoad={() => handleImageLoad(item.car.id)}
+                                              alt={item.fullpackage.title}
+                                              onLoad={() => handleImageLoad(item.fullpackage.id)}
                                               onError={handleImageError}
                                               imageLoaded={item.firstPhoto.imageLoaded}
                                             />
                                           </React.Fragment>
                                         )}
                                       </SlideContainer>
-                                    
+                                    </Link>
                                   </div>
                                   <div className="card-title">
                                     <h5 className="style2">
-                                      {item.car.title}
+                                      <Link to={`/travel-package/${item.fullpackage.id}`}>{item.fullpackage.title}</Link>
                                     </h5>
                                   </div>
 
+                                  {/* <div className="meta-info">
+                                    <div className="author">
+                                      <div className="review">
+                                        <span>Based on {item.fullPackageReviews.length} reviews</span>
+                                        <h5>
+                                          <Rating value={item.average_rating} color={'#f8e825'} />
+                                        </h5>
+                                      </div>
+                                    </div>
+                                  </div> */}
+
                                   <div className="meta-info">
                                     <div className="author">
-                                      <div className="price" style={{ textAlign: 'left' }}>
-                                        <p>${item.car.airport_transfer} - Airport Transfer</p>
-                                        
-                                        <p>${item.car.price} - Full Day</p>
-
-                                        <p>${item.car.safari_transfer} - Aquila Safari Transfer</p>
-                                       
+                                      <div className="price">
                                       </div>
                                     </div>
                                   </div>
                                   <center>
-                                    <Link
-                                      target="__blank"
-                                      to={`https://wa.link/kdchjk`}
-                                      className="sc-button loadmore style fl-button pri-3"
-                                    >
-                                      <span>Reserve Now</span>
+                                    <Link to={`/travel-package/${item.fullpackage.id}`} className="sc-button loadmore style fl-button pri-3">
+                                      <span>VIEW PACKAGE</span>
                                     </Link>
                                   </center>
                                 </div>
@@ -193,4 +222,6 @@ const Cars4Hire = forwardRef((ref) => {
   );
 });
 
-export default Cars4Hire;
+export default Packages;
+
+
