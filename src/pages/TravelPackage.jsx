@@ -209,14 +209,12 @@ const openCalendlyPopup = (e) => {
           </div>
           <br></br>
           <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-          Book Your Full Package Now                             
+          Secure your trip of a lifetime now                           
       </h1>
       <p className="sub-title ct small mg-bt-20 pad-420">
-        Schedule a quick meeting with one of our local travel experts to plan your travel package to Cape Town. 
+        Schedule a quick meeting with one of our local travel experts to secure your package now. 
       </p>
-      <p className="sub-title ct small mg-bt-20 pad-420">
-        Please note accomodation books up quickly so secure your booking now to avoid dissapointment.      
-      </p>
+      
 
       <center>
 

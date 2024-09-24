@@ -190,10 +190,10 @@ const FullPackages = () => {
                             <Packages />
 
                             <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    Ready to Plan your trip to Cape Town?                              
+                                    Or we can plan your trip to Cape Town bespoke to your needs                              
                                 </h1>
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Click the button below to book a quick meeting with one of our Cape Town experts to plan your trip to Cape Town. 
+                                    Click the button below to book a quick meeting with one of our Cape Town experts to get started. 
                                  </p>
 
                                 <center>
