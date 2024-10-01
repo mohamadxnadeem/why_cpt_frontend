@@ -47,7 +47,7 @@ const routes = [
 
   { path: '/full-packages-to-cape-town', component: <FullPackages />},
 
-  { path: '/best-tours-and-experience-in-cape-town', component: <Top3Tours />},
+  { path: '/top-3-tours', component: <Top3Tours />},
 
   { path: '/safari', component: <Safari />},
 
