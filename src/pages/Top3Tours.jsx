@@ -175,15 +175,13 @@ const Top3Tours = () => {
 
                             <div className="inner-post mg-t-40">
                                 <p className="mg-bt-24">
-                                    We specialize in providing private tours to new honey moon couples, girls trips, guys trips, business executives and international millionares who wants a luxury stay in Cape Town and to dicover:
+                                    We specialize in providing private tours and exlusive tours to first time visitors in Cape Town. We will show you:
                                 </p>
                                
                                     <p className="mg-bt-24">
                                         - All the top attractions,
                                     </p>
-                                    <p className="mg-bt-24">
-                                        - Instagram worthy locations,
-                                    </p>
+    
                                     <p className="mg-bt-24">
                                         - Best resturants,
                                     </p>
@@ -203,7 +201,7 @@ const Top3Tours = () => {
                                     Ready to secure your Private Tour?                              
                                 </h1>
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Then click the button below to book a quick meeting to plan your private tours to your requirments now. 
+                                    Then click the button below to book a quick meeting to plan a private tour bespoke to your private tours to your requirments. 
                                  </p>
 
                                 <center>
