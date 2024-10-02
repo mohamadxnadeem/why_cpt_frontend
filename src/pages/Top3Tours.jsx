@@ -15,6 +15,7 @@ import emailjs from 'emailjs-com';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import Cars4Hire from '../components/Cars4hire';
+import DealOfTheMonth from '../components/DealOfTheMonth ';
 
 // Import the background image correctly
 import backgroundImage from '../assets/images/item-background/tour.jpeg'; 
@@ -197,6 +198,10 @@ const Top3Tours = () => {
                                 
                                
                             </div>
+
+                            <DealOfTheMonth/>
+
+                            
                             <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
                                     Ready to secure your Private Tour?                              
                                 </h1>
@@ -215,7 +220,7 @@ const Top3Tours = () => {
                                 </Link>
 
                                   </center>
-                            <Tours />
+                            
 
 
                             <br />
@@ -223,7 +228,7 @@ const Top3Tours = () => {
 
                             
                             
-                            {/* <Fragment>
+                            <Fragment>
                                 <section className="tf-section live-auctions">
                                     <div className="themesflat-container">
                                         <div className="row">
@@ -289,7 +294,10 @@ const Top3Tours = () => {
                                         </div>
                                     </div>
                                 </section>
-                            </Fragment> */}
+                            </Fragment> 
+
+                            <br></br>
+                            <Tours />
                         </div>
                     </div>
 
