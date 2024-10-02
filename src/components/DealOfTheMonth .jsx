@@ -8,21 +8,34 @@ import Deal2Image from '../assets/images/item-background/carrierdeal.png'; // Im
 
 // Styled components
 const DealSection = styled.div`
-    padding: 50px;
+    padding: 50px; /* Padding for desktop */
     background-color: #f9f9f9;
     text-align: center;
+
+    @media (max-width: 768px) {
+        padding: 20px; /* Padding for mobile */
+    }
 `;
 
 const Heading = styled.h2`
     font-size: 36px;
     margin-bottom: 15px;
     font-weight: bold;
+
+    @media (max-width: 768px) {
+        font-size: 28px;
+    }
 `;
 
 const Paragraph = styled.p`
     font-size: 18px;
     margin-bottom: 30px;
     color: #555;
+
+    @media (max-width: 768px) {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
 `;
 
 const DealCards = styled.div`
@@ -41,10 +54,15 @@ const DealCard = styled.div`
     border: 1px solid #ddd;
     border-radius: 10px;
     width: 450px;
-    padding: 30px;
+    padding: 30px; /* Padding inside each card for desktop */
     text-align: center;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+
+    @media (max-width: 768px) {
+        width: 100%;
+        padding: 20px; /* Padding inside each card for mobile */
+    }
 
     img {
         width: 100%;
@@ -55,6 +73,10 @@ const DealCard = styled.div`
     h3 {
         font-size: 26px;
         margin: 15px 0;
+
+        @media (max-width: 768px) {
+            font-size: 22px;
+        }
     }
 
     .price {
@@ -80,12 +102,20 @@ const DealCard = styled.div`
         color: #e74c3c;
         font-weight: bold;
         margin-top: 10px;
+
+        @media (max-width: 768px) {
+            font-size: 24px;
+        }
     }
 
     .pax {
         font-size: 16px;
         color: #777;
         margin-top: 10px;
+
+        @media (max-width: 768px) {
+            font-size: 14px;
+        }
     }
 `;
 
@@ -93,6 +123,10 @@ const CountdownSection = styled.div`
     margin-top: 40px;
     display: flex;
     justify-content: center;
+
+    @media (max-width: 768px) {
+        margin-top: 30px;
+    }
 `;
 
 const TimerBlock = styled.div`
@@ -105,14 +139,28 @@ const TimerBlock = styled.div`
     font-weight: bold;
     margin: 0 10px;
 
+    @media (max-width: 768px) {
+        padding: 15px;
+        margin: 0 5px;
+        font-size: 20px;
+    }
+
     span {
         display: block;
         font-size: 40px;
+
+        @media (max-width: 768px) {
+            font-size: 30px;
+        }
     }
 
     small {
         font-size: 16px;
         font-weight: normal;
+
+        @media (max-width: 768px) {
+            font-size: 12px;
+        }
     }
 `;
 
@@ -152,7 +200,8 @@ const DealOfTheMonth = () => {
                 {/* First Deal Card */}
                 <DealCard>
                     <img src={Deal1Image} alt="Deal 1" />
-                    <h3>Audi A4 up to 3 pax</h3>
+                    <h3>Audi A4</h3>
+                    <div className="pax">Seats: 4 Passengers</div>
                     <div className="price">
                         <span className="usual-price">Usual Price: R3500</span>
                         <span className="price-now">Price Now: R2850</span>
@@ -163,7 +212,8 @@ const DealOfTheMonth = () => {
                 {/* Second Deal Card */}
                 <DealCard>
                     <img src={Deal2Image} alt="Deal 2" />
-                    <h3>Mercedes V Class up to 7 pax</h3>
+                    <h3>Mercedes V Class</h3>
+                    <div className="pax">Seats: 8 Passengers</div>
                     <div className="price">
                         <span className="usual-price">Usual Price: R6500</span>
                         <span className="price-now">Price Now: R4950</span>
