@@ -1,19 +1,17 @@
-// components/DealOfTheMonth.js
-
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import Deal1Image from '../assets/images/item-background/sedandeal.png'; // Image for both deals
-import Deal2Image from '../assets/images/item-background/carrierdeal.png'; // Image for both deals
+import Deal1Image from '../assets/images/item-background/sedandeal.png';
+import Deal2Image from '../assets/images/item-background/carrierdeal.png';
 
 // Styled components
 const DealSection = styled.div`
-    padding: 50px; /* Padding for desktop */
+    padding: 50px;
     background-color: #f9f9f9;
     text-align: center;
 
     @media (max-width: 768px) {
-        padding: 20px; /* Padding for mobile */
+        padding: 20px;
     }
 `;
 
@@ -54,14 +52,14 @@ const DealCard = styled.div`
     border: 1px solid #ddd;
     border-radius: 10px;
     width: 450px;
-    padding: 30px; /* Padding inside each card for desktop */
+    padding: 30px;
     text-align: center;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 
     @media (max-width: 768px) {
         width: 100%;
-        padding: 20px; /* Padding inside each card for mobile */
+        padding: 20px;
     }
 
     img {
@@ -166,20 +164,35 @@ const TimerBlock = styled.div`
 
 const DealOfTheMonth = () => {
     const [timeLeft, setTimeLeft] = useState({});
-    const dealEndTime = new Date('2024-10-31T23:59:59'); // Set the deal end time
+    const [isExpired, setIsExpired] = useState(false);
+
+    // Set the deal to expire at 10 PM today in South African Time (UTC+2)
+    const getDealEndTime = () => {
+        const now = new Date();
+        const dealEndTime = new Date();
+        dealEndTime.setHours(22, 0, 0, 0); // Set time to 10:00 PM of the current day
+        if (now > dealEndTime) {
+            dealEndTime.setDate(dealEndTime.getDate() + 1); // Move to the next day if it's past 10 PM
+        }
+        return dealEndTime;
+    };
 
     useEffect(() => {
         const calculateTimeLeft = () => {
-            const difference = dealEndTime - new Date();
+            const now = new Date();
+            const dealEndTime = getDealEndTime();
+            const difference = dealEndTime - now;
             let timeLeft = {};
 
             if (difference > 0) {
                 timeLeft = {
-                    days: Math.floor(difference / (1000 * 60 * 60 * 24)),
                     hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
                     minutes: Math.floor((difference / 1000 / 60) % 60),
                     seconds: Math.floor((difference / 1000) % 60),
                 };
+            } else {
+                setIsExpired(true);
+                timeLeft = { hours: 0, minutes: 0, seconds: 0 };
             }
 
             return timeLeft;
@@ -194,40 +207,13 @@ const DealOfTheMonth = () => {
 
     return (
         <DealSection>
-            <Heading>Deal of the Month</Heading>
-            <Paragraph>Any full day tour and chauffeur drive with the vehicles below:</Paragraph>
-            <DealCards>
-                {/* First Deal Card */}
-                <DealCard>
-                    <img src={Deal1Image} alt="Deal 1" />
-                    <h3>Audi A4</h3>
-                    <div className="pax">Seats: 4 Passengers</div>
-                    <div className="price">
-                        <span className="usual-price">Usual Price: R3500</span>
-                        <span className="price-now">Price Now: R2850</span>
-                        <div className="you-save">You Save: R650</div>
-                    </div>
-                </DealCard>
-
-                {/* Second Deal Card */}
-                <DealCard>
-                    <img src={Deal2Image} alt="Deal 2" />
-                    <h3>Mercedes V Class</h3>
-                    <div className="pax">Seats: 8 Passengers</div>
-                    <div className="price">
-                        <span className="usual-price">Usual Price: R6500</span>
-                        <span className="price-now">Price Now: R4950</span>
-                        <div className="you-save">You Save: R1550</div>
-                    </div>
-                </DealCard>
-            </DealCards>
-
-            {/* Countdown Timer Below Cards */}
+            <Heading>{isExpired ? "Deal Expired" : "Today's Deal"}</Heading>
+            <Paragraph>
+                {isExpired
+                    ? "Sorry you missed this deal, follow us on social media to find out when we have another deal."
+                    : "Book now before this deal expires to secure today's exclusive deal! You can choose any date for your tour or experience."}
+            </Paragraph>
             <CountdownSection>
-                <TimerBlock>
-                    <span>{timeLeft.days || '0'}</span>
-                    <small>Days</small>
-                </TimerBlock>
                 <TimerBlock>
                     <span>{timeLeft.hours || '0'}</span>
                     <small>Hours</small>
@@ -241,6 +227,29 @@ const DealOfTheMonth = () => {
                     <small>Seconds</small>
                 </TimerBlock>
             </CountdownSection>
+            <DealCards>
+                <DealCard>
+                    <img src={Deal1Image} alt="Deal 1" />
+                    <h3>Cape Point Tour with Audi A4</h3>
+                    <div className="pax">Seats: 4 Passengers</div>
+                    <div className="price">
+                        <span className="usual-price">Usual Price: R3500</span>
+                        <span className="price-now">Price Now: R2850</span>
+                        <div className="you-save">You Save: R650</div>
+                    </div>
+                </DealCard>
+
+                <DealCard>
+                    <img src={Deal2Image} alt="Deal 2" />
+                    <h3>Stellenbosch winelands tour with Mercedes V Class</h3>
+                    <div className="pax">Seats: 6 Passengers</div>
+                    <div className="price">
+                        <span className="usual-price">Usual Price: R6500</span>
+                        <span className="price-now">Price Now: R4950</span>
+                        <div className="you-save">You Save: R1550</div>
+                    </div>
+                </DealCard>
+            </DealCards>
         </DealSection>
     );
 };

@@ -166,48 +166,45 @@ const Top3Tours = () => {
                     <div className="post">
                         <div className="inner-content">
                             <h2 className="title-post">
-                                The Best Tours   
+                                Discover the Best Tours  
                             </h2>
                             <h2 className="title-post">
-                                And most Exclusive Experiences in Cape Town 
+                                and Exclusive Experiences in Cape Town   
                             </h2>
                            
                             <div className="divider"></div>
 
                             <div className="inner-post mg-t-40">
                                 <p className="mg-bt-24">
-                                    We specialize in providing private tours and exlusive tours to first time visitors in Cape Town. We will show you:
+                                    At www.whycapetown.com, we specialize in creating unforgettable private tours tailored to first-time visitors in Cape Town. Whether you're seeking top attractions, world-class dining, or hidden gems, we curate personalized experiences that go beyond the typical tour.
                                 </p>
                                
                                     <p className="mg-bt-24">
-                                        - All the top attractions,
+                                        - Explore iconic landmarks,
                                     </p>
     
                                     <p className="mg-bt-24">
-                                        - Best resturants,
+                                        - Dine at the finest restaurants,
                                     </p>
                                     <p className="mg-bt-24">
-                                        - Secret spots,
+                                        - Uncover secret spots known only to locals,
                                     </p>
                                     <p className="mg-bt-24">
-                                        - hidden gems,
+                                        - Discover hidden gems off the beaten path,
                                     </p>
-                                    <p className="mg-bt-24">
-                                        - and more...
-                                    </p>
+                                    
                                 
                                
                             </div>
 
-                            <DealOfTheMonth/>
 
                             
                             <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    Ready to secure your Private Tour?                              
-                                </h1>
+                                Ready to plan your personalized adventure?                            
+                            </h1>
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Then click the button below to book a quick meeting to plan a private tour bespoke to your private tours to your requirments. 
-                                 </p>
+                                    Click the button below to schedule a quick consultation, and let us craft a private tour that perfectly fits your desires and requirements.                                 
+                                </p>
 
                                 <center>
 
@@ -298,6 +295,9 @@ const Top3Tours = () => {
 
                             <br></br>
                             <Tours />
+
+                            <DealOfTheMonth/>
+
                         </div>
                     </div>
 

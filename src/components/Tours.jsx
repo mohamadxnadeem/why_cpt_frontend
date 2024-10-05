@@ -121,7 +121,7 @@ const openCalendlyPopup = (e) => {
               <div className="col-12">
                 
                   <h2 className="tf-title-heading ct style-2 mg-bt-13">
-                    5 of the Best Tours:
+                    Top Experiences to do in Cape Town:
                   </h2>
                   {/* <p className="sub-title ct small mg-bt-20 pad-420">
                     If it's your first ti
@@ -201,7 +201,7 @@ const openCalendlyPopup = (e) => {
                                   </div>
                                   <center>
                                     <Link to={`/experience/${item.experience.id}`} className="sc-button loadmore style fl-button pri-3">
-                                      <span>MORE INFO ON EXCLUSIVE DEAL</span>
+                                      <span>View Experience</span>
                                     </Link>
                                   </center>
                                 </div>

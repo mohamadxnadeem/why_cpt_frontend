@@ -3469,7 +3469,7 @@ section.today-picks {
   background: rgba(81, 66, 252, 0.1);
   border: 1px solid rgba(81, 66, 252, 0.1);
   border: none;
-  color: #197048;
+  
 }
 .is_dark .form-inner button {
   background: transparent;
