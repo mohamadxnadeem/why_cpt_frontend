@@ -176,7 +176,7 @@ const Top3Tours = () => {
 
                             <div className="inner-post mg-t-40">
                                 <p className="mg-bt-24">
-                                    At www.whycapetown.com, we specialize in creating unforgettable private tours tailored to first-time visitors in Cape Town. Whether you're seeking top attractions, world-class dining, or hidden gems, we curate personalized experiences that go beyond the typical tour.
+                                    We specialize in creating unforgettable private tours tailored to first-time visitors in Cape Town. Whether you're seeking top attractions, world-class dining, or hidden gems, we curate personalized experiences that go beyond the typical tour.
                                 </p>
                                
                                     <p className="mg-bt-24">
@@ -199,24 +199,7 @@ const Top3Tours = () => {
 
 
                             
-                            <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                Ready to plan your personalized adventure?                            
-                            </h1>
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Click the button below to schedule a quick consultation, and let us craft a private tour that perfectly fits your desires and requirements.                                 
-                                </p>
-
-                                <center>
-
-                                 <Link
-                                    to="#"
-                                    onClick={openCalendlyPopup}
-                                    className="sc-button loadmore style fl-button pri-3"
-                                >
-                                    <span>Schedule Free Consultation with a Travel Expert</span>
-                                </Link>
-
-                                  </center>
+                             
                             
 
 
@@ -225,7 +208,7 @@ const Top3Tours = () => {
 
                             
                             
-                            <Fragment>
+                            {/* <Fragment>
                                 <section className="tf-section live-auctions">
                                     <div className="themesflat-container">
                                         <div className="row">
@@ -291,12 +274,30 @@ const Top3Tours = () => {
                                         </div>
                                     </div>
                                 </section>
-                            </Fragment> 
+                            </Fragment>  */}
 
                             <br></br>
                             <Tours />
 
                             {/* <DealOfTheMonth/> */}
+                            <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                                Plan a tour of Cape Town bespoke to your requirements                             
+                            </h1>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    Already know what you want to do? Chat to one of our professional fixers to create the perfect package for you.
+                                </p>
+
+                                <center>
+
+                                 <Link
+                                    to="#"
+                                    onClick={openCalendlyPopup}
+                                    className="sc-button loadmore style fl-button pri-3"
+                                >
+                                    <span>Schedule Free Consultation with a Travel Expert</span>
+                                </Link>
+
+                                </center>
 
                         </div>
                     </div>

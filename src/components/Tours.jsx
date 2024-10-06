@@ -121,7 +121,7 @@ const openCalendlyPopup = (e) => {
               <div className="col-12">
                 
                   <h2 className="tf-title-heading ct style-2 mg-bt-13">
-                    Top Experiences to do in Cape Town:
+                    Top 5 Experiences to do in Cape Town:
                   </h2>
                   {/* <p className="sub-title ct small mg-bt-20 pad-420">
                     If it's your first ti
