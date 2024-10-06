@@ -92,10 +92,10 @@ const Cars4Hire = forwardRef((ref) => {
               <div className="col-12">
                 
                   <h2 className="tf-title-heading ct style-2 mg-bt-13">
-                    Whats the cost?
+                    Your Chauffer drive options:
                   </h2>
                   <p className="sub-title ct small mg-bt-20 pad-420">
-                    We offer luxury vehicle hire and chauffeured drives with local tour guides. Details below:
+                    Price includes vehicle, local tour guide, fuel, 200km distance and up to 12 hours.
                   </p>
                   
 
@@ -157,23 +157,23 @@ const Cars4Hire = forwardRef((ref) => {
                                   <div className="meta-info">
                                     <div className="author">
                                       <div className="price" style={{ textAlign: 'left' }}>
-                                        <p>${item.car.airport_transfer} - Airport Transfer</p>
+                                       
                                         
                                         <p>${item.car.price} - Full Day</p>
 
-                                        <p>${item.car.safari_transfer} - Aquila Safari Transfer</p>
+                                        
                                        
                                       </div>
                                     </div>
                                   </div>
                                   <center>
-                                    <Link
+                                    {/* <Link
                                       target="__blank"
                                       to={`https://wa.link/kdchjk`}
                                       className="sc-button loadmore style fl-button pri-3"
                                     >
                                       <span>Reserve Now</span>
-                                    </Link>
+                                    </Link> */}
                                   </center>
                                 </div>
                               </div>

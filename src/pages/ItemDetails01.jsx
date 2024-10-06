@@ -166,6 +166,16 @@ const ItemDetails01 = () => {
         </div>
       </section>
 
+     
+
+      {/* <Link
+        
+        to={`/top-3-tours`}
+        className="sc-button loadmore style fl-button pri-3"
+      >
+      <span>Back</span>
+    </Link> */}
+
       <SliderStyle3
         data={heroSliderData}
         renderImage={(src, blurhash) => (
@@ -206,7 +216,16 @@ const ItemDetails01 = () => {
               </div>
             </div>
           </div>
+          <div className="tf-section tf-tours">
+            <div className="container">
+              
+              <Cars4Hire />
+            </div>
+          </div>
           <br />
+
+         
+          
           <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">Book Now</h1>
           <p className="sub-title ct small mg-bt-20 pad-420">
             Limited availability—secure your private tour today!
@@ -295,12 +314,9 @@ const ItemDetails01 = () => {
               </div>
             </div>
           </div>
-          <div className="tf-section tf-tours">
-            <div className="container">
-              
-              <Tours />
-            </div>
-          </div>
+
+          <LiveAuction data={itemData.reviews} />
+          
           <Footer />
         </div>
       </div>
