@@ -296,7 +296,7 @@ const Top3Tours = () => {
                             <br></br>
                             <Tours />
 
-                            <DealOfTheMonth/>
+                            {/* <DealOfTheMonth/> */}
 
                         </div>
                     </div>
