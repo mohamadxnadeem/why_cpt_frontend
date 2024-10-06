@@ -92,7 +92,7 @@ const Cars4Hire = forwardRef((ref) => {
               <div className="col-12">
                 
                   <h2 className="tf-title-heading ct style-2 mg-bt-13">
-                    Your Chauffer drive options:
+                    Your Chauffeur drive options:
                   </h2>
                   <p className="sub-title ct small mg-bt-20 pad-420">
                     Price includes vehicle, local tour guide, fuel, 200km distance and up to 12 hours.

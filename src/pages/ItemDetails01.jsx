@@ -222,10 +222,7 @@ const ItemDetails01 = () => {
               <Cars4Hire />
             </div>
           </div>
-          <br />
-
-         
-          
+ 
           <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">Book Now</h1>
           <p className="sub-title ct small mg-bt-20 pad-420">
             Limited availability—secure your private tour today!
