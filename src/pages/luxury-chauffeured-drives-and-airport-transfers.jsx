@@ -21,9 +21,6 @@ import backgroundImage from '../assets/images/item-background/benz.jpg';
 const AirportTransfers = () => {
     const [modalShow, setModalShow] = useState(false);
     const [formSubmitted, setFormSubmitted] = useState(false);
-    const [formError, setFormError] = useState('');
-    
-
 
     const [formData, setFormData] = useState({
         name: '',
@@ -34,35 +31,26 @@ const AirportTransfers = () => {
 
     const handleChange = (e) => {
         setFormData({
-          ...formData,
-          [e.target.name]: e.target.value,
+            ...formData,
+            [e.target.name]: e.target.value,
         });
-      };
-    
-      const handleSubmit = (e) => {
+    };
+
+    const handleSubmit = (e) => {
         e.preventDefault();
     
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    
-        if (!emailPattern.test(formData.email)) {
-          setFormError('Please enter a valid email address.');
-          return;
-        }
-    
-        setFormError('');
-    
         emailjs
-          .send('service_ptqtluk', 'template_uyicl9l', formData, 'apNJP_9sXnff2q82W')
-          .then(
-            (result) => {
-              console.log('Email successfully sent!');
-              setFormSubmitted(true);
-            },
-            (error) => {
-              console.log('There was an error sending the email:', error);
-            }
-          );
-      };
+            .send('service_ptqtluk', 'template_uyicl9l', formData, 'apNJP_9sXnff2q82W')
+            .then(
+                (result) => {
+                    console.log('Email successfully sent!');
+                    setFormSubmitted(true);
+                },
+                (error) => {
+                    console.log('There was an error sending the email:', error);
+                }
+            );
+    };
 
     const items = [
         {
@@ -167,80 +155,6 @@ const AirportTransfers = () => {
                             <br />
 
                             <Cars4Hire />
-
-                            <div className="tf-section tf-item-details">
-            <div className="container">
-              <div className="row">
-                <div className="col-md-12">
-                  <div className="content-center">
-                    <div className="sc-item-details">
-                      {formSubmitted ? (
-                        <div className="thank-you-message">
-                          <h2>Thank You!</h2>
-                          <p>Your enquiry has been successfully submitted. We will get back to you soon.</p>
-                        </div>
-                      ) : (
-                        <Fragment>
-                          {!loading && ( // Hide form header while loading
-                            <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                              Contact Us To Plan Your Experience in Cape Town:
-                            </h1>
-                          )}
-
-                          <div className="form-inner">
-                            <form
-                              id="contactform"
-                              noValidate="novalidate"
-                              onSubmit={handleSubmit}
-                            >
-                              <div className="row">
-                                {!loading && ( // Conditionally render inputs based on loading state
-                                  <>
-                                    <div className="col-md-6">
-                                      <input
-                                        type="text"
-                                        name="name"
-                                        value={formData.name}
-                                        placeholder="Your Name"
-                                        onChange={handleChange}
-                                      />
-                                    </div>
-                                    <div className="col-md-6">
-                                      <input
-                                        type="email"
-                                        name="email"
-                                        value={formData.email}
-                                        placeholder="Your Email"
-                                        onChange={handleChange}
-                                      />
-                                      {formError && <p style={{ color: 'red' }}>{formError}</p>}
-                                    </div>
-                                    <div className="col-md-12">
-                                      <textarea
-                                        name="message"
-                                        value={formData.message}
-                                        placeholder="Your Message"
-                                        onChange={handleChange}
-                                      ></textarea>
-                                    </div>
-                                    <div className="col-md-12">
-                                      <button type="submit" className="sc-button loadmore style fl-button pri-3">
-                                        <span>Send Message</span>
-                                      </button>
-                                    </div>
-                                  </>
-                                )}
-                              </div>
-                            </form>
-                          </div>
-                        </Fragment>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
                             
                             <Fragment>
                                 <section className="tf-section live-auctions">
