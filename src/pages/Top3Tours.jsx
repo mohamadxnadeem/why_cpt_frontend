@@ -134,10 +134,10 @@ const Top3Tours = () => {
     return (
         <div className='home-3'>
             <Helmet>
-                <title>5 Tours you have to add to your Cape Town bucket list</title>
-                <meta name="description" content="Best value for money, check website for pricing" />
-                <meta property="og:title" content="Luxury tours and transport in Cape Town to fit every budget" />
-                <meta property="og:description" content="Best value for money, check website for pricing" />
+                <title>5 experiences to do in Cape Town</title>
+                <meta name="description" content="Luxury transport and exclusive tours for your adventure to discover the secrets of Cape Town" />
+                <meta property="og:title" content="5 experiences to do in Cape Town" />
+                <meta property="og:description" content="Luxury transport and exclusive tours for your adventure to discover the secrets of Cape Town" />
                 <meta property="og:image" content={imgblog1} />
                 <meta property="og:url" content="http://whycapetown.com/luxury-chauffeured-drives-airport-transfers" />
                 <meta property="og:type" content="website" />

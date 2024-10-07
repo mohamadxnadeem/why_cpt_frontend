@@ -256,35 +256,22 @@ const Home03 = () => {
                             <div className="text-container">
 
                                 <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    Welcome to WhyCapeTown.com: Your Gateway to Luxury Cape Town Experiences                                
+                                    We specialize in providing complete luxury packages to Cape Town                               
                                 </h1>
-                                <hr></hr>
-                                <br></br>
-
-                                <h4 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    Why Cape Town?                          
-                                </h4>
-
-                              
-
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Cape Town has been voted one of the best cities in the world for a reason. From breathtaking landscapes to rich culture and endless activities, Cape Town is a destination like no other. At WhyCapeTown.com, we specialize in crafting unforgettable, luxury travel experiences that allow you to discover why this incredible city is truly unmatched.                                
-                                </p>
-
-                            
                                
 
-                                <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    How We Can Help You                             
-                                </h1>
-
-                              
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
                                     Every journey is unique. Whether you’re planning a romantic getaway, an adventure with friends, or a family vacation, our team will design the perfect itinerary for you. We take care of all the details, so you can focus on enjoying Cape Town to the fullest.       
                                 </p>
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Here’s a glimpse of what we offer:                                
+
+                                <br></br>
+
+                                <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                                    Top 3 Attractions:                               
+                                </h1>
+                                {/* <p className="sub-title ct small mg-bt-20 pad-420">
+                                    What we offer:                                
                                 </p>
 
                                 
@@ -338,31 +325,8 @@ const Home03 = () => {
                                 <p className="sub-title ct small mg-bt-20 pad-420">
                                     - Unmatched Experiences: Whether it’s a romantic dinner at a top-rated restaurant or a private safari tour, we create moments you’ll cherish forever.
                                 </p>
-                                <br></br>
+                                <br></br> */}
 
-                                <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    How to Plan Your Trip to Cape Town                         
-                                </h1>
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Planning your dream Cape Town getaway has never been easier. Let our travel experts craft an itinerary that fits your style, from adventure-packed days to laid-back luxury escapes.                                
-                                </p>
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Click the button below to schedule a virtual meeting with one of our travel experts and start planning your trip to Cape Town today.                                
-                                </p>
-                                
-
-
-                                <center>
-
-                                 <Link
-                                    to="#"
-                                    onClick={openCalendlyPopup}
-                                    className="sc-button loadmore style fl-button pri-3"
-                                >
-                                    <span>Schedule Free Consultation with a Travel Expert</span>
-                                </Link>
-
-                                  </center>
                                 
                                 
 
@@ -481,9 +445,7 @@ const Home03 = () => {
                                                                                     <div className="card-title">
                                                                                         <h5>{item.name}</h5>
                                                                                     </div>
-                                                                                    <div className="card-title">
-                                                                                        <p>From {item.title}</p>
-                                                                                    </div>
+                                                                                    
                                                                                     <div className="card-title">
                                                                                         <h5>
                                                                                             <Rating value={item.rating} color={'#f8e825'} />
@@ -512,6 +474,31 @@ const Home03 = () => {
 
                                     <CardModal show={modalShow} onHide={() => setModalShow(false)} />
                                 </Fragment>
+
+                                <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                                    How to Plan Your Trip to Cape Town                         
+                                </h1>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    Planning your dream Cape Town getaway has never been easier. Let our travel experts craft an itinerary that fits your style, from adventure-packed days to laid-back luxury escapes.                                
+                                </p>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    Click the button below to schedule a virtual meeting with one of our travel experts and start planning your trip to Cape Town today.                                
+                                </p>
+                                
+
+
+                                <center>
+
+                                 <Link
+                                    to="#"
+                                    onClick={openCalendlyPopup}
+                                    className="sc-button loadmore style fl-button pri-3"
+                                >
+                                    <span>Schedule Free Consultation with a Travel Expert</span>
+                                </Link>
+
+                                  </center>
+                                
 
                                 
             <section className="tf-section wrap-accordion">

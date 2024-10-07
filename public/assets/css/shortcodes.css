@@ -204,6 +204,23 @@
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
+
+.sc-button-custom {
+  display: inline-block;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: #197048;
+  border: 2px solid #197048;
+  color:#fff;
+  box-sizing: border-box;
+  padding: 11px 35px;
+  border-radius: 5px;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
 .sc-button.no-bg {
   background: transparent;
 }

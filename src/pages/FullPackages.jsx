@@ -134,10 +134,10 @@ const FullPackages = () => {
     return (
         <div className='home-3'>
             <Helmet>
-                <title>5 Tours you have to add to your Cape Town bucket list</title>
-                <meta name="description" content="Best value for money, check website for pricing" />
-                <meta property="og:title" content="Luxury tours and transport in Cape Town to fit every budget" />
-                <meta property="og:description" content="Best value for money, check website for pricing" />
+                <title>Full travel packages to Cape Town</title>
+                <meta name="description" content="Luxury accomodation, Airport Transfers, Exclusive Tours and Chauffered drives" />
+                <meta property="og:title" content="Full travel packages to Cape Town" />
+                <meta property="og:description" content="Luxury accomodation, Airport Transfers, Exclusive Tours and Chauffered drives" />
                 <meta property="og:image" content={imgblog1} />
                 <meta property="og:url" content="http://whycapetown.com/luxury-chauffeured-drives-airport-transfers" />
                 <meta property="og:type" content="website" />

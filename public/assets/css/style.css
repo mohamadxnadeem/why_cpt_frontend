@@ -248,6 +248,15 @@ p {
     color      : black;
 }
 
+.custom-image{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 400px !important;
+    height: auto !important;
+    border-radius: 20px  !important;
+    object-fit: contain;
+}
+
 .saving{
     background-color: red;
     padding: 5px;
