@@ -280,7 +280,7 @@ const Top3Tours = () => {
                             <Tours />
 
                             {/* <DealOfTheMonth/> */}
-                            <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                            {/* <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
                                 Plan a tour of Cape Town bespoke to your requirements                             
                             </h1>
                                 <p className="sub-title ct small mg-bt-20 pad-420">
@@ -297,7 +297,7 @@ const Top3Tours = () => {
                                     <span>Schedule Free Consultation with a Travel Expert</span>
                                 </Link>
 
-                                </center>
+                                </center> */}
 
                         </div>
                     </div>

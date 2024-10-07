@@ -121,10 +121,10 @@ const openCalendlyPopup = (e) => {
               <div className="col-12">
                 
                   <h2 className="tf-title-heading ct style-2 mg-bt-13">
-                    Find the right package to Cape Town for you:
+                    Tailor Made Trips To Cape Town
                   </h2>
                   <p className="sub-title ct small mg-bt-20 pad-420">
-                    swipe to see more
+                    For Every Occasion
                   </p> 
                 
                 {loading ? (

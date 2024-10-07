@@ -25,7 +25,7 @@ import micheal from '../assets/images/blog/micheal.jpg'
 import dan from '../assets/images/blog/dan.jpg'
 
 import emailjs from 'emailjs-com';
-import IGimage from '../assets/images/slider/@whycapetown.svg'
+import IGimage from '../assets/images/slider/legends.svg'
 import { Link } from 'react-router-dom';
 
 import CardList from '../components/CardList'
@@ -256,21 +256,33 @@ const Home03 = () => {
                             <div className="text-container">
 
                                 <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    We specialize in providing complete luxury packages to Cape Town                               
+                                    You don't need to be a Millionare                               
                                 </h1>
                                
 
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    But you have to have class.       
+                                </p>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Every journey is unique. Whether you’re planning a romantic getaway, an adventure with friends, or a family vacation, our team will design the perfect itinerary for you. We take care of all the details, so you can focus on enjoying Cape Town to the fullest.       
+                                    We provide exclusive experiences and travel packages to Cape Town for VIP clients from around the world.      
                                 </p>
+
+                                {/* <p className="sub-title ct small mg-bt-20 pad-420">
+                                    Invite only.      
+                                </p> */}
+
+
 
                                 <br></br>
 
+                                
+                                {/* 
+                                
                                 <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
                                     Top 3 Attractions:                               
                                 </h1>
-                                {/* <p className="sub-title ct small mg-bt-20 pad-420">
+                                <p className="sub-title ct small mg-bt-20 pad-420">
                                     What we offer:                                
                                 </p>
 
@@ -381,7 +393,7 @@ const Home03 = () => {
 
                           
 
-                                <div className="image-grid">
+                                {/* <div className="image-grid">
                                     <div className="image-box">
                                         <center>
                                             <h4>Table Mountain</h4>
@@ -404,10 +416,9 @@ const Home03 = () => {
                                             <img className="homeImages" src={hof} alt="chapmans peak" />
                                         </center>
                                     </div>
-                                </div>
+                                </div> */}
 
-                                <br></br>
-                                <br></br>
+                              
 
                                 <Fragment>
                                     <section className="tf-section live-auctions">
@@ -415,7 +426,14 @@ const Home03 = () => {
                                             <div className="row">
                                                 <div className="col-md-12">
                                                     <div className="">
-                                                        <h2 className="tf-title">Genuine Reviews </h2>
+                                                        <h2 className="tf-title">Past Legends </h2>
+                                                        <center>
+                                                        <p >( Past Clients )</p>
+                                                        <br></br>
+                                                        </center>
+                                                        
+                              
+
                                                         <div className="heading-line"></div>
                                                     </div>
                                                 </div>
@@ -475,7 +493,26 @@ const Home03 = () => {
                                     <CardModal show={modalShow} onHide={() => setModalShow(false)} />
                                 </Fragment>
 
+                                
                                 <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                                    About Us                            
+                                </h1>
+                               
+
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    We're a team of trustworthy and genuine local tour guides with a passion for creating fun and safe experiences for awesome people like you.
+
+                                </p>
+                                {/* <p className="sub-title ct small mg-bt-20 pad-420">
+                                    And the secret code
+                                </p>
+
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    
+                                </p> */}
+
+
+                                {/* <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
                                     How to Plan Your Trip to Cape Town                         
                                 </h1>
                                 <p className="sub-title ct small mg-bt-20 pad-420">
@@ -498,80 +535,41 @@ const Home03 = () => {
                                 </Link>
 
                                   </center>
-                                
+                                 */}
 
                                 
-            <section className="tf-section wrap-accordion">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-12">
-                            <center>
-                                <h2 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    Everything You Need To Know:
-                                </h2>
+                               
 
-                            </center>
-                            
-                            
-                        </div>
-                        <div className="col-md-12">
-                            <div className="flat-accordion2">
-                                {
-                                    data.map((item,index) => (
-                                        <Accordion key={index} title={item.title} >
-                                            <p>{item.text}</p>
-                                        </Accordion>
-                                    ))
-                                }                             
-                            </div>
-                        </div>
-                        {/* <div className="col-md-12">
-                            <h2 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                Any Other Questions?                            
-                            </h2>
-                           
-                            <center>
-                                <Link target='__blank' to="https://wa.link/f1ufwx" className="sc-button loadmore style  fl-button pri-3"><span>Let us know</span></Link>
-                            </center>
-  
-                        </div> */}
-                    </div>
-                    
-                </div>
-            </section>
+                                    {/* 
+                                    <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                                        Ready to plan your trip to Cape Town?                              
+                                    </h1>
+                                    <p className="sub-title ct small mg-bt-20 pad-420">
+                                        Click the button below to schedule a virtual meeting with one of our travel experts to assist you with booking your package to Cape Town.                               
+                                    </p>
 
-                                 <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    Ready to plan your trip to Cape Town?                              
-                                </h1>
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Click the button below to schedule a virtual meeting with one of our travel experts to assist you with booking your package to Cape Town.                               
-                                 </p>
+                                    <center>
 
-                                <center>
+                                        <Link
+                                            to="#"
+                                            onClick={openCalendlyPopup}
+                                            className="sc-button loadmore style fl-button pri-3"
+                                        >
+                                            <span>Schedule Free Consultation with a Travel Expert</span>
+                                        </Link>
 
-                                 <Link
-                                    to="#"
-                                    onClick={openCalendlyPopup}
-                                    className="sc-button loadmore style fl-button pri-3"
-                                >
-                                    <span>Schedule Free Consultation with a Travel Expert</span>
-                                </Link>
-
-                                  </center>
+                                    </center> 
+                                    
+                                    */}
 
             
 
 
                                 
                            
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
+                            
 
-
+{/* 
                                 <div className="image-grid">
                                     <div className="image-box">
                                         <center>
@@ -595,7 +593,7 @@ const Home03 = () => {
                                             <img className="homeImages" src={bokaap} alt="bokaap" />
                                         </center>
                                     </div>
-                                </div>
+                                </div> */}
 
                         
                             </div>
@@ -606,6 +604,45 @@ const Home03 = () => {
             </section>
 
             <Packages />
+
+            <section className="tf-section wrap-accordion">
+                                    <div className="container">
+                                        <div className="row">
+                                            <div className="col-md-12">
+                                                <center>
+                                                    <h2 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                                                        Everything You Need To Know:
+                                                    </h2>
+
+                                                </center>
+                                                
+                                                
+                                            </div>
+                                            <div className="col-md-12">
+                                                <div className="flat-accordion2">
+                                                    {
+                                                        data.map((item,index) => (
+                                                            <Accordion key={index} title={item.title} >
+                                                                <p>{item.text}</p>
+                                                            </Accordion>
+                                                        ))
+                                                    }                             
+                                                </div>
+                                            </div>
+                                            {/* <div className="col-md-12">
+                                                <h2 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                                                    Any Other Questions?                            
+                                                </h2>
+                                            
+                                                <center>
+                                                    <Link target='__blank' to="https://wa.link/f1ufwx" className="sc-button loadmore style  fl-button pri-3"><span>Let us know</span></Link>
+                                                </center>
+                    
+                                            </div> */}
+                                        </div>
+                                        
+                                    </div>
+                                </section>
 
            
 

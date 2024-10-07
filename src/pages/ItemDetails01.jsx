@@ -228,7 +228,7 @@ const ItemDetails01 = () => {
             Limited availability—secure your private tour today!
           </p>
 
-          <center>
+          {/* <center>
             <Link
               to="#"
               onClick={openCalendlyPopup}
@@ -236,7 +236,7 @@ const ItemDetails01 = () => {
             >
               <span>Schedule Free Consultation with a Travel Expert</span>
             </Link>
-          </center>
+          </center> */}
 
           <div className="tf-section tf-item-details">
             <div className="container">
@@ -253,7 +253,7 @@ const ItemDetails01 = () => {
                         <Fragment>
                           {!loading && ( // Hide form header while loading
                             <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                              Or Contact us using the form below:
+                              Contact Us:
                             </h1>
                           )}
 
