@@ -140,7 +140,7 @@ const FullPackages = () => {
                 <meta property="og:title" content="How to win $20K Rolex Batman" />
                 <meta property="og:description" content="Stand to win rolex batman when you book an 8 Day luxury package to Cape Town with us." />
                 <meta property="og:image" content={imgblog1} />
-                <meta property="og:url" content="http://whycapetown.com/luxury-chauffeured-drives-airport-transfers" />
+                <meta property="og:url" content="https://whycapetown.s3.eu-central-1.amazonaws.com/batman.JPG" />
                 <meta property="og:type" content="website" />
             </Helmet>
             <Header />
