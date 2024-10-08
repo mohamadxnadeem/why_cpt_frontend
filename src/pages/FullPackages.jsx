@@ -10,6 +10,7 @@ import rachel from '../assets/images/blog/becca.jpg';
 import marie from '../assets/images/blog/marie.jpg';
 import micheal from '../assets/images/blog/micheal.jpg';
 import dan from '../assets/images/blog/dan.jpg';
+import batman from '../assets/images/blog/batman.JPG';
 
 import Packages from '../components/Packages';
 
@@ -18,7 +19,7 @@ import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 
 // Import the background image correctly
-import backgroundImage from '../assets/images/item-background/tour.jpeg'; 
+import backgroundImage from '../assets/images/item-background/rolex.jpg'; 
 
 const FullPackages = () => {
 
@@ -165,24 +166,36 @@ const FullPackages = () => {
                 <div className="themesflat-container">
                     <div className="post">
                         <div className="inner-content">
+
+                            <h2 className="title-post">
+                                Your Dream Honeymoon to Cape Town – Only $2,969
+                            </h2>
                             
                             <h2 className="title-post">
-                                We've got the best  
+                                Plus, Stand a Chance to Win a Rolex Batman Worth $20,000!
                             </h2>
-                            <h2 className="title-post">
-                                Luxury Packages to Cape Town   
-                            </h2>
+                            
                            
                             <div className="divider"></div>
 
                             <div className="inner-post mg-t-40">
+                                <img className="custom-image" src={batman} alt="table mountain" />
                                 <p className="mg-bt-24">
-                                    We made your travels to Cape Town easy and convenient. All packages includes Accomodation, Airport Transfers, chauffeured drives and exclusive must do tours for the best and safest experience in Cape Town.
+                                    We’ve curated the perfect 8-day honeymoon package, combining the best luxury experiences Cape Town has to offer. From 5-star accommodation to private chauffeured drives, and exclusive tours to all the top attractions, you’ll discover why Cape Town is hailed as the most breathtaking city on the planet.
                                 </p>
-                               
-                                    <p className="mg-bt-24">
-                                        Swipe to find the best package to suit your needs.
-                                    </p>
+
+                                <p className="mg-bt-24">
+                                For just $2,969, everything is taken care of—from your stay to the unforgettable experiences that will create lifelong memories.                                </p>
+
+                                <p className="mg-bt-24">
+                                And here’s the icing on the cake:
+                                </p>
+
+                                <p className="mg-bt-24">
+                                    When you book this package, you’ll be automatically entered to win a stunning Rolex Batman, valued at $20,000. This is more than a trip—it’s the adventure of a lifetime, with a luxury timepiece as the ultimate keepsake.                                </p>
+                                <p className="mg-bt-24">
+                                    
+                                </p>
                                     
                                 
                                
@@ -190,7 +203,7 @@ const FullPackages = () => {
                                
                             <Packages />
 
-                            <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                            {/* <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
                                     Or we can plan your trip to Cape Town bespoke to your needs                              
                                 </h1>
                                 <p className="sub-title ct small mg-bt-20 pad-420">
@@ -208,7 +221,7 @@ const FullPackages = () => {
                                 </Link>
 
                                   </center>
-
+ */}
 
                             <br />
                             <br />

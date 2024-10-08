@@ -96,7 +96,7 @@ const Header = () => {
                                             </li>
 
                                             <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-                                                <Link to="/full-packages-to-cape-town">Full Packages</Link>
+                                                <Link to="/full-packages-to-cape-town">10K Prize Giveaway!</Link>
                                             </li>
 
                                             <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
