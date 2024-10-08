@@ -142,6 +142,13 @@ const Home03 = () => {
             rating: 4,
             comment: 'Mohammed Nadeem gave us lots of time to enjoy the whole day. He had a comfortable vehicle and great snacks for the road! He always watched over our things as we wandered about each location. If youre someone who likes great pictures, hes your guy.'
         },
+        {
+            cover_photo: yaasir,
+            name: 'Yaasir',
+            title: 'England',
+            rating: 5,
+            comment: 'Cape Town one of the cities that you can never get board of with such great vibes, people, positive energy and endless adventures that can be done apart from the food that you can always enjoy with a reasonable price and all thanks to the best Cape Town tour guide @whycapetown'
+        },
         // {
         //     cover_photo: achmat,
         //     name: 'Achmat',
@@ -170,13 +177,7 @@ const Home03 = () => {
         //     rating: 5,
         //     comment: 'What a perfect tour, gave us a a much better appreciation of the beautiful sights of Cape Town and the surrounding areas. It was a packed tour but we never felt rushed and had plenty of time to explore and see what we wanted. I’d highly recommend anyone visiting Cape Town to do this tour- especially if you want to see penguins, beautiful beaches with a friendly and knowledgeable and attentive guide.'
         // },
-        // {
-        //     cover_photo: yaasir,
-        //     name: 'Yaasir',
-        //     title: 'England',
-        //     rating: 5,
-        //     comment: 'What a perfect tour, gave us a a much better appreciation of the beautiful sights of Cape Town and the surrounding areas. It was a packed tour but we never felt rushed and had plenty of time to explore and see what we wanted. I’d highly recommend anyone visiting Cape Town to do this tour- especially if you want to see penguins, beautiful beaches with a friendly and knowledgeable and attentive guide.'
-        // },
+        
         // {
         //     cover_photo: billy,
         //     name: 'Billy',
