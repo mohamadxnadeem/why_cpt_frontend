@@ -24,6 +24,19 @@ import marie from '../assets/images/blog/marie.jpg'
 import micheal from '../assets/images/blog/micheal.jpg'
 import dan from '../assets/images/blog/dan.jpg'
 
+import achmat from '../assets/images/blog/achmat.png'
+import luka from '../assets/images/blog/luka.png'
+import noor from '../assets/images/blog/noor.png'
+import renad from '../assets/images/blog/renad.png'
+import yaasir from '../assets/images/blog/yaasir.png'
+import billy from '../assets/images/blog/mampuru.png'
+import jones from '../assets/images/blog/jones.png'
+import yusra from '../assets/images/blog/yusra.png'
+import moz from '../assets/images/blog/moz.png'
+import kazi from '../assets/images/blog/Allen and Kazi.png'
+
+
+
 import emailjs from 'emailjs-com';
 import IGimage from '../assets/images/slider/legends.svg'
 import { Link } from 'react-router-dom';
@@ -129,18 +142,87 @@ const Home03 = () => {
             rating: 4,
             comment: 'Mohammed Nadeem gave us lots of time to enjoy the whole day. He had a comfortable vehicle and great snacks for the road! He always watched over our things as we wandered about each location. If youre someone who likes great pictures, hes your guy.'
         },
-        {
-            cover_photo: micheal,
-            name: 'Micheal',
-            title: 'England',
-            rating: 5,
-            comment: 'What a perfect tour, gave us a a much better appreciation of the beautiful sights of Cape Town and the surrounding areas. It was a packed tour but we never felt rushed and had plenty of time to explore and see what we wanted. I’d highly recommend anyone visiting Cape Town to do this tour- especially if you want to see penguins, beautiful beaches with a friendly and knowledgeable and attentive guide.'
-        },
+        // {
+        //     cover_photo: achmat,
+        //     name: 'Achmat',
+        //     title: 'England',
+        //     rating: 5,
+        //     comment: 'What a perfect tour, gave us a a much better appreciation of the beautiful sights of Cape Town and the surrounding areas. It was a packed tour but we never felt rushed and had plenty of time to explore and see what we wanted. I’d highly recommend anyone visiting Cape Town to do this tour- especially if you want to see penguins, beautiful beaches with a friendly and knowledgeable and attentive guide.'
+        // },
+        // {
+        //     cover_photo: noor,
+        //     name: 'Noor',
+        //     title: 'England',
+        //     rating: 5,
+        //     comment: 'What a perfect tour, gave us a a much better appreciation of the beautiful sights of Cape Town and the surrounding areas. It was a packed tour but we never felt rushed and had plenty of time to explore and see what we wanted. I’d highly recommend anyone visiting Cape Town to do this tour- especially if you want to see penguins, beautiful beaches with a friendly and knowledgeable and attentive guide.'
+        // },
+        // {
+        //     cover_photo: luka,
+        //     name: 'Luka',
+        //     title: 'England',
+        //     rating: 5,
+        //     comment: 'What a perfect tour, gave us a a much better appreciation of the beautiful sights of Cape Town and the surrounding areas. It was a packed tour but we never felt rushed and had plenty of time to explore and see what we wanted. I’d highly recommend anyone visiting Cape Town to do this tour- especially if you want to see penguins, beautiful beaches with a friendly and knowledgeable and attentive guide.'
+        // },
+        // {
+        //     cover_photo: renad,
+        //     name: 'Renad',
+        //     title: 'England',
+        //     rating: 5,
+        //     comment: 'What a perfect tour, gave us a a much better appreciation of the beautiful sights of Cape Town and the surrounding areas. It was a packed tour but we never felt rushed and had plenty of time to explore and see what we wanted. I’d highly recommend anyone visiting Cape Town to do this tour- especially if you want to see penguins, beautiful beaches with a friendly and knowledgeable and attentive guide.'
+        // },
+        // {
+        //     cover_photo: yaasir,
+        //     name: 'Yaasir',
+        //     title: 'England',
+        //     rating: 5,
+        //     comment: 'What a perfect tour, gave us a a much better appreciation of the beautiful sights of Cape Town and the surrounding areas. It was a packed tour but we never felt rushed and had plenty of time to explore and see what we wanted. I’d highly recommend anyone visiting Cape Town to do this tour- especially if you want to see penguins, beautiful beaches with a friendly and knowledgeable and attentive guide.'
+        // },
+        // {
+        //     cover_photo: billy,
+        //     name: 'Billy',
+        //     title: 'England',
+        //     rating: 5,
+        //     comment: 'What a perfect tour, gave us a a much better appreciation of the beautiful sights of Cape Town and the surrounding areas. It was a packed tour but we never felt rushed and had plenty of time to explore and see what we wanted. I’d highly recommend anyone visiting Cape Town to do this tour- especially if you want to see penguins, beautiful beaches with a friendly and knowledgeable and attentive guide.'
+        // },
+        // {
+        //     cover_photo: jones,
+        //     name: 'Jones',
+        //     title: 'England',
+        //     rating: 5,
+        //     comment: 'What a perfect tour, gave us a a much better appreciation of the beautiful sights of Cape Town and the surrounding areas. It was a packed tour but we never felt rushed and had plenty of time to explore and see what we wanted. I’d highly recommend anyone visiting Cape Town to do this tour- especially if you want to see penguins, beautiful beaches with a friendly and knowledgeable and attentive guide.'
+        // },
+        // {
+        //     cover_photo: kazi,
+        //     name: 'Kazi and Allen',
+        //     title: 'England',
+        //     rating: 5,
+        //     comment: 'What a perfect tour, gave us a a much better appreciation of the beautiful sights of Cape Town and the surrounding areas. It was a packed tour but we never felt rushed and had plenty of time to explore and see what we wanted. I’d highly recommend anyone visiting Cape Town to do this tour- especially if you want to see penguins, beautiful beaches with a friendly and knowledgeable and attentive guide.'
+        // },
+        // {
+        //     cover_photo: yusra,
+        //     name: 'Yusra',
+        //     title: 'England',
+        //     rating: 5,
+        //     comment: 'What a perfect tour, gave us a a much better appreciation of the beautiful sights of Cape Town and the surrounding areas. It was a packed tour but we never felt rushed and had plenty of time to explore and see what we wanted. I’d highly recommend anyone visiting Cape Town to do this tour- especially if you want to see penguins, beautiful beaches with a friendly and knowledgeable and attentive guide.'
+        // },
+        // {
+        //     cover_photo: moz,
+        //     name: 'Mozna',
+        //     title: 'England',
+        //     rating: 5,
+        //     comment: 'What a perfect tour, gave us a a much better appreciation of the beautiful sights of Cape Town and the surrounding areas. It was a packed tour but we never felt rushed and had plenty of time to explore and see what we wanted. I’d highly recommend anyone visiting Cape Town to do this tour- especially if you want to see penguins, beautiful beaches with a friendly and knowledgeable and attentive guide.'
+        // },
+
+
        
         
 
         
     ];
+
+    
+
+
 
     const [formData, setFormData] = useState({
         name: '',
@@ -426,7 +508,7 @@ const Home03 = () => {
                                             <div className="row">
                                                 <div className="col-md-12">
                                                     <div className="">
-                                                        <h2 className="tf-title">Past Legends </h2>
+                                                        <h2 className="tf-title">Legends </h2>
                                                         <center>
                                                         <p >( Past Clients )</p>
                                                         <br></br>
@@ -469,13 +551,13 @@ const Home03 = () => {
                                                                                             <Rating value={item.rating} color={'#f8e825'} />
                                                                                         </h5>
                                                                                     </div>
-                                                                                    <div className="meta-info">
+                                                                                    {/* <div className="meta-info">
                                                                                         <div className="author">
                                                                                             <div className="info">
                                                                                                 <h6>"{item.comment}"</h6>
                                                                                             </div>
                                                                                         </div>
-                                                                                    </div>
+                                                                                    </div> */}
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -503,6 +585,79 @@ const Home03 = () => {
                                     We're a team of trustworthy and genuine local tour guides with a passion for creating fun and safe experiences for awesome people like you.
 
                                 </p>
+
+                                <Fragment>
+                                    <section className="tf-section live-auctions">
+                                        <div className="themesflat-container">
+                                            <div className="row">
+                                                <div className="col-md-12">
+                                                    <div className="">
+                                                        <h2 className="tf-title">Testimonials </h2>
+                                                        <center>
+                                                        <p >( What they say )</p>
+                                                        <br></br>
+                                                        </center>
+                                                        
+                              
+
+                                                        <div className="heading-line"></div>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-12">
+                                                    <Swiper
+                                                        spaceBetween={30}
+                                                        breakpoints={{
+                                                            0: { slidesPerView: 1 },
+                                                            767: { slidesPerView: 2 },
+                                                            991: { slidesPerView: 3 },
+                                                            1300: { slidesPerView: 4 },
+                                                        }}
+                                                        navigation
+                                                        pagination={{ clickable: true }}
+                                                        scrollbar={{ draggable: true }}
+                                                    >
+                                                        {items.slice(0, 99).map((item, index) => (
+                                                            <SwiperSlide key={index}>
+                                                                <div className="swiper-container show-shadow carousel auctions">
+                                                                    <div className="swiper-wrapper">
+                                                                        <div className="swiper-slide">
+                                                                            <div className="slider-item">
+                                                                                <div className="sc-card-product">
+                                                                                    {/* <div className="card-media">
+                                                                                        <img src={item.cover_photo} alt="cape town" />
+                                                                                    </div> */}
+                                                                                    <div className="card-title">
+                                                                                        <h5>{item.name}</h5>
+                                                                                    </div>
+                                                                                    
+                                                                                    <div className="card-title">
+                                                                                        <h5>
+                                                                                            <Rating value={item.rating} color={'#f8e825'} />
+                                                                                        </h5>
+                                                                                    </div>
+                                                                                    <div className="meta-info">
+                                                                                        <div className="author">
+                                                                                            <div className="info">
+                                                                                                <h6>"{item.comment}"</h6>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </SwiperSlide>
+                                                        ))}
+                                                    </Swiper>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+
+
+                                    <CardModal show={modalShow} onHide={() => setModalShow(false)} />
+                                </Fragment>
                                 {/* <p className="sub-title ct small mg-bt-20 pad-420">
                                     And the secret code
                                 </p>
