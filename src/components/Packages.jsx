@@ -124,7 +124,7 @@ const openCalendlyPopup = (e) => {
                     Book this package
                   </h2>
                   <p className="sub-title ct small mg-bt-20 pad-420">
-                    And stand a change to win a $20K Rolex
+                    And stand a chance to win a $20K Rolex
                   </p> 
                 
                 {loading ? (
