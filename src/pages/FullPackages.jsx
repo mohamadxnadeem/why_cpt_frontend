@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Rating from '../components/Rating';
 import Header from '../components/header/Header';
@@ -11,23 +11,50 @@ import marie from '../assets/images/blog/marie.jpg';
 import micheal from '../assets/images/blog/micheal.jpg';
 import dan from '../assets/images/blog/dan.jpg';
 import batman from '../assets/images/blog/batman.JPG';
-
 import Packages from '../components/Packages';
-
 import emailjs from 'emailjs-com';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-
-// Import the background image correctly
 import backgroundImage from '../assets/images/item-background/rolex.jpg'; 
+import styled from 'styled-components';
+
+
+const LimitedSpotsContainer = styled.div`
+  text-align: center;
+  margin: 20px 0;
+`;
+
+const Heading = styled.h2`
+  font-size: 2rem;
+  margin-bottom: 10px;
+`;
+
+const Paragraph = styled.p`
+  font-size: 1rem;
+  color: #333;
+`;
+
+const NumberContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+`;
+
+const DigitBox = styled.div`
+  background-color: black;
+  color: white;
+  font-size: 2rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px;
+`;
 
 const FullPackages = () => {
-
-    
-
-    const [modalShow, setModalShow] = useState(false);
     const [formSubmitted, setFormSubmitted] = useState(false);
-
     const [formData, setFormData] = useState({
         name: '',
         contactNumber: '',
@@ -51,18 +78,14 @@ const FullPackages = () => {
     const openCalendlyPopup = (e) => {
         e.preventDefault();
         if (isMobile) {
-            // Open Calendly link in a new tab for mobile devices
             window.open('https://calendly.com/mohamadxnadeem/30min', '_blank');
         } else if (window.Calendly) {
-            // Trigger Calendly popup for desktop users
             window.Calendly.initPopupWidget({ url: 'https://calendly.com/mohamadxnadeem/30min' });
         } else {
             console.error("Calendly is not loaded yet");
         }
         return false;
     };
-
-    
 
     const handleChange = (e) => {
         setFormData({
@@ -73,7 +96,7 @@ const FullPackages = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-    
+
         emailjs
             .send('service_ptqtluk', 'template_uyicl9l', formData, 'apNJP_9sXnff2q82W')
             .then(
@@ -100,43 +123,43 @@ const FullPackages = () => {
             name: 'Jaques',
             title: 'Jaques',
             rating: 4.7,
-            comment: 'A straightforward and reliable service. The car was clean, the driver was polite, and we arrived at the airport without any issues. It’s a service I’ll definitely consider using again'
+            comment: 'A straightforward and reliable service. The car was clean, the driver was polite, and we arrived at the airport without any issues. It’s a service I’ll definitely consider using again',
         },
         {
             cover_photo: tim,
             name: 'Jodi',
             title: 'England',
             rating: 5,
-            comment: 'I’ve used several airport transfer services in Cape Town, and this one stands out for its reliability. The driver was friendly and professional, and the vehicle was comfortable. Definitely using them again.'
+            comment: 'I’ve used several airport transfer services in Cape Town, and this one stands out for its reliability. The driver was friendly and professional, and the vehicle was comfortable. Definitely using them again.',
         },
         {
             cover_photo: rachel,
             name: 'Serisha',
             title: 'USA',
             rating: 4,
-            comment: 'The service was solid—on time, clean car, and a courteous driver. I appreciated the little details like a bottle of water waiting for me. It made the ride more pleasant after a long flight.'
+            comment: 'The service was solid—on time, clean car, and a courteous driver. I appreciated the little details like a bottle of water waiting for me. It made the ride more pleasant after a long flight.',
         },
         {
             cover_photo: marie,
             name: 'Amina',
             title: 'Netherlands',
             rating: 4,
-            comment: 'Punctual and professional—exactly what you want from an airport transfer. The driver knew the best route to avoid traffic, which helped me get to the airport with time to spare. No complaints!'
+            comment: 'Punctual and professional—exactly what you want from an airport transfer. The driver knew the best route to avoid traffic, which helped me get to the airport with time to spare. No complaints!',
         },
         {
             cover_photo: micheal,
             name: 'Gunnar',
             title: 'England',
             rating: 5,
-            comment: 'Great service! My driver was right on time, the car was clean, and the ride was smooth. It made getting to the airport hassle-free, which is exactly what I needed after a long day.'
+            comment: 'Great service! My driver was right on time, the car was clean, and the ride was smooth. It made getting to the airport hassle-free, which is exactly what I needed after a long day.',
         },
     ];
 
     return (
         <div className='home-3'>
             <Helmet>
-                <title>How to win $20K Rolex Batman </title>
-                <meta name="description" content="Stand to win rolex batman when you book an 8 Day luxury package to Cape Town with us. " />
+                <title>How to win $20K Rolex Batman</title>
+                <meta name="description" content="Stand to win rolex batman when you book an 8 Day luxury package to Cape Town with us." />
                 <meta property="og:title" content="How to win $20K Rolex Batman" />
                 <meta property="og:description" content="Stand to win rolex batman when you book an 8 Day luxury package to Cape Town with us." />
                 <meta property="og:image" content={imgblog1} />
@@ -153,9 +176,6 @@ const FullPackages = () => {
                             <div className="page-title-heading mg-bt-12">
                                 <br />
                                 <br />
-                                {/* <h1 className="heading text-center">
-                                    Luxury Chauffeured Drives for VIPs in Cape Town
-                                </h1> */}
                             </div>
                         </div>
                     </div>
@@ -166,142 +186,46 @@ const FullPackages = () => {
                 <div className="themesflat-container">
                     <div className="post">
                         <div className="inner-content">
-
-                            <h2 className="title-post">
-                                Your Dream Honeymoon to Cape Town – Only $2,969
-                            </h2>
-                            <br></br>
-                            
-                            <h2 className="title-post">
-                                Plus, Stand 1 out of 35 Chance to Win a Rolex Batman Worth $20,000!
-                            </h2>
-                            
-                           
+                            <h2 className="title-post">Your Dream Honeymoon to Cape Town – Only $2,969</h2>
+                            <br />
+                            <h2 className="title-post">Plus, Stand 1 out of 35 Chance to Win a Rolex Batman Worth $20,000!</h2>
                             <div className="divider"></div>
-
                             <div className="inner-post mg-t-40">
                                 <img className="custom-image" src={batman} alt="table mountain" />
                                 <p className="mg-bt-24">
                                     We’ve curated the perfect 8-day honeymoon package, combining the best luxury experiences Cape Town has to offer. From 5-star accommodation to private chauffeured drives, and exclusive tours to all the top attractions, you’ll discover why Cape Town is hailed as the most breathtaking city on the planet.
                                 </p>
-
                                 <p className="mg-bt-24">
-                                For just $2,969, everything is taken care of—from your stay to the unforgettable experiences that will create lifelong memories.                                </p>
-
-                                <p className="mg-bt-24">
-                                And here’s the icing on the cake:
+                                    For just $2,969, everything is taken care of—from your stay to the unforgettable experiences that will create lifelong memories.
                                 </p>
-
                                 <p className="mg-bt-24">
-                                    When you book this package, you’ll be automatically entered to win a stunning Rolex Batman, valued at $20,000. This is more than a trip—it’s the adventure of a lifetime, with a luxury timepiece as the ultimate keepsake.                                </p>
-                                <p className="mg-bt-24">
-                                    Don't miss out—this offer is limited to the first 35 bookings.
+                                    And here’s the icing on the cake:
                                 </p>
-                                    
+                                <p className="mg-bt-24">
+                                    When you book this package, you’ll be automatically entered to win a stunning Rolex Batman, valued at $20,000. This is more than a trip—it’s the adventure of a lifetime, with a luxury timepiece as the ultimate keepsake.
+                                </p>
                                 
-                               
                             </div>
-                               
+
+                            <LimitedSpotsContainer>
+                            <h2 className="title-post">Limited to 35 Bookings</h2> 
+                            <p className="mg-bt-24">
+                            Once this number hits 0, then you've missed this opportunity!
+                                </p>
+
+                                
+                                <NumberContainer>
+                                    <DigitBox>3</DigitBox>
+                                    <DigitBox>5</DigitBox>
+                                </NumberContainer>
+                            </LimitedSpotsContainer>
+
                             <Packages />
-
-                            {/* <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    Or we can plan your trip to Cape Town bespoke to your needs                              
-                                </h1>
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Click the button below to book a quick meeting with one of our Cape Town experts to get started. 
-                                 </p>
-
-                                <center>
-
-                                 <Link
-                                    to="#"
-                                    onClick={openCalendlyPopup}
-                                    className="sc-button loadmore style fl-button pri-3"
-                                >
-                                    <span>Book Free Consultation with a Travel Expert</span>
-                                </Link>
-
-                                  </center>
- */}
-
-                            <br />
-                            <br />
-
-                            
-                            
-                            {/* <Fragment>
-                                <section className="tf-section live-auctions">
-                                    <div className="themesflat-container">
-                                        <div className="row">
-                                            <div className="col-md-12">
-                                                <div className="">
-                                                    <h2 className="tf-title">
-                                                        Reviews
-                                                    </h2>
-                                                    <div className="heading-line"></div>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-12">
-                                                <Swiper
-                                                    spaceBetween={30}
-                                                    breakpoints={{
-                                                        0: { slidesPerView: 1 },
-                                                        767: { slidesPerView: 2 },
-                                                        991: { slidesPerView: 3 },
-                                                        1300: { slidesPerView: 4 },
-                                                    }}
-                                                    navigation
-                                                    pagination={{ clickable: true }}
-                                                    scrollbar={{ draggable: true }}
-                                                >
-                                                    {items
-                                                        .slice(0, 99)
-                                                        .map((item, index) => (
-                                                            <SwiperSlide key={index}>
-                                                                <div className="swiper-container show-shadow carousel auctions">
-                                                                    <div className="swiper-wrapper">
-                                                                        <div className="swiper-slide">
-                                                                            <div className="slider-item">
-                                                                                <div className="sc-card-product">
-                                                                                    <div className="card-title">
-                                                                                        <h5>{item.name}</h5>
-                                                                                    </div>
-                                                                                    <div className="card-title">
-                                                                                        <h5>
-                                                                                            <Rating
-                                                                                                value={item.rating}
-                                                                                                color={'#f8e825'}
-                                                                                            />
-                                                                                        </h5>
-                                                                                    </div>
-                                                                                    <div className="meta-info">
-                                                                                        <div className="author">
-                                                                                            <div className="info">
-                                                                                                <h6>
-                                                                                                    "{item.comment}"
-                                                                                                </h6>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </SwiperSlide>
-                                                        ))}
-                                                </Swiper>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </section>
-                            </Fragment> */}
                         </div>
                     </div>
-
-                    
                 </div>
             </div>
+
             <Footer />
         </div>
     );
