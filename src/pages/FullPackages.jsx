@@ -172,7 +172,7 @@ const FullPackages = () => {
                             </h2>
                             
                             <h2 className="title-post">
-                                Plus, Stand a Chance to Win a Rolex Batman Worth $20,000!
+                                Plus, Stand 1 out of 35 Chance to Win a Rolex Batman Worth $20,000!
                             </h2>
                             
                            
@@ -194,7 +194,7 @@ const FullPackages = () => {
                                 <p className="mg-bt-24">
                                     When you book this package, you’ll be automatically entered to win a stunning Rolex Batman, valued at $20,000. This is more than a trip—it’s the adventure of a lifetime, with a luxury timepiece as the ultimate keepsake.                                </p>
                                 <p className="mg-bt-24">
-                                    Don't miss out—this offer is limited to the first 100 bookings, and spots are filling fast! 
+                                    Don't miss out—this offer is limited to the first 35 bookings.
                                 </p>
                                     
                                 
