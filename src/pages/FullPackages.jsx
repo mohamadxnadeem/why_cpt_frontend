@@ -170,6 +170,7 @@ const FullPackages = () => {
                             <h2 className="title-post">
                                 Your Dream Honeymoon to Cape Town – Only $2,969
                             </h2>
+                            <br></br>
                             
                             <h2 className="title-post">
                                 Plus, Stand 1 out of 35 Chance to Win a Rolex Batman Worth $20,000!
