@@ -186,7 +186,7 @@ const FullPackages = () => {
                 <div className="themesflat-container">
                     <div className="post">
                         <div className="inner-content">
-                            <h2 className="title-post">Your Dream Honeymoon to Cape Town – Only $2,969</h2>
+                            <h2 className="title-post">Your Dream Honeymoon to Cape Town – Only $3500</h2>
                             <br />
                             <h2 className="title-post">Plus, Stand 1 out of 35 Chance to Win a Rolex Batman Worth $20,000!</h2>
                             <div className="divider"></div>
@@ -196,7 +196,7 @@ const FullPackages = () => {
                                     We’ve curated the perfect 8-day honeymoon package, combining the best luxury experiences Cape Town has to offer. From 5-star accommodation to private chauffeured drives, and exclusive tours to all the top attractions, you’ll discover why Cape Town is hailed as the most breathtaking city on the planet.
                                 </p>
                                 <p className="mg-bt-24">
-                                    For just $2,969, everything is taken care of—from your stay to the unforgettable experiences that will create lifelong memories.
+                                    For just $3500, everything is taken care of—from your stay to the unforgettable experiences that will create lifelong memories.
                                 </p>
                                 <p className="mg-bt-24">
                                     And here’s the icing on the cake:
