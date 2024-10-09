@@ -2,9 +2,11 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
+
 import { Link } from 'react-router-dom';
 import LiveAuction from '../components/layouts/home-3/LiveAuction';
 import Rating from '../components/Rating';
+
 import Loader from '../components/Loader';
 import SliderStyle3 from '../components/slider/SliderStyle3';
 import { Blurhash } from 'react-blurhash';
@@ -156,12 +158,12 @@ const openCalendlyPopup = (e) => {
               <center>
                 <div className="page-title-heading mg-bt-12">
 
-<h4 
-  className="tf-title-heading ct style-2 fs-30 mg-bt-10"
-  style={{ color: 'white' }}
->
-  {itemData.fullpackage.title}
-</h4>
+                <h4 
+                  className="tf-title-heading ct style-2 fs-30 mg-bt-10"
+                  style={{ color: 'white' }}
+                >
+                  {itemData.fullpackage.title}
+                </h4>
                   {/* <h1 className="heading text-center">
                     <Rating value={itemData.average_rating} color={'#f8e825'} />
                   </h1> */}

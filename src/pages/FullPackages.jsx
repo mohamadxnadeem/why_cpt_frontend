@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React , { useState , Fragment, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Rating from '../components/Rating';
 import Header from '../components/header/Header';
@@ -15,8 +15,23 @@ import Packages from '../components/Packages';
 import emailjs from 'emailjs-com';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-import backgroundImage from '../assets/images/item-background/rolex.jpg'; 
+import backgroundImage from '../assets/images/blog/romantic-getawat.jpeg';
 import styled from 'styled-components';
+
+
+
+import achmat from '../assets/images/blog/achmat.png'
+import luka from '../assets/images/blog/luka.png'
+import noor from '../assets/images/blog/noor.png'
+import renad from '../assets/images/blog/renad.png'
+import yaasir from '../assets/images/blog/yaasir.png'
+import billy from '../assets/images/blog/mampuru.png'
+import jones from '../assets/images/blog/jones.png'
+import yusra from '../assets/images/blog/yusra.png'
+import moz from '../assets/images/blog/moz.png'
+import kazi from '../assets/images/blog/Allen and Kazi.png'
+
+import CardModal from '../components/layouts/CardModal';
 
 
 const LimitedSpotsContainer = styled.div`
@@ -55,6 +70,9 @@ const DigitBox = styled.div`
 
 const FullPackages = () => {
     const [formSubmitted, setFormSubmitted] = useState(false);
+    const [modalShow, setModalShow] = useState(false);
+
+
     const [formData, setFormData] = useState({
         name: '',
         contactNumber: '',
@@ -111,44 +129,61 @@ const FullPackages = () => {
     };
 
     const items = [
+
+        
+        {
+             cover_photo: kazi,
+             name: 'Sunnah Musk Team',
+             title: 'England',
+             rating: 5,
+             comment: 'What a perfect tour, gave us a a much better appreciation of the beautiful sights of Cape Town and the surrounding areas. It was a packed tour but we never felt rushed and had plenty of time to explore and see what we wanted. I’d highly recommend anyone visiting Cape Town to do this tour- especially if you want to see penguins, beautiful beaches with a friendly and knowledgeable and attentive guide.'
+         },
+
+         {
+            cover_photo: yaasir,
+            name: 'Yaasir',
+            title: 'England',
+            rating: 5,
+            comment: 'Cape Town one of the cities that you can never get board of with such great vibes, people, positive energy and endless adventures that can be done apart from the food that you can always enjoy with a reasonable price and all thanks to the best Cape Town tour guide @whycapetown'
+        },
         {
             cover_photo: jana,
-            name: 'Lungi',
+            name: 'Jana',
             title: 'South Africa',
             rating: 5,
             comment: 'The ride to the airport was comfortable and on time. The driver was polite and the vehicle was in great condition. It made my early morning trip much easier.',
         },
         {
             cover_photo: dan,
-            name: 'Jaques',
+            name: 'Dan',
             title: 'Jaques',
             rating: 4.7,
             comment: 'A straightforward and reliable service. The car was clean, the driver was polite, and we arrived at the airport without any issues. It’s a service I’ll definitely consider using again',
         },
         {
             cover_photo: tim,
-            name: 'Jodi',
+            name: 'Tim',
             title: 'England',
             rating: 5,
             comment: 'I’ve used several airport transfer services in Cape Town, and this one stands out for its reliability. The driver was friendly and professional, and the vehicle was comfortable. Definitely using them again.',
         },
         {
             cover_photo: rachel,
-            name: 'Serisha',
+            name: 'rachel',
             title: 'USA',
             rating: 4,
             comment: 'The service was solid—on time, clean car, and a courteous driver. I appreciated the little details like a bottle of water waiting for me. It made the ride more pleasant after a long flight.',
         },
         {
             cover_photo: marie,
-            name: 'Amina',
+            name: 'marie',
             title: 'Netherlands',
             rating: 4,
             comment: 'Punctual and professional—exactly what you want from an airport transfer. The driver knew the best route to avoid traffic, which helped me get to the airport with time to spare. No complaints!',
         },
         {
             cover_photo: micheal,
-            name: 'Gunnar',
+            name: 'micheal',
             title: 'England',
             rating: 5,
             comment: 'Great service! My driver was right on time, the car was clean, and the ride was smooth. It made getting to the airport hassle-free, which is exactly what I needed after a long day.',
@@ -156,6 +191,7 @@ const FullPackages = () => {
     ];
 
     return (
+        
         <div className='home-3'>
             <Helmet>
                 <title>How to win $20K Rolex Batman</title>
@@ -186,41 +222,143 @@ const FullPackages = () => {
                 <div className="themesflat-container">
                     <div className="post">
                         <div className="inner-content">
-                            <h2 className="title-post">Your Dream Honeymoon to Cape Town – Only $3500</h2>
+                            <h2 className="title-post">Experience 8 Days in Cape Town</h2>
                             <br />
-                            <h2 className="title-post">Plus, Stand 1 out of 35 Chance to Win a Rolex Batman Worth $20,000!</h2>
+                            <h2 className="title-post">and stand a 1 in 35 chance to win a £15K luxury timepiece.</h2>
                             <div className="divider"></div>
                             <div className="inner-post mg-t-40">
-                                <img className="custom-image" src={batman} alt="table mountain" />
+                               
                                 <p className="mg-bt-24">
-                                    We’ve curated the perfect 8-day honeymoon package, combining the best luxury experiences Cape Town has to offer. From 5-star accommodation to private chauffeured drives, and exclusive tours to all the top attractions, you’ll discover why Cape Town is hailed as the most breathtaking city on the planet.
+                                    Attention Ladies and Gentlemen!                                
                                 </p>
+
                                 <p className="mg-bt-24">
-                                    For just $3500, everything is taken care of—from your stay to the unforgettable experiences that will create lifelong memories.
+                                We've curated the perfect package for 1st-time visitors planning on visiting Cape Town.  
                                 </p>
+
                                 <p className="mg-bt-24">
-                                    And here’s the icing on the cake:
-                                </p>
+                                Your safety and comfort is our top priority.                                </p>
                                 <p className="mg-bt-24">
-                                    When you book this package, you’ll be automatically entered to win a stunning Rolex Batman, valued at $20,000. This is more than a trip—it’s the adventure of a lifetime, with a luxury timepiece as the ultimate keepsake.
+                                And yes, we are having a reward for the 1st 35 customers who purchase a package to Cape Town.                                 </p>
+                               
+                               {/* <p className="mg-bt-24">
+                                    The official launch date for accepting orders is 01 November 2024.
                                 </p>
+
+                                <p className="mg-bt-24">
+                                See what £1500 gets you for 8 days in Cape Town:
+                                </p> */}
+
+                                
+            
                                 
                             </div>
 
-                            <LimitedSpotsContainer>
-                            <h2 className="title-post">Limited to 35 Bookings</h2> 
-                            <p className="mg-bt-24">
-                                Once this number hits 0, then you missed the best deat to Cape Town on the planet!
-                            </p>
+                            <Fragment>
+                                    <section className="tf-section live-auctions">
+                                        <div className="themesflat-container">
+                                            <div className="row">
+                                                <div className="col-md-12">
+                                                    <div className="">
+                                                        <h2 className="tf-title">Legends </h2>
+                                                        <center>
+                                                        <p >( Past Clients )</p>
+                                                        <br></br>
+                                                        </center>
+                                                        
+                              
 
-                                
-                                <NumberContainer>
-                                    <DigitBox>3</DigitBox>
-                                    <DigitBox>5</DigitBox>
-                                </NumberContainer>
-                            </LimitedSpotsContainer>
+                                                        <div className="heading-line"></div>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-12">
+                                                    <Swiper
+                                                        spaceBetween={30}
+                                                        breakpoints={{
+                                                            0: { slidesPerView: 1 },
+                                                            767: { slidesPerView: 2 },
+                                                            991: { slidesPerView: 3 },
+                                                            1300: { slidesPerView: 4 },
+                                                        }}
+                                                        navigation
+                                                        pagination={{ clickable: true }}
+                                                        scrollbar={{ draggable: true }}
+                                                    >
+                                                        {items.slice(0, 99).map((item, index) => (
+                                                            <SwiperSlide key={index}>
+                                                                <div className="swiper-container show-shadow carousel auctions">
+                                                                    <div className="swiper-wrapper">
+                                                                        <div className="swiper-slide">
+                                                                            <div className="slider-item">
+                                                                                <div className="sc-card-product">
+                                                                                    <div className="card-media">
+                                                                                        <img src={item.cover_photo} alt="cape town" />
+                                                                                    </div>
+                                                                                    <div className="card-title">
+                                                                                        <h5>{item.name}</h5>
+                                                                                    </div>
+                                                                                    
+                                                                                    <div className="card-title">
+                                                                                        <h5>
+                                                                                            <Rating value={item.rating} color={'#f8e825'} />
+                                                                                        </h5>
+                                                                                    </div>
+                                                                                    {/* <div className="meta-info">
+                                                                                        <div className="author">
+                                                                                            <div className="info">
+                                                                                                <h6>"{item.comment}"</h6>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div> */}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </SwiperSlide>
+                                                        ))}
+                                                    </Swiper>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+
+
+                                    <CardModal show={modalShow} onHide={() => setModalShow(false)} />
+                                </Fragment>
 
                             <Packages />
+
+                            <LimitedSpotsContainer>
+                            
+                            <h2 className="title-post">Coming Soon</h2> 
+                            <p className="mg-bt-24">
+                                Enter your email to be the first to know when the sale is going down.                               
+                            </p>
+
+                            <img className="custom-image" src={batman} alt="table mountain" />
+                           
+
+                            <h2 className="title-post">1 in 35 chance it's yours.</h2> 
+                                {/* <p className="mg-bt-24">
+                                    1 in 35 Chance this could be yours   
+                                </p>
+                                <NumberContainer>
+                                    <DigitBox>0</DigitBox>
+                                    <DigitBox>0</DigitBox>
+                                </NumberContainer>
+                                <br></br> */}
+                                <p className="mg-bt-24">
+                                    Follow us on Instagram to stay in the know <a href='' target='__blank' >@whycapetown</a>   
+                                </p>
+                               
+                                
+                            </LimitedSpotsContainer>
+
+                          
+                            <p className="mg-bt-24">
+                                Ts and Cs Apply
+                            </p>
                         </div>
                     </div>
                 </div>

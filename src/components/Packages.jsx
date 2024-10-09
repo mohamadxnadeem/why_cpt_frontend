@@ -121,10 +121,10 @@ const openCalendlyPopup = (e) => {
               <div className="col-12">
                 
                   <h2 className="tf-title-heading ct style-2 mg-bt-13">
-                    Book this package
+                    View Package Details:
                   </h2>
                   <p className="sub-title ct small mg-bt-20 pad-420">
-                    And stand a chance to win a $20K Rolex
+                    {/* And stand a chance to win a $20K Rolex */}
                   </p> 
                 
                 {loading ? (

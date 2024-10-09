@@ -149,6 +149,15 @@ const Home03 = () => {
             rating: 5,
             comment: 'Cape Town one of the cities that you can never get board of with such great vibes, people, positive energy and endless adventures that can be done apart from the food that you can always enjoy with a reasonable price and all thanks to the best Cape Town tour guide @whycapetown'
         },
+
+        {
+            cover_photo: yaasir,
+            name: 'Yaasir',
+            title: 'England',
+            rating: 5,
+            comment: 'Cape Town one of the cities that you can never get board of with such great vibes, people, positive energy and endless adventures that can be done apart from the food that you can always enjoy with a reasonable price and all thanks to the best Cape Town tour guide @whycapetown'
+        },
+        
         // {
         //     cover_photo: achmat,
         //     name: 'Achmat',
