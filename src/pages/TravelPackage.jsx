@@ -235,7 +235,7 @@ const openCalendlyPopup = (e) => {
                         <Fragment>
                           {!loading && ( // Hide form header while loading
                             <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                              Contact Us Now to secure your dates:
+                              Let us know if you have any questions?
                             </h1>
                           )}
 
