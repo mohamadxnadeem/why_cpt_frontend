@@ -298,14 +298,35 @@ const FullPackages = () => {
                                 </p>
 
                                 <p className="mg-bt-24">
-                                We've curated the perfect package for 1st-time visitors planning on visiting Cape Town.  
+                                We've curated the perfect package for luxury travel enthusiast planning their first trip to Cape Town.  
                                 </p>
 
                                 <p className="mg-bt-24">
-                                Your safety and comfort is our top priority.                                </p>
+                                    You get Luxury, Safety and Peace of mind when you book with us.                                 
+                                </p>
                                 <p className="mg-bt-24">
-                                And yes, we are having a reward for the 1st 35 customers who purchase a package to Cape Town.                                 </p>
+                                    And special chance to win a luxury watch valued at £15K  
+                                </p>
+                                <p className="mg-bt-24">
+                                    How to enter this competition?  
+                                </p>
+
+                                <p className="mg-bt-24">
+                                    The first 35 clients who books the package below will be entered into a raffle
+                                </p>
+
+                                <p className="mg-bt-24">
+                                    And only 1 winner will gome home with the £15K watch
+                                </p>
+
+                                <p className="mg-bt-24">
+                                    But everyone of you will have a 5 star experience in the best city in the world.
+                                </p>
+
+
                                
+
+
                                {/* <p className="mg-bt-24">
                                     The official launch date for accepting orders is 01 November 2024.
                                 </p>
@@ -319,15 +340,17 @@ const FullPackages = () => {
                                 
                             </div>
 
+                            <Packages />
+
                             <Fragment>
                                     <section className="tf-section live-auctions">
                                         <div className="themesflat-container">
                                             <div className="row">
                                                 <div className="col-md-12">
                                                     <div className="">
-                                                        <h2 className="tf-title">Legends </h2>
+                                                        <h2 className="tf-title">Past Clients </h2>
                                                         <center>
-                                                        <p >( Past Clients )</p>
+                                                        {/* <p >( Past Clients )</p> */}
                                                         <br></br>
                                                         </center>
                                                         
@@ -390,9 +413,13 @@ const FullPackages = () => {
 
 
                                     <CardModal show={modalShow} onHide={() => setModalShow(false)} />
-                                </Fragment>
+                            </Fragment>
 
-                            <Packages />
+                          
+
+                            
+                            
+                      
 
                             <LimitedSpotsContainer>
                             
@@ -412,6 +439,10 @@ const FullPackages = () => {
                                 </p>
                             <img className="custom-image" src={batman} alt="table mountain" />
                             <h2 className="title-post">Coming Soon</h2> 
+
+                            <p className="mg-bt-24">
+                                Please Note, this package is not for sale yet, but will be launching soon.                             
+                            </p>
                             <p className="mg-bt-24">
                                 Enter your email to be the first to know when the sale is going down.                               
                             </p>
