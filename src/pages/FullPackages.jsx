@@ -210,8 +210,8 @@ const FullPackages = () => {
                             <LimitedSpotsContainer>
                             <h2 className="title-post">Limited to 35 Bookings</h2> 
                             <p className="mg-bt-24">
-                            Once this number hits 0, then you've missed this opportunity!
-                                </p>
+                                Once this number hits 0, then you missed the best deat to Cape Town on the planet!
+                            </p>
 
                                 
                                 <NumberContainer>
