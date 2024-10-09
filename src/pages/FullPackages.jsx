@@ -68,6 +68,12 @@ const DigitBox = styled.div`
   margin: 0 5px;
 `;
 
+const FormWrapper = styled.div`
+  max-width: 400px;
+  width: 100%; /* Ensures it scales responsively */
+  margin: 0 auto; /* Center the div horizontally */
+`;
+
 const FullPackages = () => {
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [modalShow, setModalShow] = useState(false);
@@ -335,6 +341,10 @@ const FullPackages = () => {
                             <p className="mg-bt-24">
                                 Enter your email to be the first to know when the sale is going down.                               
                             </p>
+                            <FormWrapper>
+                                <div class="klaviyo-form-Yy2tkk"></div>
+                            </FormWrapper>
+
 
                             <img className="custom-image" src={batman} alt="table mountain" />
                            
