@@ -194,6 +194,65 @@ const FullPackages = () => {
             rating: 5,
             comment: 'Great service! My driver was right on time, the car was clean, and the ride was smooth. It made getting to the airport hassle-free, which is exactly what I needed after a long day.',
         },
+
+         {
+            cover_photo: achmat,
+            name: 'Achmat',
+            title: 'England',
+            rating: 5,
+            comment: 'What a perfect tour, gave us a a much better appreciation of the beautiful sights of Cape Town and the surrounding areas. It was a packed tour but we never felt rushed and had plenty of time to explore and see what we wanted. I’d highly recommend anyone visiting Cape Town to do this tour- especially if you want to see penguins, beautiful beaches with a friendly and knowledgeable and attentive guide.'
+        },
+        {
+            cover_photo: noor,
+            name: 'Noor',
+            title: 'England',
+            rating: 5,
+            comment: 'What a perfect tour, gave us a a much better appreciation of the beautiful sights of Cape Town and the surrounding areas. It was a packed tour but we never felt rushed and had plenty of time to explore and see what we wanted. I’d highly recommend anyone visiting Cape Town to do this tour- especially if you want to see penguins, beautiful beaches with a friendly and knowledgeable and attentive guide.'
+        },
+        {
+            cover_photo: luka,
+            name: 'Luka',
+            title: 'England',
+            rating: 5,
+            comment: 'What a perfect tour, gave us a a much better appreciation of the beautiful sights of Cape Town and the surrounding areas. It was a packed tour but we never felt rushed and had plenty of time to explore and see what we wanted. I’d highly recommend anyone visiting Cape Town to do this tour- especially if you want to see penguins, beautiful beaches with a friendly and knowledgeable and attentive guide.'
+        },
+        {
+            cover_photo: renad,
+            name: 'Renad',
+            title: 'England',
+            rating: 5,
+            comment: 'What a perfect tour, gave us a a much better appreciation of the beautiful sights of Cape Town and the surrounding areas. It was a packed tour but we never felt rushed and had plenty of time to explore and see what we wanted. I’d highly recommend anyone visiting Cape Town to do this tour- especially if you want to see penguins, beautiful beaches with a friendly and knowledgeable and attentive guide.'
+        },
+        
+        {
+            cover_photo: billy,
+            name: 'Billy',
+            title: 'England',
+            rating: 5,
+            comment: 'What a perfect tour, gave us a a much better appreciation of the beautiful sights of Cape Town and the surrounding areas. It was a packed tour but we never felt rushed and had plenty of time to explore and see what we wanted. I’d highly recommend anyone visiting Cape Town to do this tour- especially if you want to see penguins, beautiful beaches with a friendly and knowledgeable and attentive guide.'
+        },
+        {
+            cover_photo: jones,
+            name: 'Jones',
+            title: 'England',
+            rating: 5,
+            comment: 'What a perfect tour, gave us a a much better appreciation of the beautiful sights of Cape Town and the surrounding areas. It was a packed tour but we never felt rushed and had plenty of time to explore and see what we wanted. I’d highly recommend anyone visiting Cape Town to do this tour- especially if you want to see penguins, beautiful beaches with a friendly and knowledgeable and attentive guide.'
+        },
+       
+         {
+             cover_photo: yusra,
+             name: 'Yusra',
+             title: 'England',
+             rating: 5,
+             comment: 'What a perfect tour, gave us a a much better appreciation of the beautiful sights of Cape Town and the surrounding areas. It was a packed tour but we never felt rushed and had plenty of time to explore and see what we wanted. I’d highly recommend anyone visiting Cape Town to do this tour- especially if you want to see penguins, beautiful beaches with a friendly and knowledgeable and attentive guide.'
+         },
+         {
+             cover_photo: moz,
+             name: 'Mozna',
+             title: 'England',
+             rating: 5,
+             comment: 'What a perfect tour, gave us a a much better appreciation of the beautiful sights of Cape Town and the surrounding areas. It was a packed tour but we never felt rushed and had plenty of time to explore and see what we wanted. I’d highly recommend anyone visiting Cape Town to do this tour- especially if you want to see penguins, beautiful beaches with a friendly and knowledgeable and attentive guide.'
+         },
     ];
 
     return (
@@ -364,6 +423,11 @@ const FullPackages = () => {
                                
                                 
                             </LimitedSpotsContainer>
+
+                            <br></br>
+                            <br></br>
+                            <br></br>
+                            <br></br>
 
                           
                             <p className="mg-bt-24">
