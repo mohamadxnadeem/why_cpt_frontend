@@ -425,7 +425,7 @@ const FullPackages = () => {
                             
                            
 
-                            <h2 className="title-post">1 in 35 chance it's yours.</h2> 
+                            <h2 className="title-post">1 in 35 to own a Rolex</h2> 
                                 {/* <p className="mg-bt-24">
                                     1 in 35 Chance this could be yours   
                                 </p>
