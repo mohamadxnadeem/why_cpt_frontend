@@ -396,16 +396,6 @@ const FullPackages = () => {
 
                             <LimitedSpotsContainer>
                             
-                            <h2 className="title-post">Coming Soon</h2> 
-                            <p className="mg-bt-24">
-                                Enter your email to be the first to know when the sale is going down.                               
-                            </p>
-                            <FormWrapper>
-                                <div class="klaviyo-form-Yy2tkk"></div>
-                            </FormWrapper>
-
-
-                            <img className="custom-image" src={batman} alt="table mountain" />
                            
 
                             <h2 className="title-post">1 in 35 chance it's yours.</h2> 
@@ -420,6 +410,17 @@ const FullPackages = () => {
                                 <p className="mg-bt-24">
                                     Follow us on Instagram to stay in the know <a href='' target='__blank' >@whycapetown</a>   
                                 </p>
+                            <img className="custom-image" src={batman} alt="table mountain" />
+                            <h2 className="title-post">Coming Soon</h2> 
+                            <p className="mg-bt-24">
+                                Enter your email to be the first to know when the sale is going down.                               
+                            </p>
+                            <FormWrapper>
+                                <div class="klaviyo-form-Yy2tkk"></div>
+                            </FormWrapper>
+                           
+
+                            
                                
                                 
                             </LimitedSpotsContainer>
