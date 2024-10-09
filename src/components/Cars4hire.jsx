@@ -159,7 +159,7 @@ const Cars4Hire = forwardRef((ref) => {
                                       <div className="price" style={{ textAlign: 'left' }}>
                                        
                                         
-                                        <p>${item.car.price} - Full Day</p>
+                                        <p>£{item.car.price} - Full Day</p>
 
                                         
                                        
