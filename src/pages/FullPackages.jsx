@@ -453,7 +453,7 @@ const FullPackages = () => {
                             </FormWrapper>
 
                             <p className="mg-bt-24">
-                                Lastly this package is only for people who genuinly enjoy luxury travel experiences and adventures in new places. 
+                                Lastly this package is only for people who genuinely enjoy luxury travel experiences and adventures in new places. 
                             </p>
                             <p className="mg-bt-24">
                                  So if you're a couch potato and only in it to win the rolex then this is not for you.         
