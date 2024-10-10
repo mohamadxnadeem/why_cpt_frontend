@@ -287,7 +287,7 @@ const FullPackages = () => {
                 <div className="themesflat-container">
                     <div className="post">
                         <div className="inner-content">
-                            <h2 className="title-post">£15K Rolex Giveaway Competion</h2>
+                            <h2 className="title-post">£15K Rolex Competition</h2>
                             <br />
                             <h2 className="title-post">Coming soon...</h2>
                             <div className="divider"></div>
