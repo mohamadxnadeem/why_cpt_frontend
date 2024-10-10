@@ -314,7 +314,7 @@ const FullPackages = () => {
 
 
                                 <p className="mg-bt-24">
-                                    So pick your best friend, girlfrend, boyfriend or who ever you want to join you on this luxury adventure to Cape Town.
+                                    So pick your best friend, girlfriend, boyfriend, fiance or who ever you want to join you on this luxury adventure to Cape Town.
                                 </p>
 
                                 <p className="mg-bt-24">
