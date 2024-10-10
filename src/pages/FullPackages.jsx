@@ -287,32 +287,34 @@ const FullPackages = () => {
                 <div className="themesflat-container">
                     <div className="post">
                         <div className="inner-content">
-                            <h2 className="title-post">Experience 8 Days in Cape Town</h2>
+                            <h2 className="title-post">£15K Rolex Giveaway Competion</h2>
                             <br />
-                            <h2 className="title-post">and stand a 1 in 35 chance to win a £15K luxury timepiece.</h2>
+                            <h2 className="title-post">Coming soon...</h2>
                             <div className="divider"></div>
                             <div className="inner-post mg-t-40">
                                
                                 <p className="mg-bt-24">
-                                    Attention Ladies and Gentlemen!                                
+                                    If you love travelling then we've got the perfect excuse for you to book your to the best city in the world!                                
                                 </p>
 
                                 <p className="mg-bt-24">
-                                We've curated the perfect package for luxury travel enthusiast planning their first trip to Cape Town.  
+                                    Why? 
                                 </p>
 
                                 <p className="mg-bt-24">
-                                    You get Luxury, Safety and Peace of mind when you book with us.                                 
+                                    Because if you book your trip to Cape Town with us then you stand a good chance to win a Rolex valued at £15K.                                
                                 </p>
                                 <p className="mg-bt-24">
-                                    And special chance to win a luxury watch valued at £15K  
+                                    But how much is this trip going to cost? 
                                 </p>
                                 <p className="mg-bt-24">
-                                    How to enter this competition?  
+                                    Just £1500 per person.  ( 2 pax package )
                                 </p>
+ 
+
 
                                 <p className="mg-bt-24">
-                                    The first 35 clients who books the package below will be entered into a raffle
+                                    So pick your best friend, girlfrend, boyfriend or who ever you want to join you on this adventure to Cape Town.
                                 </p>
 
                                 <p className="mg-bt-24">
@@ -425,7 +427,7 @@ const FullPackages = () => {
                             
                            
 
-                            <h2 className="title-post">1 in 35 to own a Rolex</h2> 
+                            <h2 className="title-post">1 in 35  chance to own a Rolex</h2> 
                                 {/* <p className="mg-bt-24">
                                     1 in 35 Chance this could be yours   
                                 </p>
@@ -438,17 +440,26 @@ const FullPackages = () => {
                                     Follow us on Instagram to stay in the know <a href='' target='__blank' >@whycapetown</a>   
                                 </p>
                             <img className="custom-image" src={batman} alt="table mountain" />
-                            <h2 className="title-post">Coming Soon</h2> 
+                            <h2 className="title-post">Competition Coming Soon</h2> 
 
                             <p className="mg-bt-24">
-                                Please Note, this package is not for sale yet, but will be launching soon.                             
+                                Please Note, this competition is limited to the first 35 customers only.                             
                             </p>
                             <p className="mg-bt-24">
-                                Enter your email to be the first to know when the sale is going down.                               
+                                So sign up to our email list to be the first to know when this competition is going live.                               
                             </p>
+                           
+                            
                             <FormWrapper>
                                 <div class="klaviyo-form-Yy2tkk"></div>
                             </FormWrapper>
+
+                            <p className="mg-bt-24">
+                                Lastly this package is only for people who genuinly enjoy luxury travel experiences and adventures in new places. 
+                            </p>
+                            <p className="mg-bt-24">
+                                 So if you're a couch potato and only in it to win the rolex then this is not for you.         
+                            </p>
                            
 
                             
