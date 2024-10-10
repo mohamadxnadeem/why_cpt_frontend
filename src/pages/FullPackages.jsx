@@ -294,7 +294,7 @@ const FullPackages = () => {
                             <div className="inner-post mg-t-40">
                                
                                 <p className="mg-bt-24">
-                                    If you love travelling then we've got the perfect excuse for you to book your to the best city in the world!                                
+                                    If you love travelling, then we've got the perfect excuse for you to book your trip to the best city in the world!                                
                                 </p>
 
                                 <p className="mg-bt-24">
@@ -314,16 +314,14 @@ const FullPackages = () => {
 
 
                                 <p className="mg-bt-24">
-                                    So pick your best friend, girlfrend, boyfriend or who ever you want to join you on this adventure to Cape Town.
+                                    So pick your best friend, girlfrend, boyfriend or who ever you want to join you on this luxury adventure to Cape Town.
                                 </p>
 
                                 <p className="mg-bt-24">
-                                    And only 1 winner will gome home with the £15K watch
+                                    And you might end up with a £15K rolex if you're lucky.
                                 </p>
 
-                                <p className="mg-bt-24">
-                                    But everyone of you will have a 5 star experience in the best city in the world.
-                                </p>
+                                
 
 
                                
