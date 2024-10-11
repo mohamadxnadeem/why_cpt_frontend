@@ -56,7 +56,7 @@ const Footer = () => {
                                         
                                     </Link>
                                 </div>
-                                <p className="sub-widget-logo">We Accept Crypto, EFT and Card Payments </p>
+                                <p className="sub-widget-logo"> © Copyright 2024, www.whycapetown.com </p>
                             </div>
                         </div>
                         <div className="col-lg-2 col-md-4 col-sm-5 col-5">
