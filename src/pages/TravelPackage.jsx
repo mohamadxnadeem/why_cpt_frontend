@@ -235,7 +235,7 @@ const openCalendlyPopup = (e) => {
                         <Fragment>
                           {!loading && ( // Hide form header while loading
                             <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                              Let us know if you have any questions?
+                              Any Questions?
                             </h1>
                           )}
 
@@ -271,13 +271,13 @@ const openCalendlyPopup = (e) => {
                                       <textarea
                                         name="message"
                                         value={formData.message}
-                                        placeholder="Your Message"
+                                        placeholder="Your question"
                                         onChange={handleChange}
                                       ></textarea>
                                     </div>
                                     <div className="col-md-12">
                                       <button type="submit" className="sc-button loadmore style fl-button pri-3">
-                                        <span>Send Message</span>
+                                        <span>Ask Question</span>
                                       </button>
                                     </div>
                                   </>
