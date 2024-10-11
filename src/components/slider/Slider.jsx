@@ -73,9 +73,9 @@ const SliderItem = ({ item, isMobile }) => (
                             <div className="wrap-heading flat-slider flex">
                                 <div className="content">
                                     
-                                    <h2 className="heading">LEGENDARY EXPERIENCES</h2>
-                                    <h2 className="heading">IN CAPE TOWN</h2>
-                                    <h2 className="heading">FOR MILLIONARES</h2>
+                                    <h2 className="heading">LEGENDARY</h2>
+                                    <h2 className="heading">CAPE TOWN EXPERIENCE </h2>
+                                    <h2 className="heading">FOR MUSLIM MILLIONARES</h2>
 
                                 </div>
                                 <div className="image">
