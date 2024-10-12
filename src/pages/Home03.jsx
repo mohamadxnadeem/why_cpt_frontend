@@ -350,15 +350,15 @@ const Home03 = () => {
                                 <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
                                     You don't need to be a Millionare                               
                                 </h1>
-                               
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
                                     But you have to have class.       
                                 </p>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    We provide exclusive experiences and travel packages to Cape Town for VIP clients from around the world.      
+                                    We provide exclusive experiences and travel packages to Cape Town for VIP clients from all around the world who's curios to find out why Cape Town is the best city on Earth.   
                                 </p>
+
 
                                 {/* <p className="sub-title ct small mg-bt-20 pad-420">
                                     Invite only.      

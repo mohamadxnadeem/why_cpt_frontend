@@ -302,23 +302,17 @@ const FullPackages = () => {
                                 </p>
 
                                 <p className="mg-bt-24">
-                                    Because if you book your trip to Cape Town with us then you stand a good chance to win a Rolex valued at £15K.                                
+                                    Because this we're confident this is the best all expense trip to Cape Town money can buy.                       
                                 </p>
                                 <p className="mg-bt-24">
-                                    But how much is this trip going to cost? 
+                                    How much is this trip going to cost? 
                                 </p>
                                 <p className="mg-bt-24">
-                                    Just £1500 per person.  ( 2 pax package )
-                                </p>
- 
-
-
-                                <p className="mg-bt-24">
-                                    So pick your best friend, girlfriend, boyfriend, fiance or who ever you want to join you on this luxury adventure to Cape Town.
+                                    Aprroximitly £5000 per person. ( Minimum 2 people)
                                 </p>
 
                                 <p className="mg-bt-24">
-                                    And you might end up with a £15K rolex if you're lucky.
+                                   And you might stand a chance to win a grand prize valued at 15K!
                                 </p>
 
                                 
