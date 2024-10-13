@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Rating from '../components/Rating';
 import Header from '../components/header/Header';
@@ -14,43 +14,99 @@ import Tours from '../components/Tours';
 import emailjs from 'emailjs-com';
 import { Helmet } from 'react-helmet';
 import Cars4Hire from '../components/Cars4hire';
+import { useParams } from 'react-router-dom';
+
 
 // Import the background image correctly
 import backgroundImage from '../assets/images/item-background/benz.jpg'; 
 
 const AirportTransfers = () => {
-    const [modalShow, setModalShow] = useState(false);
+    const { id } = useParams();
+    const [itemData, setItemData] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [formSubmitted, setFormSubmitted] = useState(false);
+    const [formError, setFormError] = useState('');
+  
 
     const [formData, setFormData] = useState({
         name: '',
-        contactNumber: '',
-        serviceType: 'Airport Transfer',
+        message: '',
+        serviceType: '',
         email: '',
-    });
-
-    const handleChange = (e) => {
+      });
+    
+      useEffect(() => {
+        const script = document.createElement('script');
+        script.src = 'https://assets.calendly.com/assets/external/widget.js';
+        script.async = true;
+        document.body.appendChild(script);
+    
+        return () => {
+          document.body.removeChild(script);
+        };
+      }, []);
+    
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    
+      const openCalendlyPopup = (e) => {
+        e.preventDefault();
+        if (isMobile) {
+          window.open('https://calendly.com/mohamadxnadeem/30min', '_blank');
+        } else if (window.Calendly) {
+          window.Calendly.initPopupWidget({ url: 'https://calendly.com/mohamadxnadeem/30min' });
+        } else {
+          console.error("Calendly is not loaded yet");
+        }
+        return false;
+      };
+    
+      useEffect(() => {
+        fetch(`https://web-production-1ab9.up.railway.app/api/experiences/${id}/with-reviews`)
+          .then((response) => response.json())
+          .then((data) => {
+            setItemData(data);
+            setLoading(false);
+            setFormData((prevFormData) => ({
+              ...prevFormData,
+              serviceType: ` ${data.experience.title}`,
+            }));
+          })
+          .catch((error) => {
+            console.error('Error fetching data:', error);
+          });
+      }, [id]);
+    
+      const handleChange = (e) => {
         setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
+          ...formData,
+          [e.target.name]: e.target.value,
         });
-    };
-
-    const handleSubmit = (e) => {
+      };
+    
+      const handleSubmit = (e) => {
         e.preventDefault();
     
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+        if (!emailPattern.test(formData.email)) {
+          setFormError('Please enter a valid email address.');
+          return;
+        }
+    
+        setFormError('');
+    
         emailjs
-            .send('service_ptqtluk', 'template_uyicl9l', formData, 'apNJP_9sXnff2q82W')
-            .then(
-                (result) => {
-                    console.log('Email successfully sent!');
-                    setFormSubmitted(true);
-                },
-                (error) => {
-                    console.log('There was an error sending the email:', error);
-                }
-            );
-    };
+          .send('service_ptqtluk', 'template_uyicl9l', formData, 'apNJP_9sXnff2q82W')
+          .then(
+            (result) => {
+              console.log('Email successfully sent!');
+              setFormSubmitted(true);
+            },
+            (error) => {
+              console.log('There was an error sending the email:', error);
+            }
+          );
+      };
 
     const items = [
         {
@@ -88,13 +144,13 @@ const AirportTransfers = () => {
             rating: 4,
             comment: 'Punctual and professional—exactly what you want from an airport transfer. The driver knew the best route to avoid traffic, which helped me get to the airport with time to spare. No complaints!'
         },
-        {
-            cover_photo: micheal,
-            name: 'Gunnar',
-            title: 'England',
-            rating: 5,
-            comment: 'Great service! My driver was right on time, the car was clean, and the ride was smooth. It made getting to the airport hassle-free, which is exactly what I needed after a long day.'
-        },
+        // {
+        //     cover_photo: micheal,
+        //     name: 'Gunnar',
+        //     title: 'England',
+        //     rating: 5,
+        //     comment: 'Great service! My driver was right on time, the car was clean, and the ride was smooth. It made getting to the airport hassle-free, which is exactly what I needed after a long day.'
+        // },
     ];
 
     return (
@@ -229,6 +285,80 @@ const AirportTransfers = () => {
                     
                 </div>
             </div>
+
+            <div className="tf-section tf-item-details">
+            <div className="container">
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="content-center">
+                    <div className="sc-item-details">
+                      {formSubmitted ? (
+                        <div className="thank-you-message">
+                          <h2>Thank You!</h2>
+                          <p>Your enquiry has been successfully submitted. We will get back to you soon.</p>
+                        </div>
+                      ) : (
+                        <Fragment>
+                          {!loading && ( // Hide form header while loading
+                            <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                              Any Questions?
+                            </h1>
+                          )}
+
+                          <div className="form-inner">
+                            <form
+                              id="contactform"
+                              noValidate="novalidate"
+                              onSubmit={handleSubmit}
+                            >
+                              <div className="row">
+                                {!loading && ( // Conditionally render inputs based on loading state
+                                  <>
+                                    <div className="col-md-6">
+                                      <input
+                                        type="text"
+                                        name="name"
+                                        value={formData.name}
+                                        placeholder="Your Name"
+                                        onChange={handleChange}
+                                      />
+                                    </div>
+                                    <div className="col-md-6">
+                                      <input
+                                        type="email"
+                                        name="email"
+                                        value={formData.email}
+                                        placeholder="Your Email"
+                                        onChange={handleChange}
+                                      />
+                                      {formError && <p style={{ color: 'red' }}>{formError}</p>}
+                                    </div>
+                                    <div className="col-md-12">
+                                      <textarea
+                                        name="message"
+                                        value={formData.message}
+                                        placeholder="Your Message"
+                                        onChange={handleChange}
+                                      ></textarea>
+                                    </div>
+                                    <div className="col-md-12">
+                                      <button type="submit" className="sc-button loadmore style fl-button pri-3">
+                                        <span>Send Message</span>
+                                      </button>
+                                    </div>
+                                  </>
+                                )}
+                              </div>
+                            </form>
+                          </div>
+                        </Fragment>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
             <Footer />
         </div>
     );
