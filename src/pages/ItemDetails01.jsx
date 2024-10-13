@@ -223,10 +223,7 @@ const ItemDetails01 = () => {
             </div>
           </div>
  
-          <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">Book Now</h1>
-          <p className="sub-title ct small mg-bt-20 pad-420">
-            Limited availability—secure your private tour today!
-          </p>
+          
 
           {/* <center>
             <Link
@@ -253,7 +250,7 @@ const ItemDetails01 = () => {
                         <Fragment>
                           {!loading && ( // Hide form header while loading
                             <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                              Contact Us:
+                              Any Questions?
                             </h1>
                           )}
 

@@ -334,7 +334,7 @@ const FullPackages = () => {
                                 
                             </div>
 
-                            <Packages />
+                            
 
                             <Fragment>
                                     <section className="tf-section live-auctions">
@@ -419,7 +419,10 @@ const FullPackages = () => {
                             
                            
 
-                            <h2 className="title-post">1 in 12  chance to own this Rolex</h2> 
+                            <h2 className="title-post">You stand a 1 in 12 chance </h2> 
+                            <p className="mg-bt-24">
+                                to win this £15 000 Rolex:                           
+                            </p>
                                 {/* <p className="mg-bt-24">
                                     1 in 35 Chance this could be yours   
                                 </p>
@@ -429,15 +432,20 @@ const FullPackages = () => {
                                 </NumberContainer>
                                 <br></br> */}
 
-                            <p className="mg-bt-24">
-                                Please Note, this competition is limited to clients who books the 11 day trip to Cape Town.                             
-                            </p>
+                           
 
-                            <p className="mg-bt-24">
-                                And we only do 12 bookings per year so you stand an extremely high chance of winning this rolex.                             
-                            </p>
+                           
+
+                            
                                
                             <img className="custom-image" src={batman} alt="table mountain" />
+                            <p className="mg-bt-24">
+                                When you book your luxury trip to Cape Town with us.                             
+                            </p>
+
+                            <Packages />
+
+
                             <h2 className="title-post">Follow Us on Instagram</h2> 
                             <p className="mg-bt-24">
                                     For the latest updates <a href='' target='__blank' >@whycapetown</a>   
@@ -465,6 +473,7 @@ const FullPackages = () => {
                                
                                 
                             </LimitedSpotsContainer>
+                            
 
                             <br></br>
                             <br></br>
