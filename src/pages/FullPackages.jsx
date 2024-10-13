@@ -287,9 +287,9 @@ const FullPackages = () => {
                 <div className="themesflat-container">
                     <div className="post">
                         <div className="inner-content">
-                            <h2 className="title-post">£15K Rolex Competition</h2>
+                            <h2 className="title-post">Book the best 11 Day Luxury Trip to Cape Town</h2>
                             <br />
-                            <h2 className="title-post">Coming soon...</h2>
+                            <h2 className="title-post">And stand a 1 in 12 chance to win a grand prize worth £15K</h2>
                             <div className="divider"></div>
                             <div className="inner-post mg-t-40">
                                
@@ -308,7 +308,7 @@ const FullPackages = () => {
                                     How much is this trip going to cost? 
                                 </p>
                                 <p className="mg-bt-24">
-                                    Aprroximitly £5000 per person. ( Minimum 2 people)
+                                    £5000 per person. ( Minimum 2 people)
                                 </p>
 
                                 <p className="mg-bt-24">
@@ -419,7 +419,7 @@ const FullPackages = () => {
                             
                            
 
-                            <h2 className="title-post">1 in 35  chance to own a Rolex</h2> 
+                            <h2 className="title-post">1 in 12  chance to own this Rolex</h2> 
                                 {/* <p className="mg-bt-24">
                                     1 in 35 Chance this could be yours   
                                 </p>
@@ -428,17 +428,24 @@ const FullPackages = () => {
                                     <DigitBox>0</DigitBox>
                                 </NumberContainer>
                                 <br></br> */}
-                                <p className="mg-bt-24">
-                                    Follow us on Instagram to stay in the know <a href='' target='__blank' >@whycapetown</a>   
-                                </p>
-                            <img className="custom-image" src={batman} alt="table mountain" />
-                            <h2 className="title-post">Competition Coming Soon</h2> 
 
                             <p className="mg-bt-24">
-                                Please Note, this competition is limited to the first 35 customers only.                             
+                                Please Note, this competition is limited to clients who books the 11 day trip to Cape Town.                             
                             </p>
+
                             <p className="mg-bt-24">
-                                So sign up to our email list to be the first to know when this competition is going live.                               
+                                And we only do 12 bookings per year so you stand an extremely high chance of winning this rolex.                             
+                            </p>
+                               
+                            <img className="custom-image" src={batman} alt="table mountain" />
+                            <h2 className="title-post">Follow Us on Instagram</h2> 
+                            <p className="mg-bt-24">
+                                    For the latest updates <a href='' target='__blank' >@whycapetown</a>   
+                                </p>
+                            
+
+                            <p className="mg-bt-24">
+                               And sign up to our email list to be the first to know about any exclusive trips or events happening in Cape Town.
                             </p>
                            
                             
@@ -446,12 +453,12 @@ const FullPackages = () => {
                                 <div class="klaviyo-form-Yy2tkk"></div>
                             </FormWrapper>
 
-                            <p className="mg-bt-24">
+                            {/* <p className="mg-bt-24">
                                 Lastly this package is only for people who genuinely enjoy luxury travel experiences and adventures in new places. 
-                            </p>
-                            <p className="mg-bt-24">
+                            </p> */}
+                            {/* <p className="mg-bt-24">
                                  So if you're a couch potato and only in it to win the rolex then this is not for you.         
-                            </p>
+                            </p> */}
                            
 
                             
