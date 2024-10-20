@@ -96,11 +96,11 @@ const Header = () => {
                                             </li>
 
                                             <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-                                                <Link to="/full-packages-to-cape-town">£15K Giveaway</Link>
+                                                <Link to="/full-packages-to-cape-town">Complete Travel Packages</Link>
                                             </li>
 
                                             <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-                                                <Link to="/top-3-tours">Exclusive Experiences</Link>
+                                                <Link to="/top-3-tours">Full Day Tours</Link>
                                             </li> 
 
                                             {/* <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>

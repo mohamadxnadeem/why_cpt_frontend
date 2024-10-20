@@ -150,13 +150,7 @@ const Home03 = () => {
             comment: 'Cape Town one of the cities that you can never get board of with such great vibes, people, positive energy and endless adventures that can be done apart from the food that you can always enjoy with a reasonable price and all thanks to the best Cape Town tour guide @whycapetown'
         },
 
-        {
-            cover_photo: yaasir,
-            name: 'Yaasir',
-            title: 'England',
-            rating: 5,
-            comment: 'Cape Town one of the cities that you can never get board of with such great vibes, people, positive energy and endless adventures that can be done apart from the food that you can always enjoy with a reasonable price and all thanks to the best Cape Town tour guide @whycapetown'
-        },
+       
         
         // {
         //     cover_photo: achmat,
@@ -323,11 +317,8 @@ const Home03 = () => {
 
             <Header />
             <Slider data={heroSliderData} />
-            <ImageBar 
-                imageUrl={IGimage}   // Replace with your image link
-                linkUrl="https://www.instagram.com/whycapetown/"             // Replace with the target link
-                altText="Why Cape Town Instagram"                    // Replace with your alt text
-            />
+            <ImageBar /> 
+              
 
             <section className="tf-help-left tf-section">
                 <div className="themesflat-container">
@@ -348,15 +339,12 @@ const Home03 = () => {
                             <div className="text-container">
 
                                 <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    You don't need to be a Millionare                               
+                                    $5000 is all you need to have a Millionaire experience in Cape Town!                               
                                 </h1>
 
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    But you have to have class.       
-                                </p>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    We provide exclusive experiences and travel packages to Cape Town for VIP clients from all around the world who's curios to find out why Cape Town is the best city on Earth.   
+                                    We provide exclusive experiences and travel packages for VIP clients from all around the world. Luxury Accomodation, Vehcile hire and the best tours on the market right here.
                                 </p>
 
 

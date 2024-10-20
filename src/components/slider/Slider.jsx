@@ -74,8 +74,8 @@ const SliderItem = ({ item, isMobile }) => (
                                 <div className="content">
                                     
                                     <h2 className="heading">LEGENDARY</h2>
-                                    <h2 className="heading">CAPE TOWN EXPERIENCE </h2>
-                                    <h2 className="heading">FOR MILLIONARES</h2>
+                                    <h2 className="heading">CAPE TOWN EXPERIENCES </h2>
+                                    <h2 className="heading">FOR LUXURY TRAVEL ENTHUSIASTS</h2>
 
                                 </div>
                                 <div className="image">

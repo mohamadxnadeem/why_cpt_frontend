@@ -40,12 +40,12 @@ const ImageStyled = styled.img`
   border-radius: 10px;
 `;
 
-const Cars4Hire = forwardRef((ref) => {
+const SelfDrive = forwardRef((ref) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('https://web-production-1ab9.up.railway.app/api/cars-for-hire/all/')
+    fetch('https://web-production-1ab9.up.railway.app/api/self-drive/all/')
       .then((response) => response.json())
       .then((data) => {
         const updatedData = data.map(item => ({
@@ -92,10 +92,10 @@ const Cars4Hire = forwardRef((ref) => {
               <div className="col-12">
                 
                   <h2 className="tf-title-heading ct style-2 mg-bt-13">
-                    Your Chauffeur drive options:
+                    Your Self Drive Options:
                   </h2>
                   <p className="sub-title ct small mg-bt-20 pad-420">
-                    Price includes vehicle, local tour guide, fuel, 200km distance and up to 8 hours.
+                    You Save 30% when you book for 1 week and 50% when you book for 1 month. Deposit Required, contact to check availability and more info.
                   </p>
                   
 
@@ -159,7 +159,7 @@ const Cars4Hire = forwardRef((ref) => {
                                       <div className="price" style={{ textAlign: 'left' }}>
                                        
                                         
-                                        <p>US${item.car.price}</p>
+                                        <p>US${item.car.price} Per Day</p>
 
                                         
                                        
@@ -193,4 +193,4 @@ const Cars4Hire = forwardRef((ref) => {
   );
 });
 
-export default Cars4Hire;
+export default SelfDrive;
