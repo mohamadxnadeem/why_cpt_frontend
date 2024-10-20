@@ -341,7 +341,7 @@ const Home03 = () => {
                             <div className="text-container">
 
                                 <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    $5000 is all you need to have a Millionaire experience in Cape Town for 11 days!                               
+                                    $10 000 is all you need to have a Millionaire experience in Cape Town for 11 days!                               
                                 </h1>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
@@ -352,9 +352,6 @@ const Home03 = () => {
                                     you don't need to be a millionare because the power of the USD against the South African rand.
                                 </p>
 
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    And we garuntee that we can save you at least 20% on your trip to Cape Town when you book with us because we've been in the travel business in Cape Town for over 80 years and got all the right connections to get you the best deal!
-                                </p>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
                                     Here's a little taste of what you can expect in Cape Town:
