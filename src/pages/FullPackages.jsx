@@ -259,12 +259,12 @@ const FullPackages = () => {
         
         <div className='home-3'>
             <Helmet>
-                <title>How to win $20K Rolex Batman</title>
-                <meta name="description" content="Stand to win rolex batman when you book an 8 Day luxury package to Cape Town with us." />
-                <meta property="og:title" content="How to win $20K Rolex Batman" />
-                <meta property="og:description" content="Stand to win rolex batman when you book an 8 Day luxury package to Cape Town with us." />
+                <title>The Millionaire Cape Town Experience </title>
+                <meta name="description" content="11 days in Cape Town for just $5000" />
+                <meta property="og:title" content="The Millionaire Cape Town Experience " />
+                <meta property="og:description" content="11 days in Cape Town for just $5000" />
                 <meta property="og:image" content={imgblog1} />
-                <meta property="og:url" content="https://whycapetown.s3.eu-central-1.amazonaws.com/batman.JPG" />
+                <meta property="og:url" content="https://whycapetown.s3.eu-central-1.amazonaws.com/Allen+and+Kazi.png" />
                 <meta property="og:type" content="website" />
             </Helmet>
             <Header />
@@ -287,9 +287,8 @@ const FullPackages = () => {
                 <div className="themesflat-container">
                     <div className="post">
                         <div className="inner-content">
-                            <h2 className="title-post">Book the best 11 Day Luxury Trip to Cape Town</h2>
+                            <h2 className="title-post">The best complete 11 day package to Cape Town money can buy.</h2>
                             <br />
-                            <h2 className="title-post">And stand a 1 in 12 chance to win a grand prize worth £15K</h2>
                             <div className="divider"></div>
                             <div className="inner-post mg-t-40">
                                
@@ -301,19 +300,13 @@ const FullPackages = () => {
                                     Why? 
                                 </p>
 
+                            
                                 <p className="mg-bt-24">
-                                    Because this we're confident this is the best all expense trip to Cape Town money can buy.                       
+                                    Because we put the ultimate 11 day package that covers everything you need to do in Cape Town. Accomodation, Transport, Safari and all the must do tours. Check out the package below for more info.
                                 </p>
-                                <p className="mg-bt-24">
-                                    How much is this trip going to cost? 
-                                </p>
-                                <p className="mg-bt-24">
-                                    £5000 per person. ( Minimum 2 people)
-                                </p>
+                            
 
-                                <p className="mg-bt-24">
-                                   And you might stand a chance to win a grand prize valued at 15K!
-                                </p>
+                             
 
                                 
 
@@ -334,7 +327,8 @@ const FullPackages = () => {
                                 
                             </div>
 
-                            
+                            <Packages />
+
 
                             <Fragment>
                                     <section className="tf-section live-auctions">
@@ -419,7 +413,7 @@ const FullPackages = () => {
                             
                            
 
-                            <h2 className="title-post">You stand a 1 in 12 chance </h2> 
+                            {/* <h2 className="title-post">You stand a 1 in 12 chance </h2> 
                             <p className="mg-bt-24">
                                 to win this £15 000 Rolex:                           
                             </p>
@@ -438,12 +432,11 @@ const FullPackages = () => {
 
                             
                                
-                            <img className="custom-image" src={batman} alt="table mountain" />
+                            {/* <img className="custom-image" src={batman} alt="table mountain" />
                             <p className="mg-bt-24">
                                 When you book your luxury trip to Cape Town with us.                             
-                            </p>
+                            </p> */} 
 
-                            <Packages />
 
 
                             <h2 className="title-post">Follow Us on Instagram</h2> 
@@ -481,9 +474,9 @@ const FullPackages = () => {
                             <br></br>
 
                           
-                            <p className="mg-bt-24">
+                            {/* <p className="mg-bt-24">
                                 Ts and Cs Apply
-                            </p>
+                            </p> */}
                         </div>
                     </div>
                 </div>

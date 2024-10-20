@@ -11,9 +11,11 @@ import Tours from '../components/Tours';
 import { Accordion } from 'react-bootstrap-accordion'
 import Packages from '../components/Packages';
 
-import hof1 from '../assets/images/blog/hof1.jpg'
-import hof2 from '../assets/images/blog/hof2.jpg'
-import hof from '../assets/images/blog/hof.jpg'
+import hof1 from '../assets/images/blog/accomomdation.png'
+import hof2 from '../assets/images/blog/winefarm.png'
+import hof from '../assets/images/blog/moz.png'
+
+
 import cobra from '../assets/images/blog/cobra.jpg'
 import chopper from '../assets/images/blog/chopper.jpg'
 import bokaap from '../assets/images/blog/bokaap.jpg'
@@ -339,13 +341,57 @@ const Home03 = () => {
                             <div className="text-container">
 
                                 <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    $5000 is all you need to have a Millionaire experience in Cape Town!                               
+                                    $5000 is all you need to have a Millionaire experience in Cape Town for 11 days!                               
                                 </h1>
 
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    Incase you didn't know, Cape Town is a a paradise for millionares and the best part is, 
+                                </p>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    We provide exclusive experiences and travel packages for VIP clients from all around the world. Luxury Accomodation, Vehcile hire and the best tours on the market right here.
+                                    you don't need to be a millionare because the power of the USD against the South African rand.
                                 </p>
+
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    And we garuntee that we can save you at least 20% on your trip to Cape Town when you book with us because we've been in the travel business in Cape Town for over 80 years and got all the right connections to get you the best deal!
+                                </p>
+
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    Here's a little taste of what you can expect in Cape Town:
+                                </p>
+                                <br></br>
+                                <br></br>
+                                <br></br>
+
+                                <div className="image-grid">
+                                    <div className="image-box">
+                                        <center>
+                                            <h4>Luxury Beach Front Villa's</h4>
+                                            <br></br>
+                                            <img className="custom-image" src={hof1} alt="table mountain" />
+                                        </center>
+                                    </div>
+                                    <div className="image-box">
+                                        <center>
+                                     
+                                        <h4>The best wine farms</h4>
+                                        <br></br>
+                                        <img className="custom-image" src={hof2} alt="aquila safari" />
+                                        </center>
+                                    </div>
+                                    <div className="image-box">
+                                        <center>
+                                            <h4>Scenic Mountain Views </h4>
+                                            <br></br>
+                                            <img className="custom-image" src={hof} alt="chapmans peak" />
+                                        </center>
+                                    </div>
+                                </div>
+                                
+
+
+
+                               
 
 
                                 {/* <p className="sub-title ct small mg-bt-20 pad-420">
@@ -473,7 +519,9 @@ const Home03 = () => {
 
                           
 
-                                {/* <div className="image-grid">
+                                {/* 
+                                
+                                <div className="image-grid">
                                     <div className="image-box">
                                         <center>
                                             <h4>Table Mountain</h4>
@@ -580,8 +628,7 @@ const Home03 = () => {
                                
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    We're a team of trustworthy and genuine local tour guides with a passion for creating fun and safe experiences for awesome people like you.
-
+                                    We're passionate about providing our clients with the best experiences and travel packages to Cape Town. Luxury Accomodation, Vehcile hire and the best tours on the market right here.
                                 </p>
 
                                 <Fragment>
@@ -792,7 +839,10 @@ const Home03 = () => {
                                                 </center>
                     
                                             </div> */}
+                                            
                                         </div>
+
+                                        
                                         
                                     </div>
                                 </section>

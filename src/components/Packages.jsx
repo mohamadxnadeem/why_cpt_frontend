@@ -124,7 +124,7 @@ const openCalendlyPopup = (e) => {
                     5 Star Luxury Travel Package to Cape Town:
                   </h2>
                   <p className="sub-title ct small mg-bt-20 pad-420">
-                    Limited to only 12 Bookings.
+                    Limited availablity.
                   </p> 
                 
                 {loading ? (
