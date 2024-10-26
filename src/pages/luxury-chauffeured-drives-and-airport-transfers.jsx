@@ -10,16 +10,54 @@ import rachel from '../assets/images/blog/becca.jpg';
 import marie from '../assets/images/blog/marie.jpg';
 import micheal from '../assets/images/blog/micheal.jpg';
 import dan from '../assets/images/blog/dan.jpg';
+import achmat from '../assets/images/blog/achmat.png'
+import luka from '../assets/images/blog/luka.png'
+import noor from '../assets/images/blog/noor.png'
+import renad from '../assets/images/blog/renad.png'
+import yaasir from '../assets/images/blog/yaasir.png'
+import billy from '../assets/images/blog/mampuru.png'
+import jones from '../assets/images/blog/jones.png'
+import yusra from '../assets/images/blog/yusra.png'
+import moz from '../assets/images/blog/moz.png'
+import kazi from '../assets/images/blog/Allen and Kazi.png'
+
+import aashish from '../assets/images/blog/Aashish.jpg'
+import kresmir from '../assets/images/blog/kresmir.jpg'
+import lungi from '../assets/images/blog/lungi.jpg'
+import mampuru from '../assets/images/blog/mampuru.jpg'
+import gunnar from '../assets/images/blog/mr gunnar.jpg'
+import ru from '../assets/images/blog/ru.jpg'
+import ruth from '../assets/images/blog/ruth.jpg'
+import saad from '../assets/images/blog/saad.jpg'
+import sarah from '../assets/images/blog/sarah.jpg'
+import tuleen from '../assets/images/blog/tuleen.jpg'
+import yasmin from '../assets/images/blog/yasmin.jpg'
+
+import asad from '../assets/images/blog/asad.jpg'
+import jodi from '../assets/images/blog/jodi.jpg'
+import nicolas from '../assets/images/blog/nicholas.jpg'
+import nadine from '../assets/images/blog/nadine.jpg'
+
 import Tours from '../components/Tours';
 import emailjs from 'emailjs-com';
 import { Helmet } from 'react-helmet';
 import Cars4Hire from '../components/Cars4hire';
 import SelfDrive from '../components/SelfDrive';
 import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
+
 
 
 // Import the background image correctly
 import backgroundImage from '../assets/images/item-background/benz.jpg'; 
+
+
+
+const FormWrapper = styled.div`
+  max-width: 400px;
+  width: 100%; /* Ensures it scales responsively */
+  margin: 0 auto; /* Center the div horizontally */
+`;
 
 const AirportTransfers = () => {
     const { id } = useParams();
@@ -110,48 +148,234 @@ const AirportTransfers = () => {
       };
 
     const items = [
+
+        
+        {
+             cover_photo: kazi,
+             name: 'Sunnah Musk Team',
+             title: 'England',
+             rating: 5,
+             comment: 'Highly recommend touring Cape Town with a local guide than trying to plan all the logistics yourself. Thank you to the team at WhyCapeTown'
+         },
+
+         {
+            cover_photo: yaasir,
+            name: 'Yaasir',
+            title: 'England',
+            rating: 5,
+            comment: 'Cape Town one of the cities that you can never get board of with such great vibes, people, positive energy and endless adventures that can be done apart from the food that you can always enjoy with a reasonable price and all thanks to the best Cape Town tour guide @whycapetown'
+        },
         {
             cover_photo: jana,
-            name: 'Lungi',
+            name: 'Jana',
             title: 'South Africa',
             rating: 5,
-            comment: 'The ride to the airport was comfortable and on time. The driver was polite and the vehicle was in great condition. It made my early morning trip much easier.',
+            comment: 'This tour is a must, you get to see the majority of the beautiful spots in Cape Town in one day! Nadeem is great, talking with him was fun and he was very considerate and kind he even helped out another person when his car was out of water. He took amazing pictures of us and of others because he was asked to do so a lot 😂',
         },
         {
             cover_photo: dan,
-            name: 'Jaques',
+            name: 'Dan',
             title: 'Jaques',
             rating: 4.7,
-            comment: 'A straightforward and reliable service. The car was clean, the driver was polite, and we arrived at the airport without any issues. It’s a service I’ll definitely consider using again'
+            comment: 'An absolute must-do in Cape Town! The tour took us to hidden gems, and I felt like I was in a different world. The Cape Peninsulas beauty is indescribable. If you want a once-in-a-lifetime experience, this is it',
         },
         {
             cover_photo: tim,
-            name: 'Jodi',
+            name: 'Tim',
             title: 'England',
             rating: 5,
-            comment: 'I’ve used several airport transfer services in Cape Town, and this one stands out for its reliability. The driver was friendly and professional, and the vehicle was comfortable. Definitely using them again.'
+            comment: 'Nadeem was a great guide! We had an amazing day sightseeing, including a fantastic little stop for fish chips. A very chilled out and relaxing drive in some of the most amazing scenery. The next day he also very kindly helped us out a very early airport transfer. A great driver and a lovely guy. Highly recommend.',
         },
         {
             cover_photo: rachel,
-            name: 'Serisha',
+            name: 'rachel',
             title: 'USA',
             rating: 4,
-            comment: 'The service was solid—on time, clean car, and a courteous driver. I appreciated the little details like a bottle of water waiting for me. It made the ride more pleasant after a long flight.'
+            comment: 'Good guide. Took us to all the places we wanted to see and talked about some of the history. Provided snacks and water for the trip.',
         },
         {
             cover_photo: marie,
-            name: 'Amina',
+            name: 'marie',
             title: 'Netherlands',
             rating: 4,
-            comment: 'Punctual and professional—exactly what you want from an airport transfer. The driver knew the best route to avoid traffic, which helped me get to the airport with time to spare. No complaints!'
+            comment: 'Mohammed Nadeem gave us lots of time to enjoy the whole day. He had a comfortable vehicle and great snacks for the road! He always watched over our things as we wandered about each location. If youre someone who likes great pictures, hes your guy.',
         },
-        // {
-        //     cover_photo: micheal,
-        //     name: 'Gunnar',
-        //     title: 'England',
-        //     rating: 5,
-        //     comment: 'Great service! My driver was right on time, the car was clean, and the ride was smooth. It made getting to the airport hassle-free, which is exactly what I needed after a long day.'
-        // },
+        {
+            cover_photo: micheal,
+            name: 'micheal',
+            title: 'England',
+            rating: 5,
+            comment: 'What a perfect tour, gave us a a much better appreciation of the beautiful sights of Cape Town and the surrounding areas. It was a packed tour but we never felt rushed and had plenty of time to explore and see what we wanted. I’d highly recommend anyone visiting Cape Town to do this tour- especially if you want to see penguins, beautiful beaches with a friendly and knowledgeable and attentive guide.',
+        },
+
+         {
+            cover_photo: achmat,
+            name: 'Achmat',
+            title: 'England',
+            rating: 5,
+            comment: 'Mohamad was a great guide, we booked a Cape Point tour with him and then ended up booking a stellenbosch tour as well! Cant wait to come back to Cape Town!'
+        },
+        {
+            cover_photo: noor,
+            name: 'Noor',
+            title: 'England',
+            rating: 5,
+            comment: 'Everything in Cape Town looks like a wallpaper, what a beautiful city and great food! Thank you to Mohamad our tourguide for keeping us safe and chauffeuring us around to all the best spots in the city!'
+        },
+        {
+            cover_photo: luka,
+            name: 'Luka',
+            title: 'England',
+            rating: 5,
+            comment: 'The Cape Point tour is must do! Scenic views and some cool spots along the way and even better if you got a private tour with mohamad as your tour guide, driver and photographer! Thanks for the awesome trip'
+        },
+        {
+            cover_photo: renad,
+            name: 'Renad',
+            title: 'England',
+            rating: 4,
+            comment: 'Did a Cape Point Tour with Mohamad as my guide, but you need to pack in clothes for the beach, something to hike and jacket because Cape Town has all 4 seasons in 1 day!'
+        },
+        
+        {
+            cover_photo: billy,
+            name: 'Billy',
+            title: 'England',
+            rating: 5,
+            comment: 'Mohamad is my go to guide and chauffeur driver when ever I come to Cape Town, from stellenbosch winelands drives and cape peninsular roadtrips and even helicopter rides at times. You can count on whycapetown for a safe, fun and premium service!'
+        },
+        {
+            cover_photo: jones,
+            name: 'Jones',
+            title: 'England',
+            rating: 5,
+            comment: 'Thank you Mohamad for a wonderful Cape Point Experience, we even got to swim with some penguins at boulders beach and managed to squeeze in a wine tasting at the Beau Constantia! Highly recommend'
+        },
+       
+         {
+             cover_photo: yusra,
+             name: 'Yusra',
+             title: 'England',
+             rating: 5,
+             comment: 'We booked a custom winelands chauffeur drive with whycapetown and Mo took us to some of the most amazing spots you have to visit, lunch at the cellers hornet, wine tasting at beau constantia and a scenic chapmans peak drive'
+         },
+         {
+             cover_photo: moz,
+             name: 'Mozna',
+             title: 'England',
+             rating: 5,
+             comment: 'I booked a girls trip to Cape Town with my best friend and I booked all my tours and chauffeured drives with whycapetown and Mo was professional, great photographer and made sure my friend and I was always safe and comfortable! Cape Town is the best!'
+         },
+         {
+            cover_photo: aashish,
+            name: 'Aashish',
+            title: 'England',
+            rating: 5,
+            comment: 'We did a custom stellenbosch winelands tour and Cape Point on our honeymoon with whycapetown and Mo was fun and professional'
+        },
+        {
+            cover_photo: kresmir,
+            name: 'Kresmir',
+            title: 'Crotia',
+            rating: 5,
+            comment: 'Life is all about having the best experiences, and you cant go wrong with a trip to Cape Town especially if you having whycapetown arrange your tours and chauffeur drives.'
+        },
+        {
+            cover_photo: lungi,
+            name: 'Lungi',
+            title: 'England',
+            rating: 5,
+            comment: 'Mo from WhyCapeTown is my go to chauffeur driver for airport transfers, trustworthy, kind and reliable! Highly recommend'
+        },
+        {
+            cover_photo: mampuru,
+            name: 'Billy',
+            title: 'England',
+            rating: 5,
+            comment: 'Mohamad is my go to guide and chauffeur driver when ever I come to Cape Town, from stellenbosch winelands drives and cape peninsular roadtrips and even helicopter rides at times. You can count on whycapetown for a safe, fun and premium service!'
+        },
+        {
+            cover_photo: gunnar,
+            name: 'Gunnar',
+            title: 'Germany',
+            rating: 5,
+            comment: 'Can always count on Mo to be on time for my airport transfers from Simons Town, good conversation and trustworthy guy!'
+        },
+        {
+            cover_photo: ru,
+            name: 'Ru',
+            title: 'England',
+            rating: 5,
+            comment: 'Cape Town is one of my favorite cities in the world! Thank you mohamad for showing us around and k'
+        },
+        {
+            cover_photo: ruth,
+            name: 'Ruth',
+            title: 'England',
+            rating: 5,
+            comment: 'We arranged all our tours with whycapetown, safari drives, winelands tour, cape peninsular tour and airport transfers! Cant wait to come back to Cape Town!'
+        },
+        {
+            cover_photo: saad,
+            name: 'Saad',
+            title: 'Morocco',
+            rating: 5,
+            comment: '5 stars for whycapetown for arranging all of our experiences at the best prices!'
+        },
+        {
+            cover_photo: sarah,
+            name: 'Sarah',
+            title: 'Morocco',
+            rating: 4,
+            comment: 'Cape Town is a beautiful city, good food and great people! Thank you whycapetown for the best experience'
+        },
+        {
+            cover_photo: tuleen,
+            name: 'Tuleen',
+            title: 'Syria',
+            rating: 5,
+            comment: 'safe, fun and reliable! Mohamad showed me the best of the Cape! Thank you whycapetown for a trip of a lifetime!'
+        },
+        {
+            cover_photo: yasmin,
+            name: 'Yasmin',
+            title: 'Bahrain',
+            rating: 5,
+            comment: 'Cape Town is the best, great weather, food and people! Need to come back to do the garden route!'
+        },
+        {
+            cover_photo: nadine,
+            name: 'Nadine',
+            title: 'Bahrain',
+            rating: 5,
+            comment: 'Best tour guide and photographer! Thank you for showing us the best of Cape Town!'
+        },
+
+        {
+            cover_photo: nicolas,
+            name: 'Nicolas',
+            title: 'Bahrain',
+            rating: 5,
+            comment: 'Highly recomend mohamad from Cape Town for chauffeur services and tours! '
+        },
+
+        {
+            cover_photo: jodi,
+            name: 'Jodi',
+            title: 'Bahrain',
+            rating: 5,
+            comment: 'My go-to chauffeur for years now. Mo gets me there and back safley always. I regularly use his services when im going on my own, because he makes sure im always safe'
+        },
+
+        {
+            cover_photo: asad,
+            name: 'Asad',
+            title: 'Bahrain',
+            rating: 5,
+            comment: 'Mohamad took us to all the top attractions and best resturants in Cape Town and even saved us from getting robbed in Long Street!'
+        },
+
+
     ];
 
     return (
@@ -189,23 +413,19 @@ const AirportTransfers = () => {
                     <div className="post">
                         <div className="inner-content">
                             <h2 className="title-post">
-                                Luxury vehicle hire and chauffeured drives in Cape Town
+                               Premium Chauffered driives and Luxury vehicle hire in Cape Town
                             </h2>
                             <div className="divider"></div>
 
                             <div className="inner-post mg-t-40">
                                 <p className="mg-bt-24">
-                                    We offer premium vehicle hire, airport transfers, chauffeured drives and tours in and around Cape Town.
-                                </p>
-                                <p className="mg-bt-24">
-                                    With professional guides and drivers in top of the line vehicles.
-                                </p>
-                                <p className="mg-bt-24">
-                                    For sophisticated professionals and international Millionaires.
-                                </p>
-                                <p className="mg-bt-24">
-                                    So book with us to guarantee your safety and a fun time in Cape Town for the best experience.
-                                </p>
+                                    We specialize in premium chauffeured drives bespoke to your requirments with professional  drivers in top of the line vehicle for sophisticated professionals and international Millionaires. Book your chauffered drivers or self drive option with us for a 5 star experience. Garunteed.
+
+
+
+                                    </p>
+                               
+                            
                             </div>
 
                             <br />
@@ -220,7 +440,7 @@ const AirportTransfers = () => {
                                             <div className="col-md-12">
                                                 <div className="">
                                                     <h2 className="tf-title">
-                                                        Reviews
+                                                        What our clients have to say: 
                                                     </h2>
                                                     <div className="heading-line"></div>
                                                 </div>
@@ -247,6 +467,10 @@ const AirportTransfers = () => {
                                                                         <div className="swiper-slide">
                                                                             <div className="slider-item">
                                                                                 <div className="sc-card-product">
+                                                                                <div className="card-media">
+                                                                                        <img src={item.cover_photo} alt="cape town" />
+                                                                                    </div>
+
                                                                                     <div className="card-title">
                                                                                         <h5>{item.name}</h5>
                                                                                     </div>
@@ -282,8 +506,29 @@ const AirportTransfers = () => {
                             </Fragment>
 
                             <SelfDrive />
+
+                            
                         </div>
                     </div>
+                    
+                    <center>
+
+                    
+                    <h2 className="title-post">Follow Us on Instagram</h2> 
+                    <p className="mg-bt-24">
+                            to sneak a peak at all the behind the scenes <a href='' target='__blank' >@whycapetown</a>   
+                        </p>
+                    
+
+                    <p className="mg-bt-24">
+                        And sign up to our email list to be the first to know about any exclusive trips or events happening in Cape Town.
+                    </p>
+                    </center>
+                           
+                            
+                            <FormWrapper>
+                                <div class="klaviyo-form-Yy2tkk"></div>
+                            </FormWrapper>
 
                     
                 </div>

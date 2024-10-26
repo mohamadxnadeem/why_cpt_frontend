@@ -4,6 +4,7 @@ import Rating from '../components/Rating';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 import imgblog1 from '../assets/images/blog/audi.png';
+
 import jana from '../assets/images/blog/jana.jpg';
 import tim from '../assets/images/blog/tim.jpg';
 import rachel from '../assets/images/blog/becca.jpg';
@@ -20,7 +21,6 @@ import jones from '../assets/images/blog/jones.png'
 import yusra from '../assets/images/blog/yusra.png'
 import moz from '../assets/images/blog/moz.png'
 import kazi from '../assets/images/blog/Allen and Kazi.png'
-
 import aashish from '../assets/images/blog/Aashish.jpg'
 import kresmir from '../assets/images/blog/kresmir.jpg'
 import lungi from '../assets/images/blog/lungi.jpg'
@@ -487,13 +487,13 @@ const Top3Tours = () => {
                                                                                             <Rating value={item.rating} color={'#f8e825'} />
                                                                                         </h5>
                                                                                     </div>
-                                                                                    {/* <div className="meta-info">
+                                                                                    <div className="meta-info">
                                                                                         <div className="author">
                                                                                             <div className="info">
                                                                                                 <h6>"{item.comment}"</h6>
                                                                                             </div>
                                                                                         </div>
-                                                                                    </div> */}
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
