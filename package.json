@@ -32,6 +32,7 @@
     "react-slick": "^0.29.0",
     "react-tabs": "^6.0.2",
     "react-transition-group": "^4.4.2",
+    "sitemap-generator-cli": "^7.5.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.12",
     "swiper": "^7.4.1",
@@ -41,8 +42,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "generate-sitemap": "sitemap-generator-cli https://whycapetown.com -o public/sitemap.xml"
   },
+
+  
+
   "eslintConfig": {
     "extends": [
       "react-app",
