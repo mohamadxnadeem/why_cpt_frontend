@@ -381,13 +381,16 @@ const AirportTransfers = () => {
     return (
         <div className='home-3'>
             <Helmet>
-                <title>Luxury chauffeured drives and Tours in Cape Town</title>
-                <meta name="description" content="Best value for money, check website for pricing" />
-                <meta property="og:title" content="Luxury tours and transport in Cape Town to fit every budget" />
-                <meta property="og:description" content="Best value for money, check website for pricing" />
-                <meta property="og:image" content={imgblog1} />
+                <title>Best chauffeur hire and airport transfers in Cape Town</title>
+                <meta name="description" content="Safe, premium chauffeur service for executives and single travelers in Cape Town. Enjoy luxury vehicles, affordable rates, and professional drivers. " />
+                <meta property="og:title" content="Best chauffeur hire and airport transfers in Cape Town" />
+                <meta property="og:description" content="Safe, premium chauffeur service for executives and single travelers in Cape Town. Enjoy luxury vehicles, affordable rates, and professional drivers." />
+                <meta name="keywords" content="chauffeur hire Cape Town, airport transfers, Stellenbosch wine tours, Cape Peninsula tours, luxury car rentals, executive travel, professional drivers, luxury vehicles"/>
+                
+                <meta property="og:image" content="https://whycapetown.s3.eu-central-1.amazonaws.com/IMG_8617.jpeg"/>
                 <meta property="og:url" content="http://whycapetown.com/luxury-chauffeured-drives-airport-transfers" />
                 <meta property="og:type" content="website" />
+
             </Helmet>
             <Header />
             
@@ -413,7 +416,7 @@ const AirportTransfers = () => {
                     <div className="post">
                         <div className="inner-content">
                             <h2 className="title-post">
-                               Premium Chauffered driives and Luxury vehicle hire in Cape Town
+                               Premium Chauffeur services and Luxury vehicle hire in Cape Town
                             </h2>
                             <div className="divider"></div>
 
