@@ -144,9 +144,9 @@ const LuxuryVillas = () => {
 
                             <div className="inner-post mg-t-40">
                                 <p className="mg-bt-24">
-                                    We offer premium vehicle hire, airport transfers, chauffeured drives and Accomodation in and around Cape Town.
+                                    Experience Cape Town with the best luxury accomodations with us. 
                                 </p>
-                                <p className="mg-bt-24">
+                                {/* <p className="mg-bt-24">
                                     With professional guides and drivers in top of the line vehicles.
                                 </p>
                                 <p className="mg-bt-24">
@@ -154,7 +154,7 @@ const LuxuryVillas = () => {
                                 </p>
                                 <p className="mg-bt-24">
                                     So book with us to guarantee your safety and a fun time in Cape Town for the best experience.
-                                </p>
+                                </p> */}
                             </div>
 
                             <br />
