@@ -14,6 +14,7 @@ import styled from 'styled-components';
 import emailjs from 'emailjs-com';
 import Tours from '../components/Tours';
 import { Helmet } from 'react-helmet';
+import TwoBedroom from '../components/accomodation/2bedroom';
 
 const LoaderWrapper = styled.div`
   position: fixed;
@@ -28,7 +29,9 @@ const LoaderWrapper = styled.div`
   z-index: 1000; // Ensure it appears above other content
 `;
 
-const LuxAccomodation = () => {
+
+
+const TwoBedroomDetails = () => {
   const { id } = useParams();
   const [itemData, setItemData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -68,7 +71,7 @@ const LuxAccomodation = () => {
   };
 
   useEffect(() => {
-    fetch(`https://web-production-1ab9.up.railway.app/api/accomodation-for-hire/${id}/details/`)
+    fetch(`https://web-production-1ab9.up.railway.app/api/two_bedroom/${id}/details/`)
       .then((response) => response.json())
       .then((data) => {
         setItemData(data);
@@ -317,4 +320,4 @@ const LuxAccomodation = () => {
   );
 };
 
-export default LuxAccomodation;
+export default TwoBedroomDetails;

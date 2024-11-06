@@ -5,7 +5,7 @@ import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import FlipMove from 'react-flip-move';
 import { Blurhash } from 'react-blurhash';
 import styled from 'styled-components';
-import Loader from './Loader'; // Import the Loader component
+import Loader from '../Loader'; // Import the Loader component
 
 // Styled components
 const SlideContainer = styled.div`
@@ -40,12 +40,12 @@ const ImageStyled = styled.img`
   border-radius: 10px;
 `;
 
-const Accomodation = forwardRef((ref) => {
+const Penthouse = forwardRef((ref) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('https://web-production-1ab9.up.railway.app/api/accomodation-for-hire/all/')
+    fetch('https://web-production-1ab9.up.railway.app/api/penthouse/all/')
       .then((response) => response.json())
       .then((data) => {
         const updatedData = data.map(item => ({
@@ -61,10 +61,10 @@ const Accomodation = forwardRef((ref) => {
       });
   }, []);
 
-  const handleImageLoad = (accomodationId) => {
+  const handleImageLoad = (PenthouseId) => {
     setData(prevData => {
       return prevData.map(item => {
-        if (item.accomodation.id === accomodationId && item.firstPhoto) {
+        if (item.accomodation.id === PenthouseId && item.firstPhoto) {
           return {
             ...item,
             firstPhoto: {
@@ -92,10 +92,10 @@ const Accomodation = forwardRef((ref) => {
               <div className="col-12">
                 
                   <h2 className="tf-title-heading ct style-2 mg-bt-13">
-                    Choose your ride:
+                    Penthouse
                   </h2>
                   <p className="sub-title ct small mg-bt-20 pad-420">
-                    Price includes vehicle, professional chauffeur, fuel, 200km distance and up to 8 hours.
+                    Enjoy the view of Cape Town in a Luxury Penthouse
                   </p>
                   
 
@@ -167,8 +167,8 @@ const Accomodation = forwardRef((ref) => {
                                     </div>
                                   </div>
                                   <center>
-                                  <Link to={`/accomodation/${item.accomodation.id}`} className="sc-button loadmore style fl-button pri-3">
-                                      <span>View Accomodation</span>
+                                    <Link to={`/penthouse-apartments/${item.accomodation.id}`} className="sc-button loadmore style fl-button pri-3">
+                                      <span>View Penthouse</span>
                                     </Link>
                                   </center>
                                 </div>
@@ -189,4 +189,4 @@ const Accomodation = forwardRef((ref) => {
   );
 });
 
-export default Accomodation;
+export default Penthouse;

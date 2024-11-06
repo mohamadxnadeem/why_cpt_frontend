@@ -4,6 +4,7 @@ import Rating from '../components/Rating';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 import imgblog1 from '../assets/images/blog/audi.png';
+
 import jana from '../assets/images/blog/jana.jpg';
 import tim from '../assets/images/blog/tim.jpg';
 import rachel from '../assets/images/blog/becca.jpg';

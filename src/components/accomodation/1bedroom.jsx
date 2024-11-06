@@ -5,7 +5,7 @@ import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import FlipMove from 'react-flip-move';
 import { Blurhash } from 'react-blurhash';
 import styled from 'styled-components';
-import Loader from './Loader'; // Import the Loader component
+import Loader from '../Loader'; // Import the Loader component
 
 // Styled components
 const SlideContainer = styled.div`
@@ -40,26 +40,30 @@ const ImageStyled = styled.img`
   border-radius: 10px;
 `;
 
-const Accomodation = forwardRef((ref) => {
+const OneBedroom = forwardRef((ref) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('https://web-production-1ab9.up.railway.app/api/accomodation-for-hire/all/')
+    fetch('https://web-production-1ab9.up.railway.app/api/one_bedroom/all/')
       .then((response) => response.json())
       .then((data) => {
+        console.log('Raw fetched data:', data); // Log raw data
         const updatedData = data.map(item => ({
           ...item,
           firstPhoto: item.cover_photos.length > 0 ? item.cover_photos[0] : null,
         }));
+        console.log('Processed data with firstPhoto:', updatedData); // Log processed data
         setData(updatedData);
-        setLoading(false); // Set loading to false after data is fetched
+        setLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
-        setLoading(false); // Set loading to false if there's an error
+        setLoading(false);
       });
   }, []);
+  
+  
 
   const handleImageLoad = (accomodationId) => {
     setData(prevData => {
@@ -92,10 +96,10 @@ const Accomodation = forwardRef((ref) => {
               <div className="col-12">
                 
                   <h2 className="tf-title-heading ct style-2 mg-bt-13">
-                    Choose your ride:
+                    Luxury One Bedroom Apartments
                   </h2>
                   <p className="sub-title ct small mg-bt-20 pad-420">
-                    Price includes vehicle, professional chauffeur, fuel, 200km distance and up to 8 hours.
+                    Perfect for single professionals or couples
                   </p>
                   
 
@@ -159,7 +163,7 @@ const Accomodation = forwardRef((ref) => {
                                       <div className="price" style={{ textAlign: 'left' }}>
                                        
                                         
-                                        <p>US${item.accomodation.min_price}</p>
+                                        <p>From ${item.accomodation.min_price} Per Night</p>
 
                                         
                                        
@@ -167,7 +171,7 @@ const Accomodation = forwardRef((ref) => {
                                     </div>
                                   </div>
                                   <center>
-                                  <Link to={`/accomodation/${item.accomodation.id}`} className="sc-button loadmore style fl-button pri-3">
+                                  <Link to={`/1-Bedroom-Apartments/${item.accomodation.id}`} className="sc-button loadmore style fl-button pri-3">
                                       <span>View Accomodation</span>
                                     </Link>
                                   </center>
@@ -189,4 +193,4 @@ const Accomodation = forwardRef((ref) => {
   );
 });
 
-export default Accomodation;
+export default OneBedroom;

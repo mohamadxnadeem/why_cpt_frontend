@@ -5,7 +5,7 @@ import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import FlipMove from 'react-flip-move';
 import { Blurhash } from 'react-blurhash';
 import styled from 'styled-components';
-import Loader from './Loader'; // Import the Loader component
+import Loader from '../Loader'; // Import the Loader component
 
 // Styled components
 const SlideContainer = styled.div`
@@ -45,7 +45,7 @@ const Accomodation = forwardRef((ref) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('https://web-production-1ab9.up.railway.app/api/accomodation-for-hire/all/')
+    fetch('https://web-production-1ab9.up.railway.app/api/hotel/all/')
       .then((response) => response.json())
       .then((data) => {
         const updatedData = data.map(item => ({
@@ -92,10 +92,10 @@ const Accomodation = forwardRef((ref) => {
               <div className="col-12">
                 
                   <h2 className="tf-title-heading ct style-2 mg-bt-13">
-                    Choose your ride:
+                    Top 3 Hotels in Cape Town
                   </h2>
                   <p className="sub-title ct small mg-bt-20 pad-420">
-                    Price includes vehicle, professional chauffeur, fuel, 200km distance and up to 8 hours.
+                    Rating based on level of luxury, views, service and value for money
                   </p>
                   
 
@@ -167,7 +167,7 @@ const Accomodation = forwardRef((ref) => {
                                     </div>
                                   </div>
                                   <center>
-                                  <Link to={`/accomodation/${item.accomodation.id}`} className="sc-button loadmore style fl-button pri-3">
+                                  <Link to={`/best-hotels/${item.accomodation.id}`} className="sc-button loadmore style fl-button pri-3">
                                       <span>View Accomodation</span>
                                     </Link>
                                   </center>

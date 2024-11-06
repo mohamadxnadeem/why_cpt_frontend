@@ -6,6 +6,13 @@ import TravelPackage from "./TravelPackage";
 import CarDetails from './CarDetails';
 import AccomodationDetails from './AccomodationDetails';
 
+import OneBedroomDetials from './OneBedroomDetials';
+import TwoBedroomDetails from './TwoBedroomDetails';
+import PenthouseDetails from './PenthouseDetails';
+import VillaDetails from './VillaDetails';
+import HotelDetails from './HotelDetails';
+
+
 import Stays from './Stays';
 import AirportTransfers from './chauffeur-hire-cape-town';
 
@@ -35,7 +42,16 @@ const routes = [
   
   { path: '/experience/:id', component: <ItemDetails01 />},
   { path: '/car-for-hire/:id', component: <CarDetails />},
+  
   { path: '/accomodation/:id', component: <AccomodationDetails />},
+
+  { path: '/accomodation/:id', component: <AccomodationDetails />},
+  { path: '/1-Bedroom-Apartments/:id', component: <OneBedroomDetials />},
+  { path: '/2-Bedroom-Apartments/:id', component: <TwoBedroomDetails />},
+  { path: '/penthouse-apartments/:id', component: <PenthouseDetails />},
+  { path: '/luxury-villas-in-cape-town/:id', component: <VillaDetails />},
+  { path: '/best-hotels/:id', component: <HotelDetails />},
+  
   
   { path: '/travel-package/:id', component: <TravelPackage />},
 
@@ -51,7 +67,7 @@ const routes = [
 
   { path: '/safari', component: <Safari />},
 
-  { path: '/luxury-villas', component: <LuxuryVillas />},
+  { path: '/accomodation', component: <LuxuryVillas />},
   
   { path: '/student-accomodation', component: <StudentAccomodation />},
   { path: '/event-venues', component: <EventVenues />},

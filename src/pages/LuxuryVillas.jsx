@@ -10,10 +10,16 @@ import rachel from '../assets/images/blog/becca.jpg';
 import marie from '../assets/images/blog/marie.jpg';
 import micheal from '../assets/images/blog/micheal.jpg';
 import dan from '../assets/images/blog/dan.jpg';
-import Tours from '../components/Tours';
 import emailjs from 'emailjs-com';
 import { Helmet } from 'react-helmet';
-import Cars4Hire from '../components/Cars4hire';
+import Accomodation from '../components/LuxuryAccomodation';
+import OneBedroom from '../components/accomodation/1bedroom';
+import TwoBedroom from '../components/accomodation/2bedroom';
+import Penthouse from '../components/accomodation/penthouse';
+import Villa from '../components/accomodation/villa';
+import Hotel from '../components/accomodation/Hotel';
+
+
 
 // Import the background image correctly
 import backgroundImage from '../assets/images/item-background/vacay.jpg'; 
@@ -100,9 +106,9 @@ const LuxuryVillas = () => {
     return (
         <div className='home-3'>
             <Helmet>
-                <title>Luxury chauffeured drives and Tours in Cape Town</title>
+                <title>Luxury chauffeured drives and Accomodation in Cape Town</title>
                 <meta name="description" content="Best value for money, check website for pricing" />
-                <meta property="og:title" content="Luxury tours and transport in Cape Town to fit every budget" />
+                <meta property="og:title" content="Luxury Accomodation and transport in Cape Town to fit every budget" />
                 <meta property="og:description" content="Best value for money, check website for pricing" />
                 <meta property="og:image" content={imgblog1} />
                 <meta property="og:url" content="http://whycapetown.com/luxury-chauffeured-drives-airport-transfers" />
@@ -132,13 +138,13 @@ const LuxuryVillas = () => {
                     <div className="post">
                         <div className="inner-content">
                             <h2 className="title-post">
-                                Luxury vehicle hire and chauffeured drives in Cape Town
+                                Luxury Accomodation in Cape Town
                             </h2>
                             <div className="divider"></div>
 
                             <div className="inner-post mg-t-40">
                                 <p className="mg-bt-24">
-                                    We offer premium vehicle hire, airport transfers, chauffeured drives and tours in and around Cape Town.
+                                    We offer premium vehicle hire, airport transfers, chauffeured drives and Accomodation in and around Cape Town.
                                 </p>
                                 <p className="mg-bt-24">
                                     With professional guides and drivers in top of the line vehicles.
@@ -154,9 +160,17 @@ const LuxuryVillas = () => {
                             <br />
                             <br />
 
-                            <Cars4Hire />
-                            
-                            <Fragment>
+                            <OneBedroom />
+
+                            <TwoBedroom />
+
+                            <Penthouse />
+
+                            <Villa />
+
+                            {/* < Hotel /> */}
+                        
+                            {/* <Fragment>
                                 <section className="tf-section live-auctions">
                                     <div className="themesflat-container">
                                         <div className="row">
@@ -222,11 +236,11 @@ const LuxuryVillas = () => {
                                         </div>
                                     </div>
                                 </section>
-                            </Fragment>
+                            </Fragment> */}
                         </div>
                     </div>
 
-                    <Tours />
+                   
                 </div>
             </div>
             <Footer />

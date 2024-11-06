@@ -96,12 +96,22 @@ const Header = () => {
                                             </li>
 
                                             <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-                                                <Link to="/full-packages-to-cape-town">Complete Travel Packages</Link>
-                                            </li>
+                                                <Link to="/accomodation">Accommodation</Link>
+                                            </li> 
 
                                             <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
                                                 <Link to="/top-3-tours">Full Day Tours</Link>
                                             </li> 
+
+                                            <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
+                                                <Link to="/chauffeur-hire-cape-town">Chauffeur Hire</Link>
+                                            </li>
+
+                                            <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
+                                                <Link to="/full-packages-to-cape-town">Complete Travel Packages</Link>
+                                            </li>
+
+                                            
 
                                             {/* <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
                                                 <Link to="/safari">Safari</Link>
@@ -111,13 +121,9 @@ const Header = () => {
                                                 <Link to="/garden-route">Garden Route</Link>
                                             </li> */}
                                             
-                                            {/* <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-                                                <Link to="/luxury-villas">Luxury Accommodation</Link>
-                                            </li>  */}
                                             
-                                            <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-                                                <Link to="/chauffeur-hire-cape-town">Chauffeur Hire</Link>
-                                            </li>
+                                            
+                                            
                                             {/* <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
                                                 <Link to="/where-to-get-cannabis">Cannabis Tours</Link>
                                             </li> */}
