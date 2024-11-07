@@ -152,17 +152,17 @@ const TwoBedroomDetails = () => {
                     <h4 className="tf-title-heading ct style-2 fs-30 mg-bt-10" style={{ color: 'white' }}>
                       {itemData.accomodation.title}
                     </h4>
-                    <h1 className="heading text-center">
+                    {/* <h1 className="heading text-center">
                       <Rating value={itemData.average_rating} color={'#f8e825'} />
-                    </h1>
+                    </h1> */}
                   </div>
                 </center>
               )}
-              <div className="breadcrumbs style2">
+              {/* <div className="breadcrumbs style2">
                 <ul>
                   <li>Based on {itemData.reviews.length} reviews</li>
                 </ul>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -221,7 +221,7 @@ const TwoBedroomDetails = () => {
           <div className="tf-section tf-tours">
             <div className="container">
               
-              <Tours />
+              {/* <Tours /> */}
             </div>
           </div>
  
@@ -311,8 +311,8 @@ const TwoBedroomDetails = () => {
             </div>
           </div>
 
-          <LiveAuction data={itemData.reviews} />
-          
+          {/* <LiveAuction data={itemData.reviews} />
+           */}
           <Footer />
         </div>
       </div>
