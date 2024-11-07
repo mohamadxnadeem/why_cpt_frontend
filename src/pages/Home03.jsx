@@ -469,21 +469,18 @@ const Home03 = () => {
                             <div className="text-container">
 
                                 <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    $10 000 is all you need to have a Millionaire experience in Cape Town for 11 days!                               
+                                    Are you ready to visit the best city in the world?                               
                                 </h1>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Incase you didn't know, Cape Town is a a paradise for millionares and the best part is, 
+                                    Cape Town has it all and is a paradise for millionaires! And the best part is, you don't need to be a millionaire to enjoy a luxury lifestyle in one of the most beautiful cities on the planet.  
                                 </p>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    you don't need to be a millionare because the power of the USD against the South African rand.
+                                    Here's a little taste of what you can expect from Cape Town:
                                 </p>
 
-
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Here's a little taste of what you can expect in Cape Town:
-                                </p>
+                               
                                 <br></br>
                                 <br></br>
                                 <br></br>
@@ -499,7 +496,7 @@ const Home03 = () => {
                                     <div className="image-box">
                                         <center>
                                      
-                                        <h4>The best wine farms</h4>
+                                        <h4>The Best Wine Vineyards</h4>
                                         <br></br>
                                         <img className="custom-image" src={hof2} alt="aquila safari" />
                                         </center>
@@ -512,6 +509,12 @@ const Home03 = () => {
                                         </center>
                                     </div>
                                 </div>
+                                <center>
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    And more...
+                                </p>
+                                </center>
+                               
                                 
 
 
@@ -671,6 +674,15 @@ const Home03 = () => {
                                     </div>
                                 </div> */}
 
+                                <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                                    About Us                            
+                                </h1>
+                               
+
+                                <p className="sub-title ct small mg-bt-20 pad-420">
+                                    Family owned business based in Cape Town, operating in the travel and tourism sector for 4 generations and passionate about providing our clients with the best experiences and travel packages to Cape Town. Luxury Accomodation, chauffeured drives, vehcile hire and the best tours on the market right here.
+                                </p>
+
                               
 
                                 <Fragment>
@@ -679,9 +691,9 @@ const Home03 = () => {
                                             <div className="row">
                                                 <div className="col-md-12">
                                                     <div className="">
-                                                        <h2 className="tf-title">Legends </h2>
+                                                        <h2 className="tf-title">What our clients </h2>
                                                         <center>
-                                                        <p >( Past Clients )</p>
+                                                        <p >Have to say about us</p>
                                                         <br></br>
                                                         </center>
                                                         
@@ -747,14 +759,7 @@ const Home03 = () => {
                                 </Fragment>
 
                                 
-                                <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    About Us                            
-                                </h1>
                                
-
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    We're passionate about providing our clients with the best experiences and travel packages to Cape Town. Luxury Accomodation, Vehcile hire and the best tours on the market right here.
-                                </p>
 
                                
                                 {/* <p className="sub-title ct small mg-bt-20 pad-420">
