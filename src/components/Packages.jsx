@@ -195,8 +195,14 @@ const openCalendlyPopup = (e) => {
 
                                   <div className="meta-info">
                                     <div className="author">
-                                      <div className="price">
-                                      </div>
+                                    <div className="price" style={{ textAlign: 'left' }}>
+                                       
+                                        
+                                       <p>Total Price £{item.fullpackage.price}</p>
+
+                                       
+                                      
+                                     </div>
                                     </div>
                                   </div>
                                   <center>

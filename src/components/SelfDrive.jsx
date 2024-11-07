@@ -159,7 +159,7 @@ const SelfDrive = forwardRef((ref) => {
                                       <div className="price" style={{ textAlign: 'left' }}>
                                        
                                         
-                                        <p>US${item.car.price} Per Day</p>
+                                        <p>£{item.car.price} Per Day</p>
 
                                         
                                        

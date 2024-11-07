@@ -385,10 +385,10 @@ const FullPackages = () => {
         
         <div className='home-3'>
             <Helmet>
-                <title>The Millionaire Cape Town Experience </title>
-                <meta name="description" content="11 days in Cape Town for just $5000" />
-                <meta property="og:title" content="The Millionaire Cape Town Experience " />
-                <meta property="og:description" content="11 days in Cape Town for just $5000" />
+                <title>Best packages from London to Cape Town </title>
+                <meta name="description" content="Best travel packages to Cape Town" />
+                <meta property="og:title" content="Best travel packages to Cape Town " />
+                <meta property="og:description" content="From London to Cape Town with pricing starting from just £2000" />
                 <meta property="og:image" content={imgblog1} />
                 <meta property="og:url" content="https://whycapetown.s3.eu-central-1.amazonaws.com/Allen+and+Kazi.png" />
                 <meta property="og:type" content="website" />
@@ -413,23 +413,23 @@ const FullPackages = () => {
                 <div className="themesflat-container">
                     <div className="post">
                         <div className="inner-content">
-                            <h2 className="title-post">The best complete 11 day package to Cape Town money can buy.</h2>
+                            <h2 className="title-post">The best packages to Cape Town money can buy.</h2>
                             <br />
                             <div className="divider"></div>
                             <div className="inner-post mg-t-40">
                                
                                 <p className="mg-bt-24">
-                                    If you love travelling, then we've got the perfect excuse for you to book your trip to the best city in the world!                                
+                                    We've put together the best 5 star luxury travel packages on the market!
+                                </p>
+                                <p className="mg-bt-24">
+                                    5 star service with pricing to suit every budget. We can also curate a package bespoke to your requirements.
                                 </p>
 
                                 <p className="mg-bt-24">
-                                    Why? 
+                                    We can also curate a package bespoke to your requirements.
                                 </p>
 
                             
-                                <p className="mg-bt-24">
-                                    Because we put the ultimate 11 day package that covers everything you need to do in Cape Town. Accomodation, Transport, Safari and all the must do tours. Check out the package below for more info.
-                                </p>
                             
 
                              
