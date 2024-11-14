@@ -92,10 +92,10 @@ const Cars4Hire = forwardRef((ref) => {
               <div className="col-12">
                 
                   <h2 className="tf-title-heading ct style-2 mg-bt-13">
-                    Choose your ride:
+                    Choose your luxury vehicle:
                   </h2>
                   <p className="sub-title ct small mg-bt-20 pad-420">
-                    Price includes vehicle, professional chauffeur, fuel, 200km distance and up to 8 hours.
+                    All pics are of actual vehicles, secure your booking as soon as possible to avoid dissapointment
                   </p>
                   
 
@@ -159,7 +159,7 @@ const Cars4Hire = forwardRef((ref) => {
                                       <div className="price" style={{ textAlign: 'left' }}>
                                        
                                         
-                                        <p>£{item.car.price} Per Day</p>
+                                        {/* <p>£{item.car.price} Per Day</p> */}
 
                                         
                                        

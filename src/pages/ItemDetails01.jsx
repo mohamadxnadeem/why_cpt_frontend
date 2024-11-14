@@ -43,30 +43,7 @@ const ItemDetails01 = () => {
     email: '',
   });
 
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://assets.calendly.com/assets/external/widget.js';
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-  const openCalendlyPopup = (e) => {
-    e.preventDefault();
-    if (isMobile) {
-      window.open('https://calendly.com/mohamadxnadeem/30min', '_blank');
-    } else if (window.Calendly) {
-      window.Calendly.initPopupWidget({ url: 'https://calendly.com/mohamadxnadeem/30min' });
-    } else {
-      console.error("Calendly is not loaded yet");
-    }
-    return false;
-  };
+  
 
   useEffect(() => {
     fetch(`https://web-production-1ab9.up.railway.app/api/experiences/${id}/with-reviews`)
@@ -216,12 +193,13 @@ const ItemDetails01 = () => {
               </div>
             </div>
           </div>
-          <div className="tf-section tf-tours">
+
+          {/* <div className="tf-section tf-tours">
             <div className="container">
               
               <Cars4Hire />
             </div>
-          </div>
+          </div> */}
  
           
 
@@ -250,8 +228,11 @@ const ItemDetails01 = () => {
                         <Fragment>
                           {!loading && ( // Hide form header while loading
                             <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                              Any Questions?
+                              Secure your booking now
                             </h1>
+                             
+                            
+                            
                           )}
 
                           <div className="form-inner">
@@ -286,7 +267,7 @@ const ItemDetails01 = () => {
                                       <textarea
                                         name="message"
                                         value={formData.message}
-                                        placeholder="Your Message"
+                                        placeholder="Please let us know the date you would like to do this tour, how many passengers and any special requests"
                                         onChange={handleChange}
                                       ></textarea>
                                     </div>
