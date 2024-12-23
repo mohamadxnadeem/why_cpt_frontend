@@ -396,11 +396,9 @@ const Top3Tours = () => {
                     <div className="post">
                         <div className="inner-content">
                             <h2 className="title-post">
-                                Discover the Best Tours  
+                                Best Tours and full day Experiences to do in Cape Town
                             </h2>
-                            <h2 className="title-post">
-                                and Exclusive Experiences in Cape Town   
-                            </h2>
+                           
                            
                             <div className="divider"></div>
 

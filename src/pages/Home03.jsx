@@ -680,8 +680,9 @@ const Home03 = () => {
                                
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Family owned business based in Cape Town, operating in the travel and tourism sector for 4 generations and passionate about providing our clients with the best experiences and travel packages to Cape Town. Luxury Accomodation, chauffeured drives, vehcile hire and the best tours on the market right here.
+                                    We've specialize in luxury chaffuered drives and tours in Cape Town, know where all the best spots are and have a fleet of luxury vehciles and professional guides so you can have the best and safest experience in Cape Town.
                                 </p>
+                                
 
                               
 

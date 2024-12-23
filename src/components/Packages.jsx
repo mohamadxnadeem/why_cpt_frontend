@@ -124,7 +124,7 @@ const openCalendlyPopup = (e) => {
                     5 Star Luxury Travel Package to Cape Town:
                   </h2>
                   <p className="sub-title ct small mg-bt-20 pad-420">
-                    We garuntee you won't find a better deal anywhere else. 
+                    Best value for your money. 
                   </p> 
                 
                 {loading ? (
