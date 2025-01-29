@@ -163,7 +163,7 @@ const OneBedroom = forwardRef((ref) => {
                                       <div className="price" style={{ textAlign: 'left' }}>
                                        
                                         
-                                        <p>From £{item.accomodation.min_price} Per Night</p>
+                                        <p>From ${item.accomodation.min_price} Per Night</p>
 
                                         
                                        

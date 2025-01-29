@@ -863,7 +863,7 @@ const Home03 = () => {
 
             </section>
 
-            <Packages />
+            <Tours />
 
             <section className="tf-section wrap-accordion">
                                     <div className="container">

@@ -106,10 +106,12 @@ const Header = () => {
                                             <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
                                                 <Link to="/chauffeur-hire-cape-town">Chauffeur Hire</Link>
                                             </li>
-
+                                            
+                                            {/*
                                             <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
                                                 <Link to="/full-packages-to-cape-town">Complete Travel Packages</Link>
                                             </li>
+                                            */}
 
                                             
 
