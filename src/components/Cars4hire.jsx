@@ -92,10 +92,10 @@ const Cars4Hire = forwardRef((ref) => {
               <div className="col-12">
                 
                   <h2 className="tf-title-heading ct style-2 mg-bt-13">
-                    Choose your luxury vehicle:
+                    Our Fleet:
                   </h2>
                   <p className="sub-title ct small mg-bt-20 pad-420">
-                    All pics are of actual vehicles, secure your booking as soon as possible to avoid dissapointment
+                    Choose your ride and secure your booking as soon as possible to avoid dissapointment
                   </p>
                   
 
