@@ -291,6 +291,9 @@ const ItemDetails01 = () => {
           </div>
 
           <LiveAuction data={itemData.reviews} />
+
+          <Tours />
+
           
           <Footer />
         </div>
