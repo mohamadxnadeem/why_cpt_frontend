@@ -469,17 +469,18 @@ const Home03 = () => {
                             <div className="text-container">
 
                                 <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    Are you ready to visit the best city in the world?                               
+                                    Are you ready to have the best experience in Cape Town?                               
                                 </h1>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Cape Town has it all and is a paradise for millionaires! And the best part is, you don't need to be a millionaire to enjoy a luxury lifestyle in one of the most beautiful cities on the planet.  
+                                    Because we specialize in private tours and luxury chauffeured drives to show you all Cape Town's top attractions, hidden gems and even a few secret spots.
                                 </p>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Here's a little taste of what you can expect from Cape Town:
+                                    Scroll down to check out some of the best full day experiences if you're in Cape Town or planning to visit Cape Town.
                                 </p>
 
+                                {/* 
                                
                                 <br></br>
                                 <br></br>
@@ -514,7 +515,7 @@ const Home03 = () => {
                                     And more...
                                 </p>
                                 </center>
-                               
+                                */}
                                 
 
 
@@ -674,14 +675,14 @@ const Home03 = () => {
                                     </div>
                                 </div> */}
 
-                                <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                                {/* <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
                                     About Us                            
                                 </h1>
                                
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
                                     We've specialize in luxury chaffuered drives and tours in Cape Town, know where all the best spots are and have a fleet of luxury vehciles and professional guides so you can have the best and safest experience in Cape Town.
-                                </p>
+                                </p> */}
                                 
 
                               
@@ -694,7 +695,7 @@ const Home03 = () => {
                                                     <div className="">
                                                         <h2 className="tf-title">What our clients </h2>
                                                         <center>
-                                                        <p >Have to say about us</p>
+                                                        <p >Have to say about our service</p>
                                                         <br></br>
                                                         </center>
                                                         
