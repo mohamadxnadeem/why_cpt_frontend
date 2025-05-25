@@ -196,7 +196,7 @@ const openCalendlyPopup = (e) => {
                                     <div className="price" style={{ textAlign: 'left' }}>
                                        
                                         
-                                       <p>Total Price £{item.fullpackage.price}</p>
+                                       <p>Total Price ${item.fullpackage.price}</p>
 
                                        
                                       
