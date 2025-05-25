@@ -8,8 +8,9 @@ import ImageBar from '../components/ImageBar';
 import Rating from '../components/Rating'
 import Footer from '../components/footer/Footer'
 import Tours from '../components/Tours';
+
+import Packages from '../components/Packages'
 import { Accordion } from 'react-bootstrap-accordion'
-import Packages from '../components/Packages';
 
 import hof1 from '../assets/images/blog/accomomdation.png'
 import hof2 from '../assets/images/blog/winefarm.png'
@@ -59,6 +60,7 @@ import IGimage from '../assets/images/slider/legends.svg'
 import { Link } from 'react-router-dom';
 
 import CardList from '../components/CardList'
+import FullPackages from './FullPackages';
 
 
 const Home03 = () => {
@@ -455,154 +457,36 @@ const Home03 = () => {
                             <div className="text-container">
 
                                 <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    You planning your first trip to Cape Town?                               
+                                    Plan your trip to Cape Town with us for a Stress Free vacation                                
                                 </h1>
+
+                                <hr></hr>
 
                             
 
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    If you're planning your first trip to Cape Town and enjoy 5 star luxury travel experiences, then you're at the right place because we can help arrange everything you need want and more for easy-stress free planning to Cape Town. 
-                                </p>
+                               
 
                                 <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    We specialize in                               
+                                    What you can expect when planning your trip with us:                               
                                 </h1>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    - Tours                               
+                                    - We secure your dates at the best 5 star hotels                               
                                 </p>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    - Chauffured Drives                               
+                                    - Chauffeured drives with a local tour guide to show you all the best spots and share the secrets of Cape Town with you                                
                                 </p>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    - Accomodation                               
+                                    - You get access to full day itinaries for the best experiences in Cape Town                               
                                 </p>
 
                                 <p className="sub-title ct small mg-bt-20 pad-420">
-                                    - And anything else you might want or need                               
+                                    - And anything else you might want or need.                             
                                 </p>
 
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Drop your details below if you're interested in visiting Cape Town and want to plan your trip with us for a stress free vacation.             
-                                </p>
-
-                                           
-
-{/* 
-                                <div className="image-grid">
-                                    <div className="image-box">
-                                        <center>
-                                            <h4>Helicopter Tour</h4>
-                                            <br></br>
-
-                                            <img className="homeImages" src={chopper} alt="helicopter ride in cape town" />
-                                        </center>
-                                    </div>
-                                    <div className="image-box">
-                                        <center>
-                                        <h4>Chapmans Peak with a Cobra</h4>
-                                        <br></br>
-                                        <img className="homeImages" src={cobra} alt="cobra experience around chapmans peak" />
-                                        </center>
-                                    </div>
-                                    <div className="image-box">
-                                        <center>
-                                            <h4>Bokaap</h4>
-                                            <br></br>
-                                            <img className="homeImages" src={bokaap} alt="bokaap" />
-                                        </center>
-                                    </div>
-                                </div> */}
-
-                        
-                            </div>
-                        </div>                                    
-                    </div>
-                </div>
-
-            </section>
-
-            <div className="tf-section tf-item-details">
-            <div className="container">
-              <div className="row">
-                <div className="col-md-12">
-                  <div className="content-center">
-                    <div className="sc-item-details">
-                      {formSubmitted ? (
-                        <div className="thank-you-message">
-                          <h2>Thank You!</h2>
-                          <p>
-                            Your enquiry has been successfully submitted. We
-                            will get back to you soon.
-                          </p>
-                        </div>
-                      ) : (
-                        <Fragment>
-                          {!loading && (
-                            <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                              You know what to do:
-                            </h1>
-                          )}
-
-                          <div className="form-inner">
-                            <form
-                              id="contactform"
-                              noValidate="novalidate"
-                              onSubmit={handleSubmit}
-                            >
-                              <div className="row">
-                                {!loading && (
-                                  <>
-                                    <div className="col-md-6">
-                                      <input
-                                        type="text"
-                                        name="name"
-                                        value={formData.name}
-                                        placeholder="Your Name"
-                                        onChange={handleChange}
-                                      />
-                                    </div>
-                                    <div className="col-md-6">
-                                      <input
-                                        type="email"
-                                        name="email"
-                                        value={formData.email}
-                                        placeholder="Your Email"
-                                        onChange={handleChange}
-                                      />
-                                      {formError && (
-                                        <p style={{ color: "red" }}>
-                                          {formError}
-                                        </p>
-                                      )}
-                                    </div>
-                                    <div className="col-md-12">
-                                      <textarea
-                                        name="message"
-                                        value={formData.message}
-                                        placeholder="Please let us know how many days you want to spend in Cape Town, what's the occasion, how many pax and a brief description on what you want from your experience in Cape Town and we will get back to you ASAP"
-                                        onChange={handleChange}
-                                      ></textarea>
-                                    </div>
-                                    <div className="col-md-12">
-                                      <button
-                                        type="submit"
-                                        className="sc-button loadmore style fl-button pri-3"
-                                      >
-                                        <span>Send Message</span>
-                                      </button>
-                                    </div>
-                                  </>
-                                )}
-                              </div>
-                            </form>
-                          </div>
-                        </Fragment>
-                      )}
-
-<Fragment>
+                                <Fragment>
                                 <section className="tf-section live-auctions">
                                     <div className="themesflat-container">
                                         <div className="row">
@@ -673,6 +557,132 @@ const Home03 = () => {
                                     </div>
                                 </section>
                             </Fragment>
+
+
+
+                                {/* <p className="sub-title ct small mg-bt-20 pad-420">
+                                    Drop your details below if you're interested in visiting Cape Town and want to plan your trip with us for a stress free vacation.             
+                                </p> */}
+
+                                           
+
+{/* 
+                                <div className="image-grid">
+                                    <div className="image-box">
+                                        <center>
+                                            <h4>Helicopter Tour</h4>
+                                            <br></br>
+
+                                            <img className="homeImages" src={chopper} alt="helicopter ride in cape town" />
+                                        </center>
+                                    </div>
+                                    <div className="image-box">
+                                        <center>
+                                        <h4>Chapmans Peak with a Cobra</h4>
+                                        <br></br>
+                                        <img className="homeImages" src={cobra} alt="cobra experience around chapmans peak" />
+                                        </center>
+                                    </div>
+                                    <div className="image-box">
+                                        <center>
+                                            <h4>Bokaap</h4>
+                                            <br></br>
+                                            <img className="homeImages" src={bokaap} alt="bokaap" />
+                                        </center>
+                                    </div>
+                                </div> */}
+
+                        
+                            </div>
+                        </div>                                    
+                    </div>
+                </div>
+
+                < Packages />
+
+            </section>
+
+            
+
+            <div className="tf-section tf-item-details">
+            <div className="container">
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="content-center">
+                    <div className="sc-item-details">
+                      {formSubmitted ? (
+                        <div className="thank-you-message">
+                          <h2>Thank You!</h2>
+                          <p>
+                            Your enquiry has been successfully submitted. We
+                            will get back to you soon.
+                          </p>
+                        </div>
+                      ) : (
+                        <Fragment>
+                          {!loading && (
+                            <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                              Contact Us:
+                            </h1>
+                          )}
+
+                          <div className="form-inner">
+                            <form
+                              id="contactform"
+                              noValidate="novalidate"
+                              onSubmit={handleSubmit}
+                            >
+                              <div className="row">
+                                {!loading && (
+                                  <>
+                                    <div className="col-md-6">
+                                      <input
+                                        type="text"
+                                        name="name"
+                                        value={formData.name}
+                                        placeholder="Your Name"
+                                        onChange={handleChange}
+                                      />
+                                    </div>
+                                    <div className="col-md-6">
+                                      <input
+                                        type="email"
+                                        name="email"
+                                        value={formData.email}
+                                        placeholder="Your Email"
+                                        onChange={handleChange}
+                                      />
+                                      {formError && (
+                                        <p style={{ color: "red" }}>
+                                          {formError}
+                                        </p>
+                                      )}
+                                    </div>
+                                    <div className="col-md-12">
+                                      <textarea
+                                        name="message"
+                                        value={formData.message}
+                                        placeholder="We need some details from you to help you have the best experience in Cape Town. Which City are you travelling from, what is the reason for your visit, how much time do you want to spend in Cape Town, how many people are travelling with you and what is your budget. If you have any questions then let us know and we will get back to you ASAP. "
+                                        onChange={handleChange}
+                                      ></textarea>
+                                    </div>
+                                    <div className="col-md-12">
+                                      <button
+                                        type="submit"
+                                        className="sc-button loadmore style fl-button pri-3"
+                                      >
+                                        <span>Send Message</span>
+                                      </button>
+                                    </div>
+                                  </>
+                                )}
+                              </div>
+                            </form>
+                          </div>
+                        </Fragment>
+                      )}
+
+                            
                     </div>
                   </div>
                 </div>
@@ -680,10 +690,9 @@ const Home03 = () => {
             </div>
             </div>
 
-
             
 
-            <Tours />
+            
 
             <section className="tf-section wrap-accordion">
                                     <div className="container">

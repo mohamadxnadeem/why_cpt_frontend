@@ -121,11 +121,9 @@ const openCalendlyPopup = (e) => {
               <div className="col-12">
                 
                   <h2 className="tf-title-heading ct style-2 mg-bt-13">
-                    5 Star Luxury Travel Package to Cape Town:
+                    Choose your package to Cape Town
                   </h2>
-                  <p className="sub-title ct small mg-bt-20 pad-420">
-                    Best value for your money. 
-                  </p> 
+                  
                 
                 {loading ? (
                   <Loader /> // Show the loader while loading
