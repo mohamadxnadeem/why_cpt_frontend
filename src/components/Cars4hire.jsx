@@ -169,7 +169,7 @@ const Cars4Hire = forwardRef((ref) => {
                                   <center>
                                     <Link
                                       target="__blank"
-                                      to={item.car.whatsapp}
+                                      to={'https://wa.link/i3muj9'}
 
                                       className="sc-button loadmore style fl-button pri-3"
                                     >
