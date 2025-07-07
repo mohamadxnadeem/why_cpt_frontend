@@ -92,10 +92,10 @@ const Cars4Hire = forwardRef((ref) => {
               <div className="col-12">
                 
                   <h2 className="tf-title-heading ct style-2 mg-bt-13">
-                    Our Fleet:
+                    Now it's time for the best part
                   </h2>
                   <p className="sub-title ct small mg-bt-20 pad-420">
-                    Choose your ride and secure your booking as soon as possible to avoid dissapointment
+                    Choose your ride and let us know what dates.
                   </p>
                   
 
@@ -169,7 +169,7 @@ const Cars4Hire = forwardRef((ref) => {
                                   <center>
                                     <Link
                                       target="__blank"
-                                      to={`https://wa.link/kdchjk`}
+                                      to={item.car.body}
                                       className="sc-button loadmore style fl-button pri-3"
                                     >
                                       <span>Reserve Now</span>
