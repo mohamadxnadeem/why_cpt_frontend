@@ -92,7 +92,7 @@ const Cars4Hire = forwardRef((ref) => {
               <div className="col-12">
                 
                   <h2 className="tf-title-heading ct style-2 mg-bt-13">
-                    Now it's time for the best part
+                    Why settle for less when you can have the best?
                   </h2>
                   <p className="sub-title ct small mg-bt-20 pad-420">
                     Choose your ride and let us know what dates.
