@@ -92,7 +92,7 @@ const Cars4Hire = forwardRef((ref) => {
               <div className="col-12">
                 
                   <h2 className="tf-title-heading ct style-2 mg-bt-13">
-                    Why settle for less when you can have the best?
+                    Why settle for less when you can have the
                   </h2>
                   <p className="sub-title ct small mg-bt-20 pad-420">
                     Choose your ride and let us know what dates.
@@ -169,7 +169,8 @@ const Cars4Hire = forwardRef((ref) => {
                                   <center>
                                     <Link
                                       target="__blank"
-                                      to={item.car.body}
+                                      to={item.car.whatsapp}
+
                                       className="sc-button loadmore style fl-button pri-3"
                                     >
                                       <span>Reserve Now</span>
