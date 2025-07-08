@@ -121,11 +121,11 @@ const openCalendlyPopup = (e) => {
               <div className="col-12">
                 
                   <h2 className="tf-title-heading ct style-2 mg-bt-13">
-                    Best Experiences to do in Cape Town 2025
+                    What to do in Cape Town 2025
                   </h2>
-                  {/* <p className="sub-title ct small mg-bt-20 pad-420">
-                    If it's your first ti
-                  </p> */}
+                  <p className="sub-title ct small mg-bt-20 pad-420">
+                    We recomend the following full day itinaries below:
+                  </p>
                 
                 {loading ? (
                   <Loader /> // Show the loader while loading

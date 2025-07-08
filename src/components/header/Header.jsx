@@ -101,13 +101,28 @@ const Header = () => {
                                             </li> 
                                             */}
 
-                                            <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-                                                <Link to="/top-3-tours">Full Day Tours</Link>
-                                            </li> 
-
-                                            <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
+                                             <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
                                                 <Link to="/chauffeur-hire-cape-town">Chauffeur Hire</Link>
                                             </li>
+
+                                            {/* <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
+                                                <Link to="/top-3-tours">What to do in Cape Town</Link>
+                                            </li>  */}
+
+                                            {/* 
+
+                                          
+                                            <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
+                                                <Link to="/top-3-tours">Top 10 Resturants</Link>
+                                            </li>
+
+                                              <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
+                                                <Link to="/top-3-tours">Best Winefarms</Link>
+                                            </li> */}
+
+
+
+                                           
                                             
                                             {/*
                                             <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>

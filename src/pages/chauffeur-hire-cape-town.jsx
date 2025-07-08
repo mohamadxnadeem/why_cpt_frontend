@@ -6,6 +6,9 @@ import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import emailjs from "emailjs-com";
 
+
+import Tours from '../components/Tours';
+
 import jana from '../assets/images/blog/jana.jpg';
 import tim from '../assets/images/blog/tim.jpg';
 import rachel from '../assets/images/blog/becca.jpg';
@@ -399,7 +402,7 @@ const AirportTransfers = () => {
                 </p>
 
                  <p className="mg-bt-24">
-                  And if that's not enough for you then maybe some client testimonials would be enought to persuade you 
+                  And if that's not enough for you then maybe some client testimonials would be enough to persuade you 
                 </p>
 
                 
@@ -577,7 +580,7 @@ const AirportTransfers = () => {
                         </Fragment>
                       )}
 
-<Fragment>
+                            <Fragment>
                                 
                             </Fragment>
                     </div>
@@ -586,6 +589,8 @@ const AirportTransfers = () => {
               </div>
             </div>
           </div>
+
+            <Tours />
 
           
         </div>
