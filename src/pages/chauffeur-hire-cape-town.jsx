@@ -473,6 +473,28 @@ const AirportTransfers = () => {
                                         </div>
                                     </div>
               </section>
+
+              <h2 className="title-post">
+                We can also assist with special events like:
+              </h2>
+
+                <p className="mg-bt-24">
+                  - Weddings,
+                </p>
+
+                <p className="mg-bt-24">
+                  - Matric Balls,
+                </p>
+
+                <p className="mg-bt-24">
+                  - Corporate events,
+                </p>
+
+                <p className="mg-bt-24">
+                  - And anything else that requires high status vehicles and professional drivers
+                </p>
+
+
               <Cars4Hire />
             </div>
           </div>
