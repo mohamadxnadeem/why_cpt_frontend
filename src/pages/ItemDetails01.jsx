@@ -153,13 +153,7 @@ const ItemDetails01 = () => {
     e.target.style.display = 'none';
   };
 
-  if (loading || !itemData) {
-    return (
-      <LoaderWrapper>
-        <Loader />
-      </LoaderWrapper>
-    );
-  }
+  
 
   const heroSliderData = itemData.cover_photos.map((coverPhoto) => ({
     src: coverPhoto.image.cover_photos,
