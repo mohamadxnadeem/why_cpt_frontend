@@ -3,19 +3,10 @@ import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import FlipMove from 'react-flip-move';
-import styled, { keyframes } from 'styled-components';
-import Loader from './Loader';
+import { Blurhash } from 'react-blurhash';
+import styled from 'styled-components';
 
-// Shimmer animation
-const shimmer = keyframes`
-  0% {
-    background-position: -500px 0;
-  }
-  100% {
-    background-position: 500px 0;
-  }
-`;
-
+// Styled components
 const SlideContainer = styled.div`
   position: relative;
   width: 100%;
@@ -24,16 +15,15 @@ const SlideContainer = styled.div`
   overflow: hidden;
 `;
 
-const Shimmer = styled.div`
+const BlurhashStyled = styled(Blurhash)`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 1;
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 1000px 100%;
-  animation: ${shimmer} 1.5s infinite linear;
+  transition: opacity 1s ease-in-out;
+  opacity: ${(props) => (props.loaded ? 0 : 1)};
 `;
 
 const ImageStyled = styled.img`
@@ -71,13 +61,18 @@ const Cars4Hire = forwardRef((ref) => {
   }, []);
 
   const handleImageLoad = (carId) => {
-    setData(prevData =>
-      prevData.map(item =>
-        item.car.id === carId && item.firstPhoto
-          ? { ...item, firstPhoto: { ...item.firstPhoto, imageLoaded: true } }
-          : item
-      )
-    );
+    setData(prevData => prevData.map(item => {
+      if (item.car.id === carId && item.firstPhoto) {
+        return {
+          ...item,
+          firstPhoto: {
+            ...item.firstPhoto,
+            imageLoaded: true,
+          }
+        };
+      }
+      return item;
+    }));
   };
 
   const handleImageError = (e) => {
@@ -99,9 +94,7 @@ const Cars4Hire = forwardRef((ref) => {
                   Choose your ride and let us know the dates.
                 </p>
 
-                {loading ? (
-                  <Loader />
-                ) : (
+                {!loading && (
                   <Swiper
                     modules={[Navigation, Pagination, Scrollbar, A11y]}
                     spaceBetween={30}
@@ -126,7 +119,15 @@ const Cars4Hire = forwardRef((ref) => {
                                     <SlideContainer>
                                       {item.firstPhoto && (
                                         <>
-                                          {!item.firstPhoto.imageLoaded && <Shimmer />}
+                                          <BlurhashStyled
+                                            hash={item.firstPhoto.blurhash}
+                                            resolutionX={32}
+                                            resolutionY={32}
+                                            width={500}
+                                            height={281}
+                                            punch={1}
+                                            loaded={item.firstPhoto.imageLoaded}
+                                          />
                                           <ImageStyled
                                             src={item.firstPhoto.image.cover_photos}
                                             alt={item.car.title}
