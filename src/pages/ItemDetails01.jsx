@@ -10,7 +10,6 @@ import parse from 'html-react-parser';
 import emailjs from 'emailjs-com';
 import Tours from '../components/Tours';
 import { Helmet } from 'react-helmet';
-import Cars4Hire from '../components/Cars4hire';
 import SliderStyle3 from '../components/slider/SliderStyle3';
 
 // Shimmer animation
@@ -87,6 +86,7 @@ const ItemDetails01 = () => {
     email: '',
   });
 
+  // Fetch data
   useEffect(() => {
     fetch(`https://web-production-1ab9.up.railway.app/api/experiences/${id}/with-reviews`)
       .then((response) => response.json())
@@ -94,28 +94,26 @@ const ItemDetails01 = () => {
         // Add imageLoaded property for shimmer effect
         const updatedData = {
           ...data,
-          cover_photos: data.cover_photos.map(photo => ({
+          cover_photos: data.cover_photos?.map(photo => ({
             ...photo,
             imageLoaded: false,
-          })),
+          })) || [],
         };
         setItemData(updatedData);
         setLoading(false);
         setFormData((prevFormData) => ({
           ...prevFormData,
-          serviceType: ` ${data.experience.title}`,
+          serviceType: ` ${data.experience?.title || ''}`,
         }));
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
+        setLoading(false);
       });
   }, [id]);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
@@ -131,13 +129,8 @@ const ItemDetails01 = () => {
     emailjs
       .send('service_ptqtluk', 'template_uyicl9l', formData, 'apNJP_9sXnff2q82W')
       .then(
-        (result) => {
-          console.log('Email successfully sent!');
-          setFormSubmitted(true);
-        },
-        (error) => {
-          console.log('There was an error sending the email:', error);
-        }
+        () => setFormSubmitted(true),
+        (error) => console.error('Error sending email:', error)
       );
   };
 
@@ -153,7 +146,15 @@ const ItemDetails01 = () => {
     e.target.style.display = 'none';
   };
 
-  
+  // Guard clause for blank page
+  if (!itemData) {
+    // Shimmer placeholder while data is loading
+    return (
+      <LoaderWrapper>
+        <ShimmerDiv style={{ width: '500px', height: '325px' }} />
+      </LoaderWrapper>
+    );
+  }
 
   const heroSliderData = itemData.cover_photos.map((coverPhoto) => ({
     src: coverPhoto.image.cover_photos,
@@ -163,8 +164,8 @@ const ItemDetails01 = () => {
   return (
     <div className='item-details'>
       <Helmet>
-        <title>{itemData.experience.title} - Cape Town Experience</title>
-        <meta name="description" content={`${itemData.experience.title} click for more info`} />
+        <title>{itemData.experience?.title || ''} - Cape Town Experience</title>
+        <meta name="description" content={`${itemData.experience?.title || ''} click for more info`} />
       </Helmet>
       <Header />
       <section className="flat-title-page inner">
@@ -175,7 +176,7 @@ const ItemDetails01 = () => {
               <center>
                 <div className="page-title-heading mg-bt-12">
                   <h4 className="tf-title-heading ct style-2 fs-30 mg-bt-10" style={{ color: 'white' }}>
-                    {itemData.experience.title}
+                    {itemData.experience?.title}
                   </h4>
                   <h1 className="heading text-center">
                     <Rating value={itemData.average_rating} color={'#f8e825'} />
@@ -184,7 +185,7 @@ const ItemDetails01 = () => {
               </center>
               <div className="breadcrumbs style2">
                 <ul>
-                  <li>Based on {itemData.reviews.length} reviews</li>
+                  <li>Based on {itemData.reviews?.length || 0} reviews</li>
                 </ul>
               </div>
             </div>
@@ -192,6 +193,7 @@ const ItemDetails01 = () => {
         </div>
       </section>
 
+      {/* Hero Slider with shimmer */}
       <SliderStyle3
         data={heroSliderData}
         renderImage={(src, _, index) => (
@@ -199,7 +201,7 @@ const ItemDetails01 = () => {
             {!itemData.cover_photos[index].imageLoaded && <ShimmerDiv />}
             <ImageStyled
               src={src}
-              alt={itemData.experience.title}
+              alt={itemData.experience?.title || 'Cover'}
               onLoad={() => handleImageLoad(index)}
               onError={handleImageError}
               imageLoaded={itemData.cover_photos[index].imageLoaded}
@@ -208,16 +210,20 @@ const ItemDetails01 = () => {
         )}
       />
 
+      {/* Experience body */}
       <div className="tf-section tf-item-details">
         <div className="container">
           <div className="row">
             <div className="col-md-12">
               <div className="content-center">
-                <div className="sc-item-details">{parse(itemData.experience.body)}</div>
+                <div className="sc-item-details">
+                  {parse(itemData.experience?.body || '')}
+                </div>
               </div>
             </div>
           </div>
 
+          {/* Booking Form */}
           <div className="tf-section tf-item-details">
             <div className="container">
               <div className="row">
@@ -262,7 +268,7 @@ const ItemDetails01 = () => {
                                     value={formData.message}
                                     placeholder="Please let us know the date you would like to do this tour, how many passengers and any special requests"
                                     onChange={handleChange}
-                                  ></textarea>
+                                  />
                                 </div>
                                 <div className="col-md-12">
                                   <button type="submit" className="sc-button loadmore style fl-button pri-3">
@@ -281,7 +287,7 @@ const ItemDetails01 = () => {
             </div>
           </div>
 
-          <LiveAuction data={itemData.reviews} />
+          <LiveAuction data={itemData.reviews || []} />
           <Tours />
           <Footer />
         </div>
