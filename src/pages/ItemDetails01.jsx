@@ -59,12 +59,26 @@ const ImageStyled = styled.img`
   border-radius: 10px;
 `;
 
+const LoaderWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+`;
+
 const ItemDetails01 = () => {
   const { id } = useParams();
   const [itemData, setItemData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formError, setFormError] = useState('');
+
   const [formData, setFormData] = useState({
     name: '',
     message: '',
@@ -72,19 +86,27 @@ const ItemDetails01 = () => {
     email: '',
   });
 
+  // Fetch experience data
   useEffect(() => {
     fetch(`https://web-production-1ab9.up.railway.app/api/experiences/${id}/with-reviews`)
-      .then((res) => res.json())
+      .then((response) => response.json())
       .then((data) => {
+        // Add imageLoaded for shimmer
         const updatedData = {
           ...data,
-          cover_photos: data.cover_photos.map(photo => ({ ...photo, imageLoaded: false })),
+          cover_photos: data.cover_photos?.map(photo => ({ ...photo, imageLoaded: false })) || [],
         };
         setItemData(updatedData);
         setLoading(false);
-        setFormData(prev => ({ ...prev, serviceType: ` ${data.experience.title}` }));
+        setFormData(prev => ({
+          ...prev,
+          serviceType: ` ${data?.experience?.title || ''}`,
+        }));
       })
-      .catch(err => console.error('Error fetching data:', err));
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+        setLoading(false);
+      });
   }, [id]);
 
   const handleChange = (e) => {
@@ -103,34 +125,35 @@ const ItemDetails01 = () => {
 
     emailjs
       .send('service_ptqtluk', 'template_uyicl9l', formData, 'apNJP_9sXnff2q82W')
-      .then(() => setFormSubmitted(true))
-      .catch(err => console.error('Email sending error:', err));
+      .then(
+        () => setFormSubmitted(true),
+        (error) => console.error('Error sending email:', error)
+      );
   };
 
   const handleImageLoad = (index) => {
     setItemData(prev => {
-      const updatedPhotos = [...prev.cover_photos];
-      updatedPhotos[index].imageLoaded = true;
+      if (!prev) return prev;
+      const updatedPhotos = [...(prev.cover_photos || [])];
+      if (updatedPhotos[index]) updatedPhotos[index].imageLoaded = true;
       return { ...prev, cover_photos: updatedPhotos };
     });
   };
 
-  const heroSliderData = itemData?.cover_photos.map(photo => ({
-    src: photo.image.cover_photos,
+  const heroSliderData = itemData?.cover_photos?.map(photo => ({
+    src: photo.image?.cover_photos,
     imageLoaded: photo.imageLoaded,
   })) || [];
 
   return (
     <div className='item-details'>
       <Helmet>
-        <title>{itemData?.experience.title || 'Experience'} - Cape Town</title>
-        <meta name="description" content={`${itemData?.experience.title || ''} click for more info`} />
+        <title>{itemData?.experience?.title || 'Experience'} - Cape Town Experience</title>
+        <meta name="description" content={`${itemData?.experience?.title || ''} click for more info`} />
       </Helmet>
-
-      {/* Header is always rendered */}
       <Header />
 
-      {/* Hero section */}
+      {/* Title Section */}
       <section className="flat-title-page inner">
         <div className="overlay"></div>
         <div className="themesflat-container">
@@ -139,16 +162,16 @@ const ItemDetails01 = () => {
               <center>
                 <div className="page-title-heading mg-bt-12">
                   <h4 className="tf-title-heading ct style-2 fs-30 mg-bt-10" style={{ color: 'white' }}>
-                    {itemData?.experience.title || <ShimmerDiv style={{ height: '30px', width: '300px' }} />}
+                    {itemData?.experience?.title || 'Loading...'}
                   </h4>
                   <h1 className="heading text-center">
-                    {itemData ? <Rating value={itemData.average_rating} color="#f8e825" /> : <ShimmerDiv style={{ height: '25px', width: '150px' }} />}
+                    <Rating value={itemData?.average_rating || 0} color={'#f8e825'} />
                   </h1>
                 </div>
               </center>
               <div className="breadcrumbs style2">
                 <ul>
-                  <li>{itemData ? `Based on ${itemData.reviews.length} reviews` : <ShimmerDiv style={{ height: '20px', width: '200px' }} />}</li>
+                  <li>Based on {itemData?.reviews?.length || 0} reviews</li>
                 </ul>
               </div>
             </div>
@@ -156,31 +179,37 @@ const ItemDetails01 = () => {
         </div>
       </section>
 
-      {/* Slider */}
-      <SliderStyle3
-        data={heroSliderData}
-        renderImage={(src, _, index) => (
-          <SlideContainer key={index}>
-            {!itemData.cover_photos[index].imageLoaded && <ShimmerDiv />}
-            <ImageStyled
-              src={src}
-              alt={itemData.experience.title}
-              onLoad={() => handleImageLoad(index)}
-              onError={(e) => { e.target.style.display = 'none'; }}
-              imageLoaded={itemData.cover_photos[index].imageLoaded}
-            />
-          </SlideContainer>
-        )}
-      />
+      {/* Hero Slider */}
+      {heroSliderData.length > 0 ? (
+        <SliderStyle3
+          data={heroSliderData}
+          renderImage={(src, _, index) => (
+            <SlideContainer key={index}>
+              {!itemData.cover_photos[index].imageLoaded && <ShimmerDiv />}
+              <ImageStyled
+                src={src}
+                alt={itemData?.experience?.title || 'Cover'}
+                onLoad={() => handleImageLoad(index)}
+                onError={(e) => e.target.style.display = 'none'}
+                imageLoaded={itemData.cover_photos[index].imageLoaded}
+              />
+            </SlideContainer>
+          )}
+        />
+      ) : (
+        <SlideContainer>
+          <ShimmerDiv />
+        </SlideContainer>
+      )}
 
-      {/* Experience details */}
+      {/* Experience Description */}
       <div className="tf-section tf-item-details">
         <div className="container">
           <div className="row">
             <div className="col-md-12">
               <div className="content-center">
                 <div className="sc-item-details">
-                  {itemData ? parse(itemData.experience.body) : <ShimmerDiv style={{ height: '150px' }} />}
+                  {itemData?.experience?.body ? parse(itemData.experience.body) : <ShimmerDiv />}
                 </div>
               </div>
             </div>
@@ -188,7 +217,7 @@ const ItemDetails01 = () => {
         </div>
       </div>
 
-      {/* Booking form */}
+      {/* Booking Form */}
       <div className="tf-section tf-item-details">
         <div className="container">
           <div className="row">
@@ -202,15 +231,29 @@ const ItemDetails01 = () => {
                     </div>
                   ) : (
                     <Fragment>
-                      <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">Secure your booking now</h1>
+                      <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                        Secure your booking now
+                      </h1>
                       <div className="form-inner">
-                        <form id="contactform" noValidate onSubmit={handleSubmit}>
+                        <form id="contactform" noValidate="novalidate" onSubmit={handleSubmit}>
                           <div className="row">
                             <div className="col-md-6">
-                              <input type="text" name="name" value={formData.name} placeholder="Your Name" onChange={handleChange} />
+                              <input
+                                type="text"
+                                name="name"
+                                value={formData.name}
+                                placeholder="Your Name"
+                                onChange={handleChange}
+                              />
                             </div>
                             <div className="col-md-6">
-                              <input type="email" name="email" value={formData.email} placeholder="Your Email" onChange={handleChange} />
+                              <input
+                                type="email"
+                                name="email"
+                                value={formData.email}
+                                placeholder="Your Email"
+                                onChange={handleChange}
+                              />
                               {formError && <p style={{ color: 'red' }}>{formError}</p>}
                             </div>
                             <div className="col-md-12">
@@ -219,7 +262,7 @@ const ItemDetails01 = () => {
                                 value={formData.message}
                                 placeholder="Please let us know the date you would like to do this tour, how many passengers and any special requests"
                                 onChange={handleChange}
-                              />
+                              ></textarea>
                             </div>
                             <div className="col-md-12">
                               <button type="submit" className="sc-button loadmore style fl-button pri-3">
@@ -238,11 +281,9 @@ const ItemDetails01 = () => {
         </div>
       </div>
 
-      {/* Reviews and Tours */}
-      {itemData && <LiveAuction data={itemData.reviews} />}
+      {/* Reviews and other components */}
+      <LiveAuction data={itemData?.reviews || []} />
       <Tours />
-
-      {/* Footer is always rendered */}
       <Footer />
     </div>
   );
