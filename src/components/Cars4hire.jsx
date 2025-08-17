@@ -3,28 +3,37 @@ import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import FlipMove from 'react-flip-move';
-import { Blurhash } from 'react-blurhash';
-import styled from 'styled-components';
-import Loader from './Loader'; // Import the Loader component
+import styled, { keyframes } from 'styled-components';
+import Loader from './Loader';
 
-// Styled components
+// Shimmer animation
+const shimmer = keyframes`
+  0% {
+    background-position: -500px 0;
+  }
+  100% {
+    background-position: 500px 0;
+  }
+`;
+
 const SlideContainer = styled.div`
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9; /* 16:9 aspect ratio for landscape */
+  aspect-ratio: 16 / 9;
   border-radius: 10px;
   overflow: hidden;
 `;
 
-const BlurhashStyled = styled(Blurhash)`
+const Shimmer = styled.div`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 1;
-  transition: opacity 1s ease-in-out;
-  opacity: ${(props) => (props.loaded ? 0 : 1)};
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 1000px 100%;
+  animation: ${shimmer} 1.5s infinite linear;
 `;
 
 const ImageStyled = styled.img`
@@ -33,7 +42,7 @@ const ImageStyled = styled.img`
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensures image covers the container */
+  object-fit: cover;
   z-index: 2;
   opacity: ${(props) => (props.imageLoaded ? 1 : 0)};
   transition: opacity 1s ease-in-out;
@@ -50,37 +59,30 @@ const Cars4Hire = forwardRef((ref) => {
       .then((data) => {
         const updatedData = data.map(item => ({
           ...item,
-          firstPhoto: item.cover_photos.length > 0 ? item.cover_photos[0] : null,
+          firstPhoto: item.cover_photos.length > 0 ? { ...item.cover_photos[0], imageLoaded: false } : null,
         }));
         setData(updatedData);
-        setLoading(false); // Set loading to false after data is fetched
+        setLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
-        setLoading(false); // Set loading to false if there's an error
+        setLoading(false);
       });
   }, []);
 
   const handleImageLoad = (carId) => {
-    setData(prevData => {
-      return prevData.map(item => {
-        if (item.car.id === carId && item.firstPhoto) {
-          return {
-            ...item,
-            firstPhoto: {
-              ...item.firstPhoto,
-              imageLoaded: true,
-            }
-          };
-        }
-        return item;
-      });
-    });
+    setData(prevData =>
+      prevData.map(item =>
+        item.car.id === carId && item.firstPhoto
+          ? { ...item, firstPhoto: { ...item.firstPhoto, imageLoaded: true } }
+          : item
+      )
+    );
   };
 
   const handleImageError = (e) => {
     console.error('Error loading image:', e.target.src, e);
-    e.target.style.display = 'none'; // Hide broken images
+    e.target.style.display = 'none';
   };
 
   return (
@@ -90,17 +92,15 @@ const Cars4Hire = forwardRef((ref) => {
           <div className="themesflat-container">
             <div className="row">
               <div className="col-12">
-                
-                  <h2 className="tf-title-heading ct style-2 mg-bt-13">
-                    Why settle for less when you can have the best
-                  </h2>
-                  <p className="sub-title ct small mg-bt-20 pad-420">
-                    Choose your ride and let us know the dates.
-                  </p>
-                  
+                <h2 className="tf-title-heading ct style-2 mg-bt-13">
+                  Why settle for less when you can have the best
+                </h2>
+                <p className="sub-title ct small mg-bt-20 pad-420">
+                  Choose your ride and let us know the dates.
+                </p>
 
                 {loading ? (
-                  <Loader /> // Show the loader while loading
+                  <Loader />
                 ) : (
                   <Swiper
                     modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -123,54 +123,33 @@ const Cars4Hire = forwardRef((ref) => {
                               <div className="slider-item">
                                 <div className={`sc-card-product ${item.car.feature ? 'comingsoon' : ''}`}>
                                   <div className="card-media">
-                                    
-                                      <SlideContainer>
-                                        {item.firstPhoto && (
-                                          <React.Fragment>
-                                            <BlurhashStyled
-                                              hash={item.firstPhoto.blurhash}
-                                              resolutionX={32}
-                                              resolutionY={32}
-                                              width={500} /* Match with container width */
-                                              height={281} /* Match with container height for 16:9 */
-                                              punch={1}
-                                              loaded={item.firstPhoto.imageLoaded}
-                                            />
-                                            <ImageStyled
-                                              src={item.firstPhoto.image.cover_photos}
-                                              alt={item.car.title}
-                                              onLoad={() => handleImageLoad(item.car.id)}
-                                              onError={handleImageError}
-                                              imageLoaded={item.firstPhoto.imageLoaded}
-                                            />
-                                          </React.Fragment>
-                                        )}
-                                      </SlideContainer>
-                                    
+                                    <SlideContainer>
+                                      {item.firstPhoto && (
+                                        <>
+                                          {!item.firstPhoto.imageLoaded && <Shimmer />}
+                                          <ImageStyled
+                                            src={item.firstPhoto.image.cover_photos}
+                                            alt={item.car.title}
+                                            onLoad={() => handleImageLoad(item.car.id)}
+                                            onError={handleImageError}
+                                            imageLoaded={item.firstPhoto.imageLoaded}
+                                          />
+                                        </>
+                                      )}
+                                    </SlideContainer>
                                   </div>
                                   <div className="card-title">
-                                    <h5 className="style2">
-                                      {item.car.title}
-                                    </h5>
+                                    <h5 className="style2">{item.car.title}</h5>
                                   </div>
-
                                   <div className="meta-info">
                                     <div className="author">
-                                      <div className="price" style={{ textAlign: 'left' }}>
-                                       
-                                        
-                                        {/* <p>£{item.car.price} Per Day</p> */}
-
-                                        
-                                       
-                                      </div>
+                                      <div className="price" style={{ textAlign: 'left' }}></div>
                                     </div>
                                   </div>
                                   <center>
                                     <Link
                                       target="__blank"
                                       to={'https://wa.link/i3muj9'}
-
                                       className="sc-button loadmore style fl-button pri-3"
                                     >
                                       <span>Reserve Now</span>
