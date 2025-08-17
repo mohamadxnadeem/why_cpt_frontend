@@ -6,13 +6,13 @@ import LiveAuction from '../components/layouts/home-3/LiveAuction';
 import Rating from '../components/Rating';
 import SliderStyle3 from '../components/slider/SliderStyle3';
 import { Blurhash } from 'react-blurhash';
+import 'react-tabs/style/react-tabs.css';
 import parse from 'html-react-parser';
 import styled, { keyframes } from 'styled-components';
 import emailjs from 'emailjs-com';
 import Tours from '../components/Tours';
 import { Helmet } from 'react-helmet';
 
-// Shimmer animation
 const shimmer = keyframes`
   0% { background-position: -500px 0; }
   100% { background-position: 500px 0; }
@@ -59,19 +59,6 @@ const ImageStyled = styled.img`
   border-radius: 10px;
 `;
 
-const LoaderWrapper = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-`;
-
 const ItemDetails01 = () => {
   const { id } = useParams();
   const [itemData, setItemData] = useState(null);
@@ -86,21 +73,29 @@ const ItemDetails01 = () => {
     email: '',
   });
 
-  // Fetch experience data
   useEffect(() => {
     fetch(`https://web-production-1ab9.up.railway.app/api/experiences/${id}/with-reviews`)
       .then((response) => response.json())
       .then((data) => {
-        // Add imageLoaded for shimmer
+        if (!data) {
+          console.error('No data received from API');
+          setLoading(false);
+          return;
+        }
+
+        // Ensure cover_photos exist and add imageLoaded flag
         const updatedData = {
           ...data,
-          cover_photos: data.cover_photos?.map(photo => ({ ...photo, imageLoaded: false })) || [],
+          cover_photos: data.cover_photos?.map((photo) => ({
+            ...photo,
+            imageLoaded: false,
+          })) || [],
         };
         setItemData(updatedData);
         setLoading(false);
-        setFormData(prev => ({
+        setFormData((prev) => ({
           ...prev,
-          serviceType: ` ${data?.experience?.title || ''}`,
+          serviceType: ` ${data.experience?.title || ''}`,
         }));
       })
       .catch((error) => {
@@ -121,18 +116,19 @@ const ItemDetails01 = () => {
       setFormError('Please enter a valid email address.');
       return;
     }
+
     setFormError('');
 
     emailjs
       .send('service_ptqtluk', 'template_uyicl9l', formData, 'apNJP_9sXnff2q82W')
       .then(
         () => setFormSubmitted(true),
-        (error) => console.error('Error sending email:', error)
+        (error) => console.error('Email sending error:', error)
       );
   };
 
   const handleImageLoad = (index) => {
-    setItemData(prev => {
+    setItemData((prev) => {
       if (!prev) return prev;
       const updatedPhotos = [...(prev.cover_photos || [])];
       if (updatedPhotos[index]) updatedPhotos[index].imageLoaded = true;
@@ -140,20 +136,26 @@ const ItemDetails01 = () => {
     });
   };
 
-  const heroSliderData = itemData?.cover_photos?.map(photo => ({
-    src: photo.image?.cover_photos,
-    imageLoaded: photo.imageLoaded,
+  const heroSliderData = itemData?.cover_photos?.map((coverPhoto) => ({
+    src: coverPhoto?.image?.cover_photos,
+    imageLoaded: coverPhoto?.imageLoaded,
+    blurhash: coverPhoto?.blurhash,
   })) || [];
 
+  console.log('itemData:', itemData);
+
   return (
-    <div className='item-details'>
+    <div className="item-details">
       <Helmet>
         <title>{itemData?.experience?.title || 'Experience'} - Cape Town Experience</title>
-        <meta name="description" content={`${itemData?.experience?.title || ''} click for more info`} />
+        <meta
+          name="description"
+          content={`${itemData?.experience?.title || 'Experience'} click for more info`}
+        />
       </Helmet>
+
       <Header />
 
-      {/* Title Section */}
       <section className="flat-title-page inner">
         <div className="overlay"></div>
         <div className="themesflat-container">
@@ -161,11 +163,14 @@ const ItemDetails01 = () => {
             <div className="col-md-12">
               <center>
                 <div className="page-title-heading mg-bt-12">
-                  <h4 className="tf-title-heading ct style-2 fs-30 mg-bt-10" style={{ color: 'white' }}>
+                  <h4
+                    className="tf-title-heading ct style-2 fs-30 mg-bt-10"
+                    style={{ color: 'white' }}
+                  >
                     {itemData?.experience?.title || 'Loading...'}
                   </h4>
                   <h1 className="heading text-center">
-                    <Rating value={itemData?.average_rating || 0} color={'#f8e825'} />
+                    <Rating value={itemData?.average_rating || 0} color="#f8e825" />
                   </h1>
                 </div>
               </center>
@@ -179,37 +184,39 @@ const ItemDetails01 = () => {
         </div>
       </section>
 
-      {/* Hero Slider */}
-      {heroSliderData.length > 0 ? (
+      {loading ? (
+        <div style={{ padding: '30px 0' }}>
+          <SlideContainer>
+            <ShimmerDiv />
+          </SlideContainer>
+        </div>
+      ) : (
         <SliderStyle3
           data={heroSliderData}
-          renderImage={(src, _, index) => (
+          renderImage={(src, blurhash, index) => (
             <SlideContainer key={index}>
-              {!itemData.cover_photos[index].imageLoaded && <ShimmerDiv />}
+              {!itemData?.cover_photos?.[index]?.imageLoaded && <ShimmerDiv />}
               <ImageStyled
                 src={src}
-                alt={itemData?.experience?.title || 'Cover'}
+                alt={itemData?.experience?.title || ''}
                 onLoad={() => handleImageLoad(index)}
-                onError={(e) => e.target.style.display = 'none'}
-                imageLoaded={itemData.cover_photos[index].imageLoaded}
+                onError={(e) => (e.target.style.display = 'none')}
+                imageLoaded={itemData?.cover_photos?.[index]?.imageLoaded}
               />
             </SlideContainer>
           )}
         />
-      ) : (
-        <SlideContainer>
-          <ShimmerDiv />
-        </SlideContainer>
       )}
 
-      {/* Experience Description */}
       <div className="tf-section tf-item-details">
         <div className="container">
           <div className="row">
             <div className="col-md-12">
               <div className="content-center">
                 <div className="sc-item-details">
-                  {itemData?.experience?.body ? parse(itemData.experience.body) : <ShimmerDiv />}
+                  {itemData?.experience?.body
+                    ? parse(itemData.experience.body)
+                    : 'Loading content...'}
                 </div>
               </div>
             </div>
@@ -265,7 +272,10 @@ const ItemDetails01 = () => {
                               ></textarea>
                             </div>
                             <div className="col-md-12">
-                              <button type="submit" className="sc-button loadmore style fl-button pri-3">
+                              <button
+                                type="submit"
+                                className="sc-button loadmore style fl-button pri-3"
+                              >
                                 <span>Send Message</span>
                               </button>
                             </div>
@@ -281,7 +291,6 @@ const ItemDetails01 = () => {
         </div>
       </div>
 
-      {/* Reviews and other components */}
       <LiveAuction data={itemData?.reviews || []} />
       <Tours />
       <Footer />
