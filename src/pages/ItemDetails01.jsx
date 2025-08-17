@@ -5,16 +5,60 @@ import Footer from '../components/footer/Footer';
 import { Link } from 'react-router-dom';
 import LiveAuction from '../components/layouts/home-3/LiveAuction';
 import Rating from '../components/Rating';
-import Loader from '../components/Loader';
-import SliderStyle3 from '../components/slider/SliderStyle3';
-import { Blurhash } from 'react-blurhash';
-import 'react-tabs/style/react-tabs.css';
+import styled, { keyframes } from 'styled-components';
 import parse from 'html-react-parser';
-import styled from 'styled-components';
 import emailjs from 'emailjs-com';
 import Tours from '../components/Tours';
 import { Helmet } from 'react-helmet';
 import Cars4Hire from '../components/Cars4hire';
+import SliderStyle3 from '../components/slider/SliderStyle3';
+
+// Shimmer animation
+const shimmer = keyframes`
+  0% { background-position: -500px 0; }
+  100% { background-position: 500px 0; }
+`;
+
+const ShimmerDiv = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    #f6f7f8 0%,
+    #edeef1 20%,
+    #f6f7f8 40%,
+    #f6f7f8 100%
+  );
+  background-size: 1000px 100%;
+  animation: ${shimmer} 1.5s linear infinite;
+  z-index: 1;
+  border-radius: 10px;
+`;
+
+const SlideContainer = styled.div`
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 15px;
+`;
+
+const ImageStyled = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+  opacity: ${(props) => (props.imageLoaded ? 1 : 0)};
+  transition: opacity 0.5s ease-in-out;
+  border-radius: 10px;
+`;
 
 const LoaderWrapper = styled.div`
   position: fixed;
@@ -26,7 +70,7 @@ const LoaderWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000; // Ensure it appears above other content
+  z-index: 1000;
 `;
 
 const ItemDetails01 = () => {
@@ -43,13 +87,19 @@ const ItemDetails01 = () => {
     email: '',
   });
 
-  
-
   useEffect(() => {
     fetch(`https://web-production-1ab9.up.railway.app/api/experiences/${id}/with-reviews`)
       .then((response) => response.json())
       .then((data) => {
-        setItemData(data);
+        // Add imageLoaded property for shimmer effect
+        const updatedData = {
+          ...data,
+          cover_photos: data.cover_photos.map(photo => ({
+            ...photo,
+            imageLoaded: false,
+          })),
+        };
+        setItemData(updatedData);
         setLoading(false);
         setFormData((prevFormData) => ({
           ...prevFormData,
@@ -70,14 +120,12 @@ const ItemDetails01 = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailPattern.test(formData.email)) {
       setFormError('Please enter a valid email address.');
       return;
     }
-
     setFormError('');
 
     emailjs
@@ -93,14 +141,19 @@ const ItemDetails01 = () => {
       );
   };
 
-  const heroSliderData = itemData && itemData.cover_photos
-    ? itemData.cover_photos.map((coverPhoto) => ({
-        src: coverPhoto.image.cover_photos,
-        blurhash: coverPhoto.blurhash,
-      }))
-    : [];
+  const handleImageLoad = (index) => {
+    setItemData(prev => {
+      const updatedPhotos = [...prev.cover_photos];
+      updatedPhotos[index].imageLoaded = true;
+      return { ...prev, cover_photos: updatedPhotos };
+    });
+  };
 
-  if (loading) {
+  const handleImageError = (e) => {
+    e.target.style.display = 'none';
+  };
+
+  if (loading || !itemData) {
     return (
       <LoaderWrapper>
         <Loader />
@@ -108,12 +161,16 @@ const ItemDetails01 = () => {
     );
   }
 
+  const heroSliderData = itemData.cover_photos.map((coverPhoto) => ({
+    src: coverPhoto.image.cover_photos,
+    imageLoaded: coverPhoto.imageLoaded,
+  }));
+
   return (
     <div className='item-details'>
       <Helmet>
-        <title>Don't miss out on this experience if you're in Cape Town</title>
-        <meta name="description" content={itemData.experience.title + ('click for more info')} />
-        <meta property="og:title" content="Look what I found" />
+        <title>{itemData.experience.title} - Cape Town Experience</title>
+        <meta name="description" content={`${itemData.experience.title} click for more info`} />
       </Helmet>
       <Header />
       <section className="flat-title-page inner">
@@ -121,18 +178,16 @@ const ItemDetails01 = () => {
         <div className="themesflat-container">
           <div className="row">
             <div className="col-md-12">
-              {!loading && ( // Hide the header while loading
-                <center>
-                  <div className="page-title-heading mg-bt-12">
-                    <h4 className="tf-title-heading ct style-2 fs-30 mg-bt-10" style={{ color: 'white' }}>
-                      {itemData.experience.title}
-                    </h4>
-                    <h1 className="heading text-center">
-                      <Rating value={itemData.average_rating} color={'#f8e825'} />
-                    </h1>
-                  </div>
-                </center>
-              )}
+              <center>
+                <div className="page-title-heading mg-bt-12">
+                  <h4 className="tf-title-heading ct style-2 fs-30 mg-bt-10" style={{ color: 'white' }}>
+                    {itemData.experience.title}
+                  </h4>
+                  <h1 className="heading text-center">
+                    <Rating value={itemData.average_rating} color={'#f8e825'} />
+                  </h1>
+                </div>
+              </center>
               <div className="breadcrumbs style2">
                 <ul>
                   <li>Based on {itemData.reviews.length} reviews</li>
@@ -143,42 +198,19 @@ const ItemDetails01 = () => {
         </div>
       </section>
 
-     
-
-      {/* <Link
-        
-        to={`/top-3-tours`}
-        className="sc-button loadmore style fl-button pri-3"
-      >
-      <span>Back</span>
-    </Link> */}
-
       <SliderStyle3
         data={heroSliderData}
-        renderImage={(src, blurhash) => (
-          <div style={{ position: 'relative' }}>
-            <Blurhash
-              hash={blurhash}
-              width={500}
-              height={325}
-              resolutionX={32}
-              resolutionY={32}
-              punch={1}
-              style={{ position: 'absolute', top: 0, left: 0, zIndex: 1 }}
-            />
-            <img
+        renderImage={(src, _, index) => (
+          <SlideContainer key={index}>
+            {!itemData.cover_photos[index].imageLoaded && <ShimmerDiv />}
+            <ImageStyled
               src={src}
-              alt="Cover"
-              style={{ width: '100%', height: 'auto', position: 'relative', zIndex: 2 }}
-              onError={(e) => {
-                console.error('Error loading image:', e);
-                e.target.style.display = 'none';
-              }}
-              onLoad={() => {
-                console.log('Image loaded successfully:', src);
-              }}
+              alt={itemData.experience.title}
+              onLoad={() => handleImageLoad(index)}
+              onError={handleImageError}
+              imageLoaded={itemData.cover_photos[index].imageLoaded}
             />
-          </div>
+          </SlideContainer>
         )}
       />
 
@@ -187,31 +219,10 @@ const ItemDetails01 = () => {
           <div className="row">
             <div className="col-md-12">
               <div className="content-center">
-                <div className="sc-item-details">
-                  <div>{parse(itemData.experience.body)}</div>
-                </div>
+                <div className="sc-item-details">{parse(itemData.experience.body)}</div>
               </div>
             </div>
           </div>
-
-          {/* <div className="tf-section tf-tours">
-            <div className="container">
-              
-              <Cars4Hire />
-            </div>
-          </div> */}
- 
-          
-
-          {/* <center>
-            <Link
-              to="#"
-              onClick={openCalendlyPopup}
-              className="sc-button loadmore style fl-button pri-3"
-            >
-              <span>Schedule Free Consultation with a Travel Expert</span>
-            </Link>
-          </center> */}
 
           <div className="tf-section tf-item-details">
             <div className="container">
@@ -226,58 +237,44 @@ const ItemDetails01 = () => {
                         </div>
                       ) : (
                         <Fragment>
-                          {!loading && ( // Hide form header while loading
-                            <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                              Secure your booking now
-                            </h1>
-                             
-                            
-                            
-                          )}
-
+                          <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                            Secure your booking now
+                          </h1>
                           <div className="form-inner">
-                            <form
-                              id="contactform"
-                              noValidate="novalidate"
-                              onSubmit={handleSubmit}
-                            >
+                            <form id="contactform" noValidate="novalidate" onSubmit={handleSubmit}>
                               <div className="row">
-                                {!loading && ( // Conditionally render inputs based on loading state
-                                  <>
-                                    <div className="col-md-6">
-                                      <input
-                                        type="text"
-                                        name="name"
-                                        value={formData.name}
-                                        placeholder="Your Name"
-                                        onChange={handleChange}
-                                      />
-                                    </div>
-                                    <div className="col-md-6">
-                                      <input
-                                        type="email"
-                                        name="email"
-                                        value={formData.email}
-                                        placeholder="Your Email"
-                                        onChange={handleChange}
-                                      />
-                                      {formError && <p style={{ color: 'red' }}>{formError}</p>}
-                                    </div>
-                                    <div className="col-md-12">
-                                      <textarea
-                                        name="message"
-                                        value={formData.message}
-                                        placeholder="Please let us know the date you would like to do this tour, how many passengers and any special requests"
-                                        onChange={handleChange}
-                                      ></textarea>
-                                    </div>
-                                    <div className="col-md-12">
-                                      <button type="submit" className="sc-button loadmore style fl-button pri-3">
-                                        <span>Send Message</span>
-                                      </button>
-                                    </div>
-                                  </>
-                                )}
+                                <div className="col-md-6">
+                                  <input
+                                    type="text"
+                                    name="name"
+                                    value={formData.name}
+                                    placeholder="Your Name"
+                                    onChange={handleChange}
+                                  />
+                                </div>
+                                <div className="col-md-6">
+                                  <input
+                                    type="email"
+                                    name="email"
+                                    value={formData.email}
+                                    placeholder="Your Email"
+                                    onChange={handleChange}
+                                  />
+                                  {formError && <p style={{ color: 'red' }}>{formError}</p>}
+                                </div>
+                                <div className="col-md-12">
+                                  <textarea
+                                    name="message"
+                                    value={formData.message}
+                                    placeholder="Please let us know the date you would like to do this tour, how many passengers and any special requests"
+                                    onChange={handleChange}
+                                  ></textarea>
+                                </div>
+                                <div className="col-md-12">
+                                  <button type="submit" className="sc-button loadmore style fl-button pri-3">
+                                    <span>Send Message</span>
+                                  </button>
+                                </div>
                               </div>
                             </form>
                           </div>
@@ -291,10 +288,7 @@ const ItemDetails01 = () => {
           </div>
 
           <LiveAuction data={itemData.reviews} />
-
           <Tours />
-
-          
           <Footer />
         </div>
       </div>
