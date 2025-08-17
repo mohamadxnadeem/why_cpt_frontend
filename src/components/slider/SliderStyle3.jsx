@@ -5,10 +5,33 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/scss';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
-import { Blurhash } from 'react-blurhash';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
-// Styled components
+// Shimmer animation
+const shimmer = keyframes`
+  0% { background-position: -500px 0; }
+  100% { background-position: 500px 0; }
+`;
+
+const ShimmerDiv = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    #f6f7f8 0%,
+    #edeef1 20%,
+    #f6f7f8 40%,
+    #f6f7f8 100%
+  );
+  background-size: 1000px 100%;
+  animation: ${shimmer} 1.5s linear infinite;
+  z-index: 1;
+  border-radius: 10px;
+`;
+
 const SliderContainer = styled.div`
   .swiper-wrapper {
     position: relative;
@@ -18,64 +41,36 @@ const SliderContainer = styled.div`
 const SlideContainer = styled.div`
   position: relative;
   width: 100%;
-  height: 300px; /* Adjust as needed */
+  height: 300px;
   border-radius: 10px;
-  overflow: hidden; /* Ensures border radius is applied to child elements */
-`;
-
-const BlurhashStyled = styled(Blurhash)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  opacity: ${(props) => (props.imageLoaded ? 0 : 1)};
-  transition: opacity 0.5s ease;
+  overflow: hidden;
 `;
 
 const ImageStyled = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensures image covers the container */
-  display: ${(props) => (props.imageLoaded ? 'block' : 'none')};
+  object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 2;
+  opacity: ${(props) => (props.imageLoaded ? 1 : 0)};
+  transition: opacity 0.5s ease-in-out;
   border-radius: 10px;
 `;
 
 const SliderItem = ({ item }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  const handleImageLoad = () => {
-    console.log('Image loaded:', item.src); // Debug image load
-    setImageLoaded(true);
-  };
-
-  const handleImageError = (e) => {
-    console.error('Error loading image:', e);
-    e.target.style.display = 'none'; // Hide broken images
-  };
-
   return (
     <SlideContainer>
-      <BlurhashStyled
-        hash={item.blurhash}
-        width={400}
-        height={300}
-        resolutionX={32}
-        resolutionY={32}
-        punch={1}
-        imageLoaded={imageLoaded}
-      />
+      {!imageLoaded && <ShimmerDiv />}
       <ImageStyled
         src={item.src}
-        alt="Cover"
+        alt={item.title}
         imageLoaded={imageLoaded}
-        onLoad={handleImageLoad}
-        onError={handleImageError}
+        onLoad={() => setImageLoaded(true)}
+        onError={(e) => (e.target.style.display = 'none')}
       />
       <div className="content">
         <div className="fs-16">
@@ -88,8 +83,6 @@ const SliderItem = ({ item }) => {
 };
 
 const SliderStyle3 = ({ data }) => {
-  console.log('this is the slider data', data);
-
   return (
     <SliderContainer>
       <section className="flat-cart-item home6 style2 mainslider">
@@ -101,15 +94,9 @@ const SliderStyle3 = ({ data }) => {
                 modules={[Navigation, Pagination, Scrollbar, A11y]}
                 spaceBetween={30}
                 breakpoints={{
-                  0: {
-                    slidesPerView: 1,
-                  },
-                  767: {
-                    slidesPerView: 2,
-                  },
-                  991: {
-                    slidesPerView: 3,
-                  },
+                  0: { slidesPerView: 1 },
+                  767: { slidesPerView: 2 },
+                  991: { slidesPerView: 3 },
                 }}
                 navigation
                 pagination={{ clickable: true }}
