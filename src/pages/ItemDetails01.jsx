@@ -5,22 +5,19 @@ import Footer from '../components/footer/Footer';
 import LiveAuction from '../components/layouts/home-3/LiveAuction';
 import Rating from '../components/Rating';
 import SliderStyle3 from '../components/slider/SliderStyle3';
-import styled, { keyframes } from 'styled-components';
-import parse from 'html-react-parser';
-import emailjs from 'emailjs-com';
 import Tours from '../components/Tours';
+import parse from 'html-react-parser';
+import styled, { keyframes } from 'styled-components';
+import emailjs from 'emailjs-com';
 import { Helmet } from 'react-helmet';
 
-// Shimmer animation
+// Shimmer effect
 const shimmer = keyframes`
   0% { background-position: -500px 0; }
   100% { background-position: 500px 0; }
 `;
 
 const ShimmerDiv = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   background: linear-gradient(
@@ -32,6 +29,9 @@ const ShimmerDiv = styled.div`
   );
   background-size: 1000px 100%;
   animation: ${shimmer} 1.5s linear infinite;
+  position: absolute;
+  top: 0;
+  left: 0;
   z-index: 1;
   border-radius: 10px;
 `;
@@ -39,19 +39,19 @@ const ShimmerDiv = styled.div`
 const SlideContainer = styled.div`
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16/9;
   border-radius: 10px;
   overflow: hidden;
   margin-bottom: 15px;
 `;
 
 const ImageStyled = styled.img`
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
   z-index: 2;
   opacity: ${(props) => (props.imageLoaded ? 1 : 0)};
   transition: opacity 0.5s ease-in-out;
@@ -84,12 +84,12 @@ const ItemDetails01 = () => {
     email: '',
   });
 
-  // Fetch experience data
+  // Fetch data
   useEffect(() => {
     fetch(`https://web-production-1ab9.up.railway.app/api/experiences/${id}/with-reviews`)
-      .then((response) => response.json())
+      .then((res) => res.json())
       .then((data) => {
-        // Add imageLoaded flag for shimmer effect
+        // Add imageLoaded property for shimmer
         const updatedData = {
           ...data,
           cover_photos: data.cover_photos.map(photo => ({
@@ -98,52 +98,47 @@ const ItemDetails01 = () => {
           })),
         };
         setItemData(updatedData);
+        setFormData((prev) => ({ ...prev, serviceType: data.experience.title }));
         setLoading(false);
-        setFormData((prev) => ({
-          ...prev,
-          serviceType: ` ${data.experience.title}`,
-        }));
       })
-      .catch((error) => console.error('Error fetching data:', error));
+      .catch((err) => console.error('Error fetching data:', err));
   }, [id]);
 
-  // Form handlers
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(formData.email)) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       setFormError('Please enter a valid email address.');
       return;
     }
     setFormError('');
-    emailjs
-      .send('service_ptqtluk', 'template_uyicl9l', formData, 'apNJP_9sXnff2q82W')
+    emailjs.send('service_ptqtluk', 'template_uyicl9l', formData, 'apNJP_9sXnff2q82W')
       .then(() => setFormSubmitted(true))
-      .catch((err) => console.error('Email sending error:', err));
+      .catch((err) => console.error('Email send error:', err));
   };
 
   const handleImageLoad = (index) => {
-    setItemData((prev) => {
+    setItemData(prev => {
       const updatedPhotos = [...prev.cover_photos];
       updatedPhotos[index].imageLoaded = true;
       return { ...prev, cover_photos: updatedPhotos };
     });
   };
 
-  const handleImageError = (e) => {
-    e.target.style.display = 'none';
-  };
+  if (!itemData) return <LoaderWrapper>Loading...</LoaderWrapper>;
 
-  // Slider data
-  const heroSliderData = itemData?.cover_photos || [];
+  // Prepare slider data
+  const heroSliderData = itemData.cover_photos.map((photo) => ({
+    src: photo.image.cover_photos,
+    imageLoaded: photo.imageLoaded,
+  }));
 
   return (
-    <div className='item-details'>
+    <div className="item-details">
       <Helmet>
-        <title>{itemData?.experience?.title || 'Experience'} - Cape Town Experience</title>
-        <meta name="description" content={`${itemData?.experience?.title} click for more info`} />
+        <title>{itemData.experience.title} - Cape Town Experience</title>
+        <meta name="description" content={`${itemData.experience.title} click for more info`} />
       </Helmet>
 
       <Header />
@@ -156,16 +151,16 @@ const ItemDetails01 = () => {
               <center>
                 <div className="page-title-heading mg-bt-12">
                   <h4 className="tf-title-heading ct style-2 fs-30 mg-bt-10" style={{ color: 'white' }}>
-                    {itemData?.experience?.title || 'Loading...'}
+                    {itemData.experience.title}
                   </h4>
                   <h1 className="heading text-center">
-                    <Rating value={itemData?.average_rating || 0} color="#f8e825" />
+                    <Rating value={itemData.average_rating} color="#f8e825" />
                   </h1>
                 </div>
               </center>
               <div className="breadcrumbs style2">
                 <ul>
-                  <li>Based on {itemData?.reviews?.length || 0} reviews</li>
+                  <li>Based on {itemData.reviews.length} reviews</li>
                 </ul>
               </div>
             </div>
@@ -173,105 +168,97 @@ const ItemDetails01 = () => {
         </div>
       </section>
 
-      {/* Slider */}
       <SliderStyle3
         data={heroSliderData}
-        renderImage={(photo, _, index) => (
+        renderImage={(src, _, index) => (
           <SlideContainer key={index}>
-            {!photo.imageLoaded && <ShimmerDiv />}
+            {!heroSliderData[index].imageLoaded && <ShimmerDiv />}
             <ImageStyled
-              src={photo.image.cover_photos}
+              src={src}
               alt={itemData.experience.title}
               onLoad={() => handleImageLoad(index)}
-              onError={handleImageError}
-              imageLoaded={photo.imageLoaded}
+              imageLoaded={heroSliderData[index].imageLoaded}
             />
           </SlideContainer>
         )}
       />
 
-      {/* Experience Body */}
       <div className="tf-section tf-item-details">
         <div className="container">
           <div className="row">
             <div className="col-md-12">
               <div className="content-center">
-                <div className="sc-item-details">{itemData && parse(itemData.experience.body)}</div>
+                <div className="sc-item-details">{parse(itemData.experience.body)}</div>
               </div>
             </div>
           </div>
 
-          {/* Booking Form */}
           <div className="tf-section tf-item-details">
             <div className="container">
               <div className="row">
                 <div className="col-md-12">
                   <div className="content-center">
-                    <div className="sc-item-details">
-                      {formSubmitted ? (
-                        <div className="thank-you-message">
-                          <h2>Thank You!</h2>
-                          <p>Your enquiry has been successfully submitted. We will get back to you soon.</p>
-                        </div>
-                      ) : (
-                        <Fragment>
-                          <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                            Secure your booking now
-                          </h1>
-                          <div className="form-inner">
-                            <form onSubmit={handleSubmit}>
-                              <div className="row">
-                                <div className="col-md-6">
-                                  <input
-                                    type="text"
-                                    name="name"
-                                    value={formData.name}
-                                    placeholder="Your Name"
-                                    onChange={handleChange}
-                                  />
-                                </div>
-                                <div className="col-md-6">
-                                  <input
-                                    type="email"
-                                    name="email"
-                                    value={formData.email}
-                                    placeholder="Your Email"
-                                    onChange={handleChange}
-                                  />
-                                  {formError && <p style={{ color: 'red' }}>{formError}</p>}
-                                </div>
-                                <div className="col-md-12">
-                                  <textarea
-                                    name="message"
-                                    value={formData.message}
-                                    placeholder="Please let us know the date you would like to do this tour, how many passengers and any special requests"
-                                    onChange={handleChange}
-                                  />
-                                </div>
-                                <div className="col-md-12">
-                                  <button type="submit" className="sc-button loadmore style fl-button pri-3">
-                                    <span>Send Message</span>
-                                  </button>
-                                </div>
+                    {formSubmitted ? (
+                      <div className="thank-you-message">
+                        <h2>Thank You!</h2>
+                        <p>Your enquiry has been successfully submitted. We will get back to you soon.</p>
+                      </div>
+                    ) : (
+                      <Fragment>
+                        <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                          Secure your booking now
+                        </h1>
+                        <div className="form-inner">
+                          <form onSubmit={handleSubmit}>
+                            <div className="row">
+                              <div className="col-md-6">
+                                <input
+                                  type="text"
+                                  name="name"
+                                  value={formData.name}
+                                  placeholder="Your Name"
+                                  onChange={handleChange}
+                                />
                               </div>
-                            </form>
-                          </div>
-                        </Fragment>
-                      )}
-                    </div>
+                              <div className="col-md-6">
+                                <input
+                                  type="email"
+                                  name="email"
+                                  value={formData.email}
+                                  placeholder="Your Email"
+                                  onChange={handleChange}
+                                />
+                                {formError && <p style={{ color: 'red' }}>{formError}</p>}
+                              </div>
+                              <div className="col-md-12">
+                                <textarea
+                                  name="message"
+                                  value={formData.message}
+                                  placeholder="Please let us know the date you would like to do this tour, how many passengers and any special requests"
+                                  onChange={handleChange}
+                                />
+                              </div>
+                              <div className="col-md-12">
+                                <button type="submit" className="sc-button loadmore style fl-button pri-3">
+                                  <span>Send Message</span>
+                                </button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </Fragment>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Other Sections */}
-          <LiveAuction data={itemData?.reviews || []} />
+          <LiveAuction data={itemData.reviews} />
           <Tours />
+          <Footer />
         </div>
       </div>
-
-      <Footer />
     </div>
   );
 };
