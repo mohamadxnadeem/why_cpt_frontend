@@ -4,26 +4,12 @@ import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 import { Link } from 'react-router-dom';
 import Rating from '../components/Rating';
-import Loader from '../components/Loader';
 import SliderStyle3 from '../components/slider/SliderStyle3';
+import ShimmerLoader from '../components/ShimmerLoader'; // ✅ shimmer instead of spinner
 import 'react-tabs/style/react-tabs.css';
 import parse from 'html-react-parser';
-import styled from 'styled-components';
 import emailjs from 'emailjs-com';
 import { Helmet } from 'react-helmet';
-
-const LoaderWrapper = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-`;
 
 const TravelPackage = () => {
   const { id } = useParams();
@@ -106,7 +92,7 @@ const TravelPackage = () => {
       });
   };
 
-  // ✅ updated heroSliderData: only image now (no blurhash)
+  // ✅ only image (no blurhash)
   const heroSliderData = itemData && itemData.cover_photos
     ? itemData.cover_photos.map((coverPhoto) => ({
         src: coverPhoto.image.cover_photos,
@@ -114,10 +100,11 @@ const TravelPackage = () => {
     : [];
 
   if (loading) {
+    // ✅ shimmer loader only
     return (
-      <LoaderWrapper>
-        <Loader />
-      </LoaderWrapper>
+      <div className="p-6">
+        <ShimmerLoader />
+      </div>
     );
   }
 
@@ -153,7 +140,7 @@ const TravelPackage = () => {
         </div>
       </section>
 
-      {/* ✅ Removed Blurhash: plain slider images with padding */}
+      {/* ✅ Slider with padding */}
       <div style={{ padding: '20px 0' }}>
         <SliderStyle3 data={heroSliderData} />
       </div>
