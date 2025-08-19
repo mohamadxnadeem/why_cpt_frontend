@@ -23,6 +23,7 @@ const TravelPackage = () => {
     contactNumber: '',
     serviceType: '',
     email: '',
+    message: '',
   });
 
   useEffect(() => {
@@ -53,7 +54,6 @@ const TravelPackage = () => {
     fetch(`https://web-production-1ab9.up.railway.app/api/full-travel-packages/${id}/with-reviews`)
       .then((response) => response.json())
       .then((data) => {
-        console.log('Fetched data:', data);
         setItemData(data);
         setLoading(false);
         setFormData((prevFormData) => ({
@@ -61,16 +61,11 @@ const TravelPackage = () => {
           serviceType: ` ${data.fullpackage.title}`,
         }));
       })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
+      .catch((error) => console.error('Error fetching data:', error));
   }, [id]);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
@@ -83,43 +78,29 @@ const TravelPackage = () => {
     setFormError('');
     emailjs
       .send('service_ptqtluk', 'template_uyicl9l', formData, 'apNJP_9sXnff2q82W')
-      .then(() => {
-        console.log('Email successfully sent!');
-        setFormSubmitted(true);
-      })
-      .catch((error) => {
-        console.log('There was an error sending the email:', error);
-      });
+      .then(() => setFormSubmitted(true))
+      .catch((error) => console.log('Error sending email:', error));
   };
 
-  // ✅ only image (no blurhash)
-  const heroSliderData = itemData && itemData.cover_photos
-    ? itemData.cover_photos.map((coverPhoto) => ({
-        src: coverPhoto.image.cover_photos,
-      }))
-    : [];
+  const heroSliderData = itemData?.cover_photos?.map((coverPhoto) => ({
+    src: coverPhoto.image.cover_photos,
+  })) || [];
 
+  // ✅ shimmer loader instead of spinner
   if (loading) {
-    // ✅ shimmer loader only
-    return (
-      <div className="p-6">
-        <ShimmerLoader />
-      </div>
-    );
+    return <ShimmerLoader />;
   }
 
   return (
     <div className='item-details'>
       <Helmet>
         <title>Don't miss out on this fullpackage if you're in Cape Town</title>
-        <meta
-          name="description"
-          content={itemData.fullpackage.title + (' click for more info')}
-        />
+        <meta name="description" content={`${itemData.fullpackage.title} click for more info`} />
         <meta property="og:title" content="Look what I found" />
       </Helmet>
 
       <Header />
+
       <section className="flat-title-page inner">
         <div className="overlay"></div>
         <div className="themesflat-container">
@@ -127,10 +108,7 @@ const TravelPackage = () => {
             <div className="col-md-12">
               <center>
                 <div className="page-title-heading mg-bt-12">
-                  <h4 
-                    className="tf-title-heading ct style-2 fs-30 mg-bt-10"
-                    style={{ color: 'white' }}
-                  >
+                  <h4 className="tf-title-heading ct style-2 fs-30 mg-bt-10" style={{ color: 'white' }}>
                     {itemData.fullpackage.title}
                   </h4>
                 </div>
@@ -140,7 +118,6 @@ const TravelPackage = () => {
         </div>
       </section>
 
-      {/* ✅ Slider with padding */}
       <div style={{ padding: '20px 0' }}>
         <SliderStyle3 data={heroSliderData} />
       </div>
@@ -151,12 +128,14 @@ const TravelPackage = () => {
             <div className="col-md-12">
               <div className="content-center">
                 <div className="sc-item-details">
-                  <div>{parse(itemData.fullpackage.body)}</div>
+                  {parse(itemData.fullpackage.body)}
                 </div>
               </div>
             </div>
           </div>
+
           <br />
+
           <div className="tf-section tf-item-details">
             <div className="container">
               <div className="row">
@@ -170,50 +149,44 @@ const TravelPackage = () => {
                         </div>
                       ) : (
                         <Fragment>
-                          {!loading && (
-                            <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                              Any Questions?
-                            </h1>
-                          )}
+                          <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                            Any Questions?
+                          </h1>
                           <div className="form-inner">
-                            <form id="contactform" noValidate="novalidate" onSubmit={handleSubmit}>
+                            <form id="contactform" noValidate onSubmit={handleSubmit}>
                               <div className="row">
-                                {!loading && (
-                                  <>
-                                    <div className="col-md-6">
-                                      <input
-                                        type="text"
-                                        name="name"
-                                        value={formData.name}
-                                        placeholder="Your Name"
-                                        onChange={handleChange}
-                                      />
-                                    </div>
-                                    <div className="col-md-6">
-                                      <input
-                                        type="email"
-                                        name="email"
-                                        value={formData.email}
-                                        placeholder="Your Email"
-                                        onChange={handleChange}
-                                      />
-                                      {formError && <p style={{ color: 'red' }}>{formError}</p>}
-                                    </div>
-                                    <div className="col-md-12">
-                                      <textarea
-                                        name="message"
-                                        value={formData.message}
-                                        placeholder="Your question"
-                                        onChange={handleChange}
-                                      ></textarea>
-                                    </div>
-                                    <div className="col-md-12">
-                                      <button type="submit" className="sc-button loadmore style fl-button pri-3">
-                                        <span>Ask Question</span>
-                                      </button>
-                                    </div>
-                                  </>
-                                )}
+                                <div className="col-md-6">
+                                  <input
+                                    type="text"
+                                    name="name"
+                                    value={formData.name}
+                                    placeholder="Your Name"
+                                    onChange={handleChange}
+                                  />
+                                </div>
+                                <div className="col-md-6">
+                                  <input
+                                    type="email"
+                                    name="email"
+                                    value={formData.email}
+                                    placeholder="Your Email"
+                                    onChange={handleChange}
+                                  />
+                                  {formError && <p style={{ color: 'red' }}>{formError}</p>}
+                                </div>
+                                <div className="col-md-12">
+                                  <textarea
+                                    name="message"
+                                    value={formData.message}
+                                    placeholder="Your question"
+                                    onChange={handleChange}
+                                  ></textarea>
+                                </div>
+                                <div className="col-md-12">
+                                  <button type="submit" className="sc-button loadmore style fl-button pri-3">
+                                    <span>Ask Question</span>
+                                  </button>
+                                </div>
                               </div>
                             </form>
                           </div>
