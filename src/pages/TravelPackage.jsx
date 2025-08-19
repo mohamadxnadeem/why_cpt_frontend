@@ -2,7 +2,6 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-import { Link } from 'react-router-dom';
 import Rating from '../components/Rating';
 import SliderStyle3 from '../components/slider/SliderStyle3';
 import 'react-tabs/style/react-tabs.css';
@@ -10,6 +9,33 @@ import parse from 'html-react-parser';
 import styled from 'styled-components';
 import emailjs from 'emailjs-com';
 import { Helmet } from 'react-helmet';
+
+// ✅ Styled shimmer loader
+const LoaderWrapper = styled.div`
+  width: 100%;
+  height: 400px;
+  margin: 20px 0;
+`;
+
+const Shimmer = styled.div`
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background: linear-gradient(
+    to right,
+    #f0f0f0 0%,
+    #e0e0e0 20%,
+    #f0f0f0 40%,
+    #f0f0f0 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+`;
 
 const TravelPackage = () => {
   const { id } = useParams();
@@ -23,6 +49,7 @@ const TravelPackage = () => {
     contactNumber: '',
     serviceType: '',
     email: '',
+    message: ''
   });
 
   useEffect(() => {
@@ -35,33 +62,20 @@ const TravelPackage = () => {
     };
   }, []);
 
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-  const openCalendlyPopup = (e) => {
-    e.preventDefault();
-    if (isMobile) {
-      window.open('https://calendly.com/mohamadxnadeem/30min', '_blank');
-    } else if (window.Calendly) {
-      window.Calendly.initPopupWidget({ url: 'https://calendly.com/mohamadxnadeem/30min' });
-    } else {
-      console.error("Calendly is not loaded yet");
-    }
-    return false;
-  };
-
   useEffect(() => {
     fetch(`https://web-production-1ab9.up.railway.app/api/full-travel-packages/${id}/with-reviews`)
       .then((response) => response.json())
       .then((data) => {
         setItemData(data);
         setLoading(false);
-        setFormData((prevFormData) => ({
-          ...prevFormData,
+        setFormData((prev) => ({
+          ...prev,
           serviceType: ` ${data.fullpackage.title}`,
         }));
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
+        setLoading(false);
       });
   }, [id]);
 
@@ -82,31 +96,14 @@ const TravelPackage = () => {
     setFormError('');
     emailjs
       .send('service_ptqtluk', 'template_uyicl9l', formData, 'apNJP_9sXnff2q82W')
-      .then(() => {
-        setFormSubmitted(true);
-      })
-      .catch((error) => {
-        console.log('There was an error sending the email:', error);
-      });
+      .then(() => setFormSubmitted(true))
+      .catch((error) => console.log('Email error:', error));
   };
 
-  const heroSliderData = itemData && itemData.cover_photos
-    ? itemData.cover_photos.map((coverPhoto) => ({
-        src: coverPhoto.image.cover_photos,
-      }))
-    : [];
-
-  // ✅ Use inline shimmer while fetching
-  if (loading) {
-    return (
-      <div className="animate-pulse p-6 space-y-4">
-        <div className="h-6 bg-gray-300 rounded w-3/4"></div>
-        <div className="h-4 bg-gray-300 rounded w-1/2"></div>
-        <div className="h-4 bg-gray-300 rounded w-full"></div>
-        <div className="h-4 bg-gray-300 rounded w-5/6"></div>
-      </div>
-    );
-  }
+  const heroSliderData =
+    itemData && itemData.cover_photos
+      ? itemData.cover_photos.map((cover) => ({ src: cover.image.cover_photos }))
+      : [];
 
   return (
     <div className='item-details'>
@@ -114,12 +111,15 @@ const TravelPackage = () => {
         <title>Don't miss out on this fullpackage if you're in Cape Town</title>
         <meta
           name="description"
-          content={itemData.fullpackage.title + (' click for more info')}
+          content={itemData?.fullpackage?.title + ' click for more info'}
         />
         <meta property="og:title" content="Look what I found" />
       </Helmet>
 
+      {/* Always render Header */}
       <Header />
+
+      {/* Hero section */}
       <section className="flat-title-page inner">
         <div className="overlay"></div>
         <div className="themesflat-container">
@@ -131,7 +131,7 @@ const TravelPackage = () => {
                     className="tf-title-heading ct style-2 fs-30 mg-bt-10"
                     style={{ color: 'white' }}
                   >
-                    {itemData.fullpackage.title}
+                    {loading ? "Loading package..." : itemData.fullpackage.title}
                   </h4>
                 </div>
               </center>
@@ -140,17 +140,27 @@ const TravelPackage = () => {
         </div>
       </section>
 
+      {/* Slider section with shimmer */}
       <div style={{ padding: '20px 0' }}>
-        <SliderStyle3 data={heroSliderData} />
+        {loading ? (
+          <LoaderWrapper><Shimmer /></LoaderWrapper>
+        ) : (
+          <SliderStyle3 data={heroSliderData} />
+        )}
       </div>
 
+      {/* Package details */}
       <div className="tf-section tf-item-details">
         <div className="container">
           <div className="row">
             <div className="col-md-12">
               <div className="content-center">
                 <div className="sc-item-details">
-                  <div>{parse(itemData.fullpackage.body)}</div>
+                  {loading ? (
+                    <p>Loading details...</p>
+                  ) : (
+                    <div>{parse(itemData.fullpackage.body)}</div>
+                  )}
                 </div>
               </div>
             </div>
@@ -158,6 +168,7 @@ const TravelPackage = () => {
 
           <br />
 
+          {/* Contact Form */}
           <div className="tf-section tf-item-details">
             <div className="container">
               <div className="row">
@@ -223,6 +234,7 @@ const TravelPackage = () => {
         </div>
       </div>
 
+      {/* Always render Footer */}
       <Footer />
     </div>
   );
