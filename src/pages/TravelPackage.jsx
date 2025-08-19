@@ -2,10 +2,12 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-import ShimmerLoader from '../components/ShimmerLoader'; 
+import { Link } from 'react-router-dom';
+import Rating from '../components/Rating';
 import SliderStyle3 from '../components/slider/SliderStyle3';
 import 'react-tabs/style/react-tabs.css';
 import parse from 'html-react-parser';
+import styled from 'styled-components';
 import emailjs from 'emailjs-com';
 import { Helmet } from 'react-helmet';
 
@@ -23,7 +25,6 @@ const TravelPackage = () => {
     email: '',
   });
 
-  // Load Calendly script
   useEffect(() => {
     const script = document.createElement('script');
     script.src = 'https://assets.calendly.com/assets/external/widget.js';
@@ -48,7 +49,6 @@ const TravelPackage = () => {
     return false;
   };
 
-  // Fetch travel package
   useEffect(() => {
     fetch(`https://web-production-1ab9.up.railway.app/api/full-travel-packages/${id}/with-reviews`)
       .then((response) => response.json())
@@ -65,7 +65,6 @@ const TravelPackage = () => {
       });
   }, [id]);
 
-  // Form handlers
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -97,9 +96,16 @@ const TravelPackage = () => {
       }))
     : [];
 
-  // ✅ Show shimmer loader while fetching
+  // ✅ Use inline shimmer while fetching
   if (loading) {
-    return <ShimmerLoader />;
+    return (
+      <div className="animate-pulse p-6 space-y-4">
+        <div className="h-6 bg-gray-300 rounded w-3/4"></div>
+        <div className="h-4 bg-gray-300 rounded w-1/2"></div>
+        <div className="h-4 bg-gray-300 rounded w-full"></div>
+        <div className="h-4 bg-gray-300 rounded w-5/6"></div>
+      </div>
+    );
   }
 
   return (
@@ -114,7 +120,6 @@ const TravelPackage = () => {
       </Helmet>
 
       <Header />
-
       <section className="flat-title-page inner">
         <div className="overlay"></div>
         <div className="themesflat-container">
@@ -135,7 +140,6 @@ const TravelPackage = () => {
         </div>
       </section>
 
-      {/* Slider with padding */}
       <div style={{ padding: '20px 0' }}>
         <SliderStyle3 data={heroSliderData} />
       </div>
@@ -154,7 +158,6 @@ const TravelPackage = () => {
 
           <br />
 
-          {/* Enquiry Form */}
           <div className="tf-section tf-item-details">
             <div className="container">
               <div className="row">
