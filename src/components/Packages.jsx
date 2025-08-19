@@ -4,28 +4,48 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import Rating from './Rating';
 import FlipMove from 'react-flip-move';
-import { Blurhash } from 'react-blurhash';
-import styled from 'styled-components';
-import Loader from './Loader'; // Import the Loader component
+import styled, { keyframes } from 'styled-components';
+import Loader from './Loader'; // Import the global Loader
 
-// Styled components
-const SlideContainer = styled.div`
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9; /* 16:9 aspect ratio for landscape */
-  border-radius: 10px;
-  overflow: hidden;
+// Shimmer effect keyframes
+const shimmer = keyframes`
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
 `;
 
-const BlurhashStyled = styled(Blurhash)`
+// Styled shimmer placeholder
+const Shimmer = styled.div`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  border-radius: 10px;
+  background: #f6f7f8;
+  background-image: linear-gradient(
+    to right,
+    #f6f7f8 0%,
+    #edeef1 20%,
+    #f6f7f8 40%,
+    #f6f7f8 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 800px 100%;
+  animation: ${shimmer} 1.2s linear infinite forwards;
   z-index: 1;
-  transition: opacity 1s ease-in-out;
-  opacity: ${(props) => (props.loaded ? 0 : 1)};
+`;
+
+// Styled container for slide images
+const SlideContainer = styled.div`
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
 `;
 
 const ImageStyled = styled.img`
@@ -34,17 +54,18 @@ const ImageStyled = styled.img`
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensures image covers the container */
+  object-fit: cover;
   z-index: 2;
   opacity: ${(props) => (props.imageLoaded ? 1 : 0)};
-  transition: opacity 1s ease-in-out;
+  transition: opacity 0.6s ease-in-out;
   border-radius: 10px;
 `;
 
-const Packages = forwardRef((ref) => {
+const Packages = forwardRef((props, ref) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Calendly integration
   useEffect(() => {
     const script = document.createElement('script');
     script.src = 'https://assets.calendly.com/assets/external/widget.js';
@@ -52,59 +73,59 @@ const Packages = forwardRef((ref) => {
     document.body.appendChild(script);
 
     return () => {
-        document.body.removeChild(script);
+      document.body.removeChild(script);
     };
-}, []);
+  }, []);
 
-const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-const openCalendlyPopup = (e) => {
+  const openCalendlyPopup = (e) => {
     e.preventDefault();
     if (isMobile) {
-        // Open Calendly link in a new tab for mobile devices
-        window.open('https://calendly.com/mohamadxnadeem/30min', '_blank');
+      window.open('https://calendly.com/mohamadxnadeem/30min', '_blank');
     } else if (window.Calendly) {
-        // Trigger Calendly popup for desktop users
-        window.Calendly.initPopupWidget({ url: 'https://calendly.com/mohamadxnadeem/30min' });
+      window.Calendly.initPopupWidget({
+        url: 'https://calendly.com/mohamadxnadeem/30min',
+      });
     } else {
-        console.error("Calendly is not loaded yet");
+      console.error('Calendly is not loaded yet');
     }
     return false;
-};
+  };
 
-
+  // Fetch API data
   useEffect(() => {
     fetch('https://web-production-1ab9.up.railway.app/api/full-travel-packages/with-reviews/')
       .then((response) => response.json())
       .then((data) => {
-        const updatedData = data.map(item => ({
+        const updatedData = data.map((item) => ({
           ...item,
           firstPhoto: item.cover_photos.length > 0 ? item.cover_photos[0] : null,
         }));
         setData(updatedData);
-        setLoading(false); // Set loading to false after data is fetched
+        setLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
-        setLoading(false); // Set loading to false if there's an error
+        setLoading(false);
       });
   }, []);
 
   const handleImageLoad = (fullpackageId) => {
-    setData(prevData => {
-      return prevData.map(item => {
+    setData((prevData) =>
+      prevData.map((item) => {
         if (item.fullpackage.id === fullpackageId && item.firstPhoto) {
           return {
             ...item,
             firstPhoto: {
               ...item.firstPhoto,
               imageLoaded: true,
-            }
+            },
           };
         }
         return item;
-      });
-    });
+      })
+    );
   };
 
   const handleImageError = (e) => {
@@ -119,14 +140,12 @@ const openCalendlyPopup = (e) => {
           <div className="themesflat-container">
             <div className="row">
               <div className="col-12">
-                
-                  <h2 className="tf-title-heading ct style-2 mg-bt-13">
-                    Choose your package to Cape Town
-                  </h2>
-                  
-                
+                <h2 className="tf-title-heading ct style-2 mg-bt-13">
+                  Choose your package to Cape Town
+                </h2>
+
                 {loading ? (
-                  <Loader /> // Show the loader while loading
+                  <Loader />
                 ) : (
                   <Swiper
                     modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -147,21 +166,17 @@ const openCalendlyPopup = (e) => {
                           <div className="swiper-wrapper">
                             <div className="swiper-slide">
                               <div className="slider-item">
-                                <div className={`sc-card-product ${item.fullpackage.feature ? 'comingsoon' : ''}`}>
+                                <div
+                                  className={`sc-card-product ${
+                                    item.fullpackage.feature ? 'comingsoon' : ''
+                                  }`}
+                                >
                                   <div className="card-media">
                                     <Link to={`/travel-package/${item.fullpackage.id}`}>
                                       <SlideContainer>
                                         {item.firstPhoto && (
-                                          <React.Fragment>
-                                            <BlurhashStyled
-                                              hash={item.firstPhoto.blurhash}
-                                              resolutionX={32}
-                                              resolutionY={32}
-                                              width={500} /* Match with container width */
-                                              height={281} /* Match with container height for 16:9 */
-                                              punch={1}
-                                              loaded={item.firstPhoto.imageLoaded}
-                                            />
+                                          <>
+                                            {!item.firstPhoto.imageLoaded && <Shimmer />}
                                             <ImageStyled
                                               src={item.firstPhoto.image.cover_photos}
                                               alt={item.fullpackage.title}
@@ -169,42 +184,31 @@ const openCalendlyPopup = (e) => {
                                               onError={handleImageError}
                                               imageLoaded={item.firstPhoto.imageLoaded}
                                             />
-                                          </React.Fragment>
+                                          </>
                                         )}
                                       </SlideContainer>
                                     </Link>
                                   </div>
                                   <div className="card-title">
                                     <h5 className="style2">
-                                      <Link to={`/travel-package/${item.fullpackage.id}`}>{item.fullpackage.title}</Link>
+                                      <Link to={`/travel-package/${item.fullpackage.id}`}>
+                                        {item.fullpackage.title}
+                                      </Link>
                                     </h5>
                                   </div>
 
-                                  {/* <div className="meta-info">
-                                    <div className="author">
-                                      <div className="review">
-                                        <span>Based on {item.fullPackageReviews.length} reviews</span>
-                                        <h5>
-                                          <Rating value={item.average_rating} color={'#f8e825'} />
-                                        </h5>
-                                      </div>
-                                    </div>
-                                  </div> */}
-
                                   <div className="meta-info">
                                     <div className="author">
-                                    <div className="price" style={{ textAlign: 'left' }}>
-                                       
-                                        
-                                       <p>Total Price ${item.fullpackage.price}</p>
-
-                                       
-                                      
-                                     </div>
+                                      <div className="price" style={{ textAlign: 'left' }}>
+                                        <p>Total Price ${item.fullpackage.price}</p>
+                                      </div>
                                     </div>
                                   </div>
                                   <center>
-                                    <Link to={`/travel-package/${item.fullpackage.id}`} className="sc-button loadmore style fl-button pri-3">
+                                    <Link
+                                      to={`/travel-package/${item.fullpackage.id}`}
+                                      className="sc-button loadmore style fl-button pri-3"
+                                    >
                                       <span>VIEW PACKAGE</span>
                                     </Link>
                                   </center>
@@ -227,5 +231,3 @@ const openCalendlyPopup = (e) => {
 });
 
 export default Packages;
-
-
