@@ -18,8 +18,32 @@ const shimmer = keyframes`
 
 // Styled components
 const SliderContainer = styled.div`
+  .swiper {
+    padding-left: 10px;  /* default mobile padding */
+    padding-right: 10px;
+  }
+
+  @media (min-width: 768px) {
+    .swiper {
+      padding-left: 20px; /* tablet padding */
+      padding-right: 20px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .swiper {
+      padding-left: 40px; /* desktop padding */
+      padding-right: 40px;
+    }
+  }
+
   .swiper-wrapper {
     position: relative;
+  }
+
+  .swiper-slide {
+    /* Optional: spacing between slides */
+    margin-right: 20px;
   }
 `;
 
