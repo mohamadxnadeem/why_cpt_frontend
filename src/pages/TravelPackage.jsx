@@ -4,10 +4,11 @@ import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 import { Link } from 'react-router-dom';
 import Rating from '../components/Rating';
+import ShimmerLoader from '../components/ShimmerLoader'; // Updated import
 import SliderStyle3 from '../components/slider/SliderStyle3';
-import ShimmerLoader from '../components/ShimmerLoader'; // ✅ shimmer instead of spinner
 import 'react-tabs/style/react-tabs.css';
 import parse from 'html-react-parser';
+import styled from 'styled-components';
 import emailjs from 'emailjs-com';
 import { Helmet } from 'react-helmet';
 
@@ -23,7 +24,6 @@ const TravelPackage = () => {
     contactNumber: '',
     serviceType: '',
     email: '',
-    message: '',
   });
 
   useEffect(() => {
@@ -61,11 +61,16 @@ const TravelPackage = () => {
           serviceType: ` ${data.fullpackage.title}`,
         }));
       })
-      .catch((error) => console.error('Error fetching data:', error));
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
   }, [id]);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handleSubmit = (e) => {
@@ -78,15 +83,21 @@ const TravelPackage = () => {
     setFormError('');
     emailjs
       .send('service_ptqtluk', 'template_uyicl9l', formData, 'apNJP_9sXnff2q82W')
-      .then(() => setFormSubmitted(true))
-      .catch((error) => console.log('Error sending email:', error));
+      .then(() => {
+        setFormSubmitted(true);
+      })
+      .catch((error) => {
+        console.log('There was an error sending the email:', error);
+      });
   };
 
-  const heroSliderData = itemData?.cover_photos?.map((coverPhoto) => ({
-    src: coverPhoto.image.cover_photos,
-  })) || [];
+  const heroSliderData = itemData && itemData.cover_photos
+    ? itemData.cover_photos.map((coverPhoto) => ({
+        src: coverPhoto.image.cover_photos,
+      }))
+    : [];
 
-  // ✅ shimmer loader instead of spinner
+  // ✅ Show shimmer loader while fetching
   if (loading) {
     return <ShimmerLoader />;
   }
@@ -95,12 +106,14 @@ const TravelPackage = () => {
     <div className='item-details'>
       <Helmet>
         <title>Don't miss out on this fullpackage if you're in Cape Town</title>
-        <meta name="description" content={`${itemData.fullpackage.title} click for more info`} />
+        <meta
+          name="description"
+          content={itemData.fullpackage.title + (' click for more info')}
+        />
         <meta property="og:title" content="Look what I found" />
       </Helmet>
 
       <Header />
-
       <section className="flat-title-page inner">
         <div className="overlay"></div>
         <div className="themesflat-container">
@@ -108,7 +121,10 @@ const TravelPackage = () => {
             <div className="col-md-12">
               <center>
                 <div className="page-title-heading mg-bt-12">
-                  <h4 className="tf-title-heading ct style-2 fs-30 mg-bt-10" style={{ color: 'white' }}>
+                  <h4 
+                    className="tf-title-heading ct style-2 fs-30 mg-bt-10"
+                    style={{ color: 'white' }}
+                  >
                     {itemData.fullpackage.title}
                   </h4>
                 </div>
@@ -128,7 +144,7 @@ const TravelPackage = () => {
             <div className="col-md-12">
               <div className="content-center">
                 <div className="sc-item-details">
-                  {parse(itemData.fullpackage.body)}
+                  <div>{parse(itemData.fullpackage.body)}</div>
                 </div>
               </div>
             </div>
@@ -153,7 +169,7 @@ const TravelPackage = () => {
                             Any Questions?
                           </h1>
                           <div className="form-inner">
-                            <form id="contactform" noValidate onSubmit={handleSubmit}>
+                            <form id="contactform" noValidate="novalidate" onSubmit={handleSubmit}>
                               <div className="row">
                                 <div className="col-md-6">
                                   <input
