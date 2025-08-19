@@ -2,13 +2,10 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-import { Link } from 'react-router-dom';
-import Rating from '../components/Rating';
-import ShimmerLoader from '../components/ShimmerLoader'; // Updated import
+import ShimmerLoader from '../components/ShimmerLoader'; 
 import SliderStyle3 from '../components/slider/SliderStyle3';
 import 'react-tabs/style/react-tabs.css';
 import parse from 'html-react-parser';
-import styled from 'styled-components';
 import emailjs from 'emailjs-com';
 import { Helmet } from 'react-helmet';
 
@@ -26,6 +23,7 @@ const TravelPackage = () => {
     email: '',
   });
 
+  // Load Calendly script
   useEffect(() => {
     const script = document.createElement('script');
     script.src = 'https://assets.calendly.com/assets/external/widget.js';
@@ -50,6 +48,7 @@ const TravelPackage = () => {
     return false;
   };
 
+  // Fetch travel package
   useEffect(() => {
     fetch(`https://web-production-1ab9.up.railway.app/api/full-travel-packages/${id}/with-reviews`)
       .then((response) => response.json())
@@ -66,6 +65,7 @@ const TravelPackage = () => {
       });
   }, [id]);
 
+  // Form handlers
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -114,6 +114,7 @@ const TravelPackage = () => {
       </Helmet>
 
       <Header />
+
       <section className="flat-title-page inner">
         <div className="overlay"></div>
         <div className="themesflat-container">
@@ -134,6 +135,7 @@ const TravelPackage = () => {
         </div>
       </section>
 
+      {/* Slider with padding */}
       <div style={{ padding: '20px 0' }}>
         <SliderStyle3 data={heroSliderData} />
       </div>
@@ -152,6 +154,7 @@ const TravelPackage = () => {
 
           <br />
 
+          {/* Enquiry Form */}
           <div className="tf-section tf-item-details">
             <div className="container">
               <div className="row">

@@ -128,11 +128,9 @@ const Tours = forwardRef((ref) => {
             <div className="row">
               <div className="col-12">
                 <h2 className="tf-title-heading ct style-2 mg-bt-13">
-                  What to do in Cape Town 2025
+                  5 Best Tours to do in Cape Town 2025
                 </h2>
-                <p className="sub-title ct small mg-bt-20 pad-420">
-                  We recommend the following full day itineraries below:
-                </p>
+                
 
                 <Swiper
                   modules={[Navigation, Pagination, Scrollbar, A11y]}
