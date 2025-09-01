@@ -477,6 +477,8 @@ const AirportTransfers = () => {
                                     </div>
               </section>
 
+              <Tours />
+
               <h2 className="title-post">
                 We can also assist with special events like:
               </h2>
@@ -520,7 +522,7 @@ const AirportTransfers = () => {
                         <Fragment>
                           {!loading && (
                             <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                              Special Request
+                              Let us know how we can help you
                             </h1>
                           )}
 
@@ -560,7 +562,7 @@ const AirportTransfers = () => {
                                       <textarea
                                         name="message"
                                         value={formData.message}
-                                        placeholder="Let us know if you have any special requests or questions and we will get back to you as soon as we can"
+                                        placeholder="Let us know if you want to book your tour or chauffeur drive with us and the details for your trip"
                                         onChange={handleChange}
                                       ></textarea>
                                     </div>
@@ -590,7 +592,7 @@ const AirportTransfers = () => {
             </div>
           </div>
 
-            <Tours />
+            
 
           
         </div>
