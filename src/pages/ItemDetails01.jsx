@@ -217,7 +217,7 @@ const ItemDetails01 = () => {
                                 </div>
                                 <div className="col-md-12">
                                   <button type="submit" className="sc-button loadmore style fl-button pri-3">
-                                    <span>Ask Question</span>
+                                    <span>Enquire Now</span>
                                   </button>
                                 </div>
                               </div>
