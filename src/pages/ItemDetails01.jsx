@@ -183,7 +183,7 @@ const ItemDetails01 = () => {
                       ) : (
                         <Fragment>
                           <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                            Any Questions?
+                            Enquire Now
                           </h1>
                           <div className="form-inner">
                             <form id="contactform" noValidate="novalidate" onSubmit={handleSubmit}>
@@ -211,7 +211,7 @@ const ItemDetails01 = () => {
                                   <textarea
                                     name="message"
                                     value={formData.message}
-                                    placeholder="Your question"
+                                    placeholder="Let us know if you would prefer a private or group tour, the size of your group, the date you want to do this tour and any questions you have and we would be happy to help"
                                     onChange={handleChange}
                                   ></textarea>
                                 </div>
