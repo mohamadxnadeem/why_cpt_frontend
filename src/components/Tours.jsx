@@ -176,7 +176,7 @@ const Tours = forwardRef((ref) => {
                                   </h5>
                                 </div>
 
-                                <div className="meta-info">
+                                {/* <div className="meta-info">
                                   <div className="author">
                                     <div className="review">
                                       <span>Based on {item.reviews.length} reviews</span>
@@ -185,11 +185,11 @@ const Tours = forwardRef((ref) => {
                                       </h5>
                                     </div>
                                   </div>
-                                </div>
+                                </div> */}
 
                                 <center>
                                   <Link to={`/experience/${item.experience.id}`} className="sc-button loadmore style fl-button pri-3">
-                                    <span>View Experience</span>
+                                    <span>View Tour Detials</span>
                                   </Link>
                                 </center>
                               </div>
