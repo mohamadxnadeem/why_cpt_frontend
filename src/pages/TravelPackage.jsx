@@ -183,7 +183,7 @@ const TravelPackage = () => {
                       ) : (
                         <Fragment>
                           <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                            Any Questions?
+                            Enquire Now
                           </h1>
                           <div className="form-inner">
                             <form id="contactform" noValidate="novalidate" onSubmit={handleSubmit}>
@@ -211,13 +211,13 @@ const TravelPackage = () => {
                                   <textarea
                                     name="message"
                                     value={formData.message}
-                                    placeholder="Your question"
+                                    placeholder="Let us know the dates you want to book your trip to Cape Town and any question or special requests here"
                                     onChange={handleChange}
                                   ></textarea>
                                 </div>
                                 <div className="col-md-12">
                                   <button type="submit" className="sc-button loadmore style fl-button pri-3">
-                                    <span>Ask Question</span>
+                                    <span>Enquire Now</span>
                                   </button>
                                 </div>
                               </div>
