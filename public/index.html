@@ -17,23 +17,23 @@
   <style>
     body, html {
       overflow-x: hidden;
-      overflow-y: auto; /* Ensure vertical scrolling is allowed */
+      overflow-y: auto;
     }
 
     #google_translate_element {
-      position: absolute; /* Position relative to nearest positioned ancestor */
-      top: 90px; /* Adjust top position as needed */
-      left: 20px; /* Adjust left position as needed */
+      position: absolute;
+      top: 90px;
+      left: 20px;
       z-index: 1000;
-      border: 2px solid #ccc; /* Thicker border */
-      border-radius: 10px; /* Rounded edges */
-      padding: 10px; /* Add padding to the container */
-      background-color: #fff; /* Background color */
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding: 10px;
+      background-color: #fff;
     }
 
     #google_translate_element iframe {
-      border-radius: 8px; /* Rounded edges for iframe content */
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add box shadow for depth effect */
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
     #google_translate_element .goog-te-gadget-simple {
@@ -50,19 +50,28 @@
     }
   </style>
 
-      <!--
-    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-    <script async type='text/javascript' src='https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=UqdxUA'></script>
-    -->
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2251761611930083');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=2251761611930083&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Meta Pixel Code -->
 
 </head>
-<!-- <script async type='text/javascript' src='https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=UqdxUA'></script> -->
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
- 
-  
 </body>
 </html>
-
