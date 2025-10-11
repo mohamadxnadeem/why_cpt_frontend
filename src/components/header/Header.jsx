@@ -95,11 +95,11 @@ const Header = () => {
                                                 <Link to="/">Home</Link>
                                             </li>
 
-                                            {/*
+                                           
                                             <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
                                                 <Link to="/accomodation">Accommodation</Link>
                                             </li> 
-                                            */}
+                                            
 
                                              <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
                                                 <Link to="/chauffeur-hire-cape-town">Chauffeur Hire</Link>

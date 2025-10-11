@@ -162,11 +162,7 @@ const LuxuryVillas = () => {
 
                             <OneBedroom />
 
-                            <TwoBedroom />
-
-                            <Penthouse />
-
-                            <Villa />
+                            
 
                             {/* < Hotel /> */}
                         

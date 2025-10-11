@@ -189,7 +189,7 @@ const Tours = forwardRef((ref) => {
 
                                 <center>
                                   <Link to={`/experience/${item.experience.id}`} className="sc-button loadmore style fl-button pri-3">
-                                    <span>View Tour Detials</span>
+                                    <span>View Experience</span>
                                   </Link>
                                 </center>
                               </div>

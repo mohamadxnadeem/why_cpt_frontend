@@ -3,40 +3,58 @@ import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import FlipMove from 'react-flip-move';
-import { Blurhash } from 'react-blurhash';
-import styled from 'styled-components';
-import Loader from '../Loader'; // Import the Loader component
+import styled, { keyframes } from 'styled-components';
 
-// Styled components
-const SlideContainer = styled.div`
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9; /* 16:9 aspect ratio for landscape */
-  border-radius: 10px;
-  overflow: hidden;
+// 🔥 Shimmer animation keyframes
+const shimmer = keyframes`
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
 `;
 
-const BlurhashStyled = styled(Blurhash)`
+// ✅ Styled shimmer placeholder
+const ShimmerPlaceholder = styled.div`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  border-radius: 10px;
+  background: linear-gradient(
+    to right,
+    #f0f0f0 0%,
+    #e0e0e0 20%,
+    #f0f0f0 40%,
+    #f0f0f0 100%
+  );
+  background-size: 2000px 100%;
+  animation: ${shimmer} 1.5s infinite linear;
   z-index: 1;
-  transition: opacity 1s ease-in-out;
-  opacity: ${(props) => (props.loaded ? 0 : 1)};
 `;
 
+// ✅ Image container
+const SlideContainer = styled.div`
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+`;
+
+// ✅ Image styling
 const ImageStyled = styled.img`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensures image covers the container */
+  object-fit: cover;
   z-index: 2;
   opacity: ${(props) => (props.imageLoaded ? 1 : 0)};
-  transition: opacity 1s ease-in-out;
+  transition: opacity 0.8s ease-in-out;
   border-radius: 10px;
 `;
 
@@ -45,15 +63,21 @@ const OneBedroom = forwardRef((ref) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('https://web-production-1ab9.up.railway.app/api/one_bedroom/all/')
+    const controller = new AbortController();
+    const timeout = setTimeout(() => {
+      console.warn('Fetch timed out — stopping loader.');
+      setLoading(false);
+    }, 8000); // stop loading after 8 seconds if API is slow
+
+    fetch('https://web-production-1ab9.up.railway.app/api/one_bedroom/all/', {
+      signal: controller.signal,
+    })
       .then((response) => response.json())
       .then((data) => {
-        console.log('Raw fetched data:', data); // Log raw data
-        const updatedData = data.map(item => ({
+        const updatedData = data.map((item) => ({
           ...item,
           firstPhoto: item.cover_photos.length > 0 ? item.cover_photos[0] : null,
         }));
-        console.log('Processed data with firstPhoto:', updatedData); // Log processed data
         setData(updatedData);
         setLoading(false);
       })
@@ -61,30 +85,33 @@ const OneBedroom = forwardRef((ref) => {
         console.error('Error fetching data:', error);
         setLoading(false);
       });
+
+    return () => {
+      controller.abort();
+      clearTimeout(timeout);
+    };
   }, []);
-  
-  
 
   const handleImageLoad = (accomodationId) => {
-    setData(prevData => {
-      return prevData.map(item => {
+    setData((prevData) =>
+      prevData.map((item) => {
         if (item.accomodation.id === accomodationId && item.firstPhoto) {
           return {
             ...item,
             firstPhoto: {
               ...item.firstPhoto,
               imageLoaded: true,
-            }
+            },
           };
         }
         return item;
-      });
-    });
+      })
+    );
   };
 
   const handleImageError = (e) => {
     console.error('Error loading image:', e.target.src, e);
-    e.target.style.display = 'none'; // Hide broken images
+    e.target.style.display = 'none';
   };
 
   return (
@@ -94,17 +121,38 @@ const OneBedroom = forwardRef((ref) => {
           <div className="themesflat-container">
             <div className="row">
               <div className="col-12">
-                
-                  <h2 className="tf-title-heading ct style-2 mg-bt-13">
-                    Luxury One Bedroom Apartments
-                  </h2>
-                  <p className="sub-title ct small mg-bt-20 pad-420">
-                    Perfect for single professionals or couples
-                  </p>
-                  
+                <h2 className="tf-title-heading ct style-2 mg-bt-13">
+                  Luxury One Bedroom Apartments
+                </h2>
+                <p className="sub-title ct small mg-bt-20 pad-420">
+                  Perfect for single professionals or couples
+                </p>
 
+                {/* ✅ Shimmer placeholders while loading */}
                 {loading ? (
-                  <Loader /> // Show the loader while loading
+                  <div
+                    style={{
+                      display: 'flex',
+                      gap: '20px',
+                      overflowX: 'auto',
+                      paddingBottom: '10px',
+                    }}
+                  >
+                    {[...Array(4)].map((_, i) => (
+                      <div
+                        key={i}
+                        style={{
+                          width: '250px',
+                          height: '200px',
+                          position: 'relative',
+                          borderRadius: '10px',
+                          flexShrink: 0,
+                        }}
+                      >
+                        <ShimmerPlaceholder />
+                      </div>
+                    ))}
+                  </div>
                 ) : (
                   <Swiper
                     modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -121,62 +169,56 @@ const OneBedroom = forwardRef((ref) => {
                   >
                     {data.slice(0, 10).map((item, index) => (
                       <SwiperSlide key={index}>
-                        <div className="swiper-container show-shadow carousel auctions">
-                          <div className="swiper-wrapper">
-                            <div className="swiper-slide">
-                              <div className="slider-item">
-                                <div className={`sc-card-product ${item.accomodation.feature ? 'comingsoon' : ''}`}>
-                                  <div className="card-media">
-                                    
-                                      <SlideContainer>
-                                        {item.firstPhoto && (
-                                          <React.Fragment>
-                                            <BlurhashStyled
-                                              hash={item.firstPhoto.blurhash}
-                                              resolutionX={32}
-                                              resolutionY={32}
-                                              width={500} /* Match with container width */
-                                              height={281} /* Match with container height for 16:9 */
-                                              punch={1}
-                                              loaded={item.firstPhoto.imageLoaded}
-                                            />
-                                            <ImageStyled
-                                              src={item.firstPhoto.image.cover_photos}
-                                              alt={item.accomodation.title}
-                                              onLoad={() => handleImageLoad(item.accomodation.id)}
-                                              onError={handleImageError}
-                                              imageLoaded={item.firstPhoto.imageLoaded}
-                                            />
-                                          </React.Fragment>
-                                        )}
-                                      </SlideContainer>
-                                    
-                                  </div>
-                                  <div className="card-title">
-                                    <h5 className="style2">
-                                      {item.accomodation.title}
-                                    </h5>
-                                  </div>
+                        <div className="swiper-slide">
+                          <div className="slider-item">
+                            <div className="sc-card-product">
+                              <div className="card-media">
+                                <SlideContainer>
+                                  {!item.firstPhoto?.imageLoaded && (
+                                    <ShimmerPlaceholder />
+                                  )}
+                                  {item.firstPhoto && (
+                                    <ImageStyled
+                                      src={item.firstPhoto.image.cover_photos}
+                                      alt={item.accomodation.title}
+                                      onLoad={() =>
+                                        handleImageLoad(item.accomodation.id)
+                                      }
+                                      onError={handleImageError}
+                                      imageLoaded={item.firstPhoto.imageLoaded}
+                                    />
+                                  )}
+                                </SlideContainer>
+                              </div>
 
-                                  <div className="meta-info">
-                                    <div className="author">
-                                      <div className="price" style={{ textAlign: 'left' }}>
-                                       
-                                        
-                                        <p>From ${item.accomodation.min_price} Per Night</p>
+                              <div className="card-title">
+                                <h5 className="style2">
+                                  {item.accomodation.title}
+                                </h5>
+                              </div>
 
-                                        
-                                       
-                                      </div>
-                                    </div>
+                              <div className="meta-info">
+                                <div className="author">
+                                  <div
+                                    className="price"
+                                    style={{ textAlign: 'left' }}
+                                  >
+                                    <p>
+                                      From ${item.accomodation.min_price} Per
+                                      Night
+                                    </p>
                                   </div>
-                                  <center>
-                                  <Link to={`/1-Bedroom-Apartments/${item.accomodation.id}`} className="sc-button loadmore style fl-button pri-3">
-                                      <span>View Accomodation</span>
-                                    </Link>
-                                  </center>
                                 </div>
                               </div>
+
+                              <center>
+                                <Link
+                                  to={`/1-Bedroom-Apartments/${item.accomodation.id}`}
+                                  className="sc-button loadmore style fl-button pri-3"
+                                >
+                                  <span>View Accommodation</span>
+                                </Link>
+                              </center>
                             </div>
                           </div>
                         </div>

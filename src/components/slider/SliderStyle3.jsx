@@ -83,6 +83,7 @@ const ImageStyled = styled.img`
   top: 0;
   left: 0;
   border-radius: 10px;
+  margin-top:20px;
 `;
 
 const SliderItem = ({ item }) => {

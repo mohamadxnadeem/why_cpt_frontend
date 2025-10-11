@@ -3,29 +3,38 @@ import { useParams } from 'react-router-dom';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 import { Link } from 'react-router-dom';
-import LiveAuction from '../components/layouts/home-3/LiveAuction';
-import Rating from '../components/Rating';
-import Loader from '../components/Loader';
 import SliderStyle3 from '../components/slider/SliderStyle3';
-import { Blurhash } from 'react-blurhash';
 import 'react-tabs/style/react-tabs.css';
 import parse from 'html-react-parser';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import emailjs from 'emailjs-com';
-import Tours from '../components/Tours';
 import { Helmet } from 'react-helmet';
 
-const LoaderWrapper = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000; // Ensure it appears above other content
+// 🔥 Shimmer animation
+const shimmer = keyframes`
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+`;
+
+// ✅ Shimmer styled component
+const Shimmer = styled.div`
+  width: ${(props) => props.width || '100%'};
+  height: ${(props) => props.height || '20px'};
+  border-radius: ${(props) => props.radius || '6px'};
+  background: linear-gradient(
+    to right,
+    #f0f0f0 0%,
+    #e0e0e0 20%,
+    #f0f0f0 40%,
+    #f0f0f0 100%
+  );
+  background-size: 1000px 100%;
+  animation: ${shimmer} 1.5s infinite linear;
+  margin-bottom: ${(props) => props.marginBottom || '10px'};
+`;
+
+const SliderWrapper = styled.div`
+  padding-top: 20px;
 `;
 
 const OneBedroom = () => {
@@ -48,9 +57,7 @@ const OneBedroom = () => {
     script.async = true;
     document.body.appendChild(script);
 
-    return () => {
-      document.body.removeChild(script);
-    };
+    return () => document.body.removeChild(script);
   }, []);
 
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -69,171 +76,107 @@ const OneBedroom = () => {
 
   useEffect(() => {
     fetch(`https://web-production-1ab9.up.railway.app/api/one_bedroom/${id}/details/`)
-      .then((response) => response.json())
+      .then((res) => res.json())
       .then((data) => {
         setItemData(data);
         setLoading(false);
-        setFormData((prevFormData) => ({
-          ...prevFormData,
+        setFormData((prev) => ({
+          ...prev,
           serviceType: ` ${data.accomodation.title}`,
         }));
       })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
+      .catch((err) => {
+        console.error('Error fetching data:', err);
+        setLoading(false);
       });
   }, [id]);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
     if (!emailPattern.test(formData.email)) {
       setFormError('Please enter a valid email address.');
       return;
     }
-
     setFormError('');
 
-    emailjs
-      .send('service_ptqtluk', 'template_uyicl9l', formData, 'apNJP_9sXnff2q82W')
-      .then(
-        (result) => {
-          console.log('Email successfully sent!');
-          setFormSubmitted(true);
-        },
-        (error) => {
-          console.log('There was an error sending the email:', error);
-        }
-      );
+    emailjs.send('service_ptqtluk', 'template_uyicl9l', formData, 'apNJP_9sXnff2q82W')
+      .then(() => setFormSubmitted(true))
+      .catch((error) => console.error('Email error:', error));
   };
 
   const heroSliderData = itemData && itemData.cover_photos
-    ? itemData.cover_photos.map((coverPhoto) => ({
-        src: coverPhoto.image.cover_photos,
-        blurhash: coverPhoto.blurhash,
-      }))
+    ? itemData.cover_photos.map((cover) => ({ src: cover.image.cover_photos }))
     : [];
-
-  if (loading) {
-    return (
-      <LoaderWrapper>
-        <Loader />
-      </LoaderWrapper>
-    );
-  }
 
   return (
     <div className='item-details'>
       <Helmet>
         <title>Don't miss out on this accomodation if you're in Cape Town</title>
-        <meta name="description" content={itemData.accomodation.title + ('click for more info')} />
+        <meta name="description" content={itemData?.accomodation?.title + ' click for more info'} />
         <meta property="og:title" content="Look what I found" />
       </Helmet>
+
       <Header />
+
+      {/* Hero Title */}
       <section className="flat-title-page inner">
         <div className="overlay"></div>
         <div className="themesflat-container">
           <div className="row">
             <div className="col-md-12">
-              {!loading && ( // Hide the header while loading
-                <center>
-                  <div className="page-title-heading mg-bt-12">
+              <center>
+                <div className="page-title-heading mg-bt-12">
+                  {loading ? (
+                    <Shimmer width="250px" height="32px" radius="6px" />
+                  ) : (
                     <h4 className="tf-title-heading ct style-2 fs-30 mg-bt-10" style={{ color: 'white' }}>
                       {itemData.accomodation.title}
                     </h4>
-                    {/* <h1 className="heading text-center">
-                      <Rating value={itemData.average_rating} color={'#f8e825'} />
-                    </h1> */}
-                  </div>
-                </center>
-              )}
-              {/* <div className="breadcrumbs style2">
-                <ul>
-                  <li>Based on {itemData.reviews.length} reviews</li>
-                </ul>
-              </div> */}
+                  )}
+                </div>
+              </center>
             </div>
           </div>
         </div>
       </section>
 
-     
-
-      {/* <Link
-        
-        to={`/top-3-tours`}
-        className="sc-button loadmore style fl-button pri-3"
-      >
-      <span>Back</span>
-    </Link> */}
-
-      <SliderStyle3
-        data={heroSliderData}
-        renderImage={(src, blurhash) => (
-          <div style={{ position: 'relative' }}>
-            <Blurhash
-              hash={blurhash}
-              width={500}
-              height={325}
-              resolutionX={32}
-              resolutionY={32}
-              punch={1}
-              style={{ position: 'absolute', top: 0, left: 0, zIndex: 1 }}
-            />
-            <img
-              src={src}
-              alt="Cover"
-              style={{ width: '100%', height: 'auto', position: 'relative', zIndex: 2 }}
-              onError={(e) => {
-                console.error('Error loading image:', e);
-                e.target.style.display = 'none';
-              }}
-              onLoad={() => {
-                console.log('Image loaded successfully:', src);
-              }}
-            />
-          </div>
+      {/* Slider */}
+      <SliderWrapper>
+        {loading ? (
+          <Shimmer height="400px" radius="12px" />
+        ) : (
+          <SliderStyle3 data={heroSliderData} />
         )}
-      />
+      </SliderWrapper>
 
+      {/* Details Body */}
       <div className="tf-section tf-item-details">
         <div className="container">
           <div className="row">
             <div className="col-md-12">
               <div className="content-center">
                 <div className="sc-item-details">
-                  <div>{parse(itemData.accomodation.body)}</div>
+                  {loading ? (
+                    <>
+                      <Shimmer height="20px" width="60%" />
+                      <Shimmer height="20px" width="90%" />
+                      <Shimmer height="20px" width="80%" />
+                      <Shimmer height="20px" width="70%" />
+                    </>
+                  ) : (
+                    parse(itemData.accomodation.body)
+                  )}
                 </div>
               </div>
             </div>
           </div>
-          <div className="tf-section tf-tours">
-            <div className="container">
-              
-              {/* <Tours /> */}
-            </div>
-          </div>
- 
-          
 
-          {/* <center>
-            <Link
-              to="#"
-              onClick={openCalendlyPopup}
-              className="sc-button loadmore style fl-button pri-3"
-            >
-              <span>Schedule Free Consultation with a Travel Expert</span>
-            </Link>
-          </center> */}
-
+          {/* Form Section */}
           <div className="tf-section tf-item-details">
             <div className="container">
               <div className="row">
@@ -247,51 +190,35 @@ const OneBedroom = () => {
                         </div>
                       ) : (
                         <Fragment>
-                          {!loading && ( // Hide form header while loading
-                            <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                              Any Questions?
-                            </h1>
-                          )}
+                          <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                            {loading ? <Shimmer width="200px" height="28px" /> : 'Let us know the dates you want to book'}
+                          </h1>
 
                           <div className="form-inner">
-                            <form
-                              id="contactform"
-                              noValidate="novalidate"
-                              onSubmit={handleSubmit}
-                            >
+                            <form id="contactform" noValidate="novalidate" onSubmit={handleSubmit}>
                               <div className="row">
-                                {!loading && ( // Conditionally render inputs based on loading state
+                                {loading ? (
+                                  <>
+                                    <Shimmer height="40px" width="100%" marginBottom="12px" />
+                                    <Shimmer height="40px" width="100%" marginBottom="12px" />
+                                    <Shimmer height="100px" width="100%" marginBottom="12px" />
+                                    <Shimmer height="50px" width="150px" marginBottom="12px" />
+                                  </>
+                                ) : (
                                   <>
                                     <div className="col-md-6">
-                                      <input
-                                        type="text"
-                                        name="name"
-                                        value={formData.name}
-                                        placeholder="Your Name"
-                                        onChange={handleChange}
-                                      />
+                                      <input type="text" name="name" value={formData.name} placeholder="Your Name" onChange={handleChange} />
                                     </div>
                                     <div className="col-md-6">
-                                      <input
-                                        type="email"
-                                        name="email"
-                                        value={formData.email}
-                                        placeholder="Your Email"
-                                        onChange={handleChange}
-                                      />
+                                      <input type="email" name="email" value={formData.email} placeholder="Your Email" onChange={handleChange} />
                                       {formError && <p style={{ color: 'red' }}>{formError}</p>}
                                     </div>
                                     <div className="col-md-12">
-                                      <textarea
-                                        name="message"
-                                        value={formData.message}
-                                        placeholder="Your Message"
-                                        onChange={handleChange}
-                                      ></textarea>
+                                      <textarea name="message" value={formData.message} placeholder="Let us know the date you want to book" onChange={handleChange}></textarea>
                                     </div>
                                     <div className="col-md-12">
                                       <button type="submit" className="sc-button loadmore style fl-button pri-3">
-                                        <span>Send Message</span>
+                                        <span>Submit Booking Request</span>
                                       </button>
                                     </div>
                                   </>
@@ -308,11 +235,10 @@ const OneBedroom = () => {
             </div>
           </div>
 
-          {/* <LiveAuction data={itemData.reviews} /> */}
-          
-          <Footer />
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 };
