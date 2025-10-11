@@ -137,25 +137,7 @@ const LuxuryVillas = () => {
                 <div className="themesflat-container">
                     <div className="post">
                         <div className="inner-content">
-                            <h2 className="title-post">
-                                Luxury Accomodation in Cape Town
-                            </h2>
-                            <div className="divider"></div>
-
-                            <div className="inner-post mg-t-40">
-                                <p className="mg-bt-24">
-                                    Experience Cape Town with the best luxury accomodations with us. 
-                                </p>
-                                {/* <p className="mg-bt-24">
-                                    With professional guides and drivers in top of the line vehicles.
-                                </p>
-                                <p className="mg-bt-24">
-                                    For sophisticated professionals and international Millionaires.
-                                </p>
-                                <p className="mg-bt-24">
-                                    So book with us to guarantee your safety and a fun time in Cape Town for the best experience.
-                                </p> */}
-                            </div>
+                            
 
                             <br />
                             <br />
