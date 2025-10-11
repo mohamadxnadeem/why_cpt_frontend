@@ -122,10 +122,10 @@ const OneBedroom = forwardRef((ref) => {
             <div className="row">
               <div className="col-12">
                 <h2 className="tf-title-heading ct style-2 mg-bt-13">
-                  Luxury One Bedroom Apartments
+                  Luxury Apartments in Camps Bay
                 </h2>
                 <p className="sub-title ct small mg-bt-20 pad-420">
-                  Perfect for single professionals or couples
+                  2 Minute walk to the beach and safest suburb in Cape Town
                 </p>
 
                 {/* ✅ Shimmer placeholders while loading */}
