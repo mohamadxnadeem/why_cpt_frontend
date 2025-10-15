@@ -2,7 +2,6 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-import Rating from '../components/Rating';
 import SliderStyle3 from '../components/slider/SliderStyle3';
 import 'react-tabs/style/react-tabs.css';
 import parse from 'html-react-parser';
@@ -37,6 +36,48 @@ const Shimmer = styled.div`
   }
 `;
 
+// 💸 Styled Price Display
+const PriceCard = styled.div`
+  background-color: #1e7b4d;
+  color: white;
+  padding: 25px 40px;
+  border-radius: 16px;
+  text-align: center;
+  display: inline-block;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  margin-top: 25px;
+`;
+
+const PriceRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+`;
+
+const PriceDigits = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  font-size: 36px;
+  font-weight: bold;
+`;
+
+const DigitBox = styled.div`
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 8px 10px;
+  min-width: 30px;
+  text-align: center;
+`;
+
+const PerPerson = styled.span`
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffffcc;
+  margin-left: 5px;
+`;
+
 const ItemDetails01 = () => {
   const { id } = useParams();
   const [itemData, setItemData] = useState(null);
@@ -47,6 +88,7 @@ const ItemDetails01 = () => {
   const [formData, setFormData] = useState({
     name: '',
     contactNumber: '',
+    tourDate:'',
     serviceType: '',
     email: '',
     message: ''
@@ -105,18 +147,25 @@ const ItemDetails01 = () => {
       ? itemData.cover_photos.map((cover) => ({ src: cover.image.cover_photos }))
       : [];
 
+  const experience = itemData?.experience;
+
+  // 🔢 Helper to split price digits into styled boxes
+  const renderPriceDigits = (price) =>
+    String(price)
+      .split('')
+      .map((digit, i) => <DigitBox key={i}>{digit}</DigitBox>);
+
   return (
     <div className='item-details'>
       <Helmet>
         <title>Don't miss out on this experience if you're in Cape Town</title>
         <meta
           name="description"
-          content={itemData?.experience?.title + ' click for more info'}
+          content={experience?.title + ' click for more info'}
         />
         <meta property="og:title" content="Look what I found" />
       </Helmet>
 
-      {/* Always render Header */}
       <Header />
 
       {/* Hero section */}
@@ -131,7 +180,7 @@ const ItemDetails01 = () => {
                     className="tf-title-heading ct style-2 fs-30 mg-bt-10"
                     style={{ color: 'white' }}
                   >
-                    {loading ? "Loading package..." : itemData.experience.title}
+                    {loading ? "Loading package..." : experience?.title}
                   </h4>
                 </div>
               </center>
@@ -140,7 +189,7 @@ const ItemDetails01 = () => {
         </div>
       </section>
 
-      {/* Slider section with shimmer */}
+      {/* Slider section */}
       <div style={{ padding: '20px 0' }}>
         {loading ? (
           <LoaderWrapper><Shimmer /></LoaderWrapper>
@@ -159,7 +208,22 @@ const ItemDetails01 = () => {
                   {loading ? (
                     <p>Loading details...</p>
                   ) : (
-                    <div>{parse(itemData.experience.body)}</div>
+                    <>
+                      <div>{parse(experience?.body)}</div>
+
+                      {/* 💸 Price Section */}
+                      <center>
+                        <PriceCard>
+                          <PriceRow>
+                            <span style={{ fontSize: '24px', fontWeight: 'bold' }}>$</span>
+                            <PriceDigits>
+                              {renderPriceDigits(Math.floor(experience?.price))}
+                            </PriceDigits>
+                            <PerPerson>per person</PerPerson>
+                          </PriceRow>
+                        </PriceCard>
+                      </center>
+                    </>
                   )}
                 </div>
               </div>
@@ -183,41 +247,79 @@ const ItemDetails01 = () => {
                       ) : (
                         <Fragment>
                           <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                            Enquire Now
+                            Secure Your Spot Today
                           </h1>
                           <div className="form-inner">
                             <form id="contactform" noValidate="novalidate" onSubmit={handleSubmit}>
                               <div className="row">
-                                <div className="col-md-6">
+                                <div className="col-md-12">
                                   <input
                                     type="text"
                                     name="name"
                                     value={formData.name}
-                                    placeholder="Your Name"
+                                    placeholder="Full Name for Your Booking"
                                     onChange={handleChange}
                                   />
                                 </div>
-                                <div className="col-md-6">
+                                <div className="col-md-12">
                                   <input
                                     type="email"
                                     name="email"
                                     value={formData.email}
-                                    placeholder="Your Email"
+                                    placeholder="Your Email for Tour Confirmation"
                                     onChange={handleChange}
                                   />
                                   {formError && <p style={{ color: 'red' }}>{formError}</p>}
                                 </div>
                                 <div className="col-md-12">
+                                  <input
+                                    type="tel"
+                                    name="contactNumber"
+                                    value={formData.contactNumber}
+                                    placeholder="Optional: Mobile for urgent updates"
+                                    onChange={handleChange}
+                                    style={{
+                                      width: '100%',
+                                      padding: '12px',
+                                      borderRadius: '8px',
+                                      border: '1px solid #ccc',
+                                      fontSize: '16px',
+                                      marginBottom: '12px',
+                                      boxSizing: 'border-box',
+                                    }}
+                                  />
+
+                                </div>
+                                
+                               <div className="col-md-12">
+                                <label style={{ display: 'block', paddingLeft:'0px', marginBottom: '6px', fontWeight: '500', color: '#555' }}>
+                                  Preferred date for your adventure
+                                </label>
+                                <input
+                                  type="date"
+                                  name="tourDate"
+                                  value={formData.tourDate}
+                                  onChange={handleChange}
+                                  style={{
+                                    width: '100%',
+                                    padding: '12px',
+                                    borderRadius: '8px',
+                                    border: '1px solid #ccc',
+                                    fontSize: '16px',
+                                  }}
+                                />
+                              </div>
+                                <div className="col-md-12">
                                   <textarea
                                     name="message"
                                     value={formData.message}
-                                    placeholder="Let us know if you would prefer a private or group tour, the size of your group, the date you want to do this tour and any questions you have and we would be happy to help"
+                                    placeholder="Any preferences or questions for your private tour?"
                                     onChange={handleChange}
                                   ></textarea>
                                 </div>
                                 <div className="col-md-12">
                                   <button type="submit" className="sc-button loadmore style fl-button pri-3">
-                                    <span>Enquire Now</span>
+                                    <span>Secure My Spot Today</span>
                                   </button>
                                 </div>
                               </div>
@@ -234,7 +336,6 @@ const ItemDetails01 = () => {
         </div>
       </div>
 
-      {/* Always render Footer */}
       <Footer />
     </div>
   );
