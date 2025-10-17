@@ -1,292 +1,22 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import { useParams } from 'react-router-dom';
-import Header from '../components/header/Header';
-import Footer from '../components/footer/Footer';
-import SliderStyle3 from '../components/slider/SliderStyle3';
-import 'react-tabs/style/react-tabs.css';
-import parse from 'html-react-parser';
-import styled from 'styled-components';
-import emailjs from 'emailjs-com';
-import { Helmet } from 'react-helmet';
+import React, { useState, useEffect, Fragment } from "react";
+import { useParams } from "react-router-dom";
+import Header from "../components/header/Header";
+import Footer from "../components/footer/Footer";
+import SliderStyle3 from "../components/slider/SliderStyle3";
+import "react-tabs/style/react-tabs.css";
+import parse from "html-react-parser";
+import styled from "styled-components";
+import emailjs from "emailjs-com";
+import { Helmet } from "react-helmet";
+import TestimonialCarousel from "../components/TestimonialCarousel";
+import PricingOfferCard from "../components/PricingOfferCard";
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import Rating from '../components/Rating';
-
-
-import jana from '../assets/images/blog/jana.jpg';
-import tim from '../assets/images/blog/tim.jpg';
-import rachel from '../assets/images/blog/becca.jpg';
-import marie from '../assets/images/blog/marie.jpg';
-import micheal from '../assets/images/blog/micheal.jpg';
-import dan from '../assets/images/blog/dan.jpg';
-import achmat from '../assets/images/blog/achmat.png'
-import luka from '../assets/images/blog/luka.png'
-import noor from '../assets/images/blog/noor.png'
-import renad from '../assets/images/blog/renad.png'
-import yaasir from '../assets/images/blog/yaasir.png'
-import billy from '../assets/images/blog/mampuru.png'
-import jones from '../assets/images/blog/jones.png'
-import yusra from '../assets/images/blog/yusra.png'
-import moz from '../assets/images/blog/moz.png'
-import kazi from '../assets/images/blog/Allen and Kazi.png'
-
-import aashish from '../assets/images/blog/Aashish.jpg'
-import kresmir from '../assets/images/blog/kresmir.jpg'
-import lungi from '../assets/images/blog/lungi.jpg'
-import mampuru from '../assets/images/blog/mampuru.jpg'
-import gunnar from '../assets/images/blog/mr gunnar.jpg'
-import ru from '../assets/images/blog/ru.jpg'
-import ruth from '../assets/images/blog/ruth.jpg'
-import saad from '../assets/images/blog/saad.jpg'
-import sarah from '../assets/images/blog/sarah.jpg'
-import tuleen from '../assets/images/blog/tuleen.jpg'
-import yasmin from '../assets/images/blog/yasmin.jpg'
-
-import asad from '../assets/images/blog/asad.jpg'
-import jodi from '../assets/images/blog/jodi.jpg'
-import nicolas from '../assets/images/blog/nicholas.jpg'
-import nadine from '../assets/images/blog/nadine.jpg'
-
-
-  const items = [
-
-        
-    {
-         cover_photo: kazi,
-         name: 'Sunnah Musk Team',
-         title: 'England',
-         rating: 5,
-         comment: 'Highly recommend touring Cape Town with a local guide than trying to plan all the logistics yourself. Thank you to the team at WhyCapeTown'
-     },
-
-     {
-        cover_photo: yaasir,
-        name: 'Yaasir',
-        title: 'England',
-        rating: 5,
-        comment: 'Cape Town one of the cities that you can never get board of with such great vibes, people, positive energy and endless adventures that can be done apart from the food that you can always enjoy with a reasonable price and all thanks to the best Cape Town tour guide @whycapetown'
-    },
-    {
-        cover_photo: jana,
-        name: 'Jana',
-        title: 'South Africa',
-        rating: 5,
-        comment: 'This tour is a must, you get to see the majority of the beautiful spots in Cape Town in one day! Nadeem is great, talking with him was fun and he was very considerate and kind he even helped out another person when his car was out of water. He took amazing pictures of us and of others because he was asked to do so a lot 😂',
-    },
-    {
-        cover_photo: dan,
-        name: 'Dan',
-        title: 'Jaques',
-        rating: 4.7,
-        comment: 'An absolute must-do in Cape Town! The tour took us to hidden gems, and I felt like I was in a different world. The Cape Peninsulas beauty is indescribable. If you want a once-in-a-lifetime experience, this is it',
-    },
-    {
-        cover_photo: tim,
-        name: 'Tim',
-        title: 'England',
-        rating: 5,
-        comment: 'Nadeem was a great guide! We had an amazing day sightseeing, including a fantastic little stop for fish chips. A very chilled out and relaxing drive in some of the most amazing scenery. The next day he also very kindly helped us out a very early airport transfer. A great driver and a lovely guy. Highly recommend.',
-    },
-    {
-        cover_photo: rachel,
-        name: 'rachel',
-        title: 'USA',
-        rating: 4,
-        comment: 'Good guide. Took us to all the places we wanted to see and talked about some of the history. Provided snacks and water for the trip.',
-    },
-    {
-        cover_photo: marie,
-        name: 'marie',
-        title: 'Netherlands',
-        rating: 4,
-        comment: 'Mohammed Nadeem gave us lots of time to enjoy the whole day. He had a comfortable vehicle and great snacks for the road! He always watched over our things as we wandered about each location. If youre someone who likes great pictures, hes your guy.',
-    },
-    {
-        cover_photo: micheal,
-        name: 'micheal',
-        title: 'England',
-        rating: 5,
-        comment: 'What a perfect tour, gave us a a much better appreciation of the beautiful sights of Cape Town and the surrounding areas. It was a packed tour but we never felt rushed and had plenty of time to explore and see what we wanted. I’d highly recommend anyone visiting Cape Town to do this tour- especially if you want to see penguins, beautiful beaches with a friendly and knowledgeable and attentive guide.',
-    },
-
-     {
-        cover_photo: achmat,
-        name: 'Achmat',
-        title: 'England',
-        rating: 5,
-        comment: 'Mohamad was a great guide, we booked a Cape Point tour with him and then ended up booking a stellenbosch tour as well! Cant wait to come back to Cape Town!'
-    },
-    {
-        cover_photo: noor,
-        name: 'Noor',
-        title: 'England',
-        rating: 5,
-        comment: 'Everything in Cape Town looks like a wallpaper, what a beautiful city and great food! Thank you to Mohamad our tourguide for keeping us safe and chauffeuring us around to all the best spots in the city!'
-    },
-    {
-        cover_photo: luka,
-        name: 'Luka',
-        title: 'England',
-        rating: 5,
-        comment: 'The Cape Point tour is must do! Scenic views and some cool spots along the way and even better if you got a private tour with mohamad as your tour guide, driver and photographer! Thanks for the awesome trip'
-    },
-    {
-        cover_photo: renad,
-        name: 'Renad',
-        title: 'England',
-        rating: 4,
-        comment: 'Did a Cape Point Tour with Mohamad as my guide, but you need to pack in clothes for the beach, something to hike and jacket because Cape Town has all 4 seasons in 1 day!'
-    },
-    
-    {
-        cover_photo: billy,
-        name: 'Billy',
-        title: 'England',
-        rating: 5,
-        comment: 'Mohamad is my go to guide and chauffeur driver when ever I come to Cape Town, from stellenbosch winelands drives and cape peninsular roadtrips and even helicopter rides at times. You can count on whycapetown for a safe, fun and premium service!'
-    },
-    {
-        cover_photo: jones,
-        name: 'Jones',
-        title: 'England',
-        rating: 5,
-        comment: 'Thank you Mohamad for a wonderful Cape Point Experience, we even got to swim with some penguins at boulders beach and managed to squeeze in a wine tasting at the Beau Constantia! Highly recommend'
-    },
-   
-     {
-         cover_photo: yusra,
-         name: 'Yusra',
-         title: 'England',
-         rating: 5,
-         comment: 'We booked a custom winelands chauffeur drive with whycapetown and Mo took us to some of the most amazing spots you have to visit, lunch at the cellers hornet, wine tasting at beau constantia and a scenic chapmans peak drive'
-     },
-     {
-         cover_photo: moz,
-         name: 'Mozna',
-         title: 'England',
-         rating: 5,
-         comment: 'I booked a girls trip to Cape Town with my best friend and I booked all my tours and chauffeured drives with whycapetown and Mo was professional, great photographer and made sure my friend and I was always safe and comfortable! Cape Town is the best!'
-     },
-     {
-        cover_photo: aashish,
-        name: 'Aashish',
-        title: 'England',
-        rating: 5,
-        comment: 'We did a custom stellenbosch winelands tour and Cape Point on our honeymoon with whycapetown and Mo was fun and professional'
-    },
-    {
-        cover_photo: kresmir,
-        name: 'Kresmir',
-        title: 'Crotia',
-        rating: 5,
-        comment: 'Life is all about having the best experiences, and you cant go wrong with a trip to Cape Town especially if you having whycapetown arrange your tours and chauffeur drives.'
-    },
-    {
-        cover_photo: lungi,
-        name: 'Lungi',
-        title: 'England',
-        rating: 5,
-        comment: 'Mo from WhyCapeTown is my go to chauffeur driver for airport transfers, trustworthy, kind and reliable! Highly recommend'
-    },
-    {
-        cover_photo: mampuru,
-        name: 'Billy',
-        title: 'England',
-        rating: 5,
-        comment: 'Mohamad is my go to guide and chauffeur driver when ever I come to Cape Town, from stellenbosch winelands drives and cape peninsular roadtrips and even helicopter rides at times. You can count on whycapetown for a safe, fun and premium service!'
-    },
-    {
-        cover_photo: gunnar,
-        name: 'Gunnar',
-        title: 'Germany',
-        rating: 5,
-        comment: 'Can always count on Mo to be on time for my airport transfers from Simons Town, good conversation and trustworthy guy!'
-    },
-    {
-        cover_photo: ru,
-        name: 'Ru',
-        title: 'England',
-        rating: 5,
-        comment: 'Cape Town is one of my favorite cities in the world! Thank you mohamad for showing us around and k'
-    },
-    {
-        cover_photo: ruth,
-        name: 'Ruth',
-        title: 'England',
-        rating: 5,
-        comment: 'We arranged all our tours with whycapetown, safari drives, winelands tour, cape peninsular tour and airport transfers! Cant wait to come back to Cape Town!'
-    },
-    {
-        cover_photo: saad,
-        name: 'Saad',
-        title: 'Morocco',
-        rating: 5,
-        comment: '5 stars for whycapetown for arranging all of our experiences at the best prices!'
-    },
-    {
-        cover_photo: sarah,
-        name: 'Sarah',
-        title: 'Morocco',
-        rating: 4,
-        comment: 'Cape Town is a beautiful city, good food and great people! Thank you whycapetown for the best experience'
-    },
-    {
-        cover_photo: tuleen,
-        name: 'Tuleen',
-        title: 'Syria',
-        rating: 5,
-        comment: 'safe, fun and reliable! Mohamad showed me the best of the Cape! Thank you whycapetown for a trip of a lifetime!'
-    },
-    {
-        cover_photo: yasmin,
-        name: 'Yasmin',
-        title: 'Bahrain',
-        rating: 5,
-        comment: 'Cape Town is the best, great weather, food and people! Need to come back to do the garden route!'
-    },
-    {
-        cover_photo: nadine,
-        name: 'Nadine',
-        title: 'Bahrain',
-        rating: 5,
-        comment: 'Best tour guide and photographer! Thank you for showing us the best of Cape Town!'
-    },
-
-    {
-        cover_photo: nicolas,
-        name: 'Nicolas',
-        title: 'Bahrain',
-        rating: 5,
-        comment: 'Highly recomend mohamad from Cape Town for chauffeur services and tours! '
-    },
-
-    {
-        cover_photo: jodi,
-        name: 'Jodi',
-        title: 'Bahrain',
-        rating: 5,
-        comment: 'My go-to chauffeur for years now. Mo gets me there and back safley always. I regularly use his services when im going on my own, because he makes sure im always safe'
-    },
-
-    {
-        cover_photo: asad,
-        name: 'Asad',
-        title: 'Bahrain',
-        rating: 5,
-        comment: 'Mohamad took us to all the top attractions and best resturants in Cape Town and even saved us from getting robbed in Long Street!'
-    },
-
-
-];
-
-
-// ✅ Styled shimmer loader
+// ✨ Styled shimmer loader for hero image
 const LoaderWrapper = styled.div`
   width: 100%;
   height: 400px;
   margin: 20px 0;
 `;
-
 const Shimmer = styled.div`
   width: 100%;
   height: 100%;
@@ -302,51 +32,13 @@ const Shimmer = styled.div`
   animation: shimmer 1.5s infinite;
 
   @keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
   }
-`;
-
-// 💸 Styled Price Display
-const PriceCard = styled.div`
-  background-color: #1e7b4d;
-  color: white;
-  padding: 25px 40px;
-  border-radius: 16px;
-  text-align: center;
-  display: inline-block;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  margin-top: 25px;
-`;
-
-const PriceRow = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-`;
-
-const PriceDigits = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 5px;
-  font-size: 36px;
-  font-weight: bold;
-`;
-
-const DigitBox = styled.div`
-  background-color: rgba(255, 255, 255, 0.15);
-  border-radius: 8px;
-  padding: 8px 10px;
-  min-width: 30px;
-  text-align: center;
-`;
-
-const PerPerson = styled.span`
-  font-size: 16px;
-  font-weight: 500;
-  color: #ffffffcc;
-  margin-left: 5px;
 `;
 
 const ItemDetails01 = () => {
@@ -354,20 +46,21 @@ const ItemDetails01 = () => {
   const [itemData, setItemData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [formError, setFormError] = useState('');
+  const [formError, setFormError] = useState("");
 
   const [formData, setFormData] = useState({
-    name: '',
-    contactNumber: '',
-    tourDate:'',
-    serviceType: '',
-    email: '',
-    message: ''
+    name: "",
+    contactNumber: "",
+    tourDate: "",
+    serviceType: "",
+    email: "",
+    message: "",
   });
 
+  // ✅ Load Calendly script
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    const script = document.createElement("script");
+    script.src = "https://assets.calendly.com/assets/external/widget.js";
     script.async = true;
     document.body.appendChild(script);
     return () => {
@@ -375,8 +68,11 @@ const ItemDetails01 = () => {
     };
   }, []);
 
+  // ✅ Fetch Experience Data
   useEffect(() => {
-    fetch(`https://web-production-1ab9.up.railway.app/api/experiences/${id}/with-reviews`)
+    fetch(
+      `https://web-production-1ab9.up.railway.app/api/experiences/${id}/with-reviews`
+    )
       .then((response) => response.json())
       .then((data) => {
         setItemData(data);
@@ -387,11 +83,12 @@ const ItemDetails01 = () => {
         }));
       })
       .catch((error) => {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
         setLoading(false);
       });
   }, [id]);
 
+  // ✅ Form Handling
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -403,43 +100,43 @@ const ItemDetails01 = () => {
     e.preventDefault();
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(formData.email)) {
-      setFormError('Please enter a valid email address.');
+      setFormError("Please enter a valid email address.");
       return;
     }
-    setFormError('');
+    setFormError("");
     emailjs
-      .send('service_ptqtluk', 'template_uyicl9l', formData, 'apNJP_9sXnff2q82W')
+      .send("service_ptqtluk", "template_uyicl9l", formData, "apNJP_9sXnff2q82W")
       .then(() => setFormSubmitted(true))
-      .catch((error) => console.log('Email error:', error));
+      .catch((error) => console.log("Email error:", error));
   };
 
-  const heroSliderData =
-    itemData && itemData.cover_photos
-      ? itemData.cover_photos.map((cover) => ({ src: cover.image.cover_photos }))
-      : [];
-
   const experience = itemData?.experience;
-
-  // 🔢 Helper to split price digits into styled boxes
-  const renderPriceDigits = (price) =>
-    String(price)
-      .split('')
-      .map((digit, i) => <DigitBox key={i}>{digit}</DigitBox>);
+  const heroSliderData =
+    itemData?.cover_photos?.map((cover) => ({
+      src: cover.image.cover_photos,
+    })) || [];
 
   return (
-    <div className='item-details'>
+    <div className="item-details">
       <Helmet>
-        <title>Don't miss out on this experience if you're in Cape Town</title>
+        <title>
+          {experience?.title ||
+            "Don't miss out on this experience if you're in Cape Town"}
+        </title>
         <meta
           name="description"
-          content={experience?.title + ' click for more info'}
+          content={
+            experience?.title
+              ? `${experience.title} - click for more info`
+              : "Cape Town tour experience details"
+          }
         />
-        <meta property="og:title" content="Look what I found" />
       </Helmet>
 
+      {/* Header */}
       <Header />
 
-      {/* Hero section */}
+      {/* Hero Section */}
       <section className="flat-title-page inner">
         <div className="overlay"></div>
         <div className="themesflat-container">
@@ -447,9 +144,9 @@ const ItemDetails01 = () => {
             <div className="col-md-12">
               <center>
                 <div className="page-title-heading mg-bt-12">
-                  <h4 
+                  <h4
                     className="tf-title-heading ct style-2 fs-30 mg-bt-10"
-                    style={{ color: 'white' }}
+                    style={{ color: "white" }}
                   >
                     {loading ? "Loading package..." : experience?.title}
                   </h4>
@@ -460,122 +157,46 @@ const ItemDetails01 = () => {
         </div>
       </section>
 
-      {/* Slider section */}
-      <div style={{ padding: '20px 0' }}>
+      {/* Slider Section */}
+      <div style={{ padding: "20px 0" }}>
         {loading ? (
-          <LoaderWrapper><Shimmer /></LoaderWrapper>
+          <LoaderWrapper>
+            <Shimmer />
+          </LoaderWrapper>
         ) : (
           <SliderStyle3 data={heroSliderData} />
         )}
       </div>
 
-      {/* Package details */}
+      {/* Package Details */}
       <div className="tf-section tf-item-details">
         <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <div className="content-center">
-                <div className="sc-item-details">
-                  {loading ? (
-                    <p>Loading details...</p>
-                  ) : (
-                    <>
-                      <div>{parse(experience?.body)}</div>
-
-                      
-                    </>
-                  )}
-                </div>
-              </div>
+          {loading ? (
+            <p>Loading details...</p>
+          ) : (
+            <div className="content-center">
+              <div className="sc-item-details">{parse(experience?.body)}</div>
             </div>
-          </div>
+          )}
 
           <br />
 
-          <section className="tf-section live-auctions">
-                                    <div className="themesflat-container">
-                                        <div className="row">
-                                            <div className="col-md-12">
-                                                <div className="">
-                                                    <h2 className="tf-title">
-                                                        Client Reviews:
-                                                    </h2>
-                                                    <div className="heading-line"></div>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-12">
-                                                <Swiper
-                                                    spaceBetween={30}
-                                                    breakpoints={{
-                                                        0: { slidesPerView: 1 },
-                                                        767: { slidesPerView: 2 },
-                                                        991: { slidesPerView: 3 },
-                                                        1300: { slidesPerView: 4 },
-                                                    }}
-                                                    navigation
-                                                    pagination={{ clickable: true }}
-                                                    scrollbar={{ draggable: true }}
-                                                >
-                                                    {items
-                                                        .slice(0, 99)
-                                                        .map((item, index) => (
-                                                            <SwiperSlide key={index}>
-                                                                <div className="swiper-container show-shadow carousel auctions">
-                                                                    <div className="swiper-wrapper">
-                                                                        <div className="swiper-slide">
-                                                                            <div className="slider-item">
-                                                                                <div className="sc-card-product">
-                                                                                <div className="card-media">
-                                                                                        <img src={item.cover_photo} alt="cape town" />
-                                                                                    </div>
+          {/* 🟢💎 Pricing Offer Card */}
+          {!loading && (
+            <PricingOfferCard
+              price={experience?.price}
+              discountedPrice={experience?.discountedprice}
+              offerDuration={300}
+              experienceId={id}
+            />
+          )}
 
-                                                                                    <div className="card-title">
-                                                                                        <h5>{item.name}</h5>
-                                                                                    </div>
-                                                                                    <div className="card-title">
-                                                                                        <h5>
-                                                                                            <Rating
-                                                                                                value={item.rating}
-                                                                                                color={'#f8e825'}
-                                                                                            />
-                                                                                        </h5>
-                                                                                    </div>
-                                                                                    <div className="meta-info">
-                                                                                        <div className="author">
-                                                                                            <div className="info">
-                                                                                                <h6>
-                                                                                                    "{item.comment}"
-                                                                                                </h6>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </SwiperSlide>
-                                                        ))}
-                                                </Swiper>
-                                            </div>
-                                        </div>
-                                    </div>
-          </section>
+          {/* 💬 Testimonials */}
+          <TestimonialCarousel />
 
-          {/* 💸 Price Section */}
-                      <center>
-                        <PriceCard>
-                          <PriceRow>
-                            <span style={{ fontSize: '24px', fontWeight: 'bold' }}>$</span>
-                            <PriceDigits>
-                              {renderPriceDigits(Math.floor(experience?.price))}
-                            </PriceDigits>
-                            <PerPerson>per person</PerPerson>
-                          </PriceRow>
-                        </PriceCard>
-                      </center>
+          <br />
 
-          {/* Contact Form */}
+          {/* 📨 Contact Form */}
           <div className="tf-section tf-item-details">
             <div className="container">
               <div className="row">
@@ -585,7 +206,10 @@ const ItemDetails01 = () => {
                       {formSubmitted ? (
                         <div className="thank-you-message">
                           <h2>Thank You!</h2>
-                          <p>Your enquiry has been successfully submitted. We will get back to you soon.</p>
+                          <p>
+                            You're one step closer to booking your tour with us.
+                            Your concierge will be in touch soon.
+                          </p>
                         </div>
                       ) : (
                         <Fragment>
@@ -593,7 +217,11 @@ const ItemDetails01 = () => {
                             Secure Your Spot Today
                           </h1>
                           <div className="form-inner">
-                            <form id="contactform" noValidate="novalidate" onSubmit={handleSubmit}>
+                            <form
+                              id="contactform"
+                              noValidate="novalidate"
+                              onSubmit={handleSubmit}
+                            >
                               <div className="row">
                                 <div className="col-md-12">
                                   <input
@@ -612,7 +240,9 @@ const ItemDetails01 = () => {
                                     placeholder="Your Email for Tour Confirmation"
                                     onChange={handleChange}
                                   />
-                                  {formError && <p style={{ color: 'red' }}>{formError}</p>}
+                                  {formError && (
+                                    <p style={{ color: "red" }}>{formError}</p>
+                                  )}
                                 </div>
                                 <div className="col-md-12">
                                   <input
@@ -622,46 +252,58 @@ const ItemDetails01 = () => {
                                     placeholder="Optional: Mobile for urgent updates"
                                     onChange={handleChange}
                                     style={{
-                                      width: '100%',
-                                      padding: '12px',
-                                      borderRadius: '8px',
-                                      border: '1px solid #ccc',
-                                      fontSize: '16px',
-                                      marginBottom: '12px',
-                                      boxSizing: 'border-box',
+                                      width: "100%",
+                                      padding: "12px",
+                                      borderRadius: "8px",
+                                      border: "1px solid #ccc",
+                                      fontSize: "16px",
+                                      marginBottom: "12px",
+                                      boxSizing: "border-box",
                                     }}
                                   />
-
                                 </div>
-                                
-                               <div className="col-md-12">
-                                <label style={{ display: 'block', paddingLeft:'0px', marginBottom: '6px', fontWeight: '500', color: '#555' }}>
-                                  Preferred date for your adventure
-                                </label>
-                                <input
-                                  type="date"
-                                  name="tourDate"
-                                  value={formData.tourDate}
-                                  onChange={handleChange}
-                                  style={{
-                                    width: '100%',
-                                    padding: '12px',
-                                    borderRadius: '8px',
-                                    border: '1px solid #ccc',
-                                    fontSize: '16px',
-                                  }}
-                                />
-                              </div>
+
+                                <div className="col-md-12">
+                                  <label
+                                    style={{
+                                      display: "block",
+                                      paddingLeft: "0px",
+                                      marginBottom: "6px",
+                                      fontWeight: "500",
+                                      color: "#555",
+                                    }}
+                                  >
+                                    Preferred date for your adventure
+                                  </label>
+                                  <input
+                                    type="date"
+                                    name="tourDate"
+                                    value={formData.tourDate}
+                                    onChange={handleChange}
+                                    style={{
+                                      width: "100%",
+                                      padding: "12px",
+                                      borderRadius: "8px",
+                                      border: "1px solid #ccc",
+                                      fontSize: "16px",
+                                    }}
+                                  />
+                                </div>
+
                                 <div className="col-md-12">
                                   <textarea
                                     name="message"
                                     value={formData.message}
-                                    placeholder="Any preferences or questions for your private tour?"
+                                    placeholder="Any preferences or questions for your tour?"
                                     onChange={handleChange}
                                   ></textarea>
                                 </div>
+
                                 <div className="col-md-12">
-                                  <button type="submit" className="sc-button loadmore style fl-button pri-3">
+                                  <button
+                                    type="submit"
+                                    className="sc-button loadmore style fl-button pri-3"
+                                  >
                                     <span>Secure My Spot Today</span>
                                   </button>
                                 </div>
@@ -679,6 +321,7 @@ const ItemDetails01 = () => {
         </div>
       </div>
 
+      {/* Footer */}
       <Footer />
     </div>
   );

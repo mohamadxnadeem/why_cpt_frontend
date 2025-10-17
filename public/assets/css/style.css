@@ -1639,7 +1639,7 @@ header{
 }
 .main-logo img {
     width: 133px;
-    height: 56px;
+    height: auto;
 }
 .main-logo img,
 .main-logo h2 {

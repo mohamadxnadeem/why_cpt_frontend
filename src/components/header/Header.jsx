@@ -2,10 +2,12 @@ import React, { useRef, useState, useEffect } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import menus from "../../pages/menu";
 import DarkMode from './DarkMode';
-import logoheader from '../../assets/images/logo/logo.svg'
-import logoheader2x from '../../assets/images/logo/logo.svg'
-import logodark from '../../assets/images/logo/logo.svg'
-import logodark2x from '../../assets/images/logo/logo.svg'
+
+import logoheader from '../../assets/images/logo/1.svg'
+import logoheader2x from '../../assets/images/logo/1.svg'
+
+import logodark from '../../assets/images/logo/2.svg'
+import logodark2x from '../../assets/images/logo/2.svg'
 
 const Header = () => {
     const { pathname } = useLocation();
