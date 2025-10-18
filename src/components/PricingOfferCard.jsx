@@ -65,7 +65,6 @@ const PriceCard = styled.div`
   }
 `;
 
-
 const Price = styled.div`
   font-size: 40px;
   font-weight: 700;
@@ -91,7 +90,7 @@ const TimerWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 8px;
-  color:black;
+  color: black;
 `;
 
 const TimerCard = styled.div`
@@ -112,18 +111,22 @@ const Availability = styled.p`
   font-size: 16px;
 `;
 
+// 🧠 Component
 const PricingOfferCard = ({
   price,
   discountedPrice,
   offerDuration,
   experienceId,
+  isDealActive = true, // toggle prop
 }) => {
   const [timeLeft, setTimeLeft] = useState(offerDuration);
   const [expired, setExpired] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
 
-  // 🕒 Timer Logic
+  // 🕒 Timer Logic (only runs when deal is active)
   useEffect(() => {
+    if (!isDealActive) return; // Skip timer if no deal is active
+
     const savedEndTime = localStorage.getItem(`offerEndTime_${experienceId}`);
     const now = Date.now();
 
@@ -148,23 +151,47 @@ const PricingOfferCard = ({
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [experienceId, offerDuration]);
+  }, [experienceId, offerDuration, isDealActive]);
 
   const minutes = Math.floor(timeLeft / 60)
     .toString()
     .padStart(2, "0");
   const seconds = (timeLeft % 60).toString().padStart(2, "0");
 
+  // 💡 Regular Mode (no discount, no timer)
+  if (!isDealActive) {
+    return (
+      <OfferWrapper>
+        <Heading>Standard Price</Heading>
+        <PriceCard type="green">
+          <Price>
+            <span style={{ fontSize: "30px", marginRight: "6px" }}>$</span>
+            {Math.floor(price || 0)
+              .toString()
+              .split("")
+              .map((digit, i) => (
+                <DigitBox key={i}>{digit}</DigitBox>
+              ))}
+            <span style={{ fontSize: "18px", marginLeft: "6px" }}>
+              per person
+            </span>
+          </Price>
+        </PriceCard>
+      </OfferWrapper>
+    );
+  }
+
+  // 💥 Deal Mode (with countdown)
   return (
     <OfferWrapper>
       <Heading fadeOut={fadeOut}>
         {expired
           ? "😔 Sorry, you missed this offer."
-          : "You have 5 minutes to secure this exclusive concierge rate."}
+          : "You have 5 minutes to get the best price offer"}
       </Heading>
 
-      {/* 🔴 Usual Price */}
-      <SubHeading>Usual Price</SubHeading>
+      {/* 🔴 Full Price */}
+      <SubHeading>Full Price</SubHeading>
       <PriceCard type="red" expired={false}>
         <Price>
           <span style={{ fontSize: "30px", marginRight: "6px" }}>$</span>
@@ -179,7 +206,7 @@ const PricingOfferCard = ({
       </PriceCard>
 
       {/* 🟢 Discounted Price */}
-      <SubHeading>Discounted Concierge Rate</SubHeading>
+      <SubHeading>Best Price</SubHeading>
       <PriceCard type="green" expired={expired}>
         <Price>
           <span style={{ fontSize: "30px", marginRight: "6px" }}>$</span>

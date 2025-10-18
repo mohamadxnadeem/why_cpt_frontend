@@ -1,79 +1,134 @@
-import React, { useState, Fragment } from "react";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import Rating from '../components/Rating';
-
+import React, { useState, useEffect, Fragment, Suspense } from "react";
 import { Helmet } from "react-helmet";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import emailjs from "emailjs-com";
-
-import TestimonialCarousel from "../components/TestimonialCarousel";
-
-import Tours from '../components/Tours';
-
-import jana from '../assets/images/blog/jana.jpg';
-import tim from '../assets/images/blog/tim.jpg';
-import rachel from '../assets/images/blog/becca.jpg';
-import marie from '../assets/images/blog/marie.jpg';
-import micheal from '../assets/images/blog/micheal.jpg';
-import dan from '../assets/images/blog/dan.jpg';
-import achmat from '../assets/images/blog/achmat.png'
-import luka from '../assets/images/blog/luka.png'
-import noor from '../assets/images/blog/noor.png'
-import renad from '../assets/images/blog/renad.png'
-import yaasir from '../assets/images/blog/yaasir.png'
-import billy from '../assets/images/blog/mampuru.png'
-import jones from '../assets/images/blog/jones.png'
-import yusra from '../assets/images/blog/yusra.png'
-import moz from '../assets/images/blog/moz.png'
-import kazi from '../assets/images/blog/Allen and Kazi.png'
-
-import aashish from '../assets/images/blog/Aashish.jpg'
-import kresmir from '../assets/images/blog/kresmir.jpg'
-import lungi from '../assets/images/blog/lungi.jpg'
-import mampuru from '../assets/images/blog/mampuru.jpg'
-import gunnar from '../assets/images/blog/mr gunnar.jpg'
-import ru from '../assets/images/blog/ru.jpg'
-import ruth from '../assets/images/blog/ruth.jpg'
-import saad from '../assets/images/blog/saad.jpg'
-import sarah from '../assets/images/blog/sarah.jpg'
-import tuleen from '../assets/images/blog/tuleen.jpg'
-import yasmin from '../assets/images/blog/yasmin.jpg'
-
-import asad from '../assets/images/blog/asad.jpg'
-import jodi from '../assets/images/blog/jodi.jpg'
-import nicolas from '../assets/images/blog/nicholas.jpg'
-import nadine from '../assets/images/blog/nadine.jpg'
 
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
-import Cars4Hire from "../components/Cars4hire";
 import backgroundImage from "../assets/images/item-background/benz.jpg";
 
-const AirportTransfers = () => {
+// 🧩 Lazy imports for performance, preloaded for instant revisits
+const TestimonialCarousel = React.lazy(() => import("../components/TestimonialCarousel"));
+const Tours = React.lazy(() => import("../components/Tours"));
+const Cars4Hire = React.lazy(() => import("../components/Cars4hire"));
 
-  // Form Function Starts here =====================================================================
-  
+// 🧩 Global Luxury Fonts + Base Text Styling
+const GlobalStyle = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap');
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    color: #2a2a2a;
+    line-height: 1.8;
+    background-color: #fff;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    color: #111;
+  }
+`;
+
+// 💫 Luxury Typography Enhancements
+const SectionTitle = styled.h2`
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: #111;
+  font-size: 32px;
+  margin-bottom: 20px;
+`;
+
+const Paragraph = styled.p`
+  font-size: 17px;
+  color: #333;
+  line-height: 1.9;
+  margin-bottom: 20px;
+`;
+
+const List = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+
+  li {
+    position: relative;
+    margin: 8px 0;
+    font-size: 16px;
+    color: #444;
+    padding-left: 22px;
+
+    &::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #d4af37;
+      font-size: 18px;
+      line-height: 1;
+    }
+  }
+`;
+
+const HighlightText = styled.span`
+  color: #d4af37;
+  font-weight: 600;
+`;
+
+// ✨ Shimmer placeholder
+const ShimmerBox = styled.div`
+  width: 100%;
+  height: ${(props) => props.height || "200px"};
+  border-radius: 10px;
+  margin: 20px 0;
+  background: linear-gradient(90deg, #f5f5f5 0%, #eaeaea 50%, #f5f5f5 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+`;
+
+const AirportTransfers = () => {
   const [formData, setFormData] = useState({
     name: "",
     message: "",
-    serviceType: "Passed through chauffeur hire", // Hardcoded value
+    serviceType: "Passed through chauffeur hire",
     email: "",
   });
 
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formError, setFormError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [cachedDataLoaded, setCachedDataLoaded] = useState(false);
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  // ✅ Preload components for next visit
+  useEffect(() => {
+    import("../components/TestimonialCarousel");
+    import("../components/Tours");
+    import("../components/Cars4hire");
+  }, []);
+
+  // ✅ Simulate API caching (if your Tours/Cars4Hire fetch data)
+  useEffect(() => {
+    const cached = sessionStorage.getItem("airportTransfersCache");
+    if (cached) {
+      setCachedDataLoaded(true);
+    } else {
+      // simulate initial fetch delay (first visit)
+      const timer = setTimeout(() => {
+        sessionStorage.setItem("airportTransfersCache", "true");
+        setCachedDataLoaded(true);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailPattern.test(formData.email)) {
@@ -86,52 +141,29 @@ const AirportTransfers = () => {
 
     emailjs
       .send("service_ptqtluk", "template_uyicl9l", formData, "apNJP_9sXnff2q82W")
-      .then(
-        (result) => {
-          console.log("Email successfully sent!");
-          setFormSubmitted(true);
-        },
-        (error) => {
-          console.log("There was an error sending the email:", error);
-        }
-      )
-      .finally(() => {
-        setLoading(false);
-      });
+      .then(() => setFormSubmitted(true))
+      .catch((error) => console.log("Email error:", error))
+      .finally(() => setLoading(false));
   };
-
-  // Form Function ends here =====================================================================
-
-
 
   return (
     <div className="home-3">
+      <GlobalStyle />
       <Helmet>
-        <title>Best chauffeur hire and private tours in Cape Town</title>
+        <title>Best Chauffeur Hire and Private Tours in Cape Town</title>
         <meta
           name="description"
-          content="Safe, premium chauffeur service for executives and single travelers in Cape Town. Enjoy luxury vehicles, affordable rates, and professional drivers."
-        />
-        <meta
-          property="og:title"
-          content="Best chauffeur hire and airport transfers in Cape Town"
-        />
-        <meta
-          property="og:description"
-          content="Safe, premium chauffeur service for executives and single travelers in Cape Town. Enjoy luxury vehicles, affordable rates, and professional drivers."
-        />
-        <meta
-          name="keywords"
-          content="chauffeur hire Cape Town, airport transfers, Stellenbosch wine tours, Cape Peninsula tours, luxury car rentals, executive travel, professional drivers, luxury vehicles"
+          content="Luxury chauffeur service and private tours in Cape Town. Premium vehicles, professional drivers, and unforgettable experiences."
         />
       </Helmet>
+
       <Header />
 
+      {/* Hero section */}
       <section
         className="flat-title-page inner"
         style={{
-          background: `url(${backgroundImage}) center center no-repeat`,
-          backgroundSize: "cover",
+          background: `url(${backgroundImage}) center center / cover no-repeat`,
           padding: "100px 0 20px",
           position: "relative",
         }}
@@ -139,75 +171,79 @@ const AirportTransfers = () => {
         <div className="overlay"></div>
       </section>
 
+      {/* Main content */}
       <div className="tf-section post-details">
         <div className="themesflat-container">
           <div className="post">
             <div className="inner-content">
-              <h2 className="title-post">
-                Premium Chauffeur Services and Private tours in Cape Town
-              </h2>
-              <div className="divider"></div>
-              <div className="inner-post mg-t-40">
-                <p className="mg-bt-24">
-                  If it's your first time in Cape Town, then why not discover all the top attractions with us bespoke to your requirements. 
-                </p>
+              <SectionTitle>
+                Premium Chauffeur Services and Private Tours in{" "}
+                <HighlightText>Cape Town</HighlightText>
+              </SectionTitle>
 
-                <p className="mg-bt-24">
-                  Okay so now you might be asking yourself: "Why Should I book with them?"
-                </p>
+              <Paragraph>
+                If it’s your first time in Cape Town, discover all the top
+                attractions with us — completely bespoke to your requirements.
+                Whether you’re visiting for business or pleasure, our private
+                chauffeurs ensure a seamless, premium experience.
+              </Paragraph>
 
-                <p className="mg-bt-24">
-                  And that's a good question, so you should consider booking with us because:
-                </p>
+              <Paragraph>
+                You might be asking: <em>“Why should I book with them?”</em>
+              </Paragraph>
 
-                <p className="mg-bt-24">
-                  - You're safe with us,
-                </p>
-                <p className="mg-bt-24">
-                  - We've got the best vehicles for any occasion,
-                </p>
-                <p className="mg-bt-24">
-                  - Local guides to share the secrets of Cape Town,
-                </p>
-                <p className="mg-bt-24">
-                  - And the best itinaries,
-                </p>
+              <Paragraph>Here’s why:</Paragraph>
 
-                 <p className="mg-bt-24">
-                  And if that's not enough for you then maybe some client testimonials would be enough to persuade you 
-                </p>
+              <List>
+                <li>You're safe with us</li>
+                <li>Luxury vehicles for every occasion</li>
+                <li>Local guides who share Cape Town’s hidden gems</li>
+                <li>Carefully planned itineraries designed for comfort</li>
+              </List>
 
-                
-              </div>
-               <TestimonialCarousel />
+              <Paragraph>
+                Still not convinced? Take a look at what our clients have to say:
+              </Paragraph>
 
-              <Tours />
+              {!cachedDataLoaded ? (
+                <ShimmerBox height="300px" />
+              ) : (
+                <Suspense fallback={<ShimmerBox height="300px" />}>
+                  <TestimonialCarousel />
+                </Suspense>
+              )}
 
-              <h2 className="title-post">
-                We can also assist with special events like:
-              </h2>
+              {!cachedDataLoaded ? (
+                <ShimmerBox height="300px" />
+              ) : (
+                <Suspense fallback={<ShimmerBox height="300px" />}>
+                  <Tours />
+                </Suspense>
+              )}
 
-                <p className="mg-bt-24">
-                  - Weddings,
-                </p>
+              <SectionTitle>
+                We can also assist with{" "}
+                <HighlightText>Special Events</HighlightText>
+              </SectionTitle>
 
-                <p className="mg-bt-24">
-                  - Matric Balls,
-                </p>
+              <List>
+                <li>Weddings</li>
+                <li>Matric Balls</li>
+                <li>Corporate Events</li>
+                <li>Any occasion needing prestige vehicles and drivers</li>
+              </List>
 
-                <p className="mg-bt-24">
-                  - Corporate events,
-                </p>
-
-                <p className="mg-bt-24">
-                  - And anything else that requires high status vehicles and professional drivers
-                </p>
-
-
-              <Cars4Hire />
+              {!cachedDataLoaded ? (
+                <ShimmerBox height="280px" />
+              ) : (
+                <Suspense fallback={<ShimmerBox height="280px" />}>
+                  <Cars4Hire />
+                </Suspense>
+              )}
             </div>
           </div>
 
+          {/* Contact Form */}
           <div className="tf-section tf-item-details">
             <div className="container">
               <div className="row">
@@ -218,22 +254,21 @@ const AirportTransfers = () => {
                         <div className="thank-you-message">
                           <h2>Thank You!</h2>
                           <p>
-                            Your enquiry has been successfully submitted. We
-                            will get back to you soon.
+                            Your enquiry has been received. We’ll get back to
+                            you soon.
                           </p>
                         </div>
                       ) : (
                         <Fragment>
                           {!loading && (
                             <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                              Let us know how we can help you
+                              Let us know how we can assist you
                             </h1>
                           )}
-
                           <div className="form-inner">
                             <form
                               id="contactform"
-                              noValidate="novalidate"
+                              noValidate
                               onSubmit={handleSubmit}
                             >
                               <div className="row">
@@ -266,7 +301,7 @@ const AirportTransfers = () => {
                                       <textarea
                                         name="message"
                                         value={formData.message}
-                                        placeholder="Let us know if you want to book your tour or chauffeur drive with us and the details for your trip"
+                                        placeholder="Tell us more about your trip or booking request"
                                         onChange={handleChange}
                                       ></textarea>
                                     </div>
@@ -285,20 +320,12 @@ const AirportTransfers = () => {
                           </div>
                         </Fragment>
                       )}
-
-                            <Fragment>
-                                
-                            </Fragment>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-            
-
-          
         </div>
       </div>
 

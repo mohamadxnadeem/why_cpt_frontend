@@ -5,37 +5,26 @@ import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import FlipMove from 'react-flip-move';
 import styled, { keyframes } from 'styled-components';
 
-// 🔥 Shimmer animation keyframes
+// 💫 Unified shimmer animation (same as Tours & Cars4Hire)
 const shimmer = keyframes`
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
-  }
+  0% { background-position: -500px 0; }
+  100% { background-position: 500px 0; }
 `;
 
-// ✅ Styled shimmer placeholder
-const ShimmerPlaceholder = styled.div`
+// 🎨 Styled shimmer placeholder
+const Shimmer = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  background: linear-gradient(
-    to right,
-    #f0f0f0 0%,
-    #e0e0e0 20%,
-    #f0f0f0 40%,
-    #f0f0f0 100%
-  );
-  background-size: 2000px 100%;
-  animation: ${shimmer} 1.5s infinite linear;
+  height: ${(props) => props.height || '100%'};
+  background: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+  background-size: 1000px 100%;
+  animation: ${shimmer} 1.5s linear infinite;
   z-index: 1;
+  border-radius: 10px;
 `;
 
-// ✅ Image container
+// 🖼️ Image container & styling
 const SlideContainer = styled.div`
   position: relative;
   width: 100%;
@@ -44,17 +33,15 @@ const SlideContainer = styled.div`
   overflow: hidden;
 `;
 
-// ✅ Image styling
 const ImageStyled = styled.img`
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   z-index: 2;
   opacity: ${(props) => (props.imageLoaded ? 1 : 0)};
-  transition: opacity 0.8s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
   border-radius: 10px;
 `;
 
@@ -62,46 +49,46 @@ const OneBedroom = forwardRef((ref) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // 🧠 Load cached accommodations first, then fetch new data
   useEffect(() => {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => {
-      console.warn('Fetch timed out — stopping loader.');
-      setLoading(false);
-    }, 8000); // stop loading after 8 seconds if API is slow
+    const cached = localStorage.getItem('oneBedroomData');
+    if (cached) {
+      try {
+        const parsed = JSON.parse(cached);
+        setData(parsed);
+        setLoading(false);
+      } catch (err) {
+        console.error('Error parsing cached one-bedroom data:', err);
+      }
+    }
 
-    fetch('https://web-production-1ab9.up.railway.app/api/one_bedroom/all/', {
-      signal: controller.signal,
-    })
+    fetch('https://web-production-1ab9.up.railway.app/api/one_bedroom/all/')
       .then((response) => response.json())
-      .then((data) => {
-        const updatedData = data.map((item) => ({
+      .then((newData) => {
+        const updatedData = newData.map((item) => ({
           ...item,
-          firstPhoto: item.cover_photos.length > 0 ? item.cover_photos[0] : null,
+          firstPhoto: item.cover_photos.length > 0
+            ? { ...item.cover_photos[0], imageLoaded: false }
+            : null,
         }));
+
         setData(updatedData);
         setLoading(false);
+        localStorage.setItem('oneBedroomData', JSON.stringify(updatedData));
       })
       .catch((error) => {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching one-bedroom data:', error);
         setLoading(false);
       });
-
-    return () => {
-      controller.abort();
-      clearTimeout(timeout);
-    };
   }, []);
 
-  const handleImageLoad = (accomodationId) => {
+  const handleImageLoad = (accommodationId) => {
     setData((prevData) =>
       prevData.map((item) => {
-        if (item.accomodation.id === accomodationId && item.firstPhoto) {
+        if (item.accomodation.id === accommodationId && item.firstPhoto) {
           return {
             ...item,
-            firstPhoto: {
-              ...item.firstPhoto,
-              imageLoaded: true,
-            },
+            firstPhoto: { ...item.firstPhoto, imageLoaded: true },
           };
         }
         return item;
@@ -125,10 +112,10 @@ const OneBedroom = forwardRef((ref) => {
                   Luxury Apartments in Camps Bay
                 </h2>
                 <p className="sub-title ct small mg-bt-20 pad-420">
-                  2 Minute walk to the beach and safest suburb in Cape Town
+                  2-Minute walk to the beach — the safest suburb in Cape Town.
                 </p>
 
-                {/* ✅ Shimmer placeholders while loading */}
+                {/* 🪞 Shimmer placeholders while loading */}
                 {loading ? (
                   <div
                     style={{
@@ -149,7 +136,7 @@ const OneBedroom = forwardRef((ref) => {
                           flexShrink: 0,
                         }}
                       >
-                        <ShimmerPlaceholder />
+                        <Shimmer />
                       </div>
                     ))}
                   </div>
@@ -165,7 +152,7 @@ const OneBedroom = forwardRef((ref) => {
                     }}
                     navigation
                     pagination={{ clickable: true }}
-                    scrollbar={{ draggable: true }}
+                    scrollbar={{ draggable: false }}
                   >
                     {data.slice(0, 10).map((item, index) => (
                       <SwiperSlide key={index}>
@@ -174,19 +161,23 @@ const OneBedroom = forwardRef((ref) => {
                             <div className="sc-card-product">
                               <div className="card-media">
                                 <SlideContainer>
-                                  {!item.firstPhoto?.imageLoaded && (
-                                    <ShimmerPlaceholder />
-                                  )}
                                   {item.firstPhoto && (
-                                    <ImageStyled
-                                      src={item.firstPhoto.image.cover_photos}
-                                      alt={item.accomodation.title}
-                                      onLoad={() =>
-                                        handleImageLoad(item.accomodation.id)
-                                      }
-                                      onError={handleImageError}
-                                      imageLoaded={item.firstPhoto.imageLoaded}
-                                    />
+                                    <>
+                                      {!item.firstPhoto.imageLoaded && (
+                                        <Shimmer />
+                                      )}
+                                      <ImageStyled
+                                        src={item.firstPhoto.image.cover_photos}
+                                        alt={item.accomodation.title}
+                                        onLoad={() =>
+                                          handleImageLoad(item.accomodation.id)
+                                        }
+                                        onError={handleImageError}
+                                        imageLoaded={
+                                          item.firstPhoto.imageLoaded
+                                        }
+                                      />
+                                    </>
                                   )}
                                 </SlideContainer>
                               </div>
@@ -199,13 +190,9 @@ const OneBedroom = forwardRef((ref) => {
 
                               <div className="meta-info">
                                 <div className="author">
-                                  <div
-                                    className="price"
-                                    style={{ textAlign: 'left' }}
-                                  >
+                                  <div className="price" style={{ textAlign: 'left' }}>
                                     <p>
-                                      From ${item.accomodation.min_price} Per
-                                      Night
+                                      From ${item.accomodation.min_price} per night
                                     </p>
                                   </div>
                                 </div>

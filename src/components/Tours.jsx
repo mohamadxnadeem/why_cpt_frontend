@@ -2,21 +2,16 @@ import React, { useState, useEffect, forwardRef, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-import Rating from './Rating';
 import FlipMove from 'react-flip-move';
 import styled, { keyframes } from 'styled-components';
 
-// Shimmer animation
+// 💫 Shimmer animation
 const shimmer = keyframes`
-  0% {
-    background-position: -500px 0;
-  }
-  100% {
-    background-position: 500px 0;
-  }
+  0% { background-position: -500px 0; }
+  100% { background-position: 500px 0; }
 `;
 
-// Styled components
+// 🎨 Styled components
 const SlideContainer = styled.div`
   position: relative;
   width: 100%;
@@ -27,17 +22,10 @@ const SlideContainer = styled.div`
 
 const Shimmer = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    to right,
-    #f6f7f8 0%,
-    #edeef1 20%,
-    #f6f7f8 40%,
-    #f6f7f8 100%
-  );
+  background: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
   background-size: 1000px 100%;
   animation: ${shimmer} 1.5s linear infinite;
   z-index: 1;
@@ -45,8 +33,7 @@ const Shimmer = styled.div`
 
 const ImageStyled = styled.img`
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -60,59 +47,61 @@ const Tours = forwardRef((ref) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Load Calendly script
   useEffect(() => {
     const script = document.createElement('script');
     script.src = 'https://assets.calendly.com/assets/external/widget.js';
     script.async = true;
     document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
+    return () => document.body.removeChild(script);
   }, []);
 
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-  const openCalendlyPopup = (e) => {
-    e.preventDefault();
-    if (isMobile) {
-      window.open('https://calendly.com/mohamadxnadeem/30min', '_blank');
-    } else if (window.Calendly) {
-      window.Calendly.initPopupWidget({ url: 'https://calendly.com/mohamadxnadeem/30min' });
-    }
-    return false;
-  };
-
+  // 🧠 Check for cached data before fetching
   useEffect(() => {
+    const cached = localStorage.getItem('toursData');
+    if (cached) {
+      try {
+        const parsed = JSON.parse(cached);
+        setData(parsed);
+        setLoading(false);
+      } catch (err) {
+        console.error('Error parsing cached tours:', err);
+      }
+    }
+
+    // Fetch fresh data (background revalidation)
     fetch('https://web-production-1ab9.up.railway.app/api/experiences/with-reviews/')
       .then((response) => response.json())
-      .then((data) => {
-        const updatedData = data.map(item => ({
+      .then((newData) => {
+        const updatedData = newData.map(item => ({
           ...item,
-          firstPhoto: item.cover_photos.length > 0 ? { ...item.cover_photos[0], imageLoaded: false } : null,
+          firstPhoto: item.cover_photos.length > 0
+            ? { ...item.cover_photos[0], imageLoaded: false }
+            : null,
         }));
+
         setData(updatedData);
         setLoading(false);
+        localStorage.setItem('toursData', JSON.stringify(updatedData)); // cache it
       })
       .catch((error) => {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching tours data:', error);
         setLoading(false);
       });
   }, []);
 
   const handleImageLoad = (experienceId) => {
-    setData(prevData => prevData.map(item => {
-      if (item.experience.id === experienceId && item.firstPhoto) {
-        return {
-          ...item,
-          firstPhoto: {
-            ...item.firstPhoto,
-            imageLoaded: true,
-          }
-        };
-      }
-      return item;
-    }));
+    setData((prevData) =>
+      prevData.map((item) => {
+        if (item.experience.id === experienceId && item.firstPhoto) {
+          return {
+            ...item,
+            firstPhoto: { ...item.firstPhoto, imageLoaded: true },
+          };
+        }
+        return item;
+      })
+    );
   };
 
   const handleImageError = (e) => {
@@ -130,7 +119,6 @@ const Tours = forwardRef((ref) => {
                 <h2 className="tf-title-heading ct style-2 mg-bt-13">
                   5 Best Tours to do in Cape Town 2025
                 </h2>
-                
 
                 <Swiper
                   modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -143,7 +131,7 @@ const Tours = forwardRef((ref) => {
                   }}
                   navigation
                   pagination={{ clickable: true }}
-                  scrollbar={{ draggable: true }}
+                  scrollbar={{ draggable: false }}
                 >
                   {data.slice(0, 10).map((item, index) => (
                     <SwiperSlide key={index}>
@@ -172,23 +160,17 @@ const Tours = forwardRef((ref) => {
                                 </div>
                                 <div className="card-title">
                                   <h5 className="style2">
-                                    <Link to={`/experience/${item.experience.id}`}>{item.experience.title}</Link>
+                                    <Link to={`/experience/${item.experience.id}`}>
+                                      {item.experience.title}
+                                    </Link>
                                   </h5>
                                 </div>
 
-                                {/* <div className="meta-info">
-                                  <div className="author">
-                                    <div className="review">
-                                      <span>Based on {item.reviews.length} reviews</span>
-                                      <h5>
-                                        <Rating value={item.average_rating} color={'#f8e825'} />
-                                      </h5>
-                                    </div>
-                                  </div>
-                                </div> */}
-
                                 <center>
-                                  <Link to={`/experience/${item.experience.id}`} className="sc-button loadmore style fl-button pri-3">
+                                  <Link
+                                    to={`/experience/${item.experience.id}`}
+                                    className="sc-button loadmore style fl-button pri-3"
+                                  >
                                     <span>View Experience</span>
                                   </Link>
                                 </center>

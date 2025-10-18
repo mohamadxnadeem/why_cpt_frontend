@@ -1,162 +1,83 @@
-import React , { useState , Fragment, useEffect } from 'react';
-import Header from '../components/header/Header';
-import heroSliderData from '../assets/fake-data/data-slider-3';
-import Slider from '../components/slider/Slider';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import CardModal from '../components/layouts/CardModal';
-import ImageBar from '../components/ImageBar';
-import Rating from '../components/Rating'
-import Footer from '../components/footer/Footer'
-import Tours from '../components/Tours';
-
-import Packages from '../components/Packages'
-import { Accordion } from 'react-bootstrap-accordion'
-
+import React, { useState, Fragment, useEffect, Suspense } from "react";
+import styled, { createGlobalStyle } from "styled-components";
+import { Helmet } from "react-helmet";
+import Header from "../components/header/Header";
+import Slider from "../components/slider/Slider";
+import heroSliderData from "../assets/fake-data/data-slider-3";
+import ImageBar from "../components/ImageBar";
+import Packages from "../components/Packages";
 import TestimonialCarousel from "../components/TestimonialCarousel";
+import Footer from "../components/footer/Footer";
+import emailjs from "emailjs-com";
+import { Accordion } from "react-bootstrap-accordion";
+import { Link } from "react-router-dom";
 
+// ✨ Global luxury typography
+const GlobalStyle = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap');
 
-import hof1 from '../assets/images/blog/accomomdation.png'
-import hof2 from '../assets/images/blog/winefarm.png'
-import hof from '../assets/images/blog/moz.png'
+  body {
+    font-family: 'Poppins', sans-serif;
+    color: #2a2a2a;
+    line-height: 1.8;
+  }
 
+  h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    color: #111;
+  }
+`;
 
-import cobra from '../assets/images/blog/cobra.jpg'
-import chopper from '../assets/images/blog/chopper.jpg'
-import bokaap from '../assets/images/blog/bokaap.jpg'
-import jana from '../assets/images/blog/jana.jpg';
-import tim from '../assets/images/blog/tim.jpg';
-import rachel from '../assets/images/blog/becca.jpg';
-import marie from '../assets/images/blog/marie.jpg';
-import micheal from '../assets/images/blog/micheal.jpg';
-import dan from '../assets/images/blog/dan.jpg';
-import achmat from '../assets/images/blog/achmat.png'
-import luka from '../assets/images/blog/luka.png'
-import noor from '../assets/images/blog/noor.png'
-import renad from '../assets/images/blog/renad.png'
-import yaasir from '../assets/images/blog/yaasir.png'
-import billy from '../assets/images/blog/mampuru.png'
-import jones from '../assets/images/blog/jones.png'
-import yusra from '../assets/images/blog/yusra.png'
-import moz from '../assets/images/blog/moz.png'
-import kazi from '../assets/images/blog/Allen and Kazi.png'
-import aashish from '../assets/images/blog/Aashish.jpg'
-import kresmir from '../assets/images/blog/kresmir.jpg'
-import lungi from '../assets/images/blog/lungi.jpg'
-import mampuru from '../assets/images/blog/mampuru.jpg'
-import gunnar from '../assets/images/blog/mr gunnar.jpg'
-import ru from '../assets/images/blog/ru.jpg'
-import ruth from '../assets/images/blog/ruth.jpg'
-import saad from '../assets/images/blog/saad.jpg'
-import sarah from '../assets/images/blog/sarah.jpg'
-import tuleen from '../assets/images/blog/tuleen.jpg'
-import yasmin from '../assets/images/blog/yasmin.jpg'
+// ✨ Styled sections
+const Section = styled.section`
+  padding: 80px 0;
+`;
 
-import asad from '../assets/images/blog/asad.jpg'
-import jodi from '../assets/images/blog/jodi.jpg'
-import nicolas from '../assets/images/blog/nicholas.jpg'
-import nadine from '../assets/images/blog/nadine.jpg'
+const Title = styled.h2`
+  font-size: 34px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #111;
+`;
 
+const Subtitle = styled.p`
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 30px auto;
+  font-size: 17px;
+  color: #555;
+`;
 
+const BulletList = styled.ul`
+  list-style: none;
+  padding: 0;
+  max-width: 700px;
+  margin: 0 auto 40px auto;
+  text-align: left;
 
-import emailjs from 'emailjs-com';
-import IGimage from '../assets/images/slider/legends.svg'
-import { Link } from 'react-router-dom';
+  li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 12px;
+    font-size: 17px;
+    color: #333;
 
-import CardList from '../components/CardList'
-import FullPackages from './FullPackages';
-
+    &::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #d4af37;
+      font-size: 20px;
+    }
+  }
+`;
 
 const Home03 = () => {
-    const [modalShow, setModalShow] = useState(false);
-
-
-    const socialList = [
-     
-        {
-            icon: "fab fa-instagram",
-            link: "https://www.instagram.com/whycapetown"
-        },
-     
-        
-        
-
-    ]
-
-    const [data] = useState(
-        [
-            {   key: "0",
-                show: "show",
-                title: 'Is Cape Town safe?',
-                text: 'Cape Town is one of the safest cities in the world but there are some places on the outskirts of the city that is extremely dangerous. Especially if you not from the area. Thats why its best to travel with a guide for the first time to teach you about where not to go and what not to do',
-            },
-            {
-                key: "1",
-                title: 'What is the best time of year to visit Cape Town?',
-                text: 'Summer is the most popular time to visit, the best weather with temperatues averaging around 30 degrees calcius, clear skys and beach days. (September - May)',
-            },
-            {
-                key: "2",
-                title: 'How do I get from the airport to the city center?',
-                text: 'We are going to be biased and say that its best to arrange your airport transfers with us, but its best to arrange it with a reputable company before hand or someone that you know. ',
-            },
-            {
-                key: "3",
-                title: 'What are the best neighborhoods to stay in Cape Town for tourists?',
-                text: 'Best Neighborhoods: Camps Bay, Sea Point, Gardens, Die Waterkant, Stellenbosch, Franshoek, Century City, Bloubergstand, Fishoek',
-            },
-            {
-                key: "4",
-                title: 'What are some traditional South African dishes I should try in Cape Town?',
-                text: 'Cape Town has the best food in the world. You have to try the breakfast at the Bokaap Deli, make sure you try a koeksister while you there, a gatsby from steelies at waterfront, ',
-            },
-            {
-                key: "5",
-                title: 'What language do people speak in Cape Town?',
-                text: 'South Africa has 9 offical languages but everyone speaks English and Afrikaans (similar to dutch and german)',
-            },
-            {
-                key: "6",
-                title: 'What are the best places and attractions to visit in Cape Town?',
-                text: 'You cant travel all the way to Cape Town and not visit Table Mountain, Cape of Goodhope, Chapmans Peak, Stellenbosch and the V and A Waterfront',
-            },
-           
-           
-          
-           
-          
-        ]
-    )
-
-    
-
-    
-
-
-
-    
-    useEffect(() => {
-        const script = document.createElement('script');
-        script.src = 'https://assets.calendly.com/assets/external/widget.js';
-        script.async = true;
-        document.body.appendChild(script);
-
-        return () => {
-            document.body.removeChild(script);
-        };
-    }, []);
-
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-    
-    
-
-    
-   // Form Function Starts here =====================================================================
-  
   const [formData, setFormData] = useState({
     name: "",
     message: "",
-    serviceType: "Full Package Enquiry", // Hardcoded value
+    serviceType: "Full Package Enquiry",
     email: "",
   });
 
@@ -164,18 +85,21 @@ const Home03 = () => {
   const [formError, setFormError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  // Calendly integration
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://assets.calendly.com/assets/external/widget.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => document.body.removeChild(script);
+  }, []);
+
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
     if (!emailPattern.test(formData.email)) {
       setFormError("Please enter a valid email address.");
       return;
@@ -186,272 +110,223 @@ const Home03 = () => {
 
     emailjs
       .send("service_ptqtluk", "template_uyicl9l", formData, "apNJP_9sXnff2q82W")
-      .then(
-        (result) => {
-          console.log("Email successfully sent!");
-          setFormSubmitted(true);
-        },
-        (error) => {
-          console.log("There was an error sending the email:", error);
-        }
-      )
-      .finally(() => {
-        setLoading(false);
-      });
+      .then(() => setFormSubmitted(true))
+      .catch((error) => console.log("Email error:", error))
+      .finally(() => setLoading(false));
   };
 
-  // Form Function ends here =====================================================================
+  const faqData = [
+    {
+      key: "0",
+      title: "Is Cape Town safe?",
+      text: "Cape Town is a safe city when you know where to go. Traveling with a trusted guide helps you explore confidently while discovering hidden local gems.",
+    },
+    {
+      key: "1",
+      title: "When is the best time to visit?",
+      text: "September through May offers the best weather — warm days, blue skies, and vibrant outdoor energy everywhere you go.",
+    },
+    {
+      key: "2",
+      title: "How do I get from the airport to the city?",
+      text: "Book your airport transfer with us for a smooth, professional experience. Your driver will meet you right at arrivals.",
+    },
+    {
+      key: "3",
+      title: "What are the best neighborhoods to stay in?",
+      text: "Camps Bay, Sea Point, Stellenbosch, and De Waterkant are among the most loved areas — each offering its own unique charm and views.",
+    },
+    {
+      key: "4",
+      title: "What local dishes should I try?",
+      text: "Try Cape Malay cuisine — bobotie, koeksisters, and a classic gatsby. You’ll thank us later.",
+    },
+  ];
 
-   
-    
-    return (
-        <div className='home-3'>    
+  return (
+    <div className="home-3">
+      <GlobalStyle />
+      <Helmet>
+        <title>
+          Luxury Cape Town Travel Packages | Private Tours & Chauffeur Service
+        </title>
+        <meta
+          name="description"
+          content="Book your dream Cape Town holiday with exclusive 5-star stays, private chauffeur tours, and personalized itineraries. Stress-free luxury travel, tailored to you."
+        />
+        <meta
+          property="og:title"
+          content="Luxury Travel Packages in Cape Town | Private Chauffeur & Tours"
+        />
+        <meta
+          property="og:description"
+          content="Discover Cape Town in style. From private airport transfers to luxury villas and guided tours — our team plans everything for you."
+        />
+        <meta
+          property="og:image"
+          content="https://www.whycapetown.com/your-cover-image.jpg"
+        />
+        <meta property="og:url" content="https://www.whycapetown.com" />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
 
-            <Header />
-            <Slider data={heroSliderData} />
-            <ImageBar /> 
-              
+      <Header />
+      <Slider data={heroSliderData} />
+      <ImageBar />
 
-            <section className="tf-help-left tf-section">
-                <div className="themesflat-container">
-                    <div className="row">
+      {/* 🏖 Intro Section */}
+      <Section>
+        <Title>Plan Your Luxury Trip to Cape Town</Title>
+        <Subtitle>
+          Let our team handle every detail — from 5-star hotels and private
+          chauffeurs to curated experiences across the Cape. Sit back, relax,
+          and enjoy a trip designed entirely for you.
+        </Subtitle>
 
-                        <div className="col-12">
-                            <br></br>
+        <BulletList>
+          <li>Exclusive rates at top-rated hotels and villas</li>
+          <li>Private chauffeurs and expert local guides</li>
+          <li>Tailored itineraries built around your interests</li>
+          <li>24/7 assistance while you’re in Cape Town</li>
+        </BulletList>
 
-                                <center>
-                                    {/* Youtube Video Link: */}
-                                    {/* <div class="video-container">
-                                        <iframe src="https://www.youtube.com/embed/3abEtWTaYqY?si=qh8RlhCKHHYyZpVZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                                    </div> */}
-                                </center>
+        <Suspense fallback={<div>Loading testimonials...</div>}>
+          <TestimonialCarousel />
+        </Suspense>
 
-                                <br></br>
+        <Packages />
+      </Section>
 
-                            <div className="text-container">
-
-                                <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    Plan your trip to Cape Town with us for a Stress Free vacation                                
-                                </h1>
-
-                                <hr></hr>
-
-                            
-
-                               
-
-                                <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                    What you can expect when planning your trip with us:                               
-                                </h1>
-
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    - We secure your dates at the best 5 star hotels                               
-                                </p>
-
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    - Chauffeured drives with a local tour guide to show you all the best spots and share the secrets of Cape Town with you                                
-                                </p>
-
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    - You get access to full day itinaries for the best experiences in Cape Town                               
-                                </p>
-
-                                <p className="sub-title ct small mg-bt-20 pad-420">
-                                    - And anything else you might want or need.                             
-                                </p>
-
-                                <Fragment>
-                                
-
-                                 <TestimonialCarousel />
-                            </Fragment>
-
-
-
-                                {/* <p className="sub-title ct small mg-bt-20 pad-420">
-                                    Drop your details below if you're interested in visiting Cape Town and want to plan your trip with us for a stress free vacation.             
-                                </p> */}
-
-                                           
-
-{/* 
-                                <div className="image-grid">
-                                    <div className="image-box">
-                                        <center>
-                                            <h4>Helicopter Tour</h4>
-                                            <br></br>
-
-                                            <img className="homeImages" src={chopper} alt="helicopter ride in cape town" />
-                                        </center>
-                                    </div>
-                                    <div className="image-box">
-                                        <center>
-                                        <h4>Chapmans Peak with a Cobra</h4>
-                                        <br></br>
-                                        <img className="homeImages" src={cobra} alt="cobra experience around chapmans peak" />
-                                        </center>
-                                    </div>
-                                    <div className="image-box">
-                                        <center>
-                                            <h4>Bokaap</h4>
-                                            <br></br>
-                                            <img className="homeImages" src={bokaap} alt="bokaap" />
-                                        </center>
-                                    </div>
-                                </div> */}
-
-                        
-                            </div>
-                        </div>                                    
+      {/* 📨 Contact Form */}
+      <div className="tf-section tf-item-details">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              <div className="content-center">
+                <div className="sc-item-details">
+                  {formSubmitted ? (
+                    <div className="thank-you-message" style={{ textAlign: "left" }}>
+                      <h2
+                        style={{
+                          fontFamily: "Playfair Display, serif",
+                          color: "#111",
+                        }}
+                      >
+                        Thank You!
+                      </h2>
+                      <p style={{ fontSize: "16px", color: "#444" }}>
+                        We’ve received your enquiry. Our team will contact you
+                        soon with your personalized Cape Town itinerary.
+                      </p>
                     </div>
-                </div>
-
-                < Packages />
-
-            </section>
-
-            
-
-            <div className="tf-section tf-item-details">
-            <div className="container">
-              <div className="row">
-                <div className="col-md-12">
-                  <div className="content-center">
-                    <div className="sc-item-details">
-                      {formSubmitted ? (
-                        <div className="thank-you-message">
-                          <h2>Thank You!</h2>
-                          <p>
-                            Your enquiry has been successfully submitted. We
-                            will get back to you soon.
+                  ) : (
+                    <Fragment>
+                      {!loading && (
+                        <>
+                          <h1
+                            className="tf-title-heading ct style-2 fs-30 mg-bt-10"
+                            style={{
+                              textAlign: "left",
+                              fontFamily: "Playfair Display, serif",
+                              color: "#111",
+                            }}
+                          >
+                            Let’s Start Planning Your Trip
+                          </h1>
+                          <p
+                            style={{
+                              textAlign: "left",
+                              fontSize: "16px",
+                              color: "#555",
+                              marginBottom: "30px",
+                              maxWidth: "700px",
+                            }}
+                          >
+                            Tell us about your dream Cape Town experience —
+                            when you’d like to visit, how many people are
+                            traveling, and what you’d love to see and do. Our
+                            travel team will send a tailored proposal shortly.
                           </p>
-                        </div>
-                      ) : (
-                        <Fragment>
-                          {!loading && (
-                            <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                              Contact Us:
-                            </h1>
-                          )}
-
-                          <div className="form-inner">
-                            <form
-                              id="contactform"
-                              noValidate="novalidate"
-                              onSubmit={handleSubmit}
-                            >
-                              <div className="row">
-                                {!loading && (
-                                  <>
-                                    <div className="col-md-6">
-                                      <input
-                                        type="text"
-                                        name="name"
-                                        value={formData.name}
-                                        placeholder="Your Name"
-                                        onChange={handleChange}
-                                      />
-                                    </div>
-                                    <div className="col-md-6">
-                                      <input
-                                        type="email"
-                                        name="email"
-                                        value={formData.email}
-                                        placeholder="Your Email"
-                                        onChange={handleChange}
-                                      />
-                                      {formError && (
-                                        <p style={{ color: "red" }}>
-                                          {formError}
-                                        </p>
-                                      )}
-                                    </div>
-                                    <div className="col-md-12">
-                                      <textarea
-                                        name="message"
-                                        value={formData.message}
-                                        placeholder="We need some details from you to help you have the best experience in Cape Town. Which City are you travelling from, what is the reason for your visit, how much time do you want to spend in Cape Town, how many people are travelling with you and what is your budget. If you have any questions then let us know and we will get back to you ASAP. "
-                                        onChange={handleChange}
-                                      ></textarea>
-                                    </div>
-                                    <div className="col-md-12">
-                                      <button
-                                        type="submit"
-                                        className="sc-button loadmore style fl-button pri-3"
-                                      >
-                                        <span>Send Message</span>
-                                      </button>
-                                    </div>
-                                  </>
-                                )}
-                              </div>
-                            </form>
-                          </div>
-                        </Fragment>
+                        </>
                       )}
 
-                            
-                    </div>
-                  </div>
+                      <div className="form-inner" style={{ textAlign: "left" }}>
+                        <form id="contactform" noValidate="novalidate" onSubmit={handleSubmit}>
+                          <div className="row">
+                            {!loading && (
+                              <>
+                                <div className="col-md-6">
+                                  <input
+                                    type="text"
+                                    name="name"
+                                    value={formData.name}
+                                    placeholder="Your Full Name"
+                                    onChange={handleChange}
+                                  />
+                                </div>
+                                <div className="col-md-6">
+                                  <input
+                                    type="email"
+                                    name="email"
+                                    value={formData.email}
+                                    placeholder="Your Email Address"
+                                    onChange={handleChange}
+                                  />
+                                  {formError && (
+                                    <p style={{ color: "red", fontSize: "14px" }}>
+                                      {formError}
+                                    </p>
+                                  )}
+                                </div>
+                                <div className="col-md-12">
+                                  <textarea
+                                    name="message"
+                                    value={formData.message}
+                                    placeholder="Example: We’re visiting from Dubai for 7 days in February. We’d love private tours, luxury stays, and airport transfers."
+                                    onChange={handleChange}
+                                    style={{ minHeight: "150px" }}
+                                  ></textarea>
+                                </div>
+                                <div className="col-md-12" style={{ textAlign: "left" }}>
+                                  <button
+                                    type="submit"
+                                    className="sc-button loadmore style fl-button pri-3"
+                                    style={{ marginTop: "15px" }}
+                                  >
+                                    <span>Send My Travel Request</span>
+                                  </button>
+                                </div>
+                              </>
+                            )}
+                          </div>
+                        </form>
+                      </div>
+                    </Fragment>
+                  )}
                 </div>
               </div>
             </div>
-            </div>
-
-            
-
-            
-
-            <section className="tf-section wrap-accordion">
-                                    <div className="container">
-                                        <div className="row">
-                                            <div className="col-md-12">
-                                                <center>
-                                                    <h2 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                                        Everything You Need To Know:
-                                                    </h2>
-
-                                                </center>
-                                                
-                                                
-                                            </div>
-                                            <div className="col-md-12">
-                                                <div className="flat-accordion2">
-                                                    {
-                                                        data.map((item,index) => (
-                                                            <Accordion key={index} title={item.title} >
-                                                                <p>{item.text}</p>
-                                                            </Accordion>
-                                                        ))
-                                                    }                             
-                                                </div>
-                                            </div>
-                                            {/* <div className="col-md-12">
-                                                <h2 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                                                    Any Other Questions?                            
-                                                </h2>
-                                            
-                                                <center>
-                                                    <Link target='__blank' to="https://wa.link/f1ufwx" className="sc-button loadmore style  fl-button pri-3"><span>Let us know</span></Link>
-                                                </center>
-                    
-                                            </div> */}
-                                            
-                                        </div>
-
-                                        
-                                        
-                                    </div>
-            </section>
-
-            
-           
-
-            <Footer />     
+          </div>
         </div>
+      </div>
 
-        
-    );
-}
+      {/* 🧭 FAQ Section */}
+      <Section>
+        <Title>Everything You Need To Know</Title>
+        <div className="container">
+          <div className="flat-accordion2">
+            {faqData.map((item, index) => (
+              <Accordion key={index} title={item.title}>
+                <p>{item.text}</p>
+              </Accordion>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      <Footer />
+    </div>
+  );
+};
 
 export default Home03;

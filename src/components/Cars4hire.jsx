@@ -5,7 +5,7 @@ import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import FlipMove from 'react-flip-move';
 import styled from 'styled-components';
 
-// Styled components
+// 🎨 Styled components
 const SlideContainer = styled.div`
   position: relative;
   width: 100%;
@@ -15,8 +15,7 @@ const SlideContainer = styled.div`
 
 const ImageStyled = styled.img`
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -28,16 +27,10 @@ const ImageStyled = styled.img`
 
 const Shimmer = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   width: 100%;
   height: ${(props) => props.height || '100%'};
-  background: linear-gradient(
-    90deg,
-    #f0f0f0 25%,
-    #e0e0e0 37%,
-    #f0f0f0 63%
-  );
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 37%, #f0f0f0 63%);
   background-size: 400% 100%;
   animation: shimmer 1.4s ease infinite;
   z-index: 1;
@@ -51,33 +44,48 @@ const Shimmer = styled.div`
 
 const Cars4Hire = forwardRef((ref) => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
+  // 🚗 Load from local cache first, then fetch new data
   useEffect(() => {
+    const cached = localStorage.getItem('carsData');
+    if (cached) {
+      try {
+        const parsed = JSON.parse(cached);
+        setData(parsed);
+        setLoading(false);
+      } catch (err) {
+        console.error('Error parsing cached cars data:', err);
+      }
+    }
+
     fetch('https://web-production-1ab9.up.railway.app/api/cars-for-hire/all/')
       .then((response) => response.json())
-      .then((data) => {
-        const updatedData = data.map(item => ({
+      .then((newData) => {
+        const updatedData = newData.map((item) => ({
           ...item,
-          firstPhoto: item.cover_photos.length > 0 ? {
-            ...item.cover_photos[0],
-            imageLoaded: false,
-          } : null,
+          firstPhoto:
+            item.cover_photos.length > 0
+              ? { ...item.cover_photos[0], imageLoaded: false }
+              : null,
         }));
         setData(updatedData);
+        setLoading(false);
+        localStorage.setItem('carsData', JSON.stringify(updatedData));
       })
-      .catch((error) => console.error('Error fetching data:', error));
+      .catch((error) => {
+        console.error('Error fetching cars data:', error);
+        setLoading(false);
+      });
   }, []);
 
   const handleImageLoad = (carId) => {
-    setData(prevData =>
-      prevData.map(item => {
+    setData((prevData) =>
+      prevData.map((item) => {
         if (item.car.id === carId && item.firstPhoto) {
           return {
             ...item,
-            firstPhoto: {
-              ...item.firstPhoto,
-              imageLoaded: true,
-            },
+            firstPhoto: { ...item.firstPhoto, imageLoaded: true },
           };
         }
         return item;
@@ -114,7 +122,7 @@ const Cars4Hire = forwardRef((ref) => {
                   }}
                   navigation
                   pagination={{ clickable: true }}
-                  scrollbar={{ draggable: true }}
+                  scrollbar={{ draggable: false }}
                 >
                   {data.slice(0, 10).map((item, index) => (
                     <SwiperSlide key={index}>
@@ -122,22 +130,48 @@ const Cars4Hire = forwardRef((ref) => {
                         <div className="swiper-wrapper">
                           <div className="swiper-slide">
                             <div className="slider-item">
-                              <div className={`sc-card-product ${item.car.feature ? 'comingsoon' : ''}`}>
+                              <div
+                                className={`sc-card-product ${
+                                  item.car.feature ? 'comingsoon' : ''
+                                }`}
+                              >
                                 <div className="card-media">
-                                  <SlideContainer style={{ aspectRatio: item.firstPhoto?.imageWidth && item.firstPhoto?.imageHeight ? `${item.firstPhoto.imageWidth} / ${item.firstPhoto.imageHeight}` : '16 / 9' }}>
+                                  <SlideContainer
+                                    style={{
+                                      aspectRatio:
+                                        item.firstPhoto?.imageWidth &&
+                                        item.firstPhoto?.imageHeight
+                                          ? `${item.firstPhoto.imageWidth} / ${item.firstPhoto.imageHeight}`
+                                          : '16 / 9',
+                                    }}
+                                  >
                                     {item.firstPhoto && (
                                       <>
                                         {!item.firstPhoto.imageLoaded && (
                                           <Shimmer
-                                            height={item.firstPhoto.imageHeight ? `${(item.firstPhoto.imageHeight / item.firstPhoto.imageWidth) * 100}%` : '100%'}
+                                            height={
+                                              item.firstPhoto.imageHeight
+                                                ? `${
+                                                    (item.firstPhoto.imageHeight /
+                                                      item.firstPhoto.imageWidth) *
+                                                    100
+                                                  }%`
+                                                : '100%'
+                                            }
                                           />
                                         )}
                                         <ImageStyled
-                                          src={item.firstPhoto.image.cover_photos}
+                                          src={
+                                            item.firstPhoto.image.cover_photos
+                                          }
                                           alt={item.car.title}
-                                          onLoad={() => handleImageLoad(item.car.id)}
+                                          onLoad={() =>
+                                            handleImageLoad(item.car.id)
+                                          }
                                           onError={handleImageError}
-                                          imageLoaded={item.firstPhoto.imageLoaded}
+                                          imageLoaded={
+                                            item.firstPhoto.imageLoaded
+                                          }
                                         />
                                       </>
                                     )}
@@ -146,12 +180,6 @@ const Cars4Hire = forwardRef((ref) => {
 
                                 <div className="card-title">
                                   <h5 className="style2">{item.car.title}</h5>
-                                </div>
-
-                                <div className="meta-info">
-                                  <div className="author">
-                                    <div className="price" style={{ textAlign: 'left' }}></div>
-                                  </div>
                                 </div>
 
                                 <center>

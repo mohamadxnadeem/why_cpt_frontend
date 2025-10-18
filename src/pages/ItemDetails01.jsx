@@ -183,12 +183,30 @@ const ItemDetails01 = () => {
 
           {/* 🟢💎 Pricing Offer Card */}
           {!loading && (
+            // <PricingOfferCard
+            //   price={experience?.price}
+            //   discountedPrice={experience?.discountedprice}
+            //   offerDuration={300}
+            //   experienceId={id}
+            // />
+
+
+
+            // // 🔥 Run promotional offer (countdown active)
+            // <PricingOfferCard
+            //   price={experience?.price}
+            //   discountedPrice=experience?.discountedprice}
+            //   offerDuration={300}
+            //   experienceId={experience?.id}
+            //   isDealActive={true}
+            // />
+
+            // 💰 Show only regular price (no countdown)
             <PricingOfferCard
               price={experience?.price}
-              discountedPrice={experience?.discountedprice}
-              offerDuration={300}
-              experienceId={id}
+              isDealActive={false}
             />
+
           )}
 
           {/* 💬 Testimonials */}
@@ -214,7 +232,7 @@ const ItemDetails01 = () => {
                       ) : (
                         <Fragment>
                           <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                            Secure Your Spot Today
+                            Lock in the best Price by contacting us below before timer runs out
                           </h1>
                           <div className="form-inner">
                             <form

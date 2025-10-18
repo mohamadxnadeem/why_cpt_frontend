@@ -1,45 +1,36 @@
-import React, { useState, useEffect, forwardRef, Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-import Rating from './Rating';
-import FlipMove from 'react-flip-move';
-import styled, { keyframes } from 'styled-components';
-import Loader from './Loader'; // Import the global Loader
+import React, { useState, useEffect, forwardRef, Fragment } from "react";
+import { Link } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import FlipMove from "react-flip-move";
+import styled, { keyframes } from "styled-components";
 
-// Shimmer effect keyframes
+// 💫 Shimmer animation (same as all other components)
 const shimmer = keyframes`
-  0% {
-    background-position: -468px 0;
-  }
-  100% {
-    background-position: 468px 0;
-  }
+  0% { background-position: -500px 0; }
+  100% { background-position: 500px 0; }
 `;
 
-// Styled shimmer placeholder
+// 💎 Styled shimmer placeholder
 const Shimmer = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  background: #f6f7f8;
-  background-image: linear-gradient(
+  height: ${(props) => props.height || "100%"};
+  background: linear-gradient(
     to right,
     #f6f7f8 0%,
     #edeef1 20%,
     #f6f7f8 40%,
     #f6f7f8 100%
   );
-  background-repeat: no-repeat;
-  background-size: 800px 100%;
-  animation: ${shimmer} 1.2s linear infinite forwards;
+  background-size: 1000px 100%;
+  animation: ${shimmer} 1.5s linear infinite;
   z-index: 1;
+  border-radius: 10px;
 `;
 
-// Styled container for slide images
+// 🖼️ Image container
 const SlideContainer = styled.div`
   position: relative;
   width: 100%;
@@ -48,16 +39,16 @@ const SlideContainer = styled.div`
   overflow: hidden;
 `;
 
+// 🖼️ Image styling
 const ImageStyled = styled.img`
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   z-index: 2;
   opacity: ${(props) => (props.imageLoaded ? 1 : 0)};
-  transition: opacity 0.6s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
   border-radius: 10px;
 `;
 
@@ -65,16 +56,13 @@ const Packages = forwardRef((props, ref) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Calendly integration
+  // 🧩 Calendly script
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    const script = document.createElement("script");
+    script.src = "https://assets.calendly.com/assets/external/widget.js";
     script.async = true;
     document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
+    return () => document.body.removeChild(script);
   }, []);
 
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -82,31 +70,47 @@ const Packages = forwardRef((props, ref) => {
   const openCalendlyPopup = (e) => {
     e.preventDefault();
     if (isMobile) {
-      window.open('https://calendly.com/mohamadxnadeem/30min', '_blank');
+      window.open("https://calendly.com/mohamadxnadeem/30min", "_blank");
     } else if (window.Calendly) {
       window.Calendly.initPopupWidget({
-        url: 'https://calendly.com/mohamadxnadeem/30min',
+        url: "https://calendly.com/mohamadxnadeem/30min",
       });
     } else {
-      console.error('Calendly is not loaded yet');
+      console.error("Calendly is not loaded yet");
     }
     return false;
   };
 
-  // Fetch API data
+  // 🧠 Local cache + fetch logic
   useEffect(() => {
-    fetch('https://web-production-1ab9.up.railway.app/api/full-travel-packages/with-reviews/')
-      .then((response) => response.json())
-      .then((data) => {
-        const updatedData = data.map((item) => ({
+    const cacheKey = "packagesData";
+    const cached = localStorage.getItem(cacheKey);
+    if (cached) {
+      try {
+        const parsed = JSON.parse(cached);
+        setData(parsed);
+        setLoading(false);
+      } catch (err) {
+        console.warn("Error parsing cached packages:", err);
+      }
+    }
+
+    fetch("https://web-production-1ab9.up.railway.app/api/full-travel-packages/with-reviews/")
+      .then((res) => res.json())
+      .then((fetched) => {
+        const updatedData = fetched.map((item) => ({
           ...item,
-          firstPhoto: item.cover_photos.length > 0 ? item.cover_photos[0] : null,
+          firstPhoto:
+            item.cover_photos.length > 0
+              ? { ...item.cover_photos[0], imageLoaded: false }
+              : null,
         }));
         setData(updatedData);
         setLoading(false);
+        localStorage.setItem(cacheKey, JSON.stringify(updatedData));
       })
       .catch((error) => {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching packages:", error);
         setLoading(false);
       });
   }, []);
@@ -117,10 +121,7 @@ const Packages = forwardRef((props, ref) => {
         if (item.fullpackage.id === fullpackageId && item.firstPhoto) {
           return {
             ...item,
-            firstPhoto: {
-              ...item.firstPhoto,
-              imageLoaded: true,
-            },
+            firstPhoto: { ...item.firstPhoto, imageLoaded: true },
           };
         }
         return item;
@@ -129,8 +130,8 @@ const Packages = forwardRef((props, ref) => {
   };
 
   const handleImageError = (e) => {
-    console.error('Error loading image:', e.target.src, e);
-    e.target.style.display = 'none'; // Hide broken images
+    console.error("Error loading image:", e.target.src);
+    e.target.style.display = "none";
   };
 
   return (
@@ -141,11 +142,34 @@ const Packages = forwardRef((props, ref) => {
             <div className="row">
               <div className="col-12">
                 <h2 className="tf-title-heading ct style-2 mg-bt-13">
-                  Choose your package to Cape Town
+                  Choose Your Dream <span style={{ color: "#d4af37" }}>Cape Town Package</span>
                 </h2>
 
+                {/* ✨ Shimmer placeholders */}
                 {loading ? (
-                  <Loader />
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: "20px",
+                      overflowX: "auto",
+                      paddingBottom: "10px",
+                    }}
+                  >
+                    {[...Array(4)].map((_, i) => (
+                      <div
+                        key={i}
+                        style={{
+                          width: "250px",
+                          height: "200px",
+                          position: "relative",
+                          borderRadius: "10px",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Shimmer />
+                      </div>
+                    ))}
+                  </div>
                 ) : (
                   <Swiper
                     modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -158,7 +182,7 @@ const Packages = forwardRef((props, ref) => {
                     }}
                     navigation
                     pagination={{ clickable: true }}
-                    scrollbar={{ draggable: true }}
+                    scrollbar={{ draggable: false }}
                   >
                     {data.slice(0, 10).map((item, index) => (
                       <SwiperSlide key={index}>
@@ -168,7 +192,7 @@ const Packages = forwardRef((props, ref) => {
                               <div className="slider-item">
                                 <div
                                   className={`sc-card-product ${
-                                    item.fullpackage.feature ? 'comingsoon' : ''
+                                    item.fullpackage.feature ? "comingsoon" : ""
                                   }`}
                                 >
                                   <div className="card-media">
@@ -180,7 +204,9 @@ const Packages = forwardRef((props, ref) => {
                                             <ImageStyled
                                               src={item.firstPhoto.image.cover_photos}
                                               alt={item.fullpackage.title}
-                                              onLoad={() => handleImageLoad(item.fullpackage.id)}
+                                              onLoad={() =>
+                                                handleImageLoad(item.fullpackage.id)
+                                              }
                                               onError={handleImageError}
                                               imageLoaded={item.firstPhoto.imageLoaded}
                                             />
@@ -199,17 +225,18 @@ const Packages = forwardRef((props, ref) => {
 
                                   <div className="meta-info">
                                     <div className="author">
-                                      <div className="price" style={{ textAlign: 'left' }}>
-                                        <p>Total Price ${item.fullpackage.price}</p>
+                                      <div className="price" style={{ textAlign: "left" }}>
+                                        <p>Total Price: ${item.fullpackage.price}</p>
                                       </div>
                                     </div>
                                   </div>
+
                                   <center>
                                     <Link
                                       to={`/travel-package/${item.fullpackage.id}`}
                                       className="sc-button loadmore style fl-button pri-3"
                                     >
-                                      <span>VIEW PACKAGE</span>
+                                      <span>View Package</span>
                                     </Link>
                                   </center>
                                 </div>
