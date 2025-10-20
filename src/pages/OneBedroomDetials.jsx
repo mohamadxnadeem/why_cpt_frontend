@@ -56,7 +56,6 @@ const OneBedroom = () => {
     script.src = 'https://assets.calendly.com/assets/external/widget.js';
     script.async = true;
     document.body.appendChild(script);
-
     return () => document.body.removeChild(script);
   }, []);
 
@@ -75,18 +74,20 @@ const OneBedroom = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     fetch(`https://web-production-1ab9.up.railway.app/api/one_bedroom/${id}/details/`)
       .then((res) => res.json())
       .then((data) => {
+        console.log("✅ One Bedroom API response:", data);
         setItemData(data);
-        setLoading(false);
         setFormData((prev) => ({
           ...prev,
-          serviceType: ` ${data.accomodation.title}`,
+          serviceType: data?.accomodation?.title || '',
         }));
+        setLoading(false);
       })
       .catch((err) => {
-        console.error('Error fetching data:', err);
+        console.error('❌ Error fetching data:', err);
         setLoading(false);
       });
   }, [id]);
@@ -104,21 +105,36 @@ const OneBedroom = () => {
     }
     setFormError('');
 
-    emailjs.send('service_ptqtluk', 'template_uyicl9l', formData, 'apNJP_9sXnff2q82W')
+    emailjs
+      .send('service_ptqtluk', 'template_uyicl9l', formData, 'apNJP_9sXnff2q82W')
       .then(() => setFormSubmitted(true))
       .catch((error) => console.error('Email error:', error));
   };
 
-  const heroSliderData = itemData && itemData.cover_photos
-    ? itemData.cover_photos.map((cover) => ({ src: cover.image.cover_photos }))
-    : [];
+  // ✅ Fix: handle flat structure and safely map
+  const heroSliderData =
+    Array.isArray(itemData?.cover_photos) && itemData.cover_photos.length > 0
+      ? itemData.cover_photos
+          .filter((cover) => cover && typeof cover.cover_photos === 'string')
+          .map((cover) => ({ src: cover.cover_photos }))
+      : [];
 
   return (
     <div className='item-details'>
       <Helmet>
-        <title>Don't miss out on this accomodation if you're in Cape Town</title>
-        <meta name="description" content={itemData?.accomodation?.title + ' click for more info'} />
-        <meta property="og:title" content="Look what I found" />
+        <title>
+          {itemData?.accomodation?.title
+            ? `${itemData.accomodation.title} | One Bedroom Apartment in Cape Town`
+            : "Don't miss out on this accommodation in Cape Town"}
+        </title>
+        <meta
+          name="description"
+          content={
+            itemData?.accomodation?.title
+              ? `${itemData.accomodation.title} - click for more info`
+              : 'Luxury one-bedroom apartments in Cape Town.'
+          }
+        />
       </Helmet>
 
       <Header />
@@ -135,7 +151,7 @@ const OneBedroom = () => {
                     <Shimmer width="250px" height="32px" radius="6px" />
                   ) : (
                     <h4 className="tf-title-heading ct style-2 fs-30 mg-bt-10" style={{ color: 'white' }}>
-                      {itemData.accomodation.title}
+                      {itemData?.accomodation?.title || 'Accommodation Details'}
                     </h4>
                   )}
                 </div>
@@ -149,8 +165,22 @@ const OneBedroom = () => {
       <SliderWrapper>
         {loading ? (
           <Shimmer height="400px" radius="12px" />
-        ) : (
+        ) : heroSliderData.length > 0 ? (
           <SliderStyle3 data={heroSliderData} />
+        ) : (
+          <div
+            style={{
+              height: '400px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              background: '#f0f0f0',
+              borderRadius: '12px',
+              color: '#777',
+            }}
+          >
+            No images available
+          </div>
         )}
       </SliderWrapper>
 
@@ -169,7 +199,7 @@ const OneBedroom = () => {
                       <Shimmer height="20px" width="70%" />
                     </>
                   ) : (
-                    parse(itemData.accomodation.body)
+                    parse(itemData?.accomodation?.body || '')
                   )}
                 </div>
               </div>
@@ -186,7 +216,7 @@ const OneBedroom = () => {
                       {formSubmitted ? (
                         <div className="thank-you-message">
                           <h2>Thank You!</h2>
-                          <p>Your enquiry has been successfully submitted. We will get back to you soon.</p>
+                          <p>Your enquiry has been successfully submitted. We’ll get back to you soon.</p>
                         </div>
                       ) : (
                         <Fragment>

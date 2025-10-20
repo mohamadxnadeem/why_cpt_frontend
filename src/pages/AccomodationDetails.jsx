@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import emailjs from 'emailjs-com';
 import { Helmet } from 'react-helmet';
 
-// ✅ Styled shimmer loader components
+// ✅ Styled shimmer loader
 const LoaderWrapper = styled.div`
   width: 100%;
   height: 400px;
@@ -36,7 +36,6 @@ const Shimmer = styled.div`
   }
 `;
 
-// ✅ Add top margin for slider images
 const SliderWrapper = styled.div`
   padding-top: 20px;
 `;
@@ -53,7 +52,7 @@ const LuxAccomodation = () => {
     contactNumber: '',
     serviceType: '',
     email: '',
-    message: ''
+    message: '',
   });
 
   // Load Calendly script dynamically
@@ -70,18 +69,19 @@ const LuxAccomodation = () => {
   // Fetch accommodation data
   useEffect(() => {
     setLoading(true);
-    fetch(`https://web-production-1ab9.up.railway.app/api/accomodations/${id}/with-reviews`)
+    fetch(`https://web-production-1ab9.up.railway.app/api/one_bedroom/${id}/details/`)
       .then((response) => response.json())
       .then((data) => {
+        console.log('✅ Accommodation response:', data);
         setItemData(data);
         setLoading(false);
         setFormData((prev) => ({
           ...prev,
-          serviceType: ` ${data.accomodation.title}`,
+          serviceType: data?.accomodation?.title || '',
         }));
       })
       .catch((error) => {
-        console.error('Error fetching data:', error);
+        console.error('❌ Error fetching accommodation:', error);
         setLoading(false);
       });
   }, [id]);
@@ -109,20 +109,36 @@ const LuxAccomodation = () => {
       .catch((error) => console.log('Email error:', error));
   };
 
-  const heroSliderData =
-    itemData && itemData.cover_photos
-      ? itemData.cover_photos.map((cover) => ({ src: cover.image.cover_photos }))
-      : [];
+  // ✅ Safe image extraction with full guards
+  const heroSliderData = (() => {
+    if (!itemData || !Array.isArray(itemData.cover_photos)) {
+      console.warn('⚠️ No cover_photos array found:', itemData);
+      return [];
+    }
+
+    return itemData.cover_photos
+      .filter((photo) => photo && typeof photo.cover_photos === 'string' && photo.cover_photos.trim() !== '')
+      .map((photo) => ({
+        src: photo.cover_photos,
+      }));
+  })();
 
   return (
-    <div className='item-details'>
+    <div className="item-details">
       <Helmet>
-        <title>Don't miss out on this accommodation if you're in Cape Town</title>
+        <title>
+          {itemData?.accomodation?.title
+            ? `${itemData.accomodation.title} | Luxury Accommodation in Cape Town`
+            : "Don't miss out on this accommodation if you're in Cape Town"}
+        </title>
         <meta
           name="description"
-          content={itemData?.accomodation?.title + ' click for more info'}
+          content={
+            itemData?.accomodation?.title
+              ? `${itemData.accomodation.title} - click for more info`
+              : 'Luxury accommodation in Cape Town.'
+          }
         />
-        <meta property="og:title" content="Look what I found" />
       </Helmet>
 
       {/* Header */}
@@ -139,8 +155,11 @@ const LuxAccomodation = () => {
                   {loading ? (
                     <Shimmer width="250px" height="32px" radius="6px" />
                   ) : (
-                    <h4 className="tf-title-heading ct style-2 fs-30 mg-bt-10" style={{ color: 'white' }}>
-                      {itemData.accomodation.title}
+                    <h4
+                      className="tf-title-heading ct style-2 fs-30 mg-bt-10"
+                      style={{ color: 'white' }}
+                    >
+                      {itemData?.accomodation?.title || 'Accommodation Details'}
                     </h4>
                   )}
                 </div>
@@ -156,8 +175,23 @@ const LuxAccomodation = () => {
           <LoaderWrapper>
             <Shimmer height="400px" radius="12px" />
           </LoaderWrapper>
-        ) : (
+        ) : heroSliderData.length > 0 ? (
           <SliderStyle3 data={heroSliderData} />
+        ) : (
+          <div
+            style={{
+              background: '#eee',
+              height: '400px',
+              borderRadius: '12px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '18px',
+              color: '#777',
+            }}
+          >
+            No images available
+          </div>
         )}
       </SliderWrapper>
 
@@ -179,7 +213,7 @@ const LuxAccomodation = () => {
                       <Shimmer height="20px" width="70%" />
                     </>
                   ) : (
-                    <div>{parse(itemData.accomodation.body)}</div>
+                    <div>{parse(itemData?.accomodation?.body || '')}</div>
                   )}
                 </div>
               </div>
@@ -206,13 +240,25 @@ const LuxAccomodation = () => {
                             Enquire Now
                           </h1>
                           <div className="form-inner">
-                            <form id="contactform" noValidate="novalidate" onSubmit={handleSubmit}>
+                            <form id="contactform" noValidate onSubmit={handleSubmit}>
                               <div className="row">
                                 <div className="col-md-6">
-                                  <input type="text" name="name" value={formData.name} placeholder="Your Name" onChange={handleChange} />
+                                  <input
+                                    type="text"
+                                    name="name"
+                                    value={formData.name}
+                                    placeholder="Your Name"
+                                    onChange={handleChange}
+                                  />
                                 </div>
                                 <div className="col-md-6">
-                                  <input type="email" name="email" value={formData.email} placeholder="Your Email" onChange={handleChange} />
+                                  <input
+                                    type="email"
+                                    name="email"
+                                    value={formData.email}
+                                    placeholder="Your Email"
+                                    onChange={handleChange}
+                                  />
                                   {formError && <p style={{ color: 'red' }}>{formError}</p>}
                                 </div>
                                 <div className="col-md-12">
