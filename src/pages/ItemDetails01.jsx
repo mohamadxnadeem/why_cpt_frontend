@@ -68,10 +68,10 @@ const ItemDetails01 = () => {
     };
   }, []);
 
-  // ✅ Fetch Experience Data
+  // ✅ Fetch Experience Data (fixed endpoint + structure)
   useEffect(() => {
     fetch(
-      `https://web-production-1ab9.up.railway.app/api/experiences/${id}/with-reviews`
+      `https://web-production-1ab9.up.railway.app/api/experiences/${id}/details/`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -79,7 +79,7 @@ const ItemDetails01 = () => {
         setLoading(false);
         setFormData((prev) => ({
           ...prev,
-          serviceType: ` ${data.experience.title}`,
+          serviceType: data?.experience?.title || "",
         }));
       })
       .catch((error) => {
@@ -113,7 +113,7 @@ const ItemDetails01 = () => {
   const experience = itemData?.experience;
   const heroSliderData =
     itemData?.cover_photos?.map((cover) => ({
-      src: cover.image.cover_photos,
+      src: cover?.cover_photos || "", // ✅ fixed: match backend field
     })) || [];
 
   return (
@@ -163,8 +163,12 @@ const ItemDetails01 = () => {
           <LoaderWrapper>
             <Shimmer />
           </LoaderWrapper>
-        ) : (
+        ) : heroSliderData.length > 0 ? (
           <SliderStyle3 data={heroSliderData} />
+        ) : (
+          <p style={{ textAlign: "center", color: "#888" }}>
+            No images available for this experience.
+          </p>
         )}
       </div>
 
@@ -175,38 +179,24 @@ const ItemDetails01 = () => {
             <p>Loading details...</p>
           ) : (
             <div className="content-center">
-              <div className="sc-item-details">{parse(experience?.body)}</div>
+              <div className="sc-item-details">
+                {/* ✅ Ensure body is a string before parsing */}
+                {experience?.body && typeof experience.body === "string"
+                  ? parse(experience.body)
+                  : <p>No details available for this experience.</p>}
+              </div>
             </div>
           )}
 
           <br />
 
-          {/* 🟢💎 Pricing Offer Card */}
+          {/* 💰 Pricing Offer Card */}
           {!loading && (
-            // <PricingOfferCard
-            //   price={experience?.price}
-            //   discountedPrice={experience?.discountedprice}
-            //   offerDuration={300}
-            //   experienceId={id}
-            // />
-
-
-
-            // // 🔥 Run promotional offer (countdown active)
-            // <PricingOfferCard
-            //   price={experience?.price}
-            //   discountedPrice=experience?.discountedprice}
-            //   offerDuration={300}
-            //   experienceId={experience?.id}
-            //   isDealActive={true}
-            // />
-
-            // 💰 Show only regular price (no countdown)
             <PricingOfferCard
               price={experience?.price}
+              discountedPrice={experience?.discountedprice}
               isDealActive={false}
             />
-
           )}
 
           {/* 💬 Testimonials */}
@@ -232,7 +222,8 @@ const ItemDetails01 = () => {
                       ) : (
                         <Fragment>
                           <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                            Lock in the best Price by contacting us below before timer runs out
+                            Lock in the best Price by contacting us below before
+                            timer runs out
                           </h1>
                           <div className="form-inner">
                             <form

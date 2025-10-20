@@ -2,7 +2,6 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-import Rating from '../components/Rating';
 import SliderStyle3 from '../components/slider/SliderStyle3';
 import 'react-tabs/style/react-tabs.css';
 import parse from 'html-react-parser';
@@ -52,6 +51,7 @@ const TravelPackage = () => {
     message: ''
   });
 
+  // ✅ Load Calendly script
   useEffect(() => {
     const script = document.createElement('script');
     script.src = 'https://assets.calendly.com/assets/external/widget.js';
@@ -62,15 +62,16 @@ const TravelPackage = () => {
     };
   }, []);
 
+  // ✅ Fetch Full Package Data
   useEffect(() => {
-    fetch(`https://web-production-1ab9.up.railway.app/api/full-travel-packages/${id}/with-reviews`)
+    fetch(`https://web-production-1ab9.up.railway.app/api/full-travel-packages/${id}/details/`)
       .then((response) => response.json())
       .then((data) => {
         setItemData(data);
         setLoading(false);
         setFormData((prev) => ({
           ...prev,
-          serviceType: ` ${data.fullpackage.title}`,
+          serviceType: data?.fullpackage?.title || '',
         }));
       })
       .catch((error) => {
@@ -79,6 +80,7 @@ const TravelPackage = () => {
       });
   }, [id]);
 
+  // ✅ Form Handling
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -100,23 +102,32 @@ const TravelPackage = () => {
       .catch((error) => console.log('Email error:', error));
   };
 
+  // ✅ Safely Map Hero Images
   const heroSliderData =
-    itemData && itemData.cover_photos
-      ? itemData.cover_photos.map((cover) => ({ src: cover.image.cover_photos }))
-      : [];
+    itemData?.cover_photos?.map((cover) => ({
+      src: cover?.cover_photos || cover?.image || ''
+    })) || [];
+
+  const packageInfo = itemData?.fullpackage;
 
   return (
     <div className='item-details'>
       <Helmet>
-        <title>Don't miss out on this fullpackage if you're in Cape Town</title>
+        <title>
+          {packageInfo?.title || "Don't miss out on this package if you're in Cape Town"}
+        </title>
         <meta
           name="description"
-          content={itemData?.fullpackage?.title + ' click for more info'}
+          content={
+            packageInfo?.title
+              ? `${packageInfo.title} - click for more info`
+              : 'Cape Town travel package details'
+          }
         />
-        <meta property="og:title" content="Look what I found" />
+        <meta property="og:title" content={packageInfo?.title || 'Full Package'} />
       </Helmet>
 
-      {/* Always render Header */}
+      {/* Header */}
       <Header />
 
       {/* Hero section */}
@@ -131,7 +142,7 @@ const TravelPackage = () => {
                     className="tf-title-heading ct style-2 fs-30 mg-bt-10"
                     style={{ color: 'white' }}
                   >
-                    {loading ? "Loading package..." : itemData.fullpackage.title}
+                    {loading ? "Loading package..." : packageInfo?.title}
                   </h4>
                 </div>
               </center>
@@ -152,19 +163,15 @@ const TravelPackage = () => {
       {/* Package details */}
       <div className="tf-section tf-item-details">
         <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <div className="content-center">
-                <div className="sc-item-details">
-                  {loading ? (
-                    <p>Loading details...</p>
-                  ) : (
-                    <div>{parse(itemData.fullpackage.body)}</div>
-                  )}
-                </div>
+          {loading ? (
+            <p>Loading details...</p>
+          ) : (
+            <div className="content-center">
+              <div className="sc-item-details">
+                {packageInfo?.body ? parse(packageInfo.body) : <p>No description available.</p>}
               </div>
             </div>
-          </div>
+          )}
 
           <br />
 
@@ -211,7 +218,7 @@ const TravelPackage = () => {
                                   <textarea
                                     name="message"
                                     value={formData.message}
-                                    placeholder="Let us know the dates you want to book your trip to Cape Town and any question or special requests here"
+                                    placeholder="Let us know your preferred travel dates and any special requests"
                                     onChange={handleChange}
                                   ></textarea>
                                 </div>
@@ -234,7 +241,7 @@ const TravelPackage = () => {
         </div>
       </div>
 
-      {/* Always render Footer */}
+      {/* Footer */}
       <Footer />
     </div>
   );

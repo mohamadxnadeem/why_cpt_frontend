@@ -5,7 +5,7 @@ import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import FlipMove from 'react-flip-move';
 import styled, { keyframes } from 'styled-components';
 
-// 💫 Unified shimmer animation (same as Tours & Cars4Hire)
+// 💫 Unified shimmer animation
 const shimmer = keyframes`
   0% { background-position: -500px 0; }
   100% { background-position: 500px 0; }
@@ -24,7 +24,7 @@ const Shimmer = styled.div`
   border-radius: 10px;
 `;
 
-// 🖼️ Image container & styling
+// 🖼️ Image container
 const SlideContainer = styled.div`
   position: relative;
   width: 100%;
@@ -45,32 +45,34 @@ const ImageStyled = styled.img`
   border-radius: 10px;
 `;
 
-const OneBedroom = forwardRef((ref) => {
+const OneBedroom = forwardRef((props, ref) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // 🧠 Load cached accommodations first, then fetch new data
   useEffect(() => {
     const cached = localStorage.getItem('oneBedroomData');
     if (cached) {
       try {
-        const parsed = JSON.parse(cached);
-        setData(parsed);
+        setData(JSON.parse(cached));
         setLoading(false);
       } catch (err) {
-        console.error('Error parsing cached one-bedroom data:', err);
+        console.error('Error parsing cached data:', err);
       }
     }
 
     fetch('https://web-production-1ab9.up.railway.app/api/one_bedroom/all/')
       .then((response) => response.json())
       .then((newData) => {
-        const updatedData = newData.map((item) => ({
-          ...item,
-          firstPhoto: item.cover_photos.length > 0
-            ? { ...item.cover_photos[0], imageLoaded: false }
-            : null,
-        }));
+        // ✅ Fix: handle backend structure safely
+        const updatedData = newData.map((item) => {
+          const firstPhoto = item.cover_photos?.[0]?.cover_photos || null;
+          return {
+            ...item,
+            firstPhoto: firstPhoto
+              ? { url: firstPhoto, imageLoaded: false }
+              : null,
+          };
+        });
 
         setData(updatedData);
         setLoading(false);
@@ -84,15 +86,11 @@ const OneBedroom = forwardRef((ref) => {
 
   const handleImageLoad = (accommodationId) => {
     setData((prevData) =>
-      prevData.map((item) => {
-        if (item.accomodation.id === accommodationId && item.firstPhoto) {
-          return {
-            ...item,
-            firstPhoto: { ...item.firstPhoto, imageLoaded: true },
-          };
-        }
-        return item;
-      })
+      prevData.map((item) =>
+        item.accomodation.id === accommodationId && item.firstPhoto
+          ? { ...item, firstPhoto: { ...item.firstPhoto, imageLoaded: true } }
+          : item
+      )
     );
   };
 
@@ -115,27 +113,10 @@ const OneBedroom = forwardRef((ref) => {
                   2-Minute walk to the beach — the safest suburb in Cape Town.
                 </p>
 
-                {/* 🪞 Shimmer placeholders while loading */}
                 {loading ? (
-                  <div
-                    style={{
-                      display: 'flex',
-                      gap: '20px',
-                      overflowX: 'auto',
-                      paddingBottom: '10px',
-                    }}
-                  >
+                  <div style={{ display: 'flex', gap: '20px', overflowX: 'auto', paddingBottom: '10px' }}>
                     {[...Array(4)].map((_, i) => (
-                      <div
-                        key={i}
-                        style={{
-                          width: '250px',
-                          height: '200px',
-                          position: 'relative',
-                          borderRadius: '10px',
-                          flexShrink: 0,
-                        }}
-                      >
+                      <div key={i} style={{ width: '250px', height: '200px', position: 'relative', borderRadius: '10px', flexShrink: 0 }}>
                         <Shimmer />
                       </div>
                     ))}
@@ -152,7 +133,6 @@ const OneBedroom = forwardRef((ref) => {
                     }}
                     navigation
                     pagination={{ clickable: true }}
-                    scrollbar={{ draggable: false }}
                   >
                     {data.slice(0, 10).map((item, index) => (
                       <SwiperSlide key={index}>
@@ -163,19 +143,15 @@ const OneBedroom = forwardRef((ref) => {
                                 <SlideContainer>
                                   {item.firstPhoto && (
                                     <>
-                                      {!item.firstPhoto.imageLoaded && (
-                                        <Shimmer />
-                                      )}
+                                      {!item.firstPhoto.imageLoaded && <Shimmer />}
                                       <ImageStyled
-                                        src={item.firstPhoto.image.cover_photos}
+                                        src={item.firstPhoto.url}
                                         alt={item.accomodation.title}
                                         onLoad={() =>
                                           handleImageLoad(item.accomodation.id)
                                         }
                                         onError={handleImageError}
-                                        imageLoaded={
-                                          item.firstPhoto.imageLoaded
-                                        }
+                                        imageLoaded={item.firstPhoto.imageLoaded}
                                       />
                                     </>
                                   )}
