@@ -70,7 +70,7 @@ const Tours = forwardRef((ref) => {
     }
 
     // Fetch fresh data (background revalidation)
-    fetch('https://web-production-1ab9.up.railway.app/api/experiences/with-reviews/')
+    fetch('https://web-production-1ab9.up.railway.app/api/experiences/all/')
       .then((response) => response.json())
       .then((newData) => {
         const updatedData = newData.map(item => ({
