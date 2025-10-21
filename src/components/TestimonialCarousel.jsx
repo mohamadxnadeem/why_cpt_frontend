@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/pagination";
 import styled, { keyframes } from "styled-components";
 import Rating from "./Rating";
 import { motion, useInView } from "framer-motion";
@@ -39,7 +38,7 @@ import jodi from "../assets/images/blog/jodi.jpg";
 import nicolas from "../assets/images/blog/nicholas.jpg";
 import nadine from "../assets/images/blog/nadine.jpg";
 
-// 🧾 Testimonial Data
+// 🧾 Original Testimonials
 const testimonials = [
   { cover_photo: kazi, name: "Kazi", title: "England", rating: 5, comment: "Highly recommend touring Cape Town with a local guide than trying to plan all the logistics yourself. Thank you to the team at WhyCapeTown" },
   { cover_photo: yaasir, name: "Yaasir", title: "England", rating: 5, comment: "Cape Town one of the cities that you can never get board of with such great vibes, people, positive energy and endless adventures that can be done apart from the food that you can always enjoy with a reasonable price and all thanks to the best Cape Town tour guide @whycapetown" },
@@ -69,10 +68,10 @@ const testimonials = [
   { cover_photo: nadine, name: "Nadine", title: "Bahrain", rating: 5, comment: "Best tour guide and photographer! Thank you for showing us the best of Cape Town!" },
   { cover_photo: nicolas, name: "Nicolas", title: "Bahrain", rating: 5, comment: "Highly recommend Mohamad from Cape Town for chauffeur services and tours!" },
   { cover_photo: jodi, name: "Jodi", title: "Bahrain", rating: 5, comment: "My go-to chauffeur for years now. Mo gets me there and back safely always. Highly recommend." },
-  { cover_photo: asad, name: "Asad", title: "Bahrain", rating: 5, comment: "Mohamad took us to all the top attractions and best restaurants in Cape Town!" }
+  { cover_photo: asad, name: "Asad", title: "Bahrain", rating: 5, comment: "Mohamad took us to all the top attractions and best restaurants in Cape Town!" },
 ];
 
-// 💎 Styled Components
+// ✨ Styled Components
 const fadeInUp = keyframes`
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -155,13 +154,12 @@ const TestimonialCarousel = () => {
       <Heading>What Our Clients Say</Heading>
       <Swiper
         spaceBetween={25}
+        slidesPerView={1}
         breakpoints={{
-          0: { slidesPerView: 1 },
           767: { slidesPerView: 2 },
           991: { slidesPerView: 3 },
           1300: { slidesPerView: 4 },
         }}
-        pagination={{ clickable: true }}
       >
         {testimonials.map((item, index) => (
           <SwiperSlide key={index}>
@@ -174,6 +172,7 @@ const TestimonialCarousel = () => {
                 <ClientImage src={item.cover_photo} alt={item.name} />
                 <ClientInfo>
                   <ClientName>{item.name}</ClientName>
+      
                   <Rating value={item.rating} color="#f8e825" />
                 </ClientInfo>
               </ClientRow>
