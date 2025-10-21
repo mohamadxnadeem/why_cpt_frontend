@@ -43,11 +43,11 @@ const ImageStyled = styled.img`
   border-radius: 10px;
 `;
 
-const Tours = forwardRef((ref) => {
+const Tours = forwardRef((props, ref) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Load Calendly script
+  // 🧩 Calendly script
   useEffect(() => {
     const script = document.createElement('script');
     script.src = 'https://assets.calendly.com/assets/external/widget.js';
@@ -56,33 +56,40 @@ const Tours = forwardRef((ref) => {
     return () => document.body.removeChild(script);
   }, []);
 
-  // 🧠 Check for cached data before fetching
+  // 🧠 Cache with 6-hour expiry
   useEffect(() => {
-    const cached = localStorage.getItem('toursData');
-    if (cached) {
+    const cacheKey = 'toursData';
+    const cacheExpiryKey = 'toursData_expiry';
+    const cached = localStorage.getItem(cacheKey);
+    const expiry = localStorage.getItem(cacheExpiryKey);
+    const now = Date.now();
+
+    if (cached && expiry && now < Number(expiry)) {
       try {
-        const parsed = JSON.parse(cached);
-        setData(parsed);
+        setData(JSON.parse(cached));
         setLoading(false);
+        return;
       } catch (err) {
         console.error('Error parsing cached tours:', err);
       }
     }
 
-    // Fetch fresh data (background revalidation)
+    // Fetch fresh data
     fetch('https://web-production-1ab9.up.railway.app/api/experiences/all/')
       .then((response) => response.json())
       .then((newData) => {
-        const updatedData = newData.map(item => ({
+        const updatedData = newData.map((item) => ({
           ...item,
-          firstPhoto: item.cover_photos.length > 0
-            ? { ...item.cover_photos[0], imageLoaded: false }
-            : null,
+          firstPhoto:
+            item.cover_photos.length > 0
+              ? { ...item.cover_photos[0], imageLoaded: false }
+              : null,
         }));
 
         setData(updatedData);
         setLoading(false);
-        localStorage.setItem('toursData', JSON.stringify(updatedData)); // cache it
+        localStorage.setItem(cacheKey, JSON.stringify(updatedData));
+        localStorage.setItem(cacheExpiryKey, (now + 6 * 60 * 60 * 1000).toString()); // 6 hours
       })
       .catch((error) => {
         console.error('Error fetching tours data:', error);
@@ -92,20 +99,16 @@ const Tours = forwardRef((ref) => {
 
   const handleImageLoad = (experienceId) => {
     setData((prevData) =>
-      prevData.map((item) => {
-        if (item.experience.id === experienceId && item.firstPhoto) {
-          return {
-            ...item,
-            firstPhoto: { ...item.firstPhoto, imageLoaded: true },
-          };
-        }
-        return item;
-      })
+      prevData.map((item) =>
+        item.experience.id === experienceId && item.firstPhoto
+          ? { ...item, firstPhoto: { ...item.firstPhoto, imageLoaded: true } }
+          : item
+      )
     );
   };
 
   const handleImageError = (e) => {
-    console.error('Error loading image:', e.target.src, e);
+    console.error('Error loading image:', e.target.src);
     e.target.style.display = 'none';
   };
 
@@ -120,68 +123,71 @@ const Tours = forwardRef((ref) => {
                   5 Best Tours to do in Cape Town 2025
                 </h2>
 
-                <Swiper
-                  modules={[Navigation, Pagination, Scrollbar, A11y]}
-                  spaceBetween={30}
-                  breakpoints={{
-                    0: { slidesPerView: 1 },
-                    767: { slidesPerView: 2 },
-                    991: { slidesPerView: 3 },
-                    1200: { slidesPerView: 4 },
-                  }}
-                  navigation
-                  pagination={{ clickable: true }}
-                  scrollbar={{ draggable: false }}
-                >
-                  {data.slice(0, 10).map((item, index) => (
-                    <SwiperSlide key={index}>
-                      <div className="swiper-container show-shadow carousel auctions">
-                        <div className="swiper-wrapper">
-                          <div className="swiper-slide">
-                            <div className="slider-item">
-                              <div className={`sc-card-product ${item.experience.feature ? 'comingsoon' : ''}`}>
-                                <div className="card-media">
-                                  <Link to={`/experience/${item.experience.id}`}>
-                                    <SlideContainer>
-                                      {item.firstPhoto && (
-                                        <>
-                                          {!item.firstPhoto.imageLoaded && <Shimmer />}
-                                          <ImageStyled
-                                            src={item.firstPhoto.image.cover_photos}
-                                            alt={item.experience.title}
-                                            onLoad={() => handleImageLoad(item.experience.id)}
-                                            onError={handleImageError}
-                                            imageLoaded={item.firstPhoto.imageLoaded}
-                                          />
-                                        </>
-                                      )}
-                                    </SlideContainer>
-                                  </Link>
-                                </div>
-                                <div className="card-title">
-                                  <h5 className="style2">
-                                    <Link to={`/experience/${item.experience.id}`}>
-                                      {item.experience.title}
-                                    </Link>
-                                  </h5>
-                                </div>
-
-                                <center>
-                                  <Link
-                                    to={`/experience/${item.experience.id}`}
-                                    className="sc-button loadmore style fl-button pri-3"
-                                  >
-                                    <span>View Experience</span>
-                                  </Link>
-                                </center>
-                              </div>
+                {loading ? (
+                  <div style={{ display: 'flex', gap: '20px', overflowX: 'auto', paddingBottom: '10px' }}>
+                    {[...Array(4)].map((_, i) => (
+                      <div key={i} style={{ width: '250px', height: '200px', position: 'relative', borderRadius: '10px', flexShrink: 0 }}>
+                        <Shimmer />
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <Swiper
+                    modules={[Navigation, Pagination, Scrollbar, A11y]}
+                    spaceBetween={30}
+                    breakpoints={{
+                      0: { slidesPerView: 1 },
+                      767: { slidesPerView: 2 },
+                      991: { slidesPerView: 3 },
+                      1200: { slidesPerView: 4 },
+                    }}
+                    navigation
+                    pagination={{ clickable: true }}
+                  >
+                    {data.slice(0, 10).map((item, index) => (
+                      <SwiperSlide key={index}>
+                        <div className="slider-item">
+                          <div className={`sc-card-product ${item.experience.feature ? 'comingsoon' : ''}`}>
+                            <div className="card-media">
+                              <Link to={`/experience/${item.experience.id}`}>
+                                <SlideContainer>
+                                  {item.firstPhoto && (
+                                    <>
+                                      {!item.firstPhoto.imageLoaded && <Shimmer />}
+                                      <ImageStyled
+                                        src={item.firstPhoto.cover_photos}
+                                        alt={item.experience.title}
+                                        onLoad={() => handleImageLoad(item.experience.id)}
+                                        onError={handleImageError}
+                                        imageLoaded={item.firstPhoto.imageLoaded}
+                                      />
+                                    </>
+                                  )}
+                                </SlideContainer>
+                              </Link>
                             </div>
+                            <div className="card-title">
+                              <h5 className="style2">
+                                <Link to={`/experience/${item.experience.id}`}>
+                                  {item.experience.title}
+                                </Link>
+                              </h5>
+                            </div>
+
+                            <center>
+                              <Link
+                                to={`/experience/${item.experience.id}`}
+                                className="sc-button loadmore style fl-button pri-3"
+                              >
+                                <span>View Experience</span>
+                              </Link>
+                            </center>
                           </div>
                         </div>
-                      </div>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                )}
               </div>
             </div>
           </div>
