@@ -312,7 +312,7 @@ const ItemDetails01 = () => {
                                     type="submit"
                                     className="sc-button loadmore style fl-button pri-3"
                                   >
-                                    <span>Secure My Spot Today</span>
+                                    <span>Enquire Now</span>
                                   </button>
                                 </div>
                               </div>
