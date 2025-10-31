@@ -222,8 +222,7 @@ const ItemDetails01 = () => {
                       ) : (
                         <Fragment>
                           <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                            Lock in the best Price by contacting us below before
-                            timer runs out
+                            Fill in the form below and our team will respond shortly to help plan your perfect Cape Town experience.
                           </h1>
                           <div className="form-inner">
                             <form
