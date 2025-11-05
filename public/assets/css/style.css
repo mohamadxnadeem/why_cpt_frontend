@@ -1524,7 +1524,7 @@ a:focus {
 
 .hover-ecfect,
 .exp{
-    background: linear-gradient(to right, #E250E5,#4B50E6,#E250E5);
+    background: linear-gradient(to right, #c5ca1c,#4B50E6,#E250E5);
     background-clip: text;
     -webkit-background-clip:text;
     font-weight: 700;
@@ -1575,7 +1575,7 @@ a:focus {
     /* color */
     --primary-color : #F8F8F8;
     --primary-color2: #1F1F2C;
-    --primary-color3: #5142FC;
+    --primary-color3: #d4af37;
     --primary-color4: #7A798A;
     --primary-color5: #F8F8F8;
     --primary-color6: #14141F;

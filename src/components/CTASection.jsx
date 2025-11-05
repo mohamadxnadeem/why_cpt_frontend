@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { FaWhatsapp } from "react-icons/fa";
 
 const CTAWrapper = styled.div`
-  background: #f8f6ef;
+  background: #ffffff;
   border-radius: 14px;
   padding: 45px 35px;
   text-align: center;
