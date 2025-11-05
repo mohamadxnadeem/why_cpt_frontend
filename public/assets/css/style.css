@@ -295,7 +295,7 @@ select {
 @media (max-width: 768px) {
   .floating-whatsapp {
     left: auto !important;
-    right: 18px !important;
+    right: 10px !important;
     bottom: 18px;
     width: 66px;
     height: 66px;
