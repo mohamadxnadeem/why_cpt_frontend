@@ -6,66 +6,37 @@ import emailjs from "emailjs-com";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import backgroundImage from "../assets/images/item-background/benz.jpg";
+import CTASection from "../components/CTASection";
 
-// 🧩 Lazy imports for performance, preloaded for instant revisits
 const TestimonialCarousel = React.lazy(() => import("../components/TestimonialCarousel"));
 const Tours = React.lazy(() => import("../components/Tours"));
 const Cars4Hire = React.lazy(() => import("../components/Cars4hire"));
 
-// 🧩 Global Luxury Fonts + Base Text Styling
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap');
 
-  body {
-    font-family: 'Poppins', sans-serif;
-    color: #2a2a2a;
-    line-height: 1.8;
-    background-color: #fff;
+  body { 
+    font-family: 'Poppins', sans-serif; 
+    color: #2a2a2a; 
+    line-height: 1.8; 
   }
 
-  h1, h2, h3 {
+  h1,h2,h3 {
     font-family: 'Playfair Display', serif;
     color: #111;
   }
 `;
 
-// 💫 Luxury Typography Enhancements
 const SectionTitle = styled.h2`
-  font-family: 'Playfair Display', serif;
+  font-size: 34px;
   font-weight: 700;
-  color: #111;
-  font-size: 32px;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 `;
 
 const Paragraph = styled.p`
-  font-size: 17px;
-  color: #333;
-  line-height: 1.9;
+  font-size: 18px;
   margin-bottom: 20px;
-`;
-
-const List = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin-bottom: 20px;
-
-  li {
-    position: relative;
-    margin: 8px 0;
-    font-size: 16px;
-    color: #444;
-    padding-left: 22px;
-
-    &::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: #d4af37;
-      font-size: 18px;
-      line-height: 1;
-    }
-  }
+  line-height: 1.85;
 `;
 
 const HighlightText = styled.span`
@@ -73,259 +44,256 @@ const HighlightText = styled.span`
   font-weight: 600;
 `;
 
-// ✨ Shimmer placeholder
+const BulletList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin-bottom: 35px;
+
+  li {
+    font-size: 18px;
+    padding-left: 26px;
+    margin: 10px 0;
+    position: relative;
+
+    &::before {
+      content: "•";
+      color: #d4af37;
+      font-size: 24px;
+      position: absolute;
+      left: 0;
+      top: -2px;
+    }
+  }
+`;
+
 const ShimmerBox = styled.div`
   width: 100%;
-  height: ${(props) => props.height || "200px"};
+  height: ${(props) => props.height || "260px"};
   border-radius: 10px;
-  margin: 20px 0;
-  background: linear-gradient(90deg, #f5f5f5 0%, #eaeaea 50%, #f5f5f5 100%);
+  margin: 25px 0;
+  background: linear-gradient(90deg, #f5f5f5, #eaeaea, #f5f5f5);
   background-size: 200% 100%;
   animation: shimmer 1.6s infinite;
-
-  @keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
+  @keyframes shimmer { 
+    0% { background-position: -200% 0; } 
+    100% { background-position: 200% 0; } 
   }
 `;
 
 const AirportTransfers = () => {
   const [formData, setFormData] = useState({
-    name: "",
-    message: "",
-    serviceType: "Passed through chauffeur hire",
-    email: "",
-  });
-
+      name: "",
+      contactNumber: "",
+      tourDate: "",
+      serviceType: "",
+      email: "",
+      message: "",
+    });
+    
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formError, setFormError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [cachedDataLoaded, setCachedDataLoaded] = useState(false);
 
-  // ✅ Preload components for next visit
-  useEffect(() => {
-    import("../components/TestimonialCarousel");
-    import("../components/Tours");
-    import("../components/Cars4hire");
-  }, []);
-
-  // ✅ Simulate API caching (if your Tours/Cars4Hire fetch data)
-  useEffect(() => {
-    const cached = sessionStorage.getItem("airportTransfersCache");
-    if (cached) {
-      setCachedDataLoaded(true);
-    } else {
-      // simulate initial fetch delay (first visit)
-      const timer = setTimeout(() => {
-        sessionStorage.setItem("airportTransfersCache", "true");
-        setCachedDataLoaded(true);
-      }, 1000);
-      return () => clearTimeout(timer);
-    }
-  }, []);
-
-  const handleChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!emailPattern.test(formData.email)) {
-      setFormError("Please enter a valid email address.");
-      return;
-    }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
+      return setFormError("Please enter a valid email.");
 
     setFormError("");
-    setLoading(true);
-
-    emailjs
-      .send("service_ptqtluk", "template_uyicl9l", formData, "apNJP_9sXnff2q82W")
-      .then(() => setFormSubmitted(true))
-      .catch((error) => console.log("Email error:", error))
-      .finally(() => setLoading(false));
+    emailjs.send("service_ptqtluk","template_uyicl9l",formData,"apNJP_9sXnff2q82W")
+    .then(() => setFormSubmitted(true));
   };
 
   return (
     <div className="home-3">
       <GlobalStyle />
+
       <Helmet>
-        <title>Best Chauffeur Hire and Private Tours in Cape Town</title>
-        <meta
-          name="description"
-          content="Luxury chauffeur service and private tours in Cape Town. Premium vehicles, professional drivers, and unforgettable experiences."
-        />
+        <title>Private Chauffeur & Bespoke Travel Experiences</title>
       </Helmet>
 
       <Header />
 
-      {/* Hero section */}
+      {/* ✅ Clean Cinematic Hero */}
       <section
         className="flat-title-page inner"
         style={{
           background: `url(${backgroundImage}) center center / cover no-repeat`,
-          padding: "100px 0 20px",
+          padding: "160px 0 80px",
           position: "relative",
         }}
       >
         <div className="overlay"></div>
       </section>
 
-      {/* Main content */}
+      {/* ✅ Main Intro */}
       <div className="tf-section post-details">
         <div className="themesflat-container">
-          <div className="post">
-            <div className="inner-content">
-              <SectionTitle>
-                Premium Chauffeur Services and Private Tours in{" "}
-                <HighlightText>Cape Town</HighlightText>
-              </SectionTitle>
+          
+          <SectionTitle>
+            Private Chauffeur & Bespoke Travel Experiences in <HighlightText>Cape Town</HighlightText>
+          </SectionTitle>
 
-              <Paragraph>
-                If it’s your first time in Cape Town, discover all the top
-                attractions with us — completely bespoke to your requirements.
-                Whether you’re visiting for business or pleasure, our private
-                chauffeurs ensure a seamless, premium experience.
-              </Paragraph>
+          <Paragraph>
+            Arrive in comfort. Explore with confidence. Enjoy Cape Town with your own dedicated private driver — tailored to your schedule, pace, and preferences.
+          </Paragraph>
 
-              <Paragraph>
-                You might be asking: <em>“Why should I book with them?”</em>
-              </Paragraph>
+          <SectionTitle>Why Travelers Choose Us</SectionTitle>
+          <BulletList>
+            <li>Private & discreet service — your comfort always comes first</li>
+            <li>Professional chauffeurs & premium vehicles</li>
+            <li>Local insider access to the best restaurants, beaches & wine estates</li>
+            <li>Itineraries tailored to your pace, preferences & style</li>
+          </BulletList>
 
-              <Paragraph>Here’s why:</Paragraph>
+          {/* ⭐ Testimonials */}
+          <Suspense fallback={<ShimmerBox height="300px" />}>
+            <TestimonialCarousel />
+          </Suspense>
 
-              <List>
-                <li>You're safe with us</li>
-                <li>Luxury vehicles for every occasion</li>
-                <li>Local guides who share Cape Town’s hidden gems</li>
-                <li>Carefully planned itineraries designed for comfort</li>
-              </List>
+          {/* 💎 CTA Block */}
+          <CTASection />
 
-              <Paragraph>
-                Still not convinced? Take a look at what our clients have to say:
-              </Paragraph>
+          {/* Tours */}
+          <Suspense fallback={<ShimmerBox height="300px" />}>
+            <Tours />
+          </Suspense>
 
-              {!cachedDataLoaded ? (
-                <ShimmerBox height="300px" />
-              ) : (
-                <Suspense fallback={<ShimmerBox height="300px" />}>
-                  <TestimonialCarousel />
-                </Suspense>
-              )}
+          <SectionTitle>Trusted for Life’s Most Important Moments</SectionTitle>
+          <Paragraph>
+            Many of our guests also request us for weddings, fine dining evenings, corporate hosting, private celebrations, and VIP stays. When your experience matters — you choose a team that takes it personally.
+          </Paragraph>
 
-              {!cachedDataLoaded ? (
-                <ShimmerBox height="300px" />
-              ) : (
-                <Suspense fallback={<ShimmerBox height="300px" />}>
-                  <Tours />
-                </Suspense>
-              )}
+          {/* Cars */}
+          <Suspense fallback={<ShimmerBox height="300px" />}>
+            <Cars4Hire />
+          </Suspense>
 
-              <SectionTitle>
-                We can also assist with{" "}
-                <HighlightText>Special Events</HighlightText>
-              </SectionTitle>
-
-              <List>
-                <li>Weddings</li>
-                <li>Matric Balls</li>
-                <li>Corporate Events</li>
-                <li>Any occasion needing prestige vehicles and drivers</li>
-              </List>
-
-              {!cachedDataLoaded ? (
-                <ShimmerBox height="280px" />
-              ) : (
-                <Suspense fallback={<ShimmerBox height="280px" />}>
-                  <Cars4Hire />
-                </Suspense>
-              )}
-            </div>
-          </div>
-
-          {/* Contact Form */}
-          <div className="tf-section tf-item-details">
-            <div className="container">
-              <div className="row">
-                <div className="col-md-12">
-                  <div className="content-center">
-                    <div className="sc-item-details">
-                      {formSubmitted ? (
-                        <div className="thank-you-message">
-                          <h2>Thank You!</h2>
-                          <p>
-                            Your enquiry has been received. We’ll get back to
-                            you soon.
-                          </p>
-                        </div>
-                      ) : (
-                        <Fragment>
-                          {!loading && (
-                            <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                              Let us know how we can assist you
-                            </h1>
-                          )}
-                          <div className="form-inner">
-                            <form
-                              id="contactform"
-                              noValidate
-                              onSubmit={handleSubmit}
-                            >
-                              <div className="row">
-                                {!loading && (
-                                  <>
-                                    <div className="col-md-6">
-                                      <input
-                                        type="text"
-                                        name="name"
-                                        value={formData.name}
-                                        placeholder="Your Name"
-                                        onChange={handleChange}
-                                      />
-                                    </div>
-                                    <div className="col-md-6">
-                                      <input
-                                        type="email"
-                                        name="email"
-                                        value={formData.email}
-                                        placeholder="Your Email"
-                                        onChange={handleChange}
-                                      />
-                                      {formError && (
-                                        <p style={{ color: "red" }}>
-                                          {formError}
-                                        </p>
-                                      )}
-                                    </div>
-                                    <div className="col-md-12">
-                                      <textarea
-                                        name="message"
-                                        value={formData.message}
-                                        placeholder="Tell us more about your trip or booking request"
-                                        onChange={handleChange}
-                                      ></textarea>
-                                    </div>
-                                    <div className="col-md-12">
-                                      <button
-                                        type="submit"
-                                        className="sc-button loadmore style fl-button pri-3"
+          {/* ✅ Restored Original Contact Form */}
+           {/* 📨 Contact Form */}
+                    <div className="tf-section tf-item-details">
+                      <div className="container">
+                        <div className="row">
+                          <div className="col-md-12">
+                            <div className="content-center">
+                              <div className="sc-item-details">
+                                {formSubmitted ? (
+                                  <div className="thank-you-message">
+                                    <h2>Thank You!</h2>
+                                    <p>
+                                      You're one step closer to booking your tour with us.
+                                      Your concierge will be in touch soon.
+                                    </p>
+                                  </div>
+                                ) : (
+                                  <Fragment>
+                                    <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
+                                      Fill in the form below and our team will respond shortly to help plan your perfect Cape Town experience.
+                                    </h1>
+                                    <div className="form-inner">
+                                      <form
+                                        id="contactform"
+                                        noValidate="novalidate"
+                                        onSubmit={handleSubmit}
                                       >
-                                        <span>Send Message</span>
-                                      </button>
+                                        <div className="row">
+                                          <div className="col-md-12">
+                                            <input
+                                              type="text"
+                                              name="name"
+                                              value={formData.name}
+                                              placeholder="Full Name for Your Booking"
+                                              onChange={handleChange}
+                                            />
+                                          </div>
+                                          <div className="col-md-12">
+                                            <input
+                                              type="email"
+                                              name="email"
+                                              value={formData.email}
+                                              placeholder="Your Email for Tour Confirmation"
+                                              onChange={handleChange}
+                                            />
+                                            {formError && (
+                                              <p style={{ color: "red" }}>{formError}</p>
+                                            )}
+                                          </div>
+                                          <div className="col-md-12">
+                                            <input
+                                              type="tel"
+                                              name="contactNumber"
+                                              value={formData.contactNumber}
+                                              placeholder="Optional: Mobile for urgent updates"
+                                              onChange={handleChange}
+                                              style={{
+                                                width: "100%",
+                                                padding: "12px",
+                                                borderRadius: "8px",
+                                                border: "1px solid #ccc",
+                                                fontSize: "16px",
+                                                marginBottom: "12px",
+                                                boxSizing: "border-box",
+                                              }}
+                                            />
+                                          </div>
+          
+                                          <div className="col-md-12">
+                                            <label
+                                              style={{
+                                                display: "block",
+                                                paddingLeft: "0px",
+                                                marginBottom: "6px",
+                                                fontWeight: "500",
+                                                color: "#555",
+                                              }}
+                                            >
+                                              Preferred date for your adventure
+                                            </label>
+                                            <input
+                                              type="date"
+                                              name="tourDate"
+                                              value={formData.tourDate}
+                                              onChange={handleChange}
+                                              style={{
+                                                width: "100%",
+                                                padding: "12px",
+                                                borderRadius: "8px",
+                                                border: "1px solid #ccc",
+                                                fontSize: "16px",
+                                              }}
+                                            />
+                                          </div>
+          
+                                          <div className="col-md-12">
+                                            <textarea
+                                              name="message"
+                                              value={formData.message}
+                                              placeholder="Any preferences or questions for your tour?"
+                                              onChange={handleChange}
+                                            ></textarea>
+                                          </div>
+          
+                                          <div className="col-md-12">
+                                            <button
+                                              type="submit"
+                                              className="sc-button loadmore style fl-button pri-3"
+                                            >
+                                              <span>Enquire Now</span>
+                                            </button>
+                                          </div>
+                                        </div>
+                                      </form>
                                     </div>
-                                  </>
+                                  </Fragment>
                                 )}
                               </div>
-                            </form>
+                            </div>
                           </div>
-                        </Fragment>
-                      )}
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+
         </div>
       </div>
 
