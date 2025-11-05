@@ -18,34 +18,22 @@ const Header = () => {
         return () => {
             window.removeEventListener('scroll', isSticky);
         };
-    }, []); // Added empty dependency array
+    }, []);
 
     useEffect(() => {
         initializeGoogleTranslate();
     }, [pathname]);
 
-    const isSticky = (e) => {
+    const isSticky = () => {
         const header = document.querySelector('.js-header');
         const scrollTop = window.scrollY;
-        console.log('Scroll Position:', scrollTop); // Check the scroll position
         
-        if (scrollTop >= 300) {
-            header.classList.add('is-fixed');
-            console.log('is-fixed class added'); // Log when the class is added
-        } else {
-            header.classList.remove('is-fixed');
-            console.log('is-fixed class removed'); // Log when the class is removed
-        }
-        
-        if (scrollTop >= 400) {
-            header.classList.add('is-small');
-            console.log('is-small class added'); // Log when the is-small class is added
-        } else {
-            header.classList.remove('is-small');
-            console.log('is-small class removed'); // Log when the is-small class is removed
-        }
+        if (scrollTop >= 300) header.classList.add('is-fixed');
+        else header.classList.remove('is-fixed');
+
+        if (scrollTop >= 400) header.classList.add('is-small');
+        else header.classList.remove('is-small');
     };
-    
 
     const menuLeft = useRef(null);
     const btnToggle = useRef(null);
@@ -71,95 +59,81 @@ const Header = () => {
     };
 
     const [activeIndex, setActiveIndex] = useState(null);
-    const handleOnClick = index => {
-        setActiveIndex(index); 
-    };
+    const handleOnClick = index => setActiveIndex(index);
 
     return (
-        <header id="header_main" className="header_1 js-header" ref={headerRef}>
-            <div className="themesflat-container">
-                <div className="row">
-                    <div className="col-md-12">                              
-                        <div id="site-header-inner"> 
-                            <div className="wrap-box flex">
-                                <div id="site-logo" className="clearfix">
-                                    <div id="site-logo-inner">
-                                        <Link to="/" rel="home" className="main-logo">
-                                            <img className='logo-dark'  id="logo_header" src={logodark} srcSet={`${logodark2x}`} alt="nft-gaming" />
-                                            <img className='logo-light'  id="logo_header" src={logoheader} srcSet={`${logoheader2x}`} alt="nft-gaming" />
-                                        </Link>
-                                    </div>
-                                    <div className="mobile-button" ref={btnToggle} onClick={menuToggle}><span></span></div>
+        <>
+           
 
-                                    <nav id="main-nav" className="main-nav" ref={menuLeft}>
-                                        <ul id="menu-primary-menu" className="menu">
-                                            <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-                                                <Link to="/">Home</Link>
-                                            </li>
+            <header id="header_main" className="header_1 js-header" ref={headerRef}>
+    <div className="themesflat-container">
+      <div className="row">
+        <div className="col-md-12">                              
+          <div id="site-header-inner"> 
+            <div className="wrap-box flex space-between center-v">
 
-                                           
-                                            <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-                                                <Link to="/accomodation">Accommodation</Link>
-                                            </li> 
-                                            
-
-                                             <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-                                                <Link to="/chauffeur-hire-cape-town">Chauffeur Hire</Link>
-                                            </li>
-
-                                            {/* <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-                                                <Link to="/top-3-tours">What to do in Cape Town</Link>
-                                            </li>  */}
-
-                                            {/* 
-
-                                          
-                                            <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-                                                <Link to="/top-3-tours">Top 10 Resturants</Link>
-                                            </li>
-
-                                              <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-                                                <Link to="/top-3-tours">Best Winefarms</Link>
-                                            </li> */}
-
-
-
-                                           
-                                            
-                                            {/*
-                                            <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-                                                <Link to="/full-packages-to-cape-town">Complete Travel Packages</Link>
-                                            </li>
-                                            */}
-
-                                            
-
-                                            {/* <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-                                                <Link to="/safari">Safari</Link>
-                                            </li> */}
-
-                                            {/* <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-                                                <Link to="/garden-route">Garden Route</Link>
-                                            </li> */}
-                                            
-                                            
-                                            
-                                            
-                                            {/* <li onClick={() => handleOnClick(0)} className={`menu-item ${activeIndex === 0 ? 'active' : ''}`}>
-                                                <Link to="/where-to-get-cannabis">Cannabis Tours</Link>
-                                            </li> */}
-                                        </ul>
-                                    </nav>
-
-                                    {/* <DarkMode /> */}
-                                </div>
-                            </div> 
-                        </div>
-                    </div>
+              {/* Logo */}
+              <div id="site-logo" className="clearfix">
+                <div id="site-logo-inner">
+                  <Link to="/" className="main-logo">
+                    <img className="logo-dark" src={logodark} alt="logo" />
+                    <img className="logo-light" src={logoheader} alt="logo" />
+                  </Link>
                 </div>
+              </div>
+
+              {/* Desktop Menu */}
+              <nav id="main-nav" className="main-nav desktop-only">
+                <ul className="menu">
+                  <li><Link to="/">Home</Link></li>
+                  <li><Link to="/accomodation">Accommodation</Link></li>
+                  <li><Link to="/chauffeur-hire-cape-town">Chauffeur Hire</Link></li>
+                </ul>
+              </nav>
+
+              {/* ✅ Desktop WhatsApp Button */}
+              <a 
+                href="https://wa.link/r5z0sb"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="whatsapp-header-btn desktop-only"
+              >
+                <i className="fab fa-whatsapp"></i> WhatsApp Us
+              </a>
+
+              {/* Mobile Menu Button */}
+              <div className="mobile-button" ref={btnToggle} onClick={menuToggle}><span></span></div>
+
+              {/* Mobile Menu */}
+              <nav id="main-nav" className="main-nav mobile-nav" ref={menuLeft}>
+                <ul className="menu">
+                  <li><Link to="/">Home</Link></li>
+                  <li><Link to="/accomodation">Accommodation</Link></li>
+                  <li><Link to="/chauffeur-hire-cape-town">Chauffeur Hire</Link></li>
+                </ul>
+
+                {/* ✅ Mobile WhatsApp Button */}
+                <a
+                  href="https://wa.link/r5z0sb"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="whatsapp-mobile-btn"
+                >
+                  <i className="fab fa-whatsapp"></i> WhatsApp Us
+                </a>
+              </nav>
+
             </div>
-        </header>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+        </>
     );
+    
 }
+
+
 
 export default Header;

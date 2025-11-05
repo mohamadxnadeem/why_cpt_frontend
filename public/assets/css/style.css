@@ -222,6 +222,155 @@ select {
 /* General
 -------------------------------------------------------------- */
 
+/* ================================
+   GENERAL LAYOUT HELPERS
+================================ */
+.wrap-box.space-between {
+  justify-content: space-between;
+}
+
+.center-v {
+  align-items: center;
+}
+
+/* Desktop Only Element Visibility */
+.desktop-only {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+}
+
+/* Mobile Only Visibility */
+@media (min-width: 769px) {
+  .mobile-nav .whatsapp-mobile-btn {
+    display: none !important;
+  }
+}
+
+/* Floating WhatsApp Button (Force Left Placement) */
+.floating-whatsapp {
+  position: fixed;
+  bottom: 22px;
+  left: 22px !important;   /* Force left side */
+  right: auto !important;  /* Ensure right is disabled */
+  width: 60px;
+  height: 60px;
+  background: #187049;
+  border-radius: 50%;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  cursor: pointer;
+  z-index: 999999;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+  text-decoration: none !important;
+  transform-origin: center center;
+  animation: whatsappPulse 8s infinite ease-in-out;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+/* Soft Luxury Pulse Animation */
+@keyframes whatsappPulse {
+  0%, 90% {
+    transform: scale(1);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+  }
+  95% {
+    transform: scale(1.12);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+  }
+}
+
+/* Mobile — move back to bottom right for thumb access */
+@media (max-width: 768px) {
+  .floating-whatsapp {
+    left: auto !important;
+    right: 18px !important;
+    bottom: 18px;
+    width: 66px;
+    height: 66px;
+    font-size: 34px;
+  }
+}
+/* ================================
+   DESKTOP WHATSAPP BUTTON (GOLD)
+================================ */
+.whatsapp-header-btn {
+  background: #D4AF37; /* GOLD */
+  color: white !important;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  margin-left: 20px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  font-size: 15px;
+  text-decoration: none !important;
+}
+
+.whatsapp-header-btn i {
+  font-size: 18px;
+}
+
+.whatsapp-header-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 3px 10px rgba(212,175,55,0.45); /* glowing gold hover */
+}
+
+/* ================================
+   MOBILE MENU WHATSAPP BUTTON
+================================ */
+.whatsapp-mobile-btn {
+  background: #187049;
+  color: white !important;
+  text-align: center;
+  font-weight: 600;
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin: 20px;
+  font-size: 17px;
+  display: block;
+  text-decoration: none !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.whatsapp-mobile-btn i {
+  font-size: 20px;
+  margin-right: 6px;
+}
+
+.whatsapp-mobile-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(24,112,73,0.35);
+}
+
+/* ================================
+   MOBILE NAVIGATION FIX
+   (Ensures WhatsApp button stays inside menu)
+================================ */
+#main-nav.mobile-nav {
+  display: none;
+}
+
+#main-nav.mobile-nav.active {
+  display: block;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 body,
 button,
 input,
