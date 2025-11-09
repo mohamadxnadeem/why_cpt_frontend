@@ -52,33 +52,44 @@ const ImageStyled = styled.img`
   border-radius: 10px;
 `;
 
+// 💰 Luxury pricing row
+const PriceRow = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 10px;
+`;
+
+const PriceLabel = styled.span`
+  font-size: 14px;
+  font-weight: 500;
+  color: #6f6f6f;
+`;
+
+const PriceValue = styled.span`
+  font-size: 20px;
+  font-weight: 700;
+  color: #0b5b33; /* Deep luxury emerald */
+  margin-top: 2px;
+`;
+
+const PriceValueInline = styled.span`
+  font-size: 20px;
+  font-weight: 700;
+  color: #0b5b33; /* emerald */
+  margin-left: 6px;
+`;
+
 const Packages = forwardRef((props, ref) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // 🧠 Load + refetch logic
+  // 🧠 Fetch & Cache Data
   useEffect(() => {
-    const cacheKey = "packagesData";
-    const cached = localStorage.getItem(cacheKey);
-
-    if (cached) {
-      try {
-        const parsed = JSON.parse(cached);
-        setData(parsed);
-      } catch (err) {
-        console.warn("Error parsing cached packages:", err);
-      }
-    }
-
-    // Always refetch from API to keep fresh data
-    fetch("https://web-production-1ab9.up.railway.app/api/full-travel-packages/all/", { cache: "no-store" })
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP error ${res.status}`);
-        return res.json();
-      })
+    fetch("https://web-production-1ab9.up.railway.app/api/full-travel-packages/all/")
+      .then((res) => res.json())
       .then((fetched) => {
         const updatedData = fetched.map((item) => {
-          // 🧩 Handle flexible image structure
           const photo =
             item.cover_photos?.[0]?.cover_photos ||
             item.cover_photos?.[0]?.image?.cover_photos ||
@@ -89,17 +100,12 @@ const Packages = forwardRef((props, ref) => {
             firstPhoto: photo ? { url: photo, imageLoaded: false } : null,
           };
         });
-
         setData(updatedData);
-        localStorage.setItem(cacheKey, JSON.stringify(updatedData));
       })
-      .catch((error) => {
-        console.error("Error fetching packages:", error);
-      })
+      .catch((error) => console.error("Error fetching packages:", error))
       .finally(() => setLoading(false));
   }, []);
 
-  // ✅ Safe image loading
   const handleImageLoad = (id) => {
     setData((prev) =>
       prev.map((item) =>
@@ -110,125 +116,88 @@ const Packages = forwardRef((props, ref) => {
     );
   };
 
-  const handleImageError = (e) => {
-    console.warn("Error loading image:", e.target.src);
-    e.target.style.display = "none";
-  };
-
   return (
     <FlipMove>
       <Fragment ref={ref}>
         <section className="tf-explore-2 tf-section live-auctions">
           <div className="themesflat-container">
-            <div className="row">
-              <div className="col-12">
-                <h2 className="tf-title-heading ct style-2 mg-bt-13">
-                  Choose Your Dream{" "}
-                  <span style={{ color: "#d4af37" }}>Cape Town Package</span>
-                </h2>
+            <h2 className="tf-title-heading ct style-2 mg-bt-13">
+              Choose Your Dream <span style={{ color: "#d4af37" }}>Cape Town Package</span>
+            </h2>
 
-                {loading ? (
+            {loading ? (
+              <div style={{ display: "flex", gap: "20px", overflowX: "auto" }}>
+                {[...Array(4)].map((_, i) => (
                   <div
-                    style={{
-                      display: "flex",
-                      gap: "20px",
-                      overflowX: "auto",
-                      paddingBottom: "10px",
-                    }}
+                    key={i}
+                    style={{ width: "250px", height: "200px", position: "relative" }}
                   >
-                    {[...Array(4)].map((_, i) => (
-                      <div
-                        key={i}
-                        style={{
-                          width: "250px",
-                          height: "200px",
-                          position: "relative",
-                          borderRadius: "10px",
-                          flexShrink: 0,
-                        }}
-                      >
-                        <Shimmer />
-                      </div>
-                    ))}
+                    <Shimmer />
                   </div>
-                ) : (
-                  <Swiper
-                    modules={[Navigation, Pagination, Scrollbar, A11y]}
-                    spaceBetween={30}
-                    breakpoints={{
-                      0: { slidesPerView: 1 },
-                      767: { slidesPerView: 2 },
-                      991: { slidesPerView: 3 },
-                      1200: { slidesPerView: 4 },
-                    }}
-                    navigation
-                    pagination={{ clickable: true }}
-                  >
-                    {data.length === 0 ? (
-                      <p>No packages available.</p>
-                    ) : (
-                      data.slice(0, 10).map((item, index) => (
-                        <SwiperSlide key={index}>
-                          <div className="swiper-slide">
-                            <div className="slider-item">
-                              <div
-                                className={`sc-card-product ${
-                                  item.fullpackage?.feature ? "comingsoon" : ""
-                                }`}
-                              >
-                                <div className="card-media">
-                                  <Link to={`/travel-package/${item.fullpackage?.id}`}>
-                                    <SlideContainer>
-                                      {item.firstPhoto && (
-                                        <>
-                                          {!item.firstPhoto.imageLoaded && <Shimmer />}
-                                          <ImageStyled
-                                            src={item.firstPhoto.url}
-                                            alt={item.fullpackage?.title}
-                                            onLoad={() => handleImageLoad(item.fullpackage?.id)}
-                                            onError={handleImageError}
-                                            imageLoaded={item.firstPhoto.imageLoaded}
-                                          />
-                                        </>
-                                      )}
-                                    </SlideContainer>
-                                  </Link>
-                                </div>
-
-                                <div className="card-title">
-                                  <h5 className="style2">
-                                    <Link to={`/travel-package/${item.fullpackage?.id}`}>
-                                      {item.fullpackage?.title}
-                                    </Link>
-                                  </h5>
-                                </div>
-
-                                <div className="meta-info">
-                                  <div className="author">
-                                    <div className="price" style={{ textAlign: "left" }}>
-                                      <p>Total Price: ${item.fullpackage?.price}</p>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <center>
-                                  <Link
-                                    to={`/travel-package/${item.fullpackage?.id}`}
-                                    className="sc-button loadmore style fl-button pri-3"
-                                  >
-                                    <span>View Package</span>
-                                  </Link>
-                                </center>
-                              </div>
-                            </div>
-                          </div>
-                        </SwiperSlide>
-                      ))
-                    )}
-                  </Swiper>
-                )}
+                ))}
               </div>
-            </div>
+            ) : (
+              <Swiper
+                modules={[Navigation, Pagination, Scrollbar, A11y]}
+                spaceBetween={30}
+                breakpoints={{
+                  0: { slidesPerView: 1 },
+                  767: { slidesPerView: 2 },
+                  991: { slidesPerView: 3 },
+                  1200: { slidesPerView: 4 },
+                }}
+                navigation
+                pagination={{ clickable: true }}
+              >
+                {data.map((item, index) => (
+                  <SwiperSlide key={index}>
+                    <div className="slider-item">
+                      <div className="sc-card-product">
+                        <div className="card-media">
+                          <Link to={`/travel-package/${item.fullpackage.id}`}>
+                            <SlideContainer>
+                              {!item.firstPhoto?.imageLoaded && <Shimmer />}
+                              {item.firstPhoto && (
+                                <ImageStyled
+                                  src={item.firstPhoto.url}
+                                  alt={item.fullpackage.title}
+                                  onLoad={() => handleImageLoad(item.fullpackage.id)}
+                                  imageLoaded={item.firstPhoto.imageLoaded}
+                                />
+                              )}
+                            </SlideContainer>
+                          </Link>
+                        </div>
+
+                        <div className="card-title">
+                          <h5 className="style2">
+                            <Link to={`/travel-package/${item.fullpackage.id}`}>
+                              {item.fullpackage.title}
+                            </Link>
+                          </h5>
+                        </div>
+
+                        {/* ✅ Updated Pricing */}
+                        <PriceRow>
+                          <PriceLabel>
+                            Starting from: <PriceValueInline>${Math.round(item.fullpackage.price)}</PriceValueInline>
+                          </PriceLabel>
+                        </PriceRow>
+
+                        <center>
+                          <Link
+                            to={`/travel-package/${item.fullpackage.id}`}
+                            className="sc-button loadmore style fl-button pri-3"
+                          >
+                            <span>View Package</span>
+                          </Link>
+                        </center>
+                      </div>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            )}
           </div>
         </section>
       </Fragment>

@@ -87,7 +87,8 @@ const Header = () => {
                 <ul className="menu">
                   <li><Link to="/">Home</Link></li>
                   <li><Link to="/accomodation">Accommodation</Link></li>
-                  <li><Link to="/chauffeur-hire-cape-town">Chauffeur Hire</Link></li>
+                   <li><Link to="/PrivateToursCapeTown">Tours and Activities</Link></li>
+                  <li><Link to="/chauffeur-hire-cape-town">Vehicle Hire</Link></li>
                 </ul>
               </nav>
 

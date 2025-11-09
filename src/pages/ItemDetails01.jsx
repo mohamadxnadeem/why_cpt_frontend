@@ -10,8 +10,9 @@ import emailjs from "emailjs-com";
 import { Helmet } from "react-helmet";
 import TestimonialCarousel from "../components/TestimonialCarousel";
 import PricingOfferCard from "../components/PricingOfferCard";
+import WhatsAppCTA from "../components/WhatsappCTA"
 
-// ✨ Styled shimmer loader for hero image
+// ✨ Styled shimmer for slider
 const LoaderWrapper = styled.div`
   width: 100%;
   height: 400px;
@@ -32,12 +33,8 @@ const Shimmer = styled.div`
   animation: shimmer 1.5s infinite;
 
   @keyframes shimmer {
-    0% {
-      background-position: -200% 0;
-    }
-    100% {
-      background-position: 200% 0;
-    }
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
   }
 `;
 
@@ -50,29 +47,15 @@ const ItemDetails01 = () => {
 
   const [formData, setFormData] = useState({
     name: "",
-    contactNumber: "",
     tourDate: "",
     serviceType: "",
     email: "",
     message: "",
   });
 
-  // ✅ Load Calendly script
+  // ✅ Fetch Experience Details
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://assets.calendly.com/assets/external/widget.js";
-    script.async = true;
-    document.body.appendChild(script);
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
-  // ✅ Fetch Experience Data (fixed endpoint + structure)
-  useEffect(() => {
-    fetch(
-      `https://web-production-1ab9.up.railway.app/api/experiences/${id}/details/`
-    )
+    fetch(`https://web-production-1ab9.up.railway.app/api/experiences/${id}/details/`)
       .then((response) => response.json())
       .then((data) => {
         setItemData(data);
@@ -82,10 +65,7 @@ const ItemDetails01 = () => {
           serviceType: data?.experience?.title || "",
         }));
       })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-        setLoading(false);
-      });
+      .catch(() => setLoading(false));
   }, [id]);
 
   // ✅ Form Handling
@@ -100,97 +80,54 @@ const ItemDetails01 = () => {
     e.preventDefault();
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(formData.email)) {
-      setFormError("Please enter a valid email address.");
+      setFormError("Please enter a valid email.");
       return;
     }
     setFormError("");
     emailjs
       .send("service_ptqtluk", "template_uyicl9l", formData, "apNJP_9sXnff2q82W")
-      .then(() => setFormSubmitted(true))
-      .catch((error) => console.log("Email error:", error));
+      .then(() => setFormSubmitted(true));
   };
 
   const experience = itemData?.experience;
   const heroSliderData =
-    itemData?.cover_photos?.map((cover) => ({
-      src: cover?.cover_photos || "", // ✅ fixed: match backend field
-    })) || [];
+    itemData?.cover_photos?.map((cover) => ({ src: cover?.cover_photos || "" })) || [];
 
   return (
     <div className="item-details">
       <Helmet>
-        <title>
-          {experience?.title ||
-            "Don't miss out on this experience if you're in Cape Town"}
-        </title>
-        <meta
-          name="description"
-          content={
-            experience?.title
-              ? `${experience.title} - click for more info`
-              : "Cape Town tour experience details"
-          }
-        />
+        <title>{experience?.title}</title>
       </Helmet>
 
-      {/* Header */}
       <Header />
 
-      {/* Hero Section */}
+      {/* Hero */}
       <section className="flat-title-page inner">
         <div className="overlay"></div>
-        <div className="themesflat-container">
-          <div className="row">
-            <div className="col-md-12">
-              <center>
-                <div className="page-title-heading mg-bt-12">
-                  <h4
-                    className="tf-title-heading ct style-2 fs-30 mg-bt-10"
-                    style={{ color: "white" }}
-                  >
-                    {loading ? "Loading package..." : experience?.title}
-                  </h4>
-                </div>
-              </center>
-            </div>
-          </div>
-        </div>
       </section>
 
-      {/* Slider Section */}
+      {/* Slider */}
       <div style={{ padding: "20px 0" }}>
         {loading ? (
-          <LoaderWrapper>
-            <Shimmer />
-          </LoaderWrapper>
+          <LoaderWrapper><Shimmer /></LoaderWrapper>
         ) : heroSliderData.length > 0 ? (
           <SliderStyle3 data={heroSliderData} />
-        ) : (
-          <p style={{ textAlign: "center", color: "#888" }}>
-            No images available for this experience.
-          </p>
-        )}
+        ) : null}
       </div>
 
-      {/* Package Details */}
       <div className="tf-section tf-item-details">
         <div className="container">
-          {loading ? (
-            <p>Loading details...</p>
-          ) : (
-            <div className="content-center">
-              <div className="sc-item-details">
-                {/* ✅ Ensure body is a string before parsing */}
-                {experience?.body && typeof experience.body === "string"
-                  ? parse(experience.body)
-                  : <p>No details available for this experience.</p>}
-              </div>
+
+          {/* Package Body */}
+          {!loading && (
+            <div className="content-center sc-item-details">
+              {experience?.body ? parse(experience.body) : null}
             </div>
           )}
 
           <br />
 
-          {/* 💰 Pricing Offer Card */}
+          {/* 💰 Pricing (Moved Up) */}
           {!loading && (
             <PricingOfferCard
               price={experience?.price}
@@ -199,11 +136,15 @@ const ItemDetails01 = () => {
             />
           )}
 
-          {/* 💬 Testimonials */}
+          {/* 🟢 WhatsApp CTA */}
+          <WhatsAppCTA />
+
+          {/* Testimonials */}
           <TestimonialCarousel />
 
-          <br />
+          <br /><br />
 
+          {/* 📨 Contact Form */}
           {/* 📨 Contact Form */}
           <div className="tf-section tf-item-details">
             <div className="container">
@@ -222,7 +163,8 @@ const ItemDetails01 = () => {
                       ) : (
                         <Fragment>
                           <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                            Fill in the form below and our team will respond shortly to help plan your perfect Cape Town experience.
+                            Tell us your dates & group size — we’ll handle everything.
+
                           </h1>
                           <div className="form-inner">
                             <form
@@ -252,24 +194,7 @@ const ItemDetails01 = () => {
                                     <p style={{ color: "red" }}>{formError}</p>
                                   )}
                                 </div>
-                                <div className="col-md-12">
-                                  <input
-                                    type="tel"
-                                    name="contactNumber"
-                                    value={formData.contactNumber}
-                                    placeholder="Optional: Mobile for urgent updates"
-                                    onChange={handleChange}
-                                    style={{
-                                      width: "100%",
-                                      padding: "12px",
-                                      borderRadius: "8px",
-                                      border: "1px solid #ccc",
-                                      fontSize: "16px",
-                                      marginBottom: "12px",
-                                      boxSizing: "border-box",
-                                    }}
-                                  />
-                                </div>
+                                
 
                                 <div className="col-md-12">
                                   <label
@@ -329,7 +254,6 @@ const ItemDetails01 = () => {
         </div>
       </div>
 
-      {/* Footer */}
       <Footer />
     </div>
   );

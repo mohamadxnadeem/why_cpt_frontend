@@ -18,7 +18,7 @@ import AirportTransfers from './chauffeur-hire-cape-town';
 
 import WhereToGetCannabis from './where-to-get-cannabis';
 
-import Tours from './Tours';
+import PrivateToursCapeTown from './Private-tours-cape-town';
 
 import LuxuryVillas from './LuxuryVillas';
 import FullPackages from './FullPackages';
@@ -35,6 +35,7 @@ import VehicleHire from './VehicleHire';
 
 
 
+
 const routes = [
   
   { path: '/', component: <Home03 />},
@@ -42,10 +43,12 @@ const routes = [
   
   { path: '/experience/:id', component: <ItemDetails01 />},
   { path: '/car-for-hire/:id', component: <CarDetails />},
+
   
   { path: '/accomodation/:id', component: <AccomodationDetails />},
 
   { path: '/accomodation/:id', component: <AccomodationDetails />},
+
   { path: '/1-Bedroom-Apartments/:id', component: <OneBedroomDetials />},
   { path: '/2-Bedroom-Apartments/:id', component: <TwoBedroomDetails />},
   { path: '/penthouse-apartments/:id', component: <PenthouseDetails />},
@@ -76,7 +79,7 @@ const routes = [
 
 
   
-  { path: '/tours', component: <Tours />},
+  { path: '/PrivateToursCapeTown', component: <PrivateToursCapeTown />},
 
 ]
 

@@ -162,7 +162,7 @@ const PricingOfferCard = ({
   if (!isDealActive) {
     return (
       <OfferWrapper>
-        <Heading>Standard Price</Heading>
+        <Heading>Starting From</Heading>
         <PriceCard type="green">
           <Price>
             <span style={{ fontSize: "30px", marginRight: "6px" }}>$</span>
@@ -177,6 +177,7 @@ const PricingOfferCard = ({
             </span>
           </Price>
         </PriceCard>
+        <Heading>Price Negotiable on larger groups</Heading>
       </OfferWrapper>
     );
   }
