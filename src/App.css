@@ -13,6 +13,32 @@
   }
 }
 
+
+.kenburns {
+  overflow: hidden;
+  position: relative;
+}
+
+.kenburns img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: kenburnsZoom 18s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes kenburnsZoom {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.12) translate(0, 0);
+  }
+  100% {
+    transform: scale(1) translate(0, 0);
+  }
+}
+
 /* Default padding */
 .text-container {
   padding: 0; /* No padding by default */

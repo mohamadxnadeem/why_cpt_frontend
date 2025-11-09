@@ -207,10 +207,11 @@ const AirportTransfers = () => {
 
         <VehicleGuide>
           <VehicleGuideTitle>Which Vehicle Is Best for You?</VehicleGuideTitle>
+          <GuideRow><span>VIP / CEO Transfer</span><span>Mercedes S-Class </span></GuideRow>
+          <GuideRow><span>Executive</span><span>Mercedes E-Class </span></GuideRow>
           <GuideRow><span>Solo / Couples</span><span>Mercedes C-Class</span></GuideRow>
           <GuideRow><span>3–6 Guests</span><span>Mercedes V-Class</span></GuideRow>
           <GuideRow><span>6–9 Guests</span><span>Hyundai Staria</span></GuideRow>
-          <GuideRow><span>VIP / CEO Transfer</span><span>Mercedes S-Class / BMW 5 Series</span></GuideRow>
         </VehicleGuide>
 
         <IncludedBox>

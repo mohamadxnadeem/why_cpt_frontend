@@ -95,7 +95,7 @@ const Header = () => {
                 rel="noopener noreferrer"
                 className="whatsapp-header-btn desktop-only"
               >
-                <i className="fab fa-whatsapp"></i> WhatsApp Us
+                <i className="fab fa-whatsapp"></i> Chat Now
               </a>
 
               {/* Mobile Menu Button */}
@@ -116,7 +116,7 @@ const Header = () => {
                   rel="noopener noreferrer"
                   className="whatsapp-mobile-btn"
                 >
-                  <i className="fab fa-whatsapp"></i> WhatsApp Us
+                  <i className="fab fa-whatsapp"></i> Chat Now
                 </a>
               </nav>
 

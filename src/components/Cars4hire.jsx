@@ -175,7 +175,7 @@ const Cars4Hire = forwardRef((props, ref) => {
                                   <div className="price" style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '6px' }}>
                                     <span style={{ fontSize: '15px', color: '#555' }}>Starting from:</span>
                                     <span style={{ fontSize: '20px', fontWeight: '700', color: '#0b5b33' }}>
-                                      ${Math.round(item.car?.price)}/day
+                                      ${Math.round(item.car?.price)} / 10hrs
                                     </span>
                                   </div>
                                 </div>
