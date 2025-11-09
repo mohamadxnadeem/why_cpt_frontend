@@ -10,7 +10,6 @@ import TestimonialCarousel from "../components/TestimonialCarousel";
 import Footer from "../components/footer/Footer";
 import emailjs from "emailjs-com";
 import { Accordion } from "react-bootstrap-accordion";
-import { Link } from "react-router-dom";
 
 // ✨ Global luxury typography
 const GlobalStyle = createGlobalStyle`

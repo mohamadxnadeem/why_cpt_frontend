@@ -20,11 +20,9 @@ import jones from '../assets/images/blog/jones.png'
 import yusra from '../assets/images/blog/yusra.png'
 import moz from '../assets/images/blog/moz.png'
 import kazi from '../assets/images/blog/Allen and Kazi.png'
-import batman from '../assets/images/blog/batman.JPG';
 import Packages from '../components/Packages';
 import emailjs from 'emailjs-com';
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
 import backgroundImage from '../assets/images/blog/romantic-getawat.jpeg';
 import styled from 'styled-components';
 

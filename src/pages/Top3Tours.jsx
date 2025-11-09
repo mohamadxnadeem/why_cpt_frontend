@@ -57,9 +57,6 @@ import { Helmet } from 'react-helmet';
 
 
 
-import { Link } from 'react-router-dom';
-import Cars4Hire from '../components/Cars4hire';
-import DealOfTheMonth from '../components/DealOfTheMonth ';
 
 // Import the background image correctly
 import backgroundImage from '../assets/images/item-background/tour.jpeg'; 

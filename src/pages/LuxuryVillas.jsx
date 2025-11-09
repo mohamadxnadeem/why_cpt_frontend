@@ -1,6 +1,4 @@
-import React, { useState, Fragment } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import Rating from '../components/Rating';
+import React, { useState } from 'react';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 import imgblog1 from '../assets/images/blog/audi.png';
@@ -12,12 +10,7 @@ import micheal from '../assets/images/blog/micheal.jpg';
 import dan from '../assets/images/blog/dan.jpg';
 import emailjs from 'emailjs-com';
 import { Helmet } from 'react-helmet';
-import Accomodation from '../components/LuxuryAccomodation';
 import OneBedroom from '../components/accomodation/1bedroom';
-import TwoBedroom from '../components/accomodation/2bedroom';
-import Penthouse from '../components/accomodation/penthouse';
-import Villa from '../components/accomodation/villa';
-import Hotel from '../components/accomodation/Hotel';
 
 
 

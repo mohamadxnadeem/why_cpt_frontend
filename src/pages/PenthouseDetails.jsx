@@ -2,9 +2,6 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-import { Link } from 'react-router-dom';
-import LiveAuction from '../components/layouts/home-3/LiveAuction';
-import Rating from '../components/Rating';
 import Loader from '../components/Loader';
 import SliderStyle3 from '../components/slider/SliderStyle3';
 import { Blurhash } from 'react-blurhash';
@@ -13,7 +10,6 @@ import parse from 'html-react-parser';
 import styled from 'styled-components';
 import emailjs from 'emailjs-com';
 import { Helmet } from 'react-helmet';
-import Tours from '../components/Tours';
 
 const LoaderWrapper = styled.div`
   position: fixed;
