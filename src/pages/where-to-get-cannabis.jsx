@@ -5,12 +5,7 @@ import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 import { Link } from 'react-router-dom';
 import imgblog1 from '../assets/images/blog/cannabis.jpg';
-import jana from '../assets/images/blog/jana.jpg';
-import tim from '../assets/images/blog/tim.jpg';
-import rachel from '../assets/images/blog/becca.jpg';
-import marie from '../assets/images/blog/marie.jpg';
-import micheal from '../assets/images/blog/micheal.jpg';
-import dan from '../assets/images/blog/dan.jpg';
+
 import Tours from '../components/Tours';
 import emailjs from 'emailjs-com';
 import { Helmet } from 'react-helmet';

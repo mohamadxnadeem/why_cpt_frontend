@@ -71,11 +71,7 @@ const SectionTitle = styled.h2`
   margin-bottom: 22px;
 `;
 
-const Paragraph = styled.p`
-  font-size: 18px;
-  margin-bottom: 20px;
-  line-height: 1.85;
-`;
+
 
 const HighlightText = styled.span`
   color: #d4af37;
