@@ -8,37 +8,7 @@ import imgblog1 from '../assets/images/blog/carhire.jpg'
 
 const VehicleHire = () => {
    
-    const [dataTags] = useState(
-        [
-            {
-                name: 'Bitcoin'
-            },
-            {
-                name: 'NFT'
-            },
-            {
-                name: 'Bids'
-            },
-            {
-                name: 'Digital'
-            },
-            {
-                name: 'Arts'
-            },
-            {
-                name: 'Marketplace'
-            },
-            {
-                name: 'Token'
-            },
-            {
-                name: 'Wallet'
-            },
-            {
-                name: 'Crypto'
-            },
-        ]
-    )
+    
     return (
         <div>
             <Header />
