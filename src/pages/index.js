@@ -9,18 +9,18 @@ import AccomodationDetails from './AccomodationDetails';
 import OneBedroomDetials from './OneBedroomDetials';
 import TwoBedroomDetails from './TwoBedroomDetails';
 import PenthouseDetails from './PenthouseDetails';
-// import VillaDetails from './VillaDetails';
+import VillaDetails from './VillaDetails';
 import HotelDetails from './HotelDetails';
 
 
 import Stays from './Stays';
 import AirportTransfers from './chauffeur-hire-cape-town';
 
-// import WhereToGetCannabis from './where-to-get-cannabis';
+import WhereToGetCannabis from './where-to-get-cannabis';
 
 import PrivateToursCapeTown from './Private-tours-cape-town';
 
-// import LuxuryVillas from './LuxuryVillas';
+import LuxuryVillas from './LuxuryVillas';
 import FullPackages from './FullPackages';
 import Top3Tours from './Top3Tours';
 import Safari from './Safari';
@@ -52,7 +52,7 @@ const routes = [
   { path: '/1-Bedroom-Apartments/:id', component: <OneBedroomDetials />},
   { path: '/2-Bedroom-Apartments/:id', component: <TwoBedroomDetails />},
   { path: '/penthouse-apartments/:id', component: <PenthouseDetails />},
-  // { path: '/luxury-villas-in-cape-town/:id', component: <VillaDetails />},
+  { path: '/luxury-villas-in-cape-town/:id', component: <VillaDetails />},
   { path: '/best-hotels/:id', component: <HotelDetails />},
   
   
@@ -62,7 +62,7 @@ const routes = [
 
   { path: '/chauffeur-hire-cape-town', component: <AirportTransfers />},
 
-  // { path: '/where-to-get-cannabis', component: <WhereToGetCannabis />},
+  { path: '/where-to-get-cannabis', component: <WhereToGetCannabis />},
 
   { path: '/full-packages-to-cape-town', component: <FullPackages />},
 
@@ -70,7 +70,7 @@ const routes = [
 
   { path: '/safari', component: <Safari />},
 
-  // { path: '/accomodation', component: <LuxuryVillas />},
+  { path: '/accomodation', component: <LuxuryVillas />},
   
   { path: '/student-accomodation', component: <StudentAccomodation />},
   { path: '/event-venues', component: <EventVenues />},
