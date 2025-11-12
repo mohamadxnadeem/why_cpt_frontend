@@ -11,6 +11,9 @@ const TestimonialCarousel = React.lazy(() =>
 );
 const Cars4Hire = React.lazy(() => import("../components/Cars4hire"));
 
+const BudgetCars4Hire = React.lazy(() => import("../components/BudgetCars"));
+
+
 const GlobalStyle = createGlobalStyle`
   body { 
     font-family: 'Poppins', sans-serif; 
@@ -214,6 +217,12 @@ const AirportTransfers = () => {
           <GuideRow><span>6–9 Guests</span><span>Hyundai Staria</span></GuideRow>
         </VehicleGuide>
 
+        
+
+        <Suspense fallback={<div style={{ height: 300 }} />}>
+          <Cars4Hire />
+        </Suspense>
+
         <IncludedBox>
           <IncludedTitle>Your Chauffeur Service Includes:</IncludedTitle>
           <IncludedList>
@@ -226,7 +235,7 @@ const AirportTransfers = () => {
         </IncludedBox>
 
         <Suspense fallback={<div style={{ height: 300 }} />}>
-          <Cars4Hire />
+          <BudgetCars4Hire />
         </Suspense>
 
         {/* ✅ BOTTOM CTA */}

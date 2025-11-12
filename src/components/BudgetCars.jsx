@@ -1,7 +1,7 @@
 import React, { useState, useEffect, forwardRef, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Scrollbar, A11y, Autoplay, EffectFade } from 'swiper';
+import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
 import FlipMove from 'react-flip-move';
 import styled, { keyframes } from 'styled-components';
 
@@ -39,17 +39,18 @@ const ImageStyled = styled.img`
   object-fit: cover;
   z-index: 2;
   opacity: ${(props) => (props.imageLoaded ? 1 : 0)};
-  transition: opacity 1.4s ease-in-out; /* ✅ slower, cinematic fade */
+  transform: ${(props) => (props.imageLoaded ? 'scale(1)' : 'scale(1.05)')};
+  transition: opacity 1.4s ease-in-out, transform 3s ease-in-out;
   border-radius: 10px;
 `;
 
-const Cars4Hire = forwardRef((props, ref) => {
+const BudgetCars4Hire = forwardRef((props, ref) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // ✅ Load & refetch logic
   useEffect(() => {
-    const cacheKey = 'carsData';
+    const cacheKey = 'budgetCarsData';
     const cached = localStorage.getItem(cacheKey);
 
     if (cached) {
@@ -59,7 +60,7 @@ const Cars4Hire = forwardRef((props, ref) => {
       } catch (err) {}
     }
 
-    fetch('https://web-production-1ab9.up.railway.app/api/cars-for-hire/premium/', { cache: 'no-store' })
+    fetch('https://web-production-1ab9.up.railway.app/api/cars-for-hire/budget/', { cache: 'no-store' })
       .then((response) => response.json())
       .then((newData) => {
         const updated = newData.map((item) => {
@@ -98,8 +99,10 @@ const Cars4Hire = forwardRef((props, ref) => {
       <Fragment ref={ref}>
         <section className="tf-explore-2 tf-section live-auctions">
           <div className="themesflat-container">
-            <h2 className="tf-title-heading ct style-2 mg-bt-13">Premium Options</h2>
-            <p className="sub-title ct small mg-bt-20 pad-420">All Black top of the line vehicles</p>
+            <h2 className="tf-title-heading ct style-2 mg-bt-13">Budget-Friendly Options</h2>
+            <p className="sub-title ct small mg-bt-20 pad-420">
+              Affordable comfort, style, and reliability.
+            </p>
 
             {loading ? (
               <div style={{ display: 'flex', gap: '20px', overflowX: 'auto' }}>
@@ -111,16 +114,16 @@ const Cars4Hire = forwardRef((props, ref) => {
               </div>
             ) : (
               <Swiper
-                modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay, EffectFade]}
+                modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
                 spaceBetween={30}
-                loop={true}
+                loop={false} // ✅ Prevent duplicates
                 autoplay={{
                   delay: 4500,
                   disableOnInteraction: false,
                 }}
-                speed={1100} /* ✅ smooth slow transition */
+                speed={1200}
                 breakpoints={{
-                  0: { slidesPerView: 1, effect: 'fade' }, /* cinematic fade on mobile */
+                  0: { slidesPerView: 1 },
                   767: { slidesPerView: 2 },
                   991: { slidesPerView: 3 },
                   1200: { slidesPerView: 4 },
@@ -153,15 +156,32 @@ const Cars4Hire = forwardRef((props, ref) => {
                         </p>
                       )}
 
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '6px' }}>
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '6px',
+                          marginTop: '6px',
+                        }}
+                      >
                         <span style={{ fontSize: '15px', color: '#555' }}>Starting from:</span>
-                        <span style={{ fontSize: '20px', fontWeight: '700', color: '#0b5b33' }}>
+                        <span
+                          style={{
+                            fontSize: '20px',
+                            fontWeight: '700',
+                            color: '#0b5b33',
+                          }}
+                        >
                           ${Math.round(item.car?.price)} / 10hrs
                         </span>
                       </div>
 
                       <center>
-                        <Link target="_blank" to="https://wa.link/i3muj9" className="sc-button loadmore style fl-button pri-3">
+                        <Link
+                          target="_blank"
+                          to="https://wa.link/i3muj9"
+                          className="sc-button loadmore style fl-button pri-3"
+                        >
                           <span>Reserve Now</span>
                         </Link>
                       </center>
@@ -177,4 +197,4 @@ const Cars4Hire = forwardRef((props, ref) => {
   );
 });
 
-export default Cars4Hire;
+export default BudgetCars4Hire;
