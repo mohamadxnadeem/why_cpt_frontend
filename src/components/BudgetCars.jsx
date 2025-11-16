@@ -172,7 +172,7 @@ const BudgetCars4Hire = forwardRef((props, ref) => {
                             color: '#0b5b33',
                           }}
                         >
-                          ${Math.round(item.car?.price)} / 10hrs
+                          R{Math.round(item.car?.price)} / Per Day
                         </span>
                       </div>
 
