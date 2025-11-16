@@ -147,11 +147,11 @@ const Cars4Hire = forwardRef((props, ref) => {
 
                       <h5 className="style2">{item.car?.title}</h5>
 
-                      {item.car?.number_of_seats && (
+                      {/* {item.car?.number_of_seats && (
                         <p style={{ fontSize: '14px', color: '#6f6f6f', marginTop: '6px' }}>
                           Up to {item.car.number_of_seats} guests
                         </p>
-                      )}
+                      )} */}
 
                       <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '6px' }}>
                         <span style={{ fontSize: '15px', color: '#555' }}>Starting from:</span>
@@ -161,8 +161,11 @@ const Cars4Hire = forwardRef((props, ref) => {
                       </div>
 
                       <center>
-                        <Link target="_blank" to="https://wa.link/i3muj9" className="sc-button loadmore style fl-button pri-3">
-                          <span>Reserve Now</span>
+                        <Link
+                          to={`/car-hire/${item.car?.id}`}
+                          className="sc-button loadmore style fl-button pri-3"
+                        >
+                          <span>View Details</span>
                         </Link>
                       </center>
                     </div>

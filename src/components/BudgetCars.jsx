@@ -150,11 +150,11 @@ const BudgetCars4Hire = forwardRef((props, ref) => {
 
                       <h5 className="style2">{item.car?.title}</h5>
 
-                      {item.car?.number_of_seats && (
+                      {/* {item.car?.number_of_seats && (
                         <p style={{ fontSize: '14px', color: '#6f6f6f', marginTop: '6px' }}>
                           Up to {item.car.number_of_seats} guests
                         </p>
-                      )}
+                      )} */}
 
                       <div
                         style={{
@@ -178,11 +178,10 @@ const BudgetCars4Hire = forwardRef((props, ref) => {
 
                       <center>
                         <Link
-                          target="_blank"
-                          to="https://wa.link/i3muj9"
+                          to={`/car-hire/${item.car?.id}`}
                           className="sc-button loadmore style fl-button pri-3"
                         >
-                          <span>Reserve Now</span>
+                          <span>View Details</span>
                         </Link>
                       </center>
                     </div>

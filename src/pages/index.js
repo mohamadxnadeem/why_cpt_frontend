@@ -3,7 +3,7 @@ import Home03 from "./Home03";
 import ItemDetails01 from "./ItemDetails01";
 import TravelPackage from "./TravelPackage";
 
-import CarDetails from './CarDetails';
+import CarHireDetails from './CarHireDetails';
 import AccomodationDetails from './AccomodationDetails';
 
 import OneBedroomDetials from './OneBedroomDetials';
@@ -42,7 +42,8 @@ const routes = [
   // Dynamic Pages
   
   { path: '/experience/:id', component: <ItemDetails01 />},
-  { path: '/car-for-hire/:id', component: <CarDetails />},
+
+  { path: '/car-hire/:id', component: <CarHireDetails />},
 
   
   { path: '/accomodation/:id', component: <AccomodationDetails />},
