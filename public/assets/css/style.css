@@ -222,6 +222,133 @@ select {
 /* General
 -------------------------------------------------------------- */
 
+/* HEADER BASE */
+.new-header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  padding: 18px 0;
+  transition: background 0.35s ease, padding 0.3s ease;
+  background: transparent;
+}
+
+/* When scrolling */
+.header-scrolled {
+  background: linear-gradient(135deg, #0b5b33, #063e23);
+  padding: 10px 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+/* NAV INNER */
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 26px;
+}
+
+/* BIGGER LOGO */
+.new-logo img {
+  width: 160px; /* increase logo size */
+  transition: 0.3s;
+}
+
+.header-scrolled .new-logo img {
+  width: 130px;
+}
+
+/* WHATSAPP BUTTON */
+.header-whatsapp-btn {
+  background: black;
+  color: white;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+
+.header-whatsapp-btn:hover {
+  opacity: 0.85;
+}
+
+/* HAMBURGER */
+.hamburger {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: white;
+  border-radius: 4px;
+  transition: 0.4s;
+}
+
+.header-scrolled .hamburger span {
+  background: white;
+}
+
+/* SIDE MENU */
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -260px;
+  width: 260px;
+  height: 100vh;
+  background: linear-gradient(135deg, #0b5b33, #063e23);
+  padding: 40px 20px;
+  transition: 0.4s ease;
+  box-shadow: 4px 0 20px rgba(0,0,0,0.3);
+}
+
+/* OPEN STATE */
+.side-menu.menu-open {
+  left: 0;
+}
+
+/* MENU LINKS */
+.side-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.side-menu ul li {
+  margin-bottom: 22px;
+}
+
+.side-menu ul li a {
+  color: white;
+  font-size: 18px;
+  text-decoration: none;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.side-menu ul li a:hover {
+  opacity: 1;
+}
+
+/* SIDE WHATSAPP CTA */
+.side-whatsapp {
+  margin-top: 40px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: black;
+  color: white !important;
+  padding: 12px 22px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
 /* ================================
    GENERAL LAYOUT HELPERS
 ================================ */
@@ -238,18 +365,19 @@ select {
   display: flex;
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .desktop-only {
     display: none !important;
   }
-}
+} */
 
-/* Mobile Only Visibility */
+
 @media (min-width: 769px) {
   .mobile-nav .whatsapp-mobile-btn {
     display: none !important;
   }
-}
+} 
+
 
 
 /* Floating WhatsApp Button (Force Left Placement) */

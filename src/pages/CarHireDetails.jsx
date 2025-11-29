@@ -345,10 +345,10 @@ const CarHireDetails = () => {
               <Title>{car.title}</Title>
               <SubTitle>Premium Chauffeur Vehicle – Cape Town</SubTitle>
 
-              <BadgeRow>
+              {/* <BadgeRow>
                 <Badge>Most booked in peak season</Badge>
                 <Badge>Perfect for airport & hotel transfers</Badge>
-              </BadgeRow>
+              </BadgeRow> */}
 
               {averageRating > 0 && (
                 <RatingLine>
@@ -447,7 +447,7 @@ const CarHireDetails = () => {
           <br />
 
           {/* 📨 ENQUIRY FORM */}
-          <div className="tf-section tf-item-details">
+          {/* <div className="tf-section tf-item-details">
             <div className="container">
               <div className="row">
                 <div className="col-md-12">
@@ -552,7 +552,7 @@ const CarHireDetails = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </PageContainer>
 

@@ -1,136 +1,245 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-import logoheader from '../../assets/images/logo/1.svg'
-
-import logodark from '../../assets/images/logo/2.svg'
+// import logoheader from "../../assets/images/logo/1.svg";
+import logodark from "../../assets/images/logo/1.svg";
 
 const Header = () => {
-    const { pathname } = useLocation();
-    const headerRef = useRef(null);
+  const headerRef = useRef(null);
+  const menuRef = useRef(null);
+  const toggleRef = useRef(null);
 
-    useEffect(() => {
-        window.addEventListener('scroll', isSticky);
-        return () => {
-            window.removeEventListener('scroll', isSticky);
-        };
-    }, []);
+  const location = useLocation();
 
-    useEffect(() => {
-        initializeGoogleTranslate();
-    }, [pathname]);
+  // Helper: Highlight current page
+  const isActive = (path) => {
+    return location.pathname === path ? "active-menu-item" : "";
+  };
 
-    const isSticky = () => {
-        const header = document.querySelector('.js-header');
-        const scrollTop = window.scrollY;
-        
-        if (scrollTop >= 300) header.classList.add('is-fixed');
-        else header.classList.remove('is-fixed');
+  // Scroll behaviour
+  useEffect(() => {
+    const handleScroll = () => {
+      const header = headerRef.current;
+      if (!header) return;
 
-        if (scrollTop >= 400) header.classList.add('is-small');
-        else header.classList.remove('is-small');
+      if (window.scrollY > 120) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
     };
 
-    const menuLeft = useRef(null);
-    const btnToggle = useRef(null);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-    const menuToggle = () => {
-        menuLeft.current.classList.toggle('active');
-        btnToggle.current.classList.toggle('active');
-        const googleTranslateElement = document.getElementById("google_translate_element");
-        if (googleTranslateElement) {
-            googleTranslateElement.style.display = googleTranslateElement.style.display === "none" ? "block" : "none";
-        }
-    };
+  // Toggle menu
+  const toggleMenu = () => {
+    menuRef.current.classList.toggle("active");
+    toggleRef.current.classList.toggle("active");
+  };
 
-    const initializeGoogleTranslate = () => {
-        if (window.google && window.google.translate && window.google.translate.TranslateElement) {
-            new window.google.translate.TranslateElement({
-                pageLanguage: 'en',
-                includedLanguages: 'en,es,pt,de,ar',
-                layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
-                autoDisplay: false
-            }, 'google_translate_element');
-        }
-    };
+  return (
+    <>
+      <header id="main-header" className="header" ref={headerRef}>
+        <div className="container">
+          <div className="header-inner">
 
-    const [activeIndex, setActiveIndex] = useState(null);
-    const handleOnClick = index => setActiveIndex(index);
-
-    return (
-        <>
-           
-
-            <header id="header_main" className="header_1 js-header" ref={headerRef}>
-    <div className="themesflat-container">
-      <div className="row">
-        <div className="col-md-12">                              
-          <div id="site-header-inner"> 
-            <div className="wrap-box flex space-between center-v">
-
-              {/* Logo */}
-              <div id="site-logo" className="clearfix">
-                <div id="site-logo-inner">
-                  <Link to="/" className="main-logo">
-                    <img className="logo-dark" src={logodark} alt="logo" />
-                    <img className="logo-light" src={logoheader} alt="logo" />
-                  </Link>
-                </div>
-              </div>
-
-              {/* Desktop Menu */}
-              <nav id="main-nav" className="main-nav desktop-only">
-                <ul className="menu">
-                  <li><Link to="/">Home</Link></li>
-                  <li><Link to="/accomodation">Accommodation</Link></li>
-                   <li><Link to="/PrivateToursCapeTown">Tours and Activities</Link></li>
-                  <li><Link to="/chauffeur-hire-cape-town">Vehicle Hire</Link></li>
-                </ul>
-              </nav>
-
-              {/* ✅ Desktop WhatsApp Button */}
-              <a 
-                href="https://wa.link/r5z0sb"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="whatsapp-header-btn desktop-only"
-              >
-                <i className="fab fa-whatsapp"></i> Chat Now
-              </a>
-
-              {/* Mobile Menu Button */}
-              <div className="mobile-button" ref={btnToggle} onClick={menuToggle}><span></span></div>
-
-              {/* Mobile Menu */}
-              <nav id="main-nav" className="main-nav mobile-nav" ref={menuLeft}>
-                <ul className="menu">
-                  <li><Link to="/">Home</Link></li>
-                  <li><Link to="/accomodation">Accommodation</Link></li>
-                  <li><Link to="/chauffeur-hire-cape-town">Chauffeur Hire</Link></li>
-                </ul>
-
-                {/* ✅ Mobile WhatsApp Button */}
-                <a
-                  href="https://wa.link/r5z0sb"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="whatsapp-mobile-btn"
-                >
-                  <i className="fab fa-whatsapp"></i> Chat Now
-                </a>
-              </nav>
-
+            {/* LOGO */}
+            <div className="logo">
+              <Link to="/">
+                <img src={logodark} alt="logo" className="logo-img" />
+              </Link>
             </div>
+
+            {/* WHATSAPP CTA */}
+            {/* <a
+              href="https://wa.link/r5z0sb"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="whatsapp-btn"
+            >
+              <i className="fab fa-whatsapp"></i> Chat Now
+            </a> */}
+
+            {/* BURGER ICON */}
+            <div className="burger" ref={toggleRef} onClick={toggleMenu}>
+              <span></span>
+            </div>
+
           </div>
         </div>
-      </div>
-    </div>
-  </header>
-        </>
-    );
-    
-}
 
+        {/* NAV MENU */}
+        <nav className="side-menu" ref={menuRef}>
+          <ul>
+            <li><Link to="/" onClick={toggleMenu} className={isActive("/")}>Home</Link></li>
+            {/* <li><Link to="/accomodation" onClick={toggleMenu} className={isActive("/accomodation")}>Accommodation</Link></li> */}
+            {/* <li><Link to="/PrivateToursCapeTown" onClick={toggleMenu} className={isActive("/PrivateToursCapeTown")}>Full Day Tours</Link></li> */}
+            <li><Link to="/top-10-resturants-in-cape-town" onClick={toggleMenu} className={isActive("/top-10-resturants-in-cape-town")}>Top 10 Restaurants</Link></li>
+            <li><Link to="/top-10-winefarms-in-cape-town" onClick={toggleMenu} className={isActive("/top-10-winefarms-in-cape-town")}>Top 10 Winefarms</Link></li>
+            <li><Link to="/best-activities-to-do-in-cape-town" onClick={toggleMenu} className={isActive("/best-activities-to-do-in-cape-town")}>Best Activities</Link></li>
+          </ul>
 
+          <a
+            href="https://wa.link/r5z0sb"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="menu-whatsapp-btn"
+          >
+            <i className="fab fa-whatsapp"></i> Chat Now
+          </a>
+        </nav>
+      </header>
+
+      <style>{`
+        /* HEADER */
+        .header {
+          width: 100%;
+          position: fixed;
+          top: 0;
+          z-index: 999;
+          background: transparent;
+          padding: 26px 0;
+          transition: padding 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+          border-bottom: 1px solid rgba(255,255,255,0.28);
+        }
+
+        .header.scrolled {
+          background: linear-gradient(135deg, #0b5b33 0%, #063e23 100%);
+          padding: 0px 0;
+          border-bottom: none;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .container {
+          width: 92%;
+          max-width: 1300px;
+          margin: auto;
+        }
+
+        .header-inner {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          position: relative;
+        }
+
+        /* LOGO */
+        .logo-img {
+          height: 100px;
+          lenght: auto;
+
+          transition: height 0.3s ease;
+        }
+        .header.scrolled .logo-img {
+          height: 100px;
+        }
+
+        /* WHATSAPP BUTTON */
+        .whatsapp-btn {
+          background: #0b5b33;
+          color: white;
+          padding: 8px 16px;
+          border-radius: 8px;
+          font-size: 15px;
+          margin-right: 20px;
+          text-decoration: none;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+        }
+
+        /* BURGER ICON */
+        .burger {
+          width: 30px;
+          height: 22px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          cursor: pointer;
+        }
+
+        .burger span,
+        .burger span::before,
+        .burger span::after {
+          content: "";
+          position: absolute;
+          height: 3px;
+          width: 100%;
+          background: white;
+          transition: 0.3s ease;
+        }
+
+        .burger span::before { top: -7px; }
+        .burger span::after { top: 7px; }
+
+        .burger.active span {
+          background: transparent;
+        }
+        .burger.active span::before {
+          transform: rotate(45deg); top: 0;
+        }
+        .burger.active span::after {
+          transform: rotate(-45deg); top: 0;
+        }
+
+        /* SIDE MENU */
+        .side-menu {
+          position: fixed;
+          top: 0;
+          left: -280px;
+          width: 260px;
+          height: 100%;
+          background: #0b5b33;
+          padding: 40px 22px;
+          transition: left 0.35s ease;
+          box-shadow: 5px 0 16px rgba(0,0,0,0.25);
+          z-index: 998;
+        }
+
+        .side-menu.active { left: 0; }
+
+        .side-menu ul {
+          list-style: none;
+          padding: 0;
+        }
+
+        .side-menu ul li {
+          margin: 18px 0;
+        }
+
+        .side-menu ul li a {
+          color: white;
+          font-size: 18px;
+          text-decoration: none;
+          font-weight: 500;
+          padding: 8px 12px;
+          display: block;
+          border-radius: 8px;
+          transition: background 0.25s ease;
+        }
+
+        /* ⭐ Active page highlight */
+        .active-menu-item {
+          background: rgba(0,0,0,0.35);
+          font-weight: 600;
+        }
+
+        .menu-whatsapp-btn {
+          margin-top: 30px;
+          display: block;
+          background: #111;
+          padding: 12px 18px;
+          color: white;
+          border-radius: 10px;
+          text-align: center;
+          text-decoration: none;
+        }
+      `}</style>
+    </>
+  );
+};
 
 export default Header;

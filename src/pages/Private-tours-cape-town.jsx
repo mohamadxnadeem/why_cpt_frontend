@@ -168,7 +168,7 @@ const PrivateToursCapeTown = () => {
           </Suspense>
 
           {/* CONTACT FORM */}
-          <div className="tf-section tf-item-details">
+          {/* <div className="tf-section tf-item-details">
             <div className="container">
               <div className="content-center">
                 <div className="sc-item-details">
@@ -225,7 +225,7 @@ const PrivateToursCapeTown = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
         </div>
       </div>

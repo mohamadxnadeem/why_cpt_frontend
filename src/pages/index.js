@@ -1,5 +1,5 @@
 
-import Home03 from "./Home03"; 
+// import Home03 from "./Home03"; 
 import ItemDetails01 from "./ItemDetails01";
 import TravelPackage from "./TravelPackage";
 
@@ -30,6 +30,12 @@ import EventVenues from './EventVenues';
 import GardenRoute from './GardenRoute';
 import VehicleHire from './VehicleHire';
 
+import TopRestaurantsCapeTown from './TopRestaurantsCapeTown';
+import TopWineFarmsCapeTown from './BestWineFarms';
+import TopActivitiesCapeTown from './TopActivitiesCapeTown';
+
+
+
 
 
 
@@ -38,7 +44,7 @@ import VehicleHire from './VehicleHire';
 
 const routes = [
   
-  { path: '/', component: <Home03 />},
+  { path: '/', component: <AirportTransfers />},
   // Dynamic Pages
   
   { path: '/experience/:id', component: <ItemDetails01 />},
@@ -74,6 +80,13 @@ const routes = [
   { path: '/accomodation', component: <LuxuryVillas />},
   
   { path: '/student-accomodation', component: <StudentAccomodation />},
+
+  { path: '/top-10-resturants-in-cape-town', component: <TopRestaurantsCapeTown />},
+  { path: '/top-10-winefarms-in-Cape-Town', component: <TopWineFarmsCapeTown />},
+  { path: '/best-activities-to-do-in-cape-town', component: <TopActivitiesCapeTown />},
+
+
+
   { path: '/event-venues', component: <EventVenues />},
   { path: '/garden-route', component: <GardenRoute />},
   { path: '/vehicle-hire', component: <VehicleHire />},
