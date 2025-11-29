@@ -1,4 +1,4 @@
-import React, { useState, Fragment, Suspense } from "react";
+import React, { useState, Suspense } from "react";
 import { Helmet } from "react-helmet";
 import styled, { createGlobalStyle } from "styled-components";
 import emailjs from "emailjs-com";
