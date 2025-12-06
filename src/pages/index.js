@@ -82,7 +82,7 @@ const routes = [
   { path: '/student-accomodation', component: <StudentAccomodation />},
 
   { path: '/top-10-resturants-in-cape-town', component: <TopRestaurantsCapeTown />},
-  { path: '/top-10-winefarms-in-Cape-Town', component: <TopWineFarmsCapeTown />},
+  { path: '/top-5-winefarms-in-Cape-Town', component: <TopWineFarmsCapeTown />},
   { path: '/best-activities-to-do-in-cape-town', component: <TopActivitiesCapeTown />},
 
 

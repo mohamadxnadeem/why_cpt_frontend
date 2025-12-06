@@ -77,7 +77,7 @@ const Header = () => {
             {/* <li><Link to="/accomodation" onClick={toggleMenu} className={isActive("/accomodation")}>Accommodation</Link></li> */}
             {/* <li><Link to="/PrivateToursCapeTown" onClick={toggleMenu} className={isActive("/PrivateToursCapeTown")}>Full Day Tours</Link></li> */}
             <li><Link to="/top-10-resturants-in-cape-town" onClick={toggleMenu} className={isActive("/top-10-resturants-in-cape-town")}>Top 10 Restaurants</Link></li>
-            <li><Link to="/top-10-winefarms-in-cape-town" onClick={toggleMenu} className={isActive("/top-10-winefarms-in-cape-town")}>Top 3 Winefarms</Link></li>
+            <li><Link to="/top-5-winefarms-in-cape-town" onClick={toggleMenu} className={isActive("/top-10-winefarms-in-cape-town")}>Top 5 Winefarms</Link></li>
             <li><Link to="/best-activities-to-do-in-cape-town" onClick={toggleMenu} className={isActive("/best-activities-to-do-in-cape-town")}>Best Activities</Link></li>
           </ul>
 
