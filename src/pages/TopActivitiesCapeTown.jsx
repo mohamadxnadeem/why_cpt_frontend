@@ -53,60 +53,176 @@ const EmeraldBlock = styled.div`
   box-shadow: 0 14px 34px rgba(0,0,0,0.18);
 `;
 
-const EmeraldTitle = styled.h2`font-size: 32px; color: #fff; font-weight: 700;`;
-const EmeraldSub = styled.p`font-size: 18px; color: #fff; opacity: .95;`;
+const EmeraldTitle = styled.h2`
+  font-size: 32px;
+  color: #fff;
+  font-weight: 700;
+`;
+
+const EmeraldSub = styled.p`
+  font-size: 18px;
+  color: #fff;
+  opacity: .95;
+`;
 
 /* CTA BUTTONS */
 const WhatsAppButton = styled.a`
-  display: inline-flex; align-items: center; gap: 10px;
-  background: #111; padding: 13px 32px;
-  color: #fff !important; border-radius: 14px;
-  text-decoration: none; font-size: 17px;
-  transition: .3s; border: 1px solid #111;
-  &:hover { background: #222; }
-`;
+  display: inline-flex; 
+  align-items: center; 
+  gap: 10px;
+  background: #111; 
+  padding: 13px 32px;
+  color: #fff !important; 
+  border-radius: 14px;
+  text-decoration: none; 
+  font-size: 17px;
+  transition: .3s; 
+  border: 1px solid #111;
+  margin-top: 14px;
 
-const SecondaryButton = styled(WhatsAppButton)`
-  background: transparent; border-color: #fff;
+  &:hover { 
+    background: #222; 
+    transform: translateY(-1px);
+  }
 `;
 
 /* LAYOUT */
-const SectionTitle = styled.h2`font-size: 30px; margin-top: 40px;`;
-const SectionIntro = styled.p`max-width: 760px; font-size: 17px; margin-bottom: 25px;`;
+const SectionTitle = styled.h2`
+  font-size: 30px; 
+  margin-top: 40px;
+`;
+
+const SectionIntro = styled.p`
+  max-width: 760px; 
+  font-size: 17px; 
+  margin-bottom: 25px;
+`;
 
 const ActivitiesWrapper = styled.div`
-  display: flex; flex-direction: column; gap: 26px;
+  display: flex; 
+  flex-direction: column; 
+  gap: 26px;
   margin: 40px 0 60px;
 `;
 
 const ActivityCard = styled.div`
   display: grid;
   grid-template-columns: 320px 1fr;
-  gap: 22px; padding: 20px;
+  gap: 22px; 
+  padding: 20px;
   border-radius: 16px;
   background: #fafafa;
   box-shadow: 0 10px 24px rgba(0,0,0,0.06);
-  @media(max-width:768px){ grid-template-columns:1fr; }
+
+  @media(max-width:768px){
+    grid-template-columns:1fr;
+  }
 `;
 
 const ActivityImage = styled.div`
-  border-radius: 14px; overflow: hidden; min-height: 220px; position:relative;
-  img{ width:100%; height:100%; object-fit:cover; transition:opacity .6s; }
+  border-radius: 14px; 
+  overflow: hidden; 
+  min-height: 220px; 
+  position:relative;
+
+  img { 
+    width:100%; 
+    height:100%; 
+    object-fit:cover; 
+    transition:opacity .6s; 
+  }
 `;
 
-const ActivityContent = styled.div`display:flex;flex-direction:column;justify-content:space-between;`;
-const ActivityName = styled.h3`font-size:22px;margin-bottom:6px;`;
+const ActivityContent = styled.div`
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+`;
 
-const ActivityMeta = styled.p`font-size:15px;color:#555;margin-bottom:4px;`;
-const ActivityHighlight = styled.p`font-size:16px;margin-bottom:10px;`;
+const ActivityName = styled.h3`
+  font-size:22px;
+  margin-bottom:6px;
+`;
 
-const TagRow = styled.div`margin-bottom:12px;`;
+const ActivityMeta = styled.p`
+  font-size:15px;
+  color:#555;
+  margin-bottom:4px;
+`;
+
+const ActivityHighlight = styled.p`
+  font-size:16px;
+  margin-bottom:10px;
+`;
+
+const TagRow = styled.div`
+  margin-bottom:12px;
+`;
+
 const Tag = styled.span`
-  display:inline-block;background:#f1f1f1;padding:5px 10px;
-  border-radius:999px;margin-right:6px;font-size:13px;
+  display:inline-block;
+  background:#f1f1f1;
+  padding:5px 10px;
+  border-radius:999px;
+  margin-right:6px;
+  font-size:13px;
 `;
 
-const CardActions = styled.div`display:flex;gap:10px;flex-wrap:wrap; margin-top:10px;`;
+const CardActions = styled.div`
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap; 
+  margin-top:10px;
+`;
+
+/* PROMO BANNER INSIDE CARD */
+const PromoBanner = styled.div`
+  margin-top: 12px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: linear-gradient(135deg,#0b5b33,#063e23);
+  color: #fff;
+  text-align: left;
+`;
+
+const PromoTitle = styled.div`
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 4px;
+`;
+
+const PromoPriceLine = styled.div`
+  font-size: 15px;
+  margin-bottom: 4px;
+
+  .old {
+    text-decoration: line-through;
+    opacity: 0.7;
+    margin-right: 8px;
+  }
+
+  .new {
+    font-weight: 700;
+  }
+`;
+
+const PromoNote = styled.div`
+  font-size: 13px;
+  opacity: 0.95;
+`;
+
+/* WhatsApp helper */
+const WHATSAPP_NUMBER = "27636746131";
+
+const generateActivityWhatsAppLink = (activityName) => {
+  const message = `Hello, I would like to book the ${activityName} for ___ people.\nPreferred date: _______`;
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+};
+
+const generateGeneralWhatsAppLink = (contextLabel) => {
+  const message = `Hello, I would like help planning ${contextLabel} in Cape Town.`;
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+};
 
 /* CHILD COMPONENT – FIXES HOOK ERROR */
 const ActivityCardItem = ({ activity, index }) => {
@@ -116,8 +232,12 @@ const ActivityCardItem = ({ activity, index }) => {
     <ActivityCard>
       <ActivityImage>
         {!loaded && <ShimmerBox />}
-        <img src={activity.image} alt={activity.name} style={{opacity: loaded ? 1 : 0}}
-             onLoad={() => setLoaded(true)} />
+        <img 
+          src={activity.image} 
+          alt={activity.name} 
+          style={{opacity: loaded ? 1 : 0}}
+          onLoad={() => setLoaded(true)} 
+        />
       </ActivityImage>
 
       <ActivityContent>
@@ -133,15 +253,29 @@ const ActivityCardItem = ({ activity, index }) => {
           <TagRow>
             {activity.tags.map(t => <Tag key={t}>{t}</Tag>)}
           </TagRow>
+
+          {activity.promo && (
+            <PromoBanner>
+              <PromoTitle>{activity.promo.title}</PromoTitle>
+              <PromoPriceLine>
+                {activity.promo.oldPrice && (
+                  <span className="old">{activity.promo.oldPrice}</span>
+                )}
+                <span className="new">{activity.promo.newPrice}</span>
+              </PromoPriceLine>
+              {activity.promo.note && <PromoNote>{activity.promo.note}</PromoNote>}
+            </PromoBanner>
+          )}
         </div>
 
         <CardActions>
-          <WhatsAppButton href="https://wa.link/r5z0sb" target="_blank">
+          <WhatsAppButton
+            href={generateActivityWhatsAppLink(activity.name)}
+            target="_blank"
+            rel="noreferrer"
+          >
             <FaWhatsapp size={18}/> Book Activity & Driver
           </WhatsAppButton>
-          <SecondaryButton href="https://wa.link/r5z0sb" target="_blank">
-            Only Book Activity
-          </SecondaryButton>
         </CardActions>
       </ActivityContent>
     </ActivityCard>
@@ -161,32 +295,99 @@ And with a private chauffeur, every activity becomes effortless, safe and stress
 `;
 
   const activities = [
-    { name:"Table Mountain Cableway", area:"Table Mountain", type:"Scenic • Landmark", duration:"1–2 hours",
-      highlight:"Ride the rotating cable car for 360° views.", tags:["Bucket List","Scenic"], image:cablecar },
-
-    { name:"Cape Peninsula & Cape Point Tour", area:"Cape Peninsula", type:"Private Tour", duration:"8–10 hours",
-      highlight:"Chapman's Peak, Cape Point & Boulders penguins.", tags:["Scenic Drive","Wildlife"], image:capepoint },
-
-    { name:"Winelands Experience", area:"Stellenbosch & Franschhoek", type:"Wine Tasting", duration:"4–8 hours",
-      highlight:"Premium tasting in world-class vineyards.", tags:["Wine","Luxury"], image:winelands },
-
-    { name:"Helicopter Flight Over Cape Town", area:"V&A Waterfront", type:"Scenic Flight", duration:"12–45 minutes",
-      highlight:"See Cape Town from above.", tags:["Luxury","Aerial Views"], image:helicopter },
-
-    { name:"Bo-Kaap Walking Tour", area:"Bo-Kaap", type:"Culture", duration:"1 hour",
-      highlight:"Colorful houses & Cape Malay heritage.", tags:["Culture","Photography"], image:bokaap },
-
-    { name:"Boulders Beach Penguins", area:"Simon's Town", type:"Wildlife", duration:"1 hour",
-      highlight:"Visit the famous African penguins.", tags:["Family Friendly","Beach"], image:boulders },
-
-    { name:"Big 5 Safari Day Trip", area:"Game Reserve", type:"Safari", duration:"Full Day",
-      highlight:"Elephants, lions, rhinos and more.", tags:["Safari","Wildlife"], image:aquila },
-
-    { name:"Signal Hill Sunset", area:"City Bowl", type:"Viewpoint", duration:"2–3 hours",
-      highlight:"Romantic sunset overlooking the Atlantic.", tags:["Sunset","Romantic"], image:hike },
-
-    { name:"Chapman's Peak Sunset Drive", area:"Atlantic Coast", type:"Scenic Drive", duration:"2–4 hours",
-      highlight:"One of the most beautiful roads in the world.", tags:["Scenic","Sunset"], image:chapmans },
+    { 
+      name:"Table Mountain Cableway", 
+      area:"Table Mountain", 
+      type:"Scenic • Landmark", 
+      duration:"1–2 hours",
+      highlight:"Ride the rotating cable car for 360° views.", 
+      tags:["Bucket List","Scenic"], 
+      image:cablecar 
+    },
+    { 
+      name:"Cape Peninsula & Cape Point Tour", 
+      area:"Cape Peninsula", 
+      type:"Private Tour", 
+      duration:"8–10 hours",
+      highlight:"Chapman's Peak, Cape Point & Boulders penguins.", 
+      tags:["Scenic Drive","Wildlife"], 
+      image:capepoint 
+    },
+    { 
+      name:"Winelands Experience", 
+      area:"Stellenbosch & Franschhoek", 
+      type:"Wine Tasting", 
+      duration:"4–8 hours",
+      highlight:"Premium tasting in world-class vineyards with a private driver.", 
+      tags:["Wine","Luxury","Scenic Views"], 
+      image:winelands,
+      promo: {
+        title: "Winelands Chauffeur Special",
+        oldPrice: "R5500",
+        newPrice: "R3500 per day",
+        note: "Private driver for up to 10 hours including 200km • Stellenbosch & Franschhoek."
+      }
+    },
+    { 
+      name:"Helicopter Flight Over Cape Town", 
+      area:"V&A Waterfront", 
+      type:"Scenic Flight", 
+      duration:"12–45 minutes",
+      highlight:"See Cape Town’s mountains, beaches and city bowl from above.", 
+      tags:["Luxury","Aerial Views"], 
+      image:helicopter 
+    },
+    { 
+      name:"Bo-Kaap Photoshoot", 
+      area:"Bo-Kaap", 
+      type:"Culture", 
+      duration:"1 hour",
+      highlight:"Colorful houses & Cape Malay heritage with local storytelling.", 
+      tags:["Culture","Photography"], 
+      image:bokaap 
+    },
+    { 
+      name:"Boulders Beach Penguins", 
+      area:"Simon's Town", 
+      type:"Wildlife", 
+      duration:"1 hour",
+      highlight:"Visit the famous African penguins on a sheltered, picturesque beach.", 
+      tags:["Family Friendly","Beach","Wildlife"], 
+      image:boulders 
+    },
+    { 
+      name:"Big 5 Sunset Safari", 
+      area:"Game Reserve", 
+      type:"Safari", 
+      duration:"Full Afternoon & Evening",
+      highlight:"Guided Big 5 sunset game drive with private return transport from Cape Town.", 
+      tags:["Safari","Wildlife","Sunset"], 
+      image:aquila,
+      promo: {
+        title: "Big 5 Sunset Safari Special",
+        oldPrice: null,
+        newPrice: "R3185 per person",
+        note: "Includes sunset safari (R1185) + private return transport (R2000) • Minimum 2 guests."
+      }
+    },
+    { 
+      name:"Signal Hill Sunset", 
+      area:"City Bowl", 
+      type:"Viewpoint", 
+      duration:"2–3 hours",
+      highlight:"Romantic sunset overlooking the Atlantic and city lights.", 
+      tags:["Sunset","Romantic"], 
+      image:hike 
+    },
+    { 
+      name:"Chapman's Peak Sunset Drive", 
+      area:"Atlantic Coast", 
+      type:"Scenic Drive", 
+      duration:"2–4 hours",
+      highlight:"One of the most beautiful coastal roads in the world, especially at sunset.", 
+      tags:["Scenic","Sunset","Photography"], 
+      image:chapmans 
+    },
   ];
 
   /* SEO-OPTIMIZED FAQ */
@@ -201,7 +402,7 @@ And with a private chauffeur, every activity becomes effortless, safe and stress
     },
     {
       title: "How many days do I need in Cape Town?",
-      text: "A perfect trip is 4–7 days. This gives enough time for the peninsula, Table Mountain, Winelands, safari day trip and city attractions — without rushing."
+      text: "A perfect trip is 4–7 days. This gives enough time for the peninsula, Table Mountain, Winelands, a safari-style day trip and city attractions — without rushing."
     },
     {
       title: "Do I need to book in advance?",
@@ -226,6 +427,10 @@ And with a private chauffeur, every activity becomes effortless, safe and stress
 
       <Helmet>
         <title>Best Activities in Cape Town | Private Tours & Chauffeur</title>
+        <meta
+          name="description"
+          content="Discover the best activities in Cape Town — Table Mountain, Cape Point, Winelands, Big 5 sunset safari and more — with private chauffeur service for a relaxed, luxury experience."
+        />
         <script type="application/ld+json">{JSON.stringify(schema)}</script>
       </Helmet>
 
@@ -245,13 +450,17 @@ And with a private chauffeur, every activity becomes effortless, safe and stress
         <EmeraldBlock>
           <EmeraldTitle>Best Activities in Cape Town</EmeraldTitle>
           <EmeraldSub>{pasIntro}</EmeraldSub>
-          <WhatsAppButton href="https://wa.link/r5z0sb" target="_blank">
+          <WhatsAppButton 
+            href={generateGeneralWhatsAppLink("the best activities and tours")}
+            target="_blank"
+            rel="noreferrer"
+          >
             <FaWhatsapp size={20}/> Plan My Itinerary
           </WhatsAppButton>
         </EmeraldBlock>
 
         <SectionTitle>Top Things To Do</SectionTitle>
-        <SectionIntro>Luxury-curated activities with chauffeur service.</SectionIntro>
+        <SectionIntro>Luxury-curated activities with private chauffeur service for stress-free days.</SectionIntro>
 
         <ActivitiesWrapper>
           {activities.map((a, i) => (
@@ -271,8 +480,12 @@ And with a private chauffeur, every activity becomes effortless, safe and stress
 
         <EmeraldBlock>
           <EmeraldTitle>Ready to Plan?</EmeraldTitle>
-          <EmeraldSub>Tell us your dates & interests.</EmeraldSub>
-          <WhatsAppButton href="https://wa.link/r5z0sb" target="_blank">
+          <EmeraldSub>Tell us your dates & interests — we’ll build a Cape Town itinerary around you.</EmeraldSub>
+          <WhatsAppButton 
+            href={generateGeneralWhatsAppLink("my Cape Town itinerary")}
+            target="_blank"
+            rel="noreferrer"
+          >
             <FaWhatsapp size={20}/> Chat to Your Concierge
           </WhatsAppButton>
         </EmeraldBlock>

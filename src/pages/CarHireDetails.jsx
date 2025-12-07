@@ -10,6 +10,7 @@ import emailjs from "emailjs-com";
 import { Helmet } from "react-helmet";
 import TestimonialCarousel from "../components/TestimonialCarousel";
 import { FaWhatsapp } from "react-icons/fa";
+import { Accordion } from "react-bootstrap-accordion";
 
 // ✨ Shimmer loader for hero gallery
 const LoaderWrapper = styled.div`
@@ -32,8 +33,12 @@ const Shimmer = styled.div`
   animation: shimmer 1.5s infinite;
 
   @keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
   }
 `;
 
@@ -206,7 +211,7 @@ const WhatsAppButton = styled.a`
   }
 `;
 
-// 📨 Form styling
+// 📨 Form styling (kept if you want to re-enable later)
 const FormTitle = styled.h2`
   font-family: "Playfair Display", serif;
   font-size: 24px;
@@ -229,6 +234,25 @@ const ErrorText = styled.p`
   color: #c0392b;
   font-size: 14px;
   margin-top: 4px;
+`;
+
+// 🔎 FAQ styling
+const FAQSection = styled.section`
+  margin: 40px 0 20px;
+`;
+
+const FAQTitle = styled.h2`
+  font-family: "Playfair Display", serif;
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: #111;
+`;
+
+const FAQIntro = styled.p`
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 16px;
 `;
 
 const CarHireDetails = () => {
@@ -277,6 +301,8 @@ const CarHireDetails = () => {
       src: cover?.cover_photos || "",
     })) || [];
 
+  const primaryImage = heroSliderData[0]?.src;
+
   // ✅ Form handlers
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -301,22 +327,110 @@ const CarHireDetails = () => {
       .catch((err) => console.error("Email error:", err));
   };
 
+  // ✅ Dynamic SEO text bits
+  const priceNumber = car?.price ? Math.round(car.price) : null;
+  const vehicleName = car?.title || "Chauffeur Vehicle";
+
+  const pageTitle = car
+    ? `${vehicleName} for Hire from R${priceNumber || "____"} per Day in Cape Town`
+    : "Chauffeur Vehicle Hire in Cape Town";
+
+  const metaDescription = car
+    ? `Hire a chauffeur-driven ${vehicleName} in Cape Town from ${
+        priceNumber ? `R${priceNumber} per day` : "a competitive daily rate"
+      }. Professional driver, fuel included and up to 10 hours / 200km per day. Perfect for airport transfers, business and private tours.`
+    : "Book luxury chauffeur-driven vehicles in Cape Town with professional drivers, fuel included and customised daily itineraries.";
+
+  // ✅ Dynamic WhatsApp CTA link (with vehicle name & dates prompt)
+  const whatsappNumber = "27636746131"; // no '+' for wa.me
+  const waText = car
+    ? `Hello, I would like to book the ${vehicleName} for the following dates: `
+    : "Hello, I would like to book a chauffeur vehicle for the following dates: ";
+  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+    waText
+  )}`;
+
+  // ✅ FAQ content (SEO–oriented, vehicle-aware)
+  const faqs = [
+    {
+      title: `What is included when I hire the ${vehicleName} with a chauffeur?`,
+      text: `
+Your booking includes a professional private driver, the ${vehicleName} reserved exclusively for your use, fuel, and up to 10 hours / 200km per day (unless otherwise stated in your quote).
+
+You can use the vehicle for airport transfers, hotel-to-hotel transfers, business meetings, sightseeing and restaurant visits within your booked time. Standard concierge support — such as restaurant recommendations and basic itinerary suggestions — is also included.`,
+    },
+    {
+      title: "Can I use this vehicle for airport, winelands and long-distance trips?",
+      text: `
+Yes. Most guests use this chauffeur service for a mix of airport transfers, city transfers and full-day hire (for the Winelands, Cape Peninsula or long-distance trips like safari lodges).
+
+Some trips outside Cape Town or beyond the daily km allowance may carry a small additional charge per km or per hour. When you send us your dates and basic plan, we’ll confirm a clear, all-inclusive quote before you book.`,
+    },
+    {
+      title: "How much does it cost per day to hire this chauffeur vehicle?",
+      text: `
+Daily rates vary slightly by season, exact route and how many days you book — but for this vehicle you can generally expect a daily chauffeur rate starting from ${
+        priceNumber ? `around R${priceNumber}` : "a competitive rate"
+      } per day for up to 10 hours / 200km.
+
+If you share a full-day hire between friends or family, it often works out more cost-effective (and far more convenient) than renting a car, paying for fuel, parking, tolls and navigation stress yourself.`,
+    },
+    {
+      title: "How do I confirm availability and make a booking?",
+      text: `
+The easiest way is to contact us on WhatsApp with your preferred dates, pick-up area, drop-off area and how many guests will be travelling.
+
+From there, your chauffeur concierge will confirm:
+• Whether this specific vehicle is available on your dates  
+• The exact daily rate based on your route and season  
+• Any add-ons you may need (child seats, trailer, guide, etc.)
+
+Once you’re happy, we’ll lock in your booking and send confirmation details.`,
+    },
+    {
+      title: "Is this chauffeur service suitable for business travellers and VIP guests?",
+      text: `
+Absolutely. Many of our guests are business travellers, executives and VIP clients who value punctuality, discretion and a clean, well-presented vehicle.
+
+Your driver will assist with luggage, route optimisation and smooth timing between meetings or venues. If you’re travelling with a larger team or require multiple vehicles, we can also coordinate a small fleet and help with simple scheduling.`,
+    },
+  ];
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.title,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: f.text,
+      },
+    })),
+  };
+
   return (
     <div className="item-details">
       <Helmet>
-        <title>
-          {car?.title
-            ? `${car.title} Chauffeur Hire | Cape Town`
-            : "Chauffeur Vehicle Hire | Cape Town"}
-        </title>
-        <meta
-          name="description"
-          content={
-            car?.title
-              ? `Luxury chauffeur-driven ${car.title} in Cape Town. Professional driver, fuel included and tailored service.`
-              : "Luxury chauffeur-driven vehicles for hire in Cape Town with professional drivers."
-          }
-        />
+        <title>{pageTitle}</title>
+        <meta name="description" content={metaDescription} />
+
+        {/* Basic Open Graph for social / SEO */}
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={metaDescription} />
+        {primaryImage && <meta property="og:image" content={primaryImage} />}
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={metaDescription} />
+        {primaryImage && <meta name="twitter:image" content={primaryImage} />}
+
+        {/* FAQ JSON-LD for rich results */}
+        <script type="application/ld+json">
+          {JSON.stringify(faqSchema)}
+        </script>
       </Helmet>
 
       <Header />
@@ -342,13 +456,21 @@ const CarHireDetails = () => {
           {/* HEADER BLOCK */}
           {!loading && car && (
             <HeaderBlock>
-              <Title>{car.title}</Title>
-              <SubTitle>Premium Chauffeur Vehicle – Cape Town</SubTitle>
+              <Title>
+                {vehicleName} for Hire from{" "}
+                {priceNumber ? `R${priceNumber}` : "a competitive rate"} per Day
+                in Cape Town
+              </Title>
+              <SubTitle>
+                Chauffeur-driven {vehicleName} with professional driver in Cape
+                Town and surrounds.
+              </SubTitle>
 
-              {/* <BadgeRow>
-                <Badge>Most booked in peak season</Badge>
-                <Badge>Perfect for airport & hotel transfers</Badge>
-              </BadgeRow> */}
+              <BadgeRow>
+                <Badge>Private Chauffeur</Badge>
+                <Badge>Fuel Included</Badge>
+                <Badge>10 Hours / 200km per day</Badge>
+              </BadgeRow>
 
               {averageRating > 0 && (
                 <RatingLine>
@@ -382,9 +504,9 @@ const CarHireDetails = () => {
               <Card>
                 <CardTitle>Rates & Details</CardTitle>
 
-                {car?.price && (
+                {priceNumber && (
                   <>
-                    <PriceValue>R{Math.round(car.price)} / day</PriceValue>
+                    <PriceValue>R{priceNumber} / day</PriceValue>
                     <PriceLabel>
                       Includes up to <strong>10 hours</strong> and{" "}
                       <strong>200km</strong> per day with a private chauffeur,
@@ -434,20 +556,47 @@ const CarHireDetails = () => {
               Weekends and peak season book out quickly. Send us your dates and
               we’ll confirm availability and final pricing for this vehicle.
             </EmeraldSub>
-            <WhatsAppButton href="https://wa.link/r5z0sb" target="_blank" rel="noreferrer">
+            <WhatsAppButton
+              href={whatsappLink}
+              target="_blank"
+              rel="noreferrer"
+            >
               <FaWhatsapp size={20} />
-              Chat with a Chauffeur Concierge
+              Chat with a Chauffeur Concierge on WhatsApp
             </WhatsAppButton>
           </EmeraldBlock>
 
           {/* ⭐ Testimonials */}
           <TestimonialCarousel />
 
-          <br />
-          <br />
+          {/* 🔎 FAQ SECTION FOR SEO */}
+          <FAQSection>
+            <FAQTitle>Frequently Asked Questions</FAQTitle>
+            <FAQIntro>
+              Here are some of the most common questions guests ask when
+              booking this chauffeur vehicle in Cape Town.
+            </FAQIntro>
+            <div className="flat-accordion2">
+              {faqs.map((item, index) => (
+                <Accordion key={index} title={item.title}>
+                  <p
+                    style={{
+                      fontSize: "15px",
+                      lineHeight: 1.8,
+                      whiteSpace: "pre-line",
+                      marginBottom: 0,
+                    }}
+                  >
+                    {item.text}
+                  </p>
+                </Accordion>
+              ))}
+            </div>
+          </FAQSection>
 
-          {/* 📨 ENQUIRY FORM */}
-          {/* <div className="tf-section tf-item-details">
+          {/* 📨 ENQUIRY FORM (optional — still here if you want to re-enable)
+          
+          <div className="tf-section tf-item-details">
             <div className="container">
               <div className="row">
                 <div className="col-md-12">
@@ -552,7 +701,8 @@ const CarHireDetails = () => {
                 </div>
               </div>
             </div>
-          </div> */}
+          </div>
+          */}
         </div>
       </PageContainer>
 
