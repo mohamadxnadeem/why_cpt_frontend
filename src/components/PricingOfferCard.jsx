@@ -1,244 +1,108 @@
 import React, { useState, useEffect } from "react";
-import styled, { keyframes, css } from "styled-components";
+import styled from "styled-components";
 
-// 💚 Animations
-const breathe = keyframes`
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.03); }
-`;
-
-// 🧱 Styled Components
-const OfferWrapper = styled.div`
-  background: transparent;
-  border-radius: 20px;
-  padding: 50px 20px;
+/* Styling */
+const Wrapper = styled.div`
+  text-align: center;
   margin: 40px auto;
-  text-align: center;
   max-width: 700px;
-  color: white;
-  transition: all 0.5s ease;
 `;
 
-const Heading = styled.h1`
-  background: black;
-  color: white;
-  display: inline-block;
-  padding: 12px 20px;
-  border-radius: 10px;
+const PriceCardWrapper = styled.div`
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 28px 24px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+`;
+
+const PriceTitle = styled.h2`
   font-size: 24px;
-  margin-bottom: 25px;
-  opacity: ${(props) => (props.fadeOut ? 0 : 1)};
-  transition: opacity 1s ease;
+  margin-bottom: 12px;
 `;
 
-const SubHeading = styled.h3`
-  background: black;
-  color: white;
-  display: block;
-  width: fit-content;
-  margin: 0 auto 12px auto;
-  padding: 10px 22px;
-  border-radius: 8px;
-  font-size: 18px;
-  font-weight: 600;
+const PriceValue = styled.div`
+  font-size: 44px;
+  font-weight: 800;
+  color: #0b5b33;
+  margin-bottom: 4px;
 `;
 
-const PriceCard = styled.div`
-  background-color: ${(props) =>
-    props.expired ? "#555" : props.type === "red" ? "#d61f30" : "#1e7b4d"};
-  color: white;
-  padding: 45px 50px;
-  border-radius: 20px;
-  text-align: center;
-  display: block;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
-  margin: 20px auto;
-  width: 340px;
-  animation: ${(props) =>
-    props.type === "green" && !props.expired
-      ? css`${breathe} 4s infinite`
-      : "none"};
-
-  @media (max-width: 480px) {
-    width: 90%;
-    padding: 35px 20px;
-  }
+const Label = styled.p`
+  font-size: 14px;
+  color: #777;
 `;
 
-const Price = styled.div`
-  font-size: 40px;
-  font-weight: 700;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const DigitBox = styled.div`
-  background-color: rgba(255, 255, 255, 0.15);
-  border-radius: 8px;
-  padding: 10px 12px;
-  min-width: 35px;
-  text-align: center;
-  font-size: 40px;
-  font-weight: bold;
-  margin: 2px;
-`;
-
-const TimerWrapper = styled.div`
-  margin-top: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  color: black;
-`;
-
-const TimerCard = styled.div`
-  background: black;
-  color: white;
-  border-radius: 8px;
-  padding: 12px 18px;
-  min-width: 55px;
-  text-align: center;
-  font-size: 32px;
-  font-weight: bold;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
-`;
-
-const Availability = styled.p`
-  color: #d4af37;
+const CurrencySelector = styled.select`
   margin-top: 15px;
+  padding: 10px 14px;
+  border-radius: 10px;
   font-size: 16px;
+  border: 1px solid #ddd;
 `;
 
-// 🧠 Component
-const PricingOfferCard = ({
-  price,
-  discountedPrice,
-  offerDuration,
-  experienceId,
-  isDealActive = true, // toggle prop
-}) => {
-  const [timeLeft, setTimeLeft] = useState(offerDuration);
-  const [expired, setExpired] = useState(false);
-  const [fadeOut, setFadeOut] = useState(false);
+/* ─────────────────────────────────────────────── */
 
-  // 🕒 Timer Logic (only runs when deal is active)
+const PricingOfferCard = ({ price }) => {
+  const [currency, setCurrency] = useState("ZAR");
+  const [convertedPrice, setConvertedPrice] = useState(price);
+
+  /*  
+    ► STATIC TEST RATES (Update this daily manually)
+    ► These rates are correct as of: "example day"
+    ► Purpose: Verify that conversion UI & logic works
+  */
+  const STATIC_RATES = {
+    ZAR: 1,
+    USD: 0.054, // 1 ZAR = 0.054 USD (example)
+    GBP: 0.043, // 1 ZAR = 0.043 GBP (example)
+    EUR: 0.050, // 1 ZAR = 0.050 EUR (example)
+  };
+
+  /* Currency Symbols */
+  const SYMBOLS = {
+    ZAR: "R",
+    USD: "$",
+    GBP: "£",
+    EUR: "€",
+  };
+
+  /* 👉 Convert price whenever currency changes */
   useEffect(() => {
-    if (!isDealActive) return; // Skip timer if no deal is active
+    const rate = STATIC_RATES[currency];
 
-    const savedEndTime = localStorage.getItem(`offerEndTime_${experienceId}`);
-    const now = Date.now();
-
-    let endTime;
-    if (savedEndTime && parseInt(savedEndTime, 10) > now) {
-      endTime = parseInt(savedEndTime, 10);
-    } else {
-      endTime = now + offerDuration * 1000;
-      localStorage.setItem(`offerEndTime_${experienceId}`, endTime);
+    if (!rate) {
+      setConvertedPrice(price);
+      return;
     }
 
-    const interval = setInterval(() => {
-      const remaining = Math.floor((endTime - Date.now()) / 1000);
-      if (remaining <= 0) {
-        clearInterval(interval);
-        setExpired(true);
-        setFadeOut(true);
-        setTimeLeft(0);
-      } else {
-        setTimeLeft(remaining);
-      }
-    }, 1000);
+    const newPrice = price * rate;
+    setConvertedPrice(newPrice);
+  }, [currency, price]);
 
-    return () => clearInterval(interval);
-  }, [experienceId, offerDuration, isDealActive]);
-
-  const minutes = Math.floor(timeLeft / 60)
-    .toString()
-    .padStart(2, "0");
-  const seconds = (timeLeft % 60).toString().padStart(2, "0");
-
-  // 💡 Regular Mode (no discount, no timer)
-  if (!isDealActive) {
-    return (
-      <OfferWrapper>
-        <Heading>Starting From</Heading>
-        <PriceCard type="green">
-          <Price>
-            <span style={{ fontSize: "30px", marginRight: "6px" }}>$</span>
-            {Math.floor(price || 0)
-              .toString()
-              .split("")
-              .map((digit, i) => (
-                <DigitBox key={i}>{digit}</DigitBox>
-              ))}
-            <span style={{ fontSize: "18px", marginLeft: "6px" }}>
-              per person
-            </span>
-          </Price>
-        </PriceCard>
-        <Heading>Price Negotiable on larger groups</Heading>
-      </OfferWrapper>
-    );
-  }
-
-  // 💥 Deal Mode (with countdown)
   return (
-    <OfferWrapper>
-      <Heading fadeOut={fadeOut}>
-        {expired
-          ? "😔 Sorry, you missed this offer."
-          : "You have 5 minutes to get the best price offer"}
-      </Heading>
+    <Wrapper>
+      <PriceCardWrapper>
+        <PriceTitle>Private Tour Price</PriceTitle>
 
-      {/* 🔴 Full Price */}
-      <SubHeading>Full Price</SubHeading>
-      <PriceCard type="red" expired={false}>
-        <Price>
-          <span style={{ fontSize: "30px", marginRight: "6px" }}>$</span>
-          {Math.floor(price || 0)
-            .toString()
-            .split("")
-            .map((digit, i) => (
-              <DigitBox key={i}>{digit}</DigitBox>
-            ))}
-          <span style={{ fontSize: "18px", marginLeft: "6px" }}>per person</span>
-        </Price>
-      </PriceCard>
+        <PriceValue>
+          {SYMBOLS[currency]}
+          {Math.round(convertedPrice).toLocaleString()}
+        </PriceValue>
 
-      {/* 🟢 Discounted Price */}
-      <SubHeading>Best Price</SubHeading>
-      <PriceCard type="green" expired={expired}>
-        <Price>
-          <span style={{ fontSize: "30px", marginRight: "6px" }}>$</span>
-          {Math.floor(discountedPrice || 0)
-            .toString()
-            .split("")
-            .map((digit, i) => (
-              <DigitBox key={i}>{digit}</DigitBox>
-            ))}
-          <span style={{ fontSize: "18px", marginLeft: "6px" }}>per person</span>
-        </Price>
-      </PriceCard>
+        <Label>Per Private Tour up to 8 pax (not per person)</Label>
 
-      {/* ⏰ Timer Section */}
-      <SubHeading>
-        {expired ? "Offer Expired" : "Time Left to Secure This Offer"}
-      </SubHeading>
-      <TimerWrapper>
-        <TimerCard>{minutes[0]}</TimerCard>
-        <TimerCard>{minutes[1]}</TimerCard>
-        <span style={{ fontSize: "32px", margin: "0 6px" }}>:</span>
-        <TimerCard>{seconds[0]}</TimerCard>
-        <TimerCard>{seconds[1]}</TimerCard>
-      </TimerWrapper>
-
-      {!expired && (
-        <Availability>
-          Limited Availability — Only a few spots left this week
-        </Availability>
-      )}
-    </OfferWrapper>
+        {/* Currency Dropdown */}
+        <CurrencySelector
+          value={currency}
+          onChange={(e) => setCurrency(e.target.value)}
+        >
+          <option value="ZAR">🇿🇦 ZAR — South African Rand</option>
+          <option value="USD">🇺🇸 USD — US Dollar</option>
+          <option value="GBP">🇬🇧 GBP — British Pound</option>
+          <option value="EUR">🇪🇺 EUR — Euro</option>
+        </CurrencySelector>
+      </PriceCardWrapper>
+    </Wrapper>
   );
 };
 

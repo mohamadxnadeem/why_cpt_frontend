@@ -7,6 +7,7 @@ import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import backgroundImage from "../assets/images/item-background/benz.jpg";
 import CTASection from "../components/CTASection";
+import { Accordion } from "react-bootstrap-accordion";
 
 // Lazy-loaded components
 const TestimonialCarousel = React.lazy(() =>
@@ -82,6 +83,48 @@ const ShimmerBox = styled.div`
   }
 `;
 
+/* ---------- Hero content overlay ---------- */
+const HeroInner = styled.div`
+  position: relative;
+  z-index: 2;
+  padding: 90px 0 40px;
+`;
+
+const HeroContent = styled.div`
+  max-width: 780px;
+  color: #fff;
+`;
+
+const HeroHeading = styled.h1`
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: #fff;
+`;
+
+const HeroSub = styled.p`
+  font-size: 18px;
+  max-width: 640px;
+  margin-bottom: 16px;
+  color: #f7f7f7;
+`;
+
+const HeroList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0 0;
+
+  li {
+    font-size: 16px;
+    margin: 5px 0;
+  }
+`;
+
+/* ---------- FAQ section ---------- */
+const FAQWrapper = styled.div`
+  margin: 50px 0 70px;
+`;
+
 /* ---------------- Component ---------------- */
 const PrivateToursCapeTown = () => {
   const [formData, setFormData] = useState({
@@ -107,21 +150,95 @@ const PrivateToursCapeTown = () => {
       .then(() => setFormSubmitted(true));
   };
 
+  /* --- SEO-optimised FAQs for "private tours Cape Town" --- */
+  const faqs = [
+    {
+      title: "What is included in a private tour in Cape Town?",
+      text:
+        "Our private tours in Cape Town typically include a professional driver-guide, hotel or villa pickup and drop-off, a fully licensed vehicle, curated routes and basic itinerary planning. Entrance fees, meals and optional activities can be added based on the private tour you choose."
+    },
+    {
+      title: "Why choose a private tour instead of a group tour?",
+      text:
+        "A private tour in Cape Town runs completely on your schedule. You decide when to stop for photos, how long to spend at each attraction and which places matter most to you. There is no rushing, no fixed timetable and no sharing the vehicle with strangers — just a relaxed, tailored experience."
+    },
+    {
+      title: "How long is a typical private day tour in Cape Town?",
+      text:
+        "Most full-day private tours in Cape Town run for about 8 to 10 hours. This gives enough time for highlights like the Cape Peninsula, Cape Point, Boulders Beach penguins, the Winelands or a combination of coastal and city attractions, without feeling rushed."
+    },
+    {
+      title: "Can I customise my private tour itinerary?",
+      text:
+        "Yes. Every private tour can be customised around your interests — from photography stops and hidden beaches to specific restaurants, coffee shops, wine farms or neighbourhoods. You can also combine multiple areas like the Cape Peninsula and Winelands over two or more days."
+    },
+    {
+      title: "Do your private tours include a private driver and vehicle?",
+      text:
+        "All our Cape Town private tours are chauffeur-driven. That means you enjoy a dedicated vehicle and private driver for the duration of your tour. This is ideal for couples, families, small groups and travellers who prefer comfort, safety and convenience over self-driving."
+    }
+  ];
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.title,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: f.text,
+      },
+    })),
+  };
+
   return (
     <div className="tours-page">
       <GlobalStyle />
 
       <Helmet>
-        <title>Private Tours & Exclusive Experiences in Cape Town</title>
+        <title>
+          Private Tours Cape Town | Chauffeur-Driven Private Day Trips & Experiences
+        </title>
         <meta
           name="description"
-          content="Premium private tours in Cape Town including Winelands, Cape Peninsula, Safari & luxury curated experiences."
+          content="Book premium private tours in Cape Town with a dedicated driver-guide. Cape Peninsula, Winelands, safari day trips and tailor-made private tours with hotel pickup."
         />
+        <meta
+          name="keywords"
+          content="private tours Cape Town, Cape Town private tours, private tour guide Cape Town, private day trips Cape Town, Cape Peninsula private tour, Cape Town private wine tour"
+        />
+        <link
+          rel="canonical"
+          href="https://www.whycapetown.com/private-tours-cape-town"
+        />
+        <meta
+          property="og:title"
+          content="Private Tours in Cape Town | Chauffeur-Driven Day Trips"
+        />
+        <meta
+          property="og:description"
+          content="Discover Cape Town with a private driver-guide. Customised private tours including Cape Peninsula, Winelands and safari day trips."
+        />
+        <meta
+          property="og:image"
+          content="https://www.whycapetown.com/og/private-tours-cape-town.jpg"
+        />
+        <meta
+          property="og:url"
+          content="https://www.whycapetown.com/private-tours-cape-town"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+
+        {/* FAQ schema for SEO */}
+        <script type="application/ld+json">
+          {JSON.stringify(faqSchema)}
+        </script>
       </Helmet>
 
       <Header />
 
-      {/* HERO - CLEAN & PREMIUM */}
+      {/* HERO - CLEAN & PREMIUM WITH H1 */}
       <section
         className="flat-title-page inner"
         style={{
@@ -131,44 +248,91 @@ const PrivateToursCapeTown = () => {
         }}
       >
         <div className="overlay"></div>
+
+        <div className="themesflat-container">
+          <HeroInner>
+            <HeroContent>
+              <HeroHeading>Private Tours in Cape Town</HeroHeading>
+              <HeroSub>
+                Chauffeur-driven private tours and day trips across Cape Town,
+                the Cape Peninsula and Winelands — designed around your pace,
+                interests and travel style.
+              </HeroSub>
+              <HeroList>
+                <li>✓ Private driver & vehicle just for your group</li>
+                <li>✓ Custom routes: Cape Peninsula, Winelands, safari & more</li>
+                <li>✓ Ideal for couples, families & small groups</li>
+              </HeroList>
+            </HeroContent>
+          </HeroInner>
+        </div>
       </section>
 
       <div className="tf-section post-details">
         <div className="themesflat-container">
-
           <SectionTitle>
             Private Tours Curated with <Highlight>Heart & Detail</Highlight>
           </SectionTitle>
 
           <Paragraph>
-            Whether you're here to discover breathtaking coastlines, savor
-            world-class wine, or explore wildlife up close — your journey in Cape
-            Town should feel effortless, personal and unforgettable.
+            Whether you're here to discover breathtaking coastlines, savour
+            world-class wine or explore wildlife up close, your{" "}
+            <strong>private tour in Cape Town</strong> should feel effortless,
+            personal and unforgettable. Every experience is planned around what
+            matters most to you — not a rigid group itinerary.
           </Paragraph>
 
-          <SectionTitle>What Makes Our Experiences Special</SectionTitle>
+          <SectionTitle>Why Choose a Private Tour in Cape Town?</SectionTitle>
           <BulletList>
-            <li>Private tours tailored to your pace — zero rushing</li>
-            <li>Local expert guide who knows the city deeply</li>
-            <li>Photographer-like guidance for perfect pictures</li>
-            <li>Dining recommendations + planning assistance included</li>
+            <li>
+              Private tours tailored to your pace — no rushing from stop to stop
+            </li>
+            <li>
+              Chauffeur-driven comfort with a local expert who knows Cape Town
+              deeply
+            </li>
+            <li>
+              Flexible routes: Cape Peninsula, Table Mountain, Winelands, city
+              and safari day trips
+            </li>
+            <li>
+              Photo stops, restaurant bookings and hidden viewpoints built into
+              your day
+            </li>
           </BulletList>
+
+          <SectionTitle>Popular Private Day Tours in Cape Town</SectionTitle>
+          <Paragraph>
+            Our most requested <strong>Cape Town private tours</strong> include:
+            the Cape Peninsula & Cape Point, Boulders Beach penguins, the
+            Stellenbosch & Franschhoek Winelands and custom city highlights.
+            Each tour is completely private, with door-to-door transport and a
+            dedicated driver-guide.
+          </Paragraph>
 
           {/* ⭐ Testimonials */}
           <Suspense fallback={<ShimmerBox height="300px" />}>
             <TestimonialCarousel />
           </Suspense>
 
-          {/* 💎 CTA SECTION */}
+          {/* 💎 CTA SECTION (WhatsApp / enquiry etc.) */}
           <CTASection />
 
-          {/* 🌍 Tour Packages List */}
+          {/* 🌍 Private Tour Packages List */}
+          <SectionTitle>Private Tour Packages in Cape Town</SectionTitle>
+          <Paragraph>
+            Browse our curated selection of <strong>private tours in Cape Town</strong>{" "}
+            below. Each tour can be customised by switch­ing activities, start
+            times or adding extra days to match your ideal itinerary.
+          </Paragraph>
+
           <Suspense fallback={<ShimmerBox height="300px" />}>
             <ToursList />
           </Suspense>
 
-          {/* CONTACT FORM */}
-          {/* <div className="tf-section tf-item-details">
+          {/* OPTIONAL CONTACT FORM (still here if you want to re-enable later) */}
+          {/* 
+          <div className="tf-section tf-item-details">
             <div className="container">
               <div className="content-center">
                 <div className="sc-item-details">
@@ -180,7 +344,7 @@ const PrivateToursCapeTown = () => {
                   ) : (
                     <Fragment>
                       <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                        Tell us what kind of experience you’re looking for.
+                        Tell us what kind of private tour you’re looking for.
                       </h1>
 
                       <div className="form-inner">
@@ -211,7 +375,7 @@ const PrivateToursCapeTown = () => {
                           <textarea
                             name="message"
                             value={formData.message}
-                            placeholder="Tell us about your ideal experience"
+                            placeholder="Tell us about your ideal private tour in Cape Town"
                             onChange={handleChange}
                           ></textarea>
 
@@ -225,8 +389,22 @@ const PrivateToursCapeTown = () => {
                 </div>
               </div>
             </div>
-          </div> */}
+          </div>
+          */}
 
+          {/* 🔍 FAQ SECTION FOR SEO */}
+          <FAQWrapper>
+            <SectionTitle>Private Tours Cape Town – Frequently Asked Questions</SectionTitle>
+            <div className="flat-accordion2">
+              {faqs.map((item, i) => (
+                <Accordion key={i} title={item.title}>
+                  <p style={{ fontSize: "16px", lineHeight: 1.8 }}>
+                    {item.text}
+                  </p>
+                </Accordion>
+              ))}
+            </div>
+          </FAQWrapper>
         </div>
       </div>
 

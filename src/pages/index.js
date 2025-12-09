@@ -93,7 +93,7 @@ const routes = [
 
 
   
-  { path: '/PrivateToursCapeTown', component: <PrivateToursCapeTown />},
+  { path: '/private-tours-cape-town', component: <PrivateToursCapeTown />},
 
 ]
 
