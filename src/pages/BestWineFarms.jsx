@@ -467,7 +467,7 @@ We curated the top 5 must-experience wine adventures so you enjoy luxury tasting
         </div>
 
         {/* STICKY OFFER CTA */}
-        <StickyOffer visible={showSticky}>
+        {/* <StickyOffer visible={showSticky}>
           <OfferPrice>
            Full Day Chauffuered Drive From R5500  
           </OfferPrice>
@@ -481,7 +481,7 @@ We curated the top 5 must-experience wine adventures so you enjoy luxury tasting
           >
             <FaWhatsapp size={18} /> Book Now
           </WhatsAppButton>
-        </StickyOffer>
+        </StickyOffer> */}
 
         <Footer />
       </div>
