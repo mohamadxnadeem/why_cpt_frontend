@@ -423,14 +423,14 @@ We curated the top 5 must-experience wine adventures so you enjoy luxury tasting
         </EmeraldBlock>
 
         {/* OFFER BLOCK */}
-        <OfferBlock>
+        {/* <OfferBlock>
           <EmeraldTitle>Limited-Time Chauffeur Offer</EmeraldTitle>
           <EmeraldSub>Book your luxury private driver for the winelands today.</EmeraldSub>
           <EmeraldSub>Please note this deal only applies to sedans.</EmeraldSub>
 
 
           <OfferPrice>
-            <span>R5500</span> Now Only <strong>R3500</strong>
+            <span>From R5500</span> Now Only <strong>R3500</strong>
           </OfferPrice>
 
           <WhatsAppButton
@@ -440,7 +440,7 @@ We curated the top 5 must-experience wine adventures so you enjoy luxury tasting
           >
             <FaWhatsapp size={18} /> Claim Offer
           </WhatsAppButton>
-        </OfferBlock>
+        </OfferBlock> */}
 
         {/* EXPERIENCES */}
         <SectionTitle>Best Wine Experiences</SectionTitle>
@@ -469,7 +469,7 @@ We curated the top 5 must-experience wine adventures so you enjoy luxury tasting
         {/* STICKY OFFER CTA */}
         <StickyOffer visible={showSticky}>
           <OfferPrice>
-            <span>R5500</span> R3500  Exclusive Website Offer. Up to 4 Pax only
+           Full Day Chauffuered Drive From R5500  
           </OfferPrice>
           
 
