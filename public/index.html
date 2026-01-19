@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Best Experiences in Cape Town </title>
+  <title>Best Experiences in Cape Town</title>
   <meta name="description" content="Best experiences and tours in Cape Town with luxury vehciles and professional guides."/>
   <meta name="googlebot-news" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://www.whycapetown.com" />
-  <meta property="og:title" content=">Best Experiences in Cape Town" />
+  <meta property="og:title" content="Best Experiences in Cape Town" />
   <meta property="og:url" content="https://www.whycapetown.com"/>
   <meta property="og:description" content="Best experiences and tours in Cape Town with luxury vehciles and professional guides."/>
   <meta property="og:image" content="https://whycapetown.s3.eu-central-1.amazonaws.com/Allen+and+Kazi.png"/>
 
   <link rel="stylesheet" href="%PUBLIC_URL%/../assets/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  
 
   <style>
     body, html {
@@ -53,6 +52,88 @@
     }
   </style>
 
+  <!-- ✅ Google Ads Global Site Tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11020060137"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-11020060137');
+  </script>
+
+  <!-- ✅ Event snippet for WhatsApp click conversion -->
+  <script>
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof(url) != 'undefined') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion', {
+          'send_to': 'AW-11020060137/_NW4CPTYxugbEOmL44Yp',
+          'event_callback': callback
+      });
+      return false;
+    }
+  </script>
+
+  <!-- ✅ NEW: Capture & persist gclid (ONLY count conversions from Google Ads) -->
+  <script>
+    (function () {
+      try {
+        var params = new URLSearchParams(window.location.search);
+        var gclid = params.get("gclid");
+        if (gclid) {
+          localStorage.setItem("wct_gclid", gclid);
+          localStorage.setItem("wct_gclid_ts", String(Date.now()));
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- ✅ NEW: Global helpers for paid-only conversion tracking + WhatsApp open -->
+  <script>
+    (function () {
+      function hasValidGclid() {
+        try {
+          var ts = parseInt(localStorage.getItem("wct_gclid_ts") || "0", 10);
+
+          // expire after 30 days
+          if (ts && Date.now() - ts > 30 * 24 * 60 * 60 * 1000) {
+            localStorage.removeItem("wct_gclid");
+            localStorage.removeItem("wct_gclid_ts");
+            return false;
+          }
+          return !!localStorage.getItem("wct_gclid");
+        } catch (e) {
+          return false;
+        }
+      }
+
+      // Expose "is this a paid Google Ads visit?" to React pages
+      window.WCT_isPaidGoogleAdsVisit = function () {
+        return hasValidGclid();
+      };
+
+      // Expose a helper to track conversion ONLY if paid, then open WhatsApp
+      window.WCT_trackWhatsAppConversionAndOpen = function (url) {
+        var paid = window.WCT_isPaidGoogleAdsVisit && window.WCT_isPaidGoogleAdsVisit();
+
+        // Fire Google Ads conversion only for paid traffic
+        if (paid && typeof window.gtag_report_conversion === "function") {
+          window.gtag_report_conversion(url);
+          return false;
+        }
+
+        // Otherwise just open WhatsApp (organic/direct/social traffic)
+        if (url) {
+          window.open(url, "_blank", "noopener,noreferrer");
+        }
+        return false;
+      };
+    })();
+  </script>
+
   <!-- Meta Pixel Code -->
   <script>
     !function(f,b,e,v,n,t,s)
@@ -76,13 +157,17 @@
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
-  <a 
-    href="https://wa.link/r5z0sb" 
+
+  <!-- Floating WhatsApp (site-wide) -->
+  <a
+    href="https://wa.link/r5z0sb"
     class="floating-whatsapp"
     target="_blank"
     rel="noopener noreferrer"
+    onclick="return window.WCT_trackWhatsAppConversionAndOpen && window.WCT_trackWhatsAppConversionAndOpen(this.href);"
   >
     <i class="fab fa-whatsapp"></i>
   </a>
+
 </body>
 </html>

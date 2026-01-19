@@ -217,28 +217,44 @@ const CardActions = styled.div`
   gap: 10px;
 `;
 
-/* Dynamic WhatsApp Link */
+/* ✅ NEW WhatsApp message template + direct phone */
+const WHATSAPP_PHONE = "27636746131";
+
 const generateWhatsAppLink = (experienceName) => {
-  const message = `Hi! I'm interested in the ${experienceName}. Can you assist with availability?`;
-  return `https://wa.link/rsupjp?text=${encodeURIComponent(message)}`;
+  const message =
+    `Hi there! I would like to book a winelands chauffeur drive.\n` +
+    `Experience: ${experienceName}\n` +
+    `Preferred date: ____\n` +
+    `Pick-up location: ____\n` +
+    `Guests: ____\n\n` +
+    `Please confirm availability and pricing.`;
+  return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
 };
 
-/* CTA Conversion Event */
-const fireConversion = (label) => {
-  if (window.gtag) {
-    window.gtag("event", "conversion", {
-      send_to: "AW-CONVERSION-ID",
-      event_label: label,
-    });
-  }
+/* ✅ NEW: Paid-only Google Ads conversion + open WhatsApp */
+const handleWhatsAppClick = (e, url, label) => {
+  e.preventDefault();
+
+  // Optional: keep Meta Pixel lead tracking for all traffic
   if (window.fbq) {
     window.fbq("track", "Lead", { value: 1, currency: "ZAR", label });
+  }
+
+  // Track Google Ads conversion ONLY if visit came from Google Ads (gclid stored)
+  if (window.WCT_trackWhatsAppConversionAndOpen) {
+    window.WCT_trackWhatsAppConversionAndOpen(url);
+  } else if (url) {
+    // Fallback: open WhatsApp if helper isn't present
+    window.open(url, "_blank", "noopener,noreferrer");
   }
 };
 
 /* EXPERIENCE ITEM */
 const FarmCardItem = ({ farm, index }) => {
   const [loaded, setLoaded] = useState(false);
+
+  const chauffeurUrl = generateWhatsAppLink(farm.name);
+  const reserveOnlyUrl = generateWhatsAppLink(`${farm.name} (Experience Only)`);
 
   return (
     <FarmCard>
@@ -254,29 +270,39 @@ const FarmCardItem = ({ farm, index }) => {
 
       <FarmContent>
         <div>
-          <FarmName>{index + 1}. {farm.name}</FarmName>
-          <FarmMeta><strong>Area:</strong> {farm.area}</FarmMeta>
-          <FarmMeta><strong>Experience type:</strong> {farm.speciality}</FarmMeta>
+          <FarmName>
+            {index + 1}. {farm.name}
+          </FarmName>
+          <FarmMeta>
+            <strong>Area:</strong> {farm.area}
+          </FarmMeta>
+          <FarmMeta>
+            <strong>Experience type:</strong> {farm.speciality}
+          </FarmMeta>
           <FarmHighlight>{farm.highlight}</FarmHighlight>
 
           <TagRow>
-            {farm.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
+            {farm.tags.map((tag) => (
+              <Tag key={tag}>{tag}</Tag>
+            ))}
           </TagRow>
         </div>
 
         <CardActions>
           <WhatsAppButton
-            href={generateWhatsAppLink(farm.name)}
+            href={chauffeurUrl}
             target="_blank"
-            onClick={() => fireConversion(`Book Chauffeur + ${farm.name}`)}
+            rel="noopener noreferrer"
+            onClick={(e) => handleWhatsAppClick(e, chauffeurUrl, `Book Chauffeur + ${farm.name}`)}
           >
             <FaWhatsapp size={18} /> Book Chauffeur + Tastings
           </WhatsAppButton>
 
           <SecondaryButton
-            href={generateWhatsAppLink(`${farm.name} Experience Only`)}
+            href={reserveOnlyUrl}
             target="_blank"
-            onClick={() => fireConversion(`Reserve Only ${farm.name}`)}
+            rel="noopener noreferrer"
+            onClick={(e) => handleWhatsAppClick(e, reserveOnlyUrl, `Reserve Only ${farm.name}`)}
           >
             Only Reserve Experience
           </SecondaryButton>
@@ -348,31 +374,29 @@ We curated the top 5 must-experience wine adventures so you enjoy luxury tasting
     },
   ];
 
-  /* FULL SEO FAQS (kept short here for ChatGPT limit but structured correctly) */
   const faqs = [
     {
       title: "Why are these the top 5 wine experiences in Cape Town?",
-      text: "These experiences offer the best combination of scenery, wine quality, history and luxury service…",
+      text: "These experiences offer a strong mix of scenery, wine quality, iconic estates and an easy route for a luxury day out.",
     },
     {
       title: "Do I need a private chauffeur for wine tasting?",
-      text: "A chauffeur provides safety, comfort, no driving stress and perfect timing between estates…",
+      text: "A chauffeur means you can relax, enjoy tastings responsibly, and move smoothly between estates without parking stress.",
     },
     {
       title: "How long do I need for a wine tour?",
-      text: "A full 7–9 hour day is ideal to enjoy tastings, lunch and scenic stops without rushing…",
+      text: "A full 7–9 hour day is ideal to enjoy tastings, a relaxed lunch, and a few scenic stops without rushing.",
     },
     {
       title: "Can the tour be customised?",
-      text: "Yes — for couples, families, groups and special occasions…",
+      text: "Yes — we can tailor estates, timing, lunch spots and photo stops for couples, families and groups.",
     },
     {
       title: "When is the best time of year to visit?",
-      text: "Summer offers green vineyards; winter offers cosy firesides; spring offers blossoms…",
+      text: "Winelands are great year-round: summer is vibrant, winter is cosy, and spring is fresh and scenic.",
     },
   ];
 
-  /* FAQ Schema */
   const schema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -383,13 +407,20 @@ We curated the top 5 must-experience wine adventures so you enjoy luxury tasting
     })),
   };
 
+  const heroCtaUrl = generateWhatsAppLink("Cape Town Wine Experiences");
+
   return (
     <div className="home-3">
       <GlobalStyle />
 
       <Helmet>
-        <title>Top 5 Wine Tasting Experiences in Cape Town | Chauffeur & Luxury Wine Tours</title>
-        <meta name="description" content="Discover Cape Town's top wine experiences including Delaire Graff, Boschendal, Wine Tram and more. Chauffeur-driven wine tours." />
+        <title>
+          Top 5 Wine Tasting Experiences in Cape Town | Chauffeur & Luxury Wine Tours
+        </title>
+        <meta
+          name="description"
+          content="Discover Cape Town's top wine experiences including Delaire Graff, Boschendal, Wine Tram and more. Chauffeur-driven wine tours."
+        />
         <script type="application/ld+json">{JSON.stringify(schema)}</script>
       </Helmet>
 
@@ -407,40 +438,20 @@ We curated the top 5 must-experience wine adventures so you enjoy luxury tasting
       </section>
 
       <div className="themesflat-container">
-
         {/* INTRO BLOCK */}
         <EmeraldBlock>
           <EmeraldTitle>Top 5 Wine Tasting Experiences in Cape Town</EmeraldTitle>
           <EmeraldSub>{pasIntro}</EmeraldSub>
 
           <WhatsAppButton
-            href={generateWhatsAppLink("Cape Town Wine Experiences")}
+            href={heroCtaUrl}
             target="_blank"
-            onClick={() => fireConversion("Plan My Wine Day CTA")}
+            rel="noopener noreferrer"
+            onClick={(e) => handleWhatsAppClick(e, heroCtaUrl, "Plan My Wine Day CTA")}
           >
             <FaWhatsapp size={20} /> Plan My Wine Day
           </WhatsAppButton>
         </EmeraldBlock>
-
-        {/* OFFER BLOCK */}
-        {/* <OfferBlock>
-          <EmeraldTitle>Limited-Time Chauffeur Offer</EmeraldTitle>
-          <EmeraldSub>Book your luxury private driver for the winelands today.</EmeraldSub>
-          <EmeraldSub>Please note this deal only applies to sedans.</EmeraldSub>
-
-
-          <OfferPrice>
-            <span>From R5500</span> Now Only <strong>R3500</strong>
-          </OfferPrice>
-
-          <WhatsAppButton
-            href={generateWhatsAppLink("R3500 Chauffeur Offer")}
-            target="_blank"
-            onClick={() => fireConversion("Chauffeur Offer CTA")}
-          >
-            <FaWhatsapp size={18} /> Claim Offer
-          </WhatsAppButton>
-        </OfferBlock> */}
 
         {/* EXPERIENCES */}
         <SectionTitle>Best Wine Experiences</SectionTitle>
@@ -465,23 +476,6 @@ We curated the top 5 must-experience wine adventures so you enjoy luxury tasting
             </Accordion>
           ))}
         </div>
-
-        {/* STICKY OFFER CTA */}
-        {/* <StickyOffer visible={showSticky}>
-          <OfferPrice>
-           Full Day Chauffuered Drive From R5500  
-          </OfferPrice>
-          
-
-
-          <WhatsAppButton
-            href={generateWhatsAppLink("R3500 Chauffeur Offer")}
-            target="_blank"
-            onClick={() => fireConversion("Sticky Offer CTA")}
-          >
-            <FaWhatsapp size={18} /> Book Now
-          </WhatsAppButton>
-        </StickyOffer> */}
 
         <Footer />
       </div>
