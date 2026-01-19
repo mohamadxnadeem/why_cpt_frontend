@@ -223,7 +223,6 @@ const WHATSAPP_PHONE = "27636746131";
 const generateWhatsAppLink = (experienceName) => {
   const message =
     `Hi there! I would like to book a winelands chauffeur drive.\n` +
-    `Experience: ${experienceName}\n` +
     `Preferred date: ____\n` +
     `Pick-up location: ____\n` +
     `Guests: ____\n\n` +
@@ -288,25 +287,7 @@ const FarmCardItem = ({ farm, index }) => {
           </TagRow>
         </div>
 
-        <CardActions>
-          <WhatsAppButton
-            href={chauffeurUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => handleWhatsAppClick(e, chauffeurUrl, `Book Chauffeur + ${farm.name}`)}
-          >
-            <FaWhatsapp size={18} /> Book Chauffeur + Tastings
-          </WhatsAppButton>
-
-          <SecondaryButton
-            href={reserveOnlyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => handleWhatsAppClick(e, reserveOnlyUrl, `Reserve Only ${farm.name}`)}
-          >
-            Only Reserve Experience
-          </SecondaryButton>
-        </CardActions>
+        
       </FarmContent>
     </FarmCard>
   );

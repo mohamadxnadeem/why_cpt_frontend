@@ -225,18 +225,18 @@ const generateGeneralWhatsAppLink = (contextLabel) => {
 };
 
 /* CHILD COMPONENT – FIXES HOOK ERROR */
-const ActivityCardItem = ({ activity, index }) => {
+const ActivityCardItem = ({ activity, index, onWhatsAppClick }) => {
   const [loaded, setLoaded] = useState(false);
 
   return (
     <ActivityCard>
       <ActivityImage>
         {!loaded && <ShimmerBox />}
-        <img 
-          src={activity.image} 
-          alt={activity.name} 
-          style={{opacity: loaded ? 1 : 0}}
-          onLoad={() => setLoaded(true)} 
+        <img
+          src={activity.image}
+          alt={activity.name}
+          style={{ opacity: loaded ? 1 : 0 }}
+          onLoad={() => setLoaded(true)}
         />
       </ActivityImage>
 
@@ -251,7 +251,7 @@ const ActivityCardItem = ({ activity, index }) => {
           <ActivityHighlight>{activity.highlight}</ActivityHighlight>
 
           <TagRow>
-            {activity.tags.map(t => <Tag key={t}>{t}</Tag>)}
+            {activity.tags.map((t) => <Tag key={t}>{t}</Tag>)}
           </TagRow>
 
           {activity.promo && (
@@ -273,8 +273,9 @@ const ActivityCardItem = ({ activity, index }) => {
             href={generateActivityWhatsAppLink(activity.name)}
             target="_blank"
             rel="noreferrer"
+            onClick={(e) => onWhatsAppClick(e, generateActivityWhatsAppLink(activity.name))}
           >
-            <FaWhatsapp size={18}/> Book Activity & Driver
+            <FaWhatsapp size={18} /> Ask About This Activity
           </WhatsAppButton>
         </CardActions>
       </ActivityContent>
@@ -284,6 +285,21 @@ const ActivityCardItem = ({ activity, index }) => {
 
 /* MAIN PAGE */
 const TopActivitiesCapeTown = () => {
+
+  // ✅ Paid-only conversion tracking helper
+  const handleWhatsAppClick = (e, url) => {
+    // stop default navigation, we will open ourselves
+    if (e && e.preventDefault) e.preventDefault();
+
+    // Use the global helper from index.html (fires conversion ONLY if gclid exists)
+    if (window.WCT_trackWhatsAppConversionAndOpen) {
+      return window.WCT_trackWhatsAppConversionAndOpen(url);
+    }
+
+    // fallback
+    window.open(url, "_blank", "noopener,noreferrer");
+    return false;
+  };
 
   /* --- PAS COPYWRITING INTRO --- */
   const pasIntro = `
@@ -295,99 +311,87 @@ And with a private chauffeur, every activity becomes effortless, safe and stress
 `;
 
   const activities = [
-    { 
-      name:"Table Mountain Cableway", 
-      area:"Table Mountain", 
-      type:"Scenic • Landmark", 
-      duration:"1–2 hours",
-      highlight:"Ride the rotating cable car for 360° views.", 
-      tags:["Bucket List","Scenic"], 
-      image:cablecar 
+    {
+      name: "Table Mountain Cableway",
+      area: "Table Mountain",
+      type: "Scenic • Landmark",
+      duration: "1–2 hours",
+      highlight: "Ride the rotating cable car for 360° views.",
+      tags: ["Bucket List", "Scenic"],
+      image: cablecar
     },
-    { 
-      name:"Cape Peninsula & Cape Point Tour", 
-      area:"Cape Peninsula", 
-      type:"Private Tour", 
-      duration:"8–10 hours",
-      highlight:"Chapman's Peak, Cape Point & Boulders penguins.", 
-      tags:["Scenic Drive","Wildlife"], 
-      image:capepoint 
+    {
+      name: "Cape Peninsula & Cape Point Tour",
+      area: "Cape Peninsula",
+      type: "Private Tour",
+      duration: "8–10 hours",
+      highlight: "Chapman's Peak, Cape Point & Boulders penguins.",
+      tags: ["Scenic Drive", "Wildlife"],
+      image: capepoint
     },
-    { 
-      name:"Winelands Experience", 
-      area:"Stellenbosch & Franschhoek", 
-      type:"Wine Tasting", 
-      duration:"4–8 hours",
-      highlight:"Premium tasting in world-class vineyards with a private driver.", 
-      tags:["Wine","Luxury","Scenic Views"], 
-      image:winelands,
-      promo: {
-        title: "Winelands Chauffeur Special",
-        oldPrice: "R5500",
-        newPrice: "R3500 per day",
-        note: "Private driver for up to 10 hours including 200km • Stellenbosch & Franschhoek."
-      }
+    {
+      name: "Winelands Experience",
+      area: "Stellenbosch & Franschhoek",
+      type: "Wine Tasting",
+      duration: "4–8 hours",
+      highlight: "Premium tasting in world-class vineyards with a private driver.",
+      tags: ["Wine", "Luxury", "Scenic Views"],
+      image: winelands
     },
-    { 
-      name:"Helicopter Flight Over Cape Town", 
-      area:"V&A Waterfront", 
-      type:"Scenic Flight", 
-      duration:"12–45 minutes",
-      highlight:"See Cape Town’s mountains, beaches and city bowl from above.", 
-      tags:["Luxury","Aerial Views"], 
-      image:helicopter 
+    {
+      name: "Helicopter Flight Over Cape Town",
+      area: "V&A Waterfront",
+      type: "Scenic Flight",
+      duration: "12–45 minutes",
+      highlight: "See Cape Town’s mountains, beaches and city bowl from above.",
+      tags: ["Luxury", "Aerial Views"],
+      image: helicopter
     },
-    { 
-      name:"Bo-Kaap Photoshoot", 
-      area:"Bo-Kaap", 
-      type:"Culture", 
-      duration:"1 hour",
-      highlight:"Colorful houses & Cape Malay heritage with local storytelling.", 
-      tags:["Culture","Photography"], 
-      image:bokaap 
+    {
+      name: "Bo-Kaap Photoshoot",
+      area: "Bo-Kaap",
+      type: "Culture",
+      duration: "1 hour",
+      highlight: "Colorful houses & Cape Malay heritage with local storytelling.",
+      tags: ["Culture", "Photography"],
+      image: bokaap
     },
-    { 
-      name:"Boulders Beach Penguins", 
-      area:"Simon's Town", 
-      type:"Wildlife", 
-      duration:"1 hour",
-      highlight:"Visit the famous African penguins on a sheltered, picturesque beach.", 
-      tags:["Family Friendly","Beach","Wildlife"], 
-      image:boulders 
+    {
+      name: "Boulders Beach Penguins",
+      area: "Simon's Town",
+      type: "Wildlife",
+      duration: "1 hour",
+      highlight: "Visit the famous African penguins on a sheltered, picturesque beach.",
+      tags: ["Family Friendly", "Beach", "Wildlife"],
+      image: boulders
     },
-    { 
-      name:"Big 5 Sunset Safari", 
-      area:"Game Reserve", 
-      type:"Safari", 
-      duration:"Full Afternoon & Evening",
-      highlight:"Guided Big 5 sunset game drive with private return transport from Cape Town.", 
-      tags:["Safari","Wildlife","Sunset"], 
-      image:aquila,
-      promo: {
-        title: "Big 5 Sunset Safari Special",
-        oldPrice: null,
-        newPrice: "R3185 per person",
-        note: "Includes sunset safari (R1185) + private return transport (R2000) • Minimum 2 guests."
-      }
+    {
+      name: "Big 5 Sunset Safari",
+      area: "Game Reserve",
+      type: "Safari",
+      duration: "Full Afternoon & Evening",
+      highlight: "Guided Big 5 sunset game drive with private return transport from Cape Town.",
+      tags: ["Safari", "Wildlife", "Sunset"],
+      image: aquila
     },
-    { 
-      name:"Signal Hill Sunset", 
-      area:"City Bowl", 
-      type:"Viewpoint", 
-      duration:"2–3 hours",
-      highlight:"Romantic sunset overlooking the Atlantic and city lights.", 
-      tags:["Sunset","Romantic"], 
-      image:hike 
+    {
+      name: "Signal Hill Sunset",
+      area: "City Bowl",
+      type: "Viewpoint",
+      duration: "2–3 hours",
+      highlight: "Romantic sunset overlooking the Atlantic and city lights.",
+      tags: ["Sunset", "Romantic"],
+      image: hike
     },
-    { 
-      name:"Chapman's Peak Sunset Drive", 
-      area:"Atlantic Coast", 
-      type:"Scenic Drive", 
-      duration:"2–4 hours",
-      highlight:"One of the most beautiful coastal roads in the world, especially at sunset.", 
-      tags:["Scenic","Sunset","Photography"], 
-      image:chapmans 
-    },
+    {
+      name: "Chapman's Peak Sunset Drive",
+      area: "Atlantic Coast",
+      type: "Scenic Drive",
+      duration: "2–4 hours",
+      highlight: "One of the most beautiful coastal roads in the world, especially at sunset.",
+      tags: ["Scenic", "Sunset", "Photography"],
+      image: chapmans
+    }
   ];
 
   /* SEO-OPTIMIZED FAQ */
@@ -414,10 +418,10 @@ And with a private chauffeur, every activity becomes effortless, safe and stress
   const schema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": faqs.map(f => ({
+    mainEntity: faqs.map((f) => ({
       "@type": "Question",
-      "name": f.title,
-      "acceptedAnswer": { "@type":"Answer", "text": f.text }
+      name: f.title,
+      acceptedAnswer: { "@type": "Answer", text: f.text }
     }))
   };
 
@@ -438,8 +442,8 @@ And with a private chauffeur, every activity becomes effortless, safe and stress
 
       {/* HERO */}
       <section style={{
-        background:`url(${backgroundImage}) center/cover no-repeat`,
-        height:"60vh"
+        background: `url(${backgroundImage}) center/cover no-repeat`,
+        height: "60vh"
       }}>
         <div className="overlay"></div>
       </section>
@@ -450,12 +454,13 @@ And with a private chauffeur, every activity becomes effortless, safe and stress
         <EmeraldBlock>
           <EmeraldTitle>Best Activities in Cape Town</EmeraldTitle>
           <EmeraldSub>{pasIntro}</EmeraldSub>
-          <WhatsAppButton 
+          <WhatsAppButton
             href={generateGeneralWhatsAppLink("the best activities and tours")}
             target="_blank"
             rel="noreferrer"
+            onClick={(e) => handleWhatsAppClick(e, generateGeneralWhatsAppLink("the best activities and tours"))}
           >
-            <FaWhatsapp size={20}/> Plan My Itinerary
+            <FaWhatsapp size={20} /> Plan My Itinerary
           </WhatsAppButton>
         </EmeraldBlock>
 
@@ -464,7 +469,12 @@ And with a private chauffeur, every activity becomes effortless, safe and stress
 
         <ActivitiesWrapper>
           {activities.map((a, i) => (
-            <ActivityCardItem key={a.name} activity={a} index={i} />
+            <ActivityCardItem
+              key={a.name}
+              activity={a}
+              index={i}
+              onWhatsAppClick={handleWhatsAppClick}
+            />
           ))}
         </ActivitiesWrapper>
 
@@ -481,12 +491,13 @@ And with a private chauffeur, every activity becomes effortless, safe and stress
         <EmeraldBlock>
           <EmeraldTitle>Ready to Plan?</EmeraldTitle>
           <EmeraldSub>Tell us your dates & interests — we’ll build a Cape Town itinerary around you.</EmeraldSub>
-          <WhatsAppButton 
+          <WhatsAppButton
             href={generateGeneralWhatsAppLink("my Cape Town itinerary")}
             target="_blank"
             rel="noreferrer"
+            onClick={(e) => handleWhatsAppClick(e, generateGeneralWhatsAppLink("my Cape Town itinerary"))}
           >
-            <FaWhatsapp size={20}/> Chat to Your Concierge
+            <FaWhatsapp size={20} /> Chat to Your Concierge
           </WhatsAppButton>
         </EmeraldBlock>
 

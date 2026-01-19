@@ -4,7 +4,7 @@ import styled, { createGlobalStyle, keyframes } from "styled-components";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 
-import backgroundImage from "../assets/images/resturants/chefswarehouse.webp"; 
+import backgroundImage from "../assets/images/resturants/chefswarehouse.webp";
 import graff from "../assets/images/resturants/graff.jpg";
 import fyn from "../assets/images/resturants/fyn.jpg";
 import saray from "../assets/images/resturants/saray.jpg";
@@ -205,6 +205,33 @@ const ShimmerLine = styled(ShimmerBox)`
    PAGE COMPONENT
 --------------------------------------------------------- */
 const TopRestaurantsCapeTown = () => {
+  // ✅ Paid-only WhatsApp conversion tracking (Google Ads only via gclid)
+  const handleWhatsAppClick = (e, url) => {
+    if (e && e.preventDefault) e.preventDefault();
+
+    if (window.WCT_trackWhatsAppConversionAndOpen) {
+      return window.WCT_trackWhatsAppConversionAndOpen(url);
+    }
+
+    window.open(url, "_blank", "noopener,noreferrer");
+    return false;
+  };
+
+  // WhatsApp message templates
+  const WHATSAPP_NUMBER = "27636746131";
+
+  const buildWhatsAppUrl = (message) =>
+    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+  const getGeneralDiningMessage = () =>
+    "Hi Cape Town Concierge, I’d like to reserve a private experience. Date: ____ | Guests: ____ | Budget: ____";
+
+  const getRestaurantMessage = (restaurantName) =>
+    `Hi Cape Town Concierge, I'd like to reserve ${restaurantName}.\nDate: ____ | Guests: ____ | Time: ____ | Budget: ____`;
+
+  const getChauffeurAndDiningMessage = (restaurantName) =>
+    `Hi Cape Town Concierge, please arrange a restaurant reservation + private chauffeur.\nRestaurant: ${restaurantName}\nDate: ____ | Guests: ____ | Pickup: ____ | Return: ____`;
+
   // PAS intro text
   const pasIntro = `
 Cape Town has more incredible restaurants than you could possibly try in one trip — from fine dining tasting menus to live African feasts and hidden local favourites.
@@ -400,8 +427,14 @@ That’s why we’ve handpicked our Top 10 dining experiences and paired them wi
         <EmeraldBlock>
           <EmeraldTitle>Top 10 Dining Experiences in Cape Town</EmeraldTitle>
           <EmeraldSub>{pasIntro}</EmeraldSub>
-          <WhatsAppButton href="https://wa.link/r5z0sb" target="_blank">
-            <FaWhatsapp size={20} /> Arrange My Evening
+
+          <WhatsAppButton
+            href={buildWhatsAppUrl(getGeneralDiningMessage())}
+            target="_blank"
+            rel="noreferrer"
+            onClick={(e) => handleWhatsAppClick(e, buildWhatsAppUrl(getGeneralDiningMessage()))}
+          >
+            <FaWhatsapp size={20} /> Help Me Reserve
           </WhatsAppButton>
         </EmeraldBlock>
 
@@ -459,12 +492,28 @@ That’s why we’ve handpicked our Top 10 dining experiences and paired them wi
                     </div>
 
                     <CardActions>
-                      <WhatsAppButton href="https://wa.link/r5z0sb" target="_blank">
-                        <FaWhatsapp size={18} /> Book Chauffeur &amp; Table
+                      {/* ✅ CTA 1: Reservation + Chauffeur */}
+                      <WhatsAppButton
+                        href={buildWhatsAppUrl(getChauffeurAndDiningMessage(r.name))}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={(e) =>
+                          handleWhatsAppClick(e, buildWhatsAppUrl(getChauffeurAndDiningMessage(r.name)))
+                        }
+                      >
+                        <FaWhatsapp size={18} /> Reserve + Chauffeur
                       </WhatsAppButton>
 
-                      <SecondaryButton href="https://wa.link/r5z0sb" target="_blank">
-                        Only Reserve Restaurant
+                      {/* ✅ CTA 2: Reservation Only */}
+                      <SecondaryButton
+                        href={buildWhatsAppUrl(getRestaurantMessage(r.name))}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={(e) =>
+                          handleWhatsAppClick(e, buildWhatsAppUrl(getRestaurantMessage(r.name)))
+                        }
+                      >
+                        Reserve Table Only
                       </SecondaryButton>
                     </CardActions>
                   </RestaurantContent>
@@ -472,7 +521,7 @@ That’s why we’ve handpicked our Top 10 dining experiences and paired them wi
               ))}
         </RestaurantsWrapper>
 
-        {/* FAQ SECTION – styling matches activities page (flat-accordion2 + Accordion) */}
+        {/* FAQ SECTION */}
         <SectionTitle>Frequently Asked Questions</SectionTitle>
         <div className="flat-accordion2">
           {faqs.map((item, i) => (
@@ -490,7 +539,13 @@ That’s why we’ve handpicked our Top 10 dining experiences and paired them wi
             business or a friends’ night out. We’ll recommend the perfect restaurant, secure your booking
             and arrange a private chauffeur so your entire evening feels effortless from start to finish.
           </EmeraldSub>
-          <WhatsAppButton href="https://wa.link/r5z0sb" target="_blank">
+
+          <WhatsAppButton
+            href={buildWhatsAppUrl(getGeneralDiningMessage())}
+            target="_blank"
+            rel="noreferrer"
+            onClick={(e) => handleWhatsAppClick(e, buildWhatsAppUrl(getGeneralDiningMessage()))}
+          >
             <FaWhatsapp size={20} /> Chat to Your Concierge
           </WhatsAppButton>
         </EmeraldBlock>

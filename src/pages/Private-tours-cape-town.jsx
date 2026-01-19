@@ -125,6 +125,29 @@ const FAQWrapper = styled.div`
   margin: 50px 0 70px;
 `;
 
+/* ---------- WhatsApp CTA Button ---------- */
+const WhatsAppButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #111;
+  padding: 13px 28px;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 14px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: 0.25s ease;
+  border: 1px solid #111;
+  cursor: pointer;
+
+  &:hover {
+    background: #222;
+    transform: translateY(-1px);
+  }
+`;
+
 /* ---------------- Component ---------------- */
 const PrivateToursCapeTown = () => {
   const [formData, setFormData] = useState({
@@ -148,6 +171,30 @@ const PrivateToursCapeTown = () => {
     emailjs
       .send("service_ptqtluk", "template_uyicl9l", formData, "apNJP_9sXnff2q82W")
       .then(() => setFormSubmitted(true));
+  };
+
+  /* ✅ WhatsApp helpers (uses paid-only tracking from index.html if available) */
+  const WHATSAPP_NUMBER = "27636746131";
+
+  const buildWhatsAppUrl = (message) => {
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  };
+
+  const WCT_openWhatsApp = (url) => {
+    // Use your paid-only conversion logic if it exists
+    if (window.WCT_trackWhatsAppConversionAndOpen) {
+      return window.WCT_trackWhatsAppConversionAndOpen(url);
+    }
+    // Fallback
+    window.open(url, "_blank", "noopener,noreferrer");
+    return false;
+  };
+
+  const openPrivateTourWhatsApp = () => {
+    const msg =
+      "Hi Cape Town Concierge, I’d like to reserve a private experience. Date: ____ | Guests: ____ | Budget: ____";
+    const url = buildWhatsAppUrl(msg);
+    WCT_openWhatsApp(url);
   };
 
   /* --- SEO-optimised FAQs for "private tours Cape Town" --- */
@@ -185,10 +232,7 @@ const PrivateToursCapeTown = () => {
     mainEntity: faqs.map((f) => ({
       "@type": "Question",
       name: f.title,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: f.text,
-      },
+      acceptedAnswer: { "@type": "Answer", text: f.text },
     })),
   };
 
@@ -229,11 +273,7 @@ const PrivateToursCapeTown = () => {
           content="https://www.whycapetown.com/private-tours-cape-town"
         />
         <meta name="twitter:card" content="summary_large_image" />
-
-        {/* FAQ schema for SEO */}
-        <script type="application/ld+json">
-          {JSON.stringify(faqSchema)}
-        </script>
+        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
 
       <Header />
@@ -263,6 +303,13 @@ const PrivateToursCapeTown = () => {
                 <li>✓ Custom routes: Cape Peninsula, Winelands, safari & more</li>
                 <li>✓ Ideal for couples, families & small groups</li>
               </HeroList>
+
+              {/* ✅ HERO CTA (tracked) */}
+              <div style={{ marginTop: 18 }}>
+                <WhatsAppButton type="button" onClick={openPrivateTourWhatsApp}>
+                  WhatsApp to Reserve
+                </WhatsAppButton>
+              </div>
             </HeroContent>
           </HeroInner>
         </div>
@@ -284,22 +331,18 @@ const PrivateToursCapeTown = () => {
 
           <SectionTitle>Why Choose a Private Tour in Cape Town?</SectionTitle>
           <BulletList>
-            <li>
-              Private tours tailored to your pace — no rushing from stop to stop
-            </li>
-            <li>
-              Chauffeur-driven comfort with a local expert who knows Cape Town
-              deeply
-            </li>
-            <li>
-              Flexible routes: Cape Peninsula, Table Mountain, Winelands, city
-              and safari day trips
-            </li>
-            <li>
-              Photo stops, restaurant bookings and hidden viewpoints built into
-              your day
-            </li>
+            <li>Private tours tailored to your pace — no rushing from stop to stop</li>
+            <li>Chauffeur-driven comfort with a local expert who knows Cape Town deeply</li>
+            <li>Flexible routes: Cape Peninsula, Table Mountain, Winelands, city and safari day trips</li>
+            <li>Photo stops, restaurant bookings and hidden viewpoints built into your day</li>
           </BulletList>
+
+          {/* ✅ MID-PAGE CTA (tracked) */}
+          <div style={{ margin: "10px 0 34px" }}>
+            <WhatsAppButton type="button" onClick={openPrivateTourWhatsApp}>
+              Check Availability on WhatsApp
+            </WhatsAppButton>
+          </div>
 
           <SectionTitle>Popular Private Day Tours in Cape Town</SectionTitle>
           <Paragraph>
@@ -315,82 +358,28 @@ const PrivateToursCapeTown = () => {
             <TestimonialCarousel />
           </Suspense>
 
-          {/* 💎 CTA SECTION (WhatsApp / enquiry etc.) */}
+          {/* 💎 CTA SECTION (keep as-is; you can update inside CTASection too) */}
           <CTASection />
 
           {/* 🌍 Private Tour Packages List */}
           <SectionTitle>Private Tour Packages in Cape Town</SectionTitle>
           <Paragraph>
-            Browse our curated selection of <strong>private tours in Cape Town</strong>{" "}
-            below. Each tour can be customised by switch­ing activities, start
-            times or adding extra days to match your ideal itinerary.
+            Browse our curated selection of{" "}
+            <strong>private tours in Cape Town</strong> below. Each tour can be
+            customised by switch­ing activities, start times or adding extra days
+            to match your ideal itinerary.
           </Paragraph>
 
           <Suspense fallback={<ShimmerBox height="300px" />}>
             <ToursList />
           </Suspense>
 
-          {/* OPTIONAL CONTACT FORM (still here if you want to re-enable later) */}
-          {/* 
-          <div className="tf-section tf-item-details">
-            <div className="container">
-              <div className="content-center">
-                <div className="sc-item-details">
-                  {formSubmitted ? (
-                    <div className="thank-you-message">
-                      <h2>Thank You!</h2>
-                      <p>We’ll be in touch shortly to help plan your trip.</p>
-                    </div>
-                  ) : (
-                    <Fragment>
-                      <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                        Tell us what kind of private tour you’re looking for.
-                      </h1>
-
-                      <div className="form-inner">
-                        <form onSubmit={handleSubmit}>
-                          <input
-                            type="text"
-                            name="name"
-                            value={formData.name}
-                            placeholder="Your Name"
-                            onChange={handleChange}
-                          />
-                          <input
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            placeholder="Your Email"
-                            onChange={handleChange}
-                          />
-                          {formError && <p style={{ color: "red" }}>{formError}</p>}
-
-                          <input
-                            type="date"
-                            name="tourDate"
-                            value={formData.tourDate}
-                            onChange={handleChange}
-                          />
-
-                          <textarea
-                            name="message"
-                            value={formData.message}
-                            placeholder="Tell us about your ideal private tour in Cape Town"
-                            onChange={handleChange}
-                          ></textarea>
-
-                          <button type="submit" className="sc-button loadmore style fl-button pri-3">
-                            <span>Enquire Now</span>
-                          </button>
-                        </form>
-                      </div>
-                    </Fragment>
-                  )}
-                </div>
-              </div>
-            </div>
+          {/* ✅ BOTTOM CTA (tracked) */}
+          <div style={{ marginTop: 34 }}>
+            <WhatsAppButton type="button" onClick={openPrivateTourWhatsApp}>
+              Chat to Your Concierge
+            </WhatsAppButton>
           </div>
-          */}
 
           {/* 🔍 FAQ SECTION FOR SEO */}
           <FAQWrapper>
@@ -398,9 +387,7 @@ const PrivateToursCapeTown = () => {
             <div className="flat-accordion2">
               {faqs.map((item, i) => (
                 <Accordion key={i} title={item.title}>
-                  <p style={{ fontSize: "16px", lineHeight: 1.8 }}>
-                    {item.text}
-                  </p>
+                  <p style={{ fontSize: "16px", lineHeight: 1.8 }}>{item.text}</p>
                 </Accordion>
               ))}
             </div>
