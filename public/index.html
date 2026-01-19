@@ -66,18 +66,18 @@
     function gtag_report_conversion(url) {
       var callback = function () {
         if (typeof(url) != 'undefined') {
-          window.location = url;
+          window.location = url; // redirect after conversion fires
         }
       };
       gtag('event', 'conversion', {
-          'send_to': 'AW-11020060137/_NW4CPTYxugbEOmL44Yp',
-          'event_callback': callback
+        'send_to': 'AW-11020060137/_NW4CPTYxugbEOmL44Yp',
+        'event_callback': callback
       });
       return false;
     }
   </script>
 
-  <!-- ✅ NEW: Capture & persist gclid (ONLY count conversions from Google Ads) -->
+  <!-- ✅ Capture & persist gclid (ONLY count conversions from Google Ads) -->
   <script>
     (function () {
       try {
@@ -91,7 +91,7 @@
     })();
   </script>
 
-  <!-- ✅ NEW: Global helpers for paid-only conversion tracking + WhatsApp open -->
+  <!-- ✅ Global helpers for paid-only conversion tracking + WhatsApp open -->
   <script>
     (function () {
       function hasValidGclid() {
@@ -110,12 +110,10 @@
         }
       }
 
-      // Expose "is this a paid Google Ads visit?" to React pages
       window.WCT_isPaidGoogleAdsVisit = function () {
         return hasValidGclid();
       };
 
-      // Expose a helper to track conversion ONLY if paid, then open WhatsApp
       window.WCT_trackWhatsAppConversionAndOpen = function (url) {
         var paid = window.WCT_isPaidGoogleAdsVisit && window.WCT_isPaidGoogleAdsVisit();
 
@@ -160,7 +158,7 @@
 
   <!-- Floating WhatsApp (site-wide) -->
   <a
-    href="https://wa.link/r5z0sb"
+    href="https://wa.me/27636746131?text=Hi%20there%2C%20I%20would%20like%20to%20book%20a%20winelands%20chauffeur%20drive%20for%20the%20following%20date%3A%20______"
     class="floating-whatsapp"
     target="_blank"
     rel="noopener noreferrer"
