@@ -99,10 +99,10 @@ const BudgetCars4Hire = forwardRef((props, ref) => {
       <Fragment ref={ref}>
         <section className="tf-explore-2 tf-section live-auctions">
           <div className="themesflat-container">
-            <h2 className="tf-title-heading ct style-2 mg-bt-13">Budget-Friendly Options</h2>
-            <p className="sub-title ct small mg-bt-20 pad-420">
-              Affordable comfort, style, and reliability.
-            </p>
+            <h2 className="tf-title-heading ct style-2 mg-bt-13">Your Transport Options</h2>
+            {/* <p className="sub-title ct small mg-bt-20 pad-420">
+              Explore Cape Town in Comfortable 
+            </p> */}
 
             {loading ? (
               <div style={{ display: 'flex', gap: '20px', overflowX: 'auto' }}>
@@ -164,7 +164,7 @@ const BudgetCars4Hire = forwardRef((props, ref) => {
                           marginTop: '6px',
                         }}
                       >
-                        <span style={{ fontSize: '15px', color: '#555' }}>Starting from:</span>
+                        {/* <span style={{ fontSize: '15px', color: '#555' }}>Starting from:</span>
                         <span
                           style={{
                             fontSize: '20px',
@@ -173,7 +173,7 @@ const BudgetCars4Hire = forwardRef((props, ref) => {
                           }}
                         >
                           R{Math.round(item.car?.price)} / Per Day
-                        </span>
+                        </span> */}
                       </div>
 
                       <center>

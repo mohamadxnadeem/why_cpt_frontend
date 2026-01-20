@@ -82,14 +82,16 @@ const PricingOfferCard = ({ price }) => {
   return (
     <Wrapper>
       <PriceCardWrapper>
-        <PriceTitle>Private Tour Price</PriceTitle>
+        <PriceTitle>Private Chauffeur Price Starting From</PriceTitle>
 
         <PriceValue>
           {SYMBOLS[currency]}
           {Math.round(convertedPrice).toLocaleString()}
         </PriceValue>
 
-        <Label>Per Private Tour up to 8 pax (not per person)</Label>
+        <Label>Price Includes vehicle, driver, fuel and toll fees</Label>
+
+         <Label>Price Excludes National Park Tickets, Activities and Meals</Label>
 
         {/* Currency Dropdown */}
         <CurrencySelector

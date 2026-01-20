@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useParams } from "react-router-dom";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
@@ -11,6 +11,13 @@ import TestimonialCarousel from "../components/TestimonialCarousel";
 import { Accordion } from "react-bootstrap-accordion";
 import { FaWhatsapp } from "react-icons/fa";
 import PricingOfferCard from "../components/PricingOfferCard";
+
+const Cars4Hire = React.lazy(() =>
+  import("../components/Cars4hire")
+);
+const BudgetCars4Hire = React.lazy(() =>
+  import("../components/BudgetCars")
+);
 
 /* ---------------- Shimmer for slider ---------------- */
 const LoaderWrapper = styled.div`
@@ -213,14 +220,12 @@ const ItemDetails01 = () => {
       ) {
         detected = "EUR";
       } else if (!lang.toLowerCase().includes("za")) {
-        // if not obviously South African but also not EU/US/UK, default to USD
         detected = "USD";
       }
 
       setSelectedCurrency(detected);
     }
 
-    // fetch live exchange rates; default base is usually EUR
     const fetchRates = async () => {
       try {
         const res = await fetch(
@@ -262,8 +267,6 @@ const ItemDetails01 = () => {
     if (selectedCurrency === "ZAR" || !rateZAR || !rateTarget) {
       displayPrice = basePriceZAR;
     } else {
-      // rates are expressed vs common base (likely EUR), so use the ratio
-      // price_in_target = price_in_ZAR * (rateTarget / rateZAR)
       displayPrice = basePriceZAR * (rateTarget / rateZAR);
     }
   }
@@ -274,12 +277,29 @@ const ItemDetails01 = () => {
       : "https://www.whycapetown.com/private-tours-cape-town";
 
   // WhatsApp CTA dynamic text
-  const tourName =
-    experience?.title || "Cape Town Private Tour & Experience";
+  const tourName = experience?.title || "Cape Town Private Tour & Experience";
   const whatsappMessage = `Hello, I would like to book the ${tourName} for ___ people.\nPreferred date: _______`;
   const whatsappLink = `https://wa.me/27636746131?text=${encodeURIComponent(
     whatsappMessage
   )}`;
+
+  // ✅ NEW: paid-only WhatsApp conversion tracking (uses helper you added in index.html)
+  const trackWhatsApp = (url) => {
+    try {
+      if (
+        typeof window !== "undefined" &&
+        typeof window.WCT_trackWhatsAppConversionAndOpen === "function"
+      ) {
+        window.WCT_trackWhatsAppConversionAndOpen(url);
+        return;
+      }
+    } catch (e) {
+      // fall back below
+    }
+
+    // fallback: still open WhatsApp
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
 
   /* ---------- SEO-optimised FAQs for tour details ---------- */
   const faqs = [
@@ -321,9 +341,7 @@ const ItemDetails01 = () => {
   return (
     <div className="item-details">
       <Helmet>
-        <title>
-          {tourName} | Private Tour in Cape Town with Chauffeur
-        </title>
+        <title>{tourName} | Private Tour in Cape Town with Chauffeur</title>
         <meta
           name="description"
           content={
@@ -336,23 +354,15 @@ const ItemDetails01 = () => {
           content="private tour Cape Town, Cape Town private tours, Cape Peninsula tour, Cape Town chauffeur, private day trips Cape Town"
         />
         <link rel="canonical" href={canonicalUrl} />
-        <meta
-          property="og:title"
-          content={`${tourName} | Private Tour Cape Town`}
-        />
+        <meta property="og:title" content={`${tourName} | Private Tour Cape Town`} />
         <meta
           property="og:description"
           content={`Chauffeur-driven private tour: ${tourName} in Cape Town. Door-to-door service, flexible itinerary and curated highlights.`}
         />
         <meta property="og:url" content={canonicalUrl} />
-        {experience?.og_image && (
-          <meta property="og:image" content={experience.og_image} />
-        )}
+        {experience?.og_image && <meta property="og:image" content={experience.og_image} />}
 
-        {/* FAQ structured data for this tour */}
-        <script type="application/ld+json">
-          {JSON.stringify(faqSchema)}
-        </script>
+        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
 
       <Header />
@@ -391,17 +401,19 @@ const ItemDetails01 = () => {
 
           {/* PACKAGE BODY */}
           {!loading && experience?.body && (
-            <div className="content-center sc-item-details">
-              {parse(experience.body)}
-            </div>
+            <div className="content-center sc-item-details">{parse(experience.body)}</div>
           )}
 
-         {/* PRICING COMPONENT */}
-          {!loading && experience?.price && (
-            <PricingOfferCard price={experience.price} />
-          )}
+          {/* PRICING COMPONENT */}
+          {!loading && experience?.price && <PricingOfferCard price={experience.price} />}
 
-          {/* WHATSAPP CTA */}
+
+  
+          <Suspense fallback={<div style={{ height: 300 }} />}>
+            <BudgetCars4Hire />
+          </Suspense>
+
+          {/* WHATSAPP CTA (tracked) */}
           <EmeraldBlock>
             <EmeraldTitle>Ready to Reserve This Private Tour?</EmeraldTitle>
             <EmeraldSub>
@@ -410,7 +422,16 @@ const ItemDetails01 = () => {
               <strong>tour name and preferred dates</strong>, and your concierge
               will confirm availability and next steps.
             </EmeraldSub>
-            <WhatsAppButton href={whatsappLink} target="_blank" rel="noreferrer">
+
+            <WhatsAppButton
+              href={whatsappLink}
+              target="_blank"
+              rel="noreferrer"
+              onClick={(e) => {
+                e.preventDefault();
+                trackWhatsApp(whatsappLink);
+              }}
+            >
               <FaWhatsapp size={20} />
               Chat on WhatsApp About {tourName}
             </WhatsAppButton>
@@ -421,19 +442,11 @@ const ItemDetails01 = () => {
 
           {/* FAQ SECTION */}
           <FAQWrapper>
-            <SectionTitle>
-              Private Tours in Cape Town – Frequently Asked Questions
-            </SectionTitle>
+            <SectionTitle>Private Tours in Cape Town – Frequently Asked Questions</SectionTitle>
             <div className="flat-accordion2">
               {faqs.map((item, i) => (
                 <Accordion key={i} title={item.title}>
-                  <p
-                    style={{
-                      fontSize: "16px",
-                      lineHeight: 1.8,
-                      whiteSpace: "pre-line",
-                    }}
-                  >
+                  <p style={{ fontSize: "16px", lineHeight: 1.8, whiteSpace: "pre-line" }}>
                     {item.text}
                   </p>
                 </Accordion>

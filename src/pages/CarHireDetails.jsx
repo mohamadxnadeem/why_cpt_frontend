@@ -341,14 +341,29 @@ const CarHireDetails = () => {
       }. Professional driver, fuel included and up to 10 hours / 200km per day. Perfect for airport transfers, business and private tours.`
     : "Book luxury chauffeur-driven vehicles in Cape Town with professional drivers, fuel included and customised daily itineraries.";
 
-  // ✅ Dynamic WhatsApp CTA link (with vehicle name & dates prompt)
+  // ✅ WhatsApp
   const whatsappNumber = "27636746131"; // no '+' for wa.me
   const waText = car
-    ? `Hello, I would like to book the ${vehicleName} for the following dates: `
-    : "Hello, I would like to book a chauffeur vehicle for the following dates: ";
+    ? `Hi Cape Town Concierge, I’d like to reserve ${vehicleName}. Date: ____ | Guests: ____ | Budget: ____`
+    : "Hi Cape Town Concierge, I’d like to reserve a private experience. Date: ____ | Guests: ____ | Budget: ____";
+
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
     waText
   )}`;
+
+  // ✅ Paid-only WhatsApp click tracker (uses your index.html helper)
+  const handleWhatsAppClick = (e) => {
+    e.preventDefault();
+    const url = whatsappLink;
+
+    if (window.WCT_trackWhatsAppConversionAndOpen) {
+      window.WCT_trackWhatsAppConversionAndOpen(url);
+      return;
+    }
+
+    // fallback
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
 
   // ✅ FAQ content (SEO–oriented, vehicle-aware)
   const faqs = [
@@ -549,17 +564,19 @@ Your driver will assist with luggage, route optimisation and smooth timing betwe
             </div>
           </DetailsGrid>
 
-          {/* 🟢 High-Intent WhatsApp CTA */}
+          {/* 🟢 High-Intent WhatsApp CTA (tracked for paid Google Ads only) */}
           <EmeraldBlock>
             <EmeraldTitle>Ready to Reserve This Vehicle?</EmeraldTitle>
             <EmeraldSub>
               Weekends and peak season book out quickly. Send us your dates and
               we’ll confirm availability and final pricing for this vehicle.
             </EmeraldSub>
+
             <WhatsAppButton
               href={whatsappLink}
               target="_blank"
               rel="noreferrer"
+              onClick={handleWhatsAppClick}
             >
               <FaWhatsapp size={20} />
               Chat with a Chauffeur Concierge on WhatsApp
@@ -594,115 +611,7 @@ Your driver will assist with luggage, route optimisation and smooth timing betwe
             </div>
           </FAQSection>
 
-          {/* 📨 ENQUIRY FORM (optional — still here if you want to re-enable)
-          
-          <div className="tf-section tf-item-details">
-            <div className="container">
-              <div className="row">
-                <div className="col-md-12">
-                  <div className="content-center">
-                    <div className="sc-item-details">
-                      {formSubmitted ? (
-                        <ThankYouBox>
-                          <h2>Thank you!</h2>
-                          <p>
-                            Your enquiry has been received. Your chauffeur concierge
-                            will be in touch shortly to confirm availability and
-                            finalise your booking.
-                          </p>
-                        </ThankYouBox>
-                      ) : (
-                        <>
-                          <FormTitle>Prefer Email? Send Us Your Details</FormTitle>
-                          <FormSubText>
-                            Share your dates, pick-up area and group size below and
-                            we’ll reply with availability and tailored options for
-                            this vehicle.
-                          </FormSubText>
-
-                          <div className="form-inner">
-                            <form
-                              id="contactform"
-                              noValidate="novalidate"
-                              onSubmit={handleSubmit}
-                            >
-                              <div className="row">
-                                <div className="col-md-12">
-                                  <input
-                                    type="text"
-                                    name="name"
-                                    value={formData.name}
-                                    placeholder="Full Name"
-                                    onChange={handleChange}
-                                  />
-                                </div>
-
-                                <div className="col-md-12">
-                                  <input
-                                    type="email"
-                                    name="email"
-                                    value={formData.email}
-                                    placeholder="Email Address"
-                                    onChange={handleChange}
-                                  />
-                                  {formError && <ErrorText>{formError}</ErrorText>}
-                                </div>
-
-                                <div className="col-md-12">
-                                  <label
-                                    style={{
-                                      display: "block",
-                                      marginBottom: "6px",
-                                      fontWeight: 500,
-                                      color: "#555",
-                                    }}
-                                  >
-                                    Preferred Date
-                                  </label>
-                                  <input
-                                    type="date"
-                                    name="tourDate"
-                                    value={formData.tourDate}
-                                    onChange={handleChange}
-                                    style={{
-                                      width: "100%",
-                                      padding: "12px",
-                                      borderRadius: "8px",
-                                      border: "1px solid #ccc",
-                                      fontSize: "16px",
-                                    }}
-                                  />
-                                </div>
-
-                                <div className="col-md-12">
-                                  <textarea
-                                    name="message"
-                                    value={formData.message}
-                                    placeholder="Tell us your pick-up location, number of guests and any special requirements."
-                                    onChange={handleChange}
-                                  ></textarea>
-                                </div>
-
-                                <div className="col-md-12">
-                                  <button
-                                    type="submit"
-                                    className="sc-button loadmore style fl-button pri-3"
-                                  >
-                                    <span>Enquire About This Vehicle</span>
-                                  </button>
-                                </div>
-                              </div>
-                            </form>
-                          </div>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          */}
+          {/* (form stays commented out) */}
         </div>
       </PageContainer>
 
