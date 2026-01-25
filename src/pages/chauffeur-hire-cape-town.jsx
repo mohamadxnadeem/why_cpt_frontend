@@ -275,18 +275,18 @@ const AirportTransfers = () => {
         </Suspense>
 
         {/* GUIDE */}
-        <VehicleGuide>
+        {/* <VehicleGuide>
           <VehicleGuideTitle>Which Vehicle Is Best for You?</VehicleGuideTitle>
-          <GuideRow><span>VIP / CEO Transfer</span><span>Mercedes S-Class</span></GuideRow>
-          <GuideRow><span>Executive</span><span>Mercedes E-Class</span></GuideRow>
-          <GuideRow><span>Solo / Couples</span><span>Mercedes C-Class</span></GuideRow>
+          <GuideRow><span>VIP / CEO Transfer</span><span>Range Rover</span></GuideRow>
+          <GuideRow><span>Executive</span><span>BMW 5 Series</span></GuideRow>
+          <GuideRow><span>Solo / Couples</span><span>Audi A4</span></GuideRow>
           <GuideRow><span>3–6 Guests</span><span>Mercedes V-Class</span></GuideRow>
           <GuideRow><span>6–9 Guests</span><span>Hyundai Staria</span></GuideRow>
-        </VehicleGuide>
+        </VehicleGuide> */}
 
         {/* Cars */}
         <Suspense fallback={<div style={{ height: 300 }} />}>
-          <Cars4Hire />
+          <BudgetCars4Hire />
         </Suspense>
 
         <IncludedBox>
@@ -300,9 +300,7 @@ const AirportTransfers = () => {
           </IncludedList>
         </IncludedBox>
 
-        <Suspense fallback={<div style={{ height: 300 }} />}>
-          <BudgetCars4Hire />
-        </Suspense>
+      
 
         {/* FAQ SECTION */}
         <SectionTitle>Frequently Asked Questions</SectionTitle>

@@ -99,10 +99,10 @@ const BudgetCars4Hire = forwardRef((props, ref) => {
       <Fragment ref={ref}>
         <section className="tf-explore-2 tf-section live-auctions">
           <div className="themesflat-container">
-            <h2 className="tf-title-heading ct style-2 mg-bt-13">Your Transport Options</h2>
-            {/* <p className="sub-title ct small mg-bt-20 pad-420">
-              Explore Cape Town in Comfortable 
-            </p> */}
+            <h2 className="tf-title-heading ct style-2 mg-bt-13">Our Fleet</h2>
+            <p className="sub-title ct small mg-bt-20 pad-420">
+              With professional driver (tour guide) to chauffeur you around the best spots in and around Cape Town 
+            </p>
 
             {loading ? (
               <div style={{ display: 'flex', gap: '20px', overflowX: 'auto' }}>
@@ -156,6 +156,9 @@ const BudgetCars4Hire = forwardRef((props, ref) => {
                         </p>
                       )} */}
 
+                        <span style={{ fontSize: '15px', color: '#555' }}>Up to {item.car.number_of_seats} Passengers</span>
+
+
                       <div
                         style={{
                           display: 'flex',
@@ -163,8 +166,9 @@ const BudgetCars4Hire = forwardRef((props, ref) => {
                           gap: '6px',
                           marginTop: '6px',
                         }}
+                        
                       >
-                        {/* <span style={{ fontSize: '15px', color: '#555' }}>Starting from:</span>
+                        <span style={{ fontSize: '15px', color: '#555' }}>Starting from:</span>
                         <span
                           style={{
                             fontSize: '20px',
@@ -173,17 +177,17 @@ const BudgetCars4Hire = forwardRef((props, ref) => {
                           }}
                         >
                           R{Math.round(item.car?.price)} / Per Day
-                        </span> */}
+                        </span>
                       </div>
 
-                      <center>
+                      {/* <center>
                         <Link
                           to={`/car-hire/${item.car?.id}`}
                           className="sc-button loadmore style fl-button pri-3"
                         >
                           <span>View Details</span>
                         </Link>
-                      </center>
+                      </center> */}
                     </div>
                   </SwiperSlide>
                 ))}

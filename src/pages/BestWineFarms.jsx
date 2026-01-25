@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { Helmet } from "react-helmet";
 import styled, { createGlobalStyle, keyframes } from "styled-components";
 import Header from "../components/header/Header";
@@ -14,6 +14,13 @@ import winetram from "../assets/images/winefarms/winetram.jpg";
 
 import { FaWhatsapp } from "react-icons/fa";
 import { Accordion } from "react-bootstrap-accordion";
+
+import TestimonialCarousel from "../components/TestimonialCarousel";
+
+
+const BudgetCars4Hire = React.lazy(() =>
+  import("../components/BudgetCars")
+);
 
 /* GLOBAL STYLE */
 const GlobalStyle = createGlobalStyle`
@@ -445,6 +452,19 @@ We curated the top 5 must-experience wine adventures so you enjoy luxury tasting
             <FarmCardItem key={farm.name} farm={farm} index={index} />
           ))}
         </FarmsWrapper>
+
+
+
+
+        <Suspense fallback={<div style={{ height: 300 }} />}>
+          <BudgetCars4Hire />
+        </Suspense>
+
+        <Suspense fallback={<div>Loading testimonials...</div>}>
+          <TestimonialCarousel />
+        </Suspense>
+
+
 
         {/* FAQ SECTION */}
         <SectionTitle>Frequently Asked Questions</SectionTitle>
