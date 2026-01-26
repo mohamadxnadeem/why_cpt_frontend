@@ -1,4 +1,4 @@
-import React, { useState, useEffect, forwardRef, Fragment } from 'react';
+import React, { useState, useEffect, forwardRef, Fragment, useMemo } from 'react';
 // import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
@@ -44,9 +44,48 @@ const ImageStyled = styled.img`
   border-radius: 10px;
 `;
 
+/* ✅ Sort UI */
+const HeaderRow = styled.div`
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+`;
+
+const SortWrap = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+const SortLabel = styled.label`
+  font-size: 14px;
+  color: #555;
+  font-weight: 600;
+`;
+
+const SortSelect = styled.select`
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+
+  &:focus {
+    border-color: #0b5b33;
+  }
+`;
+
 const BudgetCars4Hire = forwardRef((props, ref) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // ✅ NEW: sort state
+  const [sortBy, setSortBy] = useState('price_asc'); // default low -> high
 
   // ✅ Load & refetch logic
   useEffect(() => {
@@ -94,15 +133,64 @@ const BudgetCars4Hire = forwardRef((props, ref) => {
 
   const handleImageError = (e) => (e.target.style.display = 'none');
 
+  // ✅ Sorted view (does not mutate original `data`)
+  const sortedData = useMemo(() => {
+    const arr = [...data];
+
+    const getPrice = (x) => Number(x?.car?.price || 0);
+    const getSeats = (x) => Number(x?.car?.number_of_seats || 0);
+    const getTitle = (x) => String(x?.car?.title || '');
+
+    switch (sortBy) {
+      case 'price_desc':
+        arr.sort((a, b) => getPrice(b) - getPrice(a));
+        break;
+
+      case 'seats_desc':
+        arr.sort((a, b) => getSeats(b) - getSeats(a));
+        break;
+
+      case 'title_asc':
+        arr.sort((a, b) => getTitle(a).localeCompare(getTitle(b)));
+        break;
+
+      case 'price_asc':
+      default:
+        arr.sort((a, b) => getPrice(a) - getPrice(b));
+        break;
+    }
+
+    return arr;
+  }, [data, sortBy]);
+
   return (
     <FlipMove>
       <Fragment ref={ref}>
         <section className="tf-explore-2 tf-section live-auctions">
           <div className="themesflat-container">
-            <h2 className="tf-title-heading ct style-2 mg-bt-13">Our Fleet</h2>
-            <p className="sub-title ct small mg-bt-20 pad-420">
-              With professional driver (tour guide) to chauffeur you around the best spots in and around Cape Town 
-            </p>
+            <HeaderRow>
+              <div>
+                <h2 className="tf-title-heading ct style-2 mg-bt-13">Our Fleet</h2>
+                <p className="sub-title ct small mg-bt-20 pad-420">
+                  With professional driver (tour guide) to chauffeur you around the best spots in and around Cape Town
+                </p>
+              </div>
+
+              {/* ✅ Sort dropdown */}
+              <SortWrap>
+                <SortLabel htmlFor="fleet-sort">Sort:</SortLabel>
+                <SortSelect
+                  id="fleet-sort"
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                >
+                  <option value="price_asc">Price: Low → High</option>
+                  <option value="price_desc">Price: High → Low</option>
+                  <option value="seats_desc">Seats: High → Low</option>
+                  <option value="title_asc">Name: A → Z</option>
+                </SortSelect>
+              </SortWrap>
+            </HeaderRow>
 
             {loading ? (
               <div style={{ display: 'flex', gap: '20px', overflowX: 'auto' }}>
@@ -130,8 +218,8 @@ const BudgetCars4Hire = forwardRef((props, ref) => {
                 }}
                 pagination={{ clickable: true }}
               >
-                {data.map((item, index) => (
-                  <SwiperSlide key={index}>
+                {sortedData.map((item, index) => (
+                  <SwiperSlide key={item.car?.id || index}>
                     <div className="sc-card-product">
                       <div className="card-media">
                         <SlideContainer>
@@ -150,14 +238,9 @@ const BudgetCars4Hire = forwardRef((props, ref) => {
 
                       <h5 className="style2">{item.car?.title}</h5>
 
-                      {/* {item.car?.number_of_seats && (
-                        <p style={{ fontSize: '14px', color: '#6f6f6f', marginTop: '6px' }}>
-                          Up to {item.car.number_of_seats} guests
-                        </p>
-                      )} */}
-
-                        <span style={{ fontSize: '15px', color: '#555' }}>Up to {item.car.number_of_seats} Passengers</span>
-
+                      <span style={{ fontSize: '15px', color: '#555' }}>
+                        Up to {item.car?.number_of_seats} Passengers
+                      </span>
 
                       <div
                         style={{
@@ -166,7 +249,6 @@ const BudgetCars4Hire = forwardRef((props, ref) => {
                           gap: '6px',
                           marginTop: '6px',
                         }}
-                        
                       >
                         <span style={{ fontSize: '15px', color: '#555' }}>Starting from:</span>
                         <span
@@ -180,14 +262,16 @@ const BudgetCars4Hire = forwardRef((props, ref) => {
                         </span>
                       </div>
 
-                      {/* <center>
+                      {/*
+                      <center>
                         <Link
                           to={`/car-hire/${item.car?.id}`}
                           className="sc-button loadmore style fl-button pri-3"
                         >
                           <span>View Details</span>
                         </Link>
-                      </center> */}
+                      </center>
+                      */}
                     </div>
                   </SwiperSlide>
                 ))}
