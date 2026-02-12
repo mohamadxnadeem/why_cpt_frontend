@@ -178,11 +178,11 @@ const Packages = forwardRef((props, ref) => {
                         </div>
 
                         {/* ✅ Updated Pricing */}
-                        <PriceRow>
+                        {/* <PriceRow>
                           <PriceLabel>
                             Starting from: <PriceValueInline>${Math.round(item.fullpackage.price)}</PriceValueInline>
                           </PriceLabel>
-                        </PriceRow>
+                        </PriceRow> */}
 
                         <center>
                           <Link

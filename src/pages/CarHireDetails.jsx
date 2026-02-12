@@ -377,7 +377,7 @@ const CarHireDetails = () => {
   const vehicleName = car?.title || "Chauffeur Vehicle";
 
   const pageTitle = car
-    ? `${vehicleName} for Hire from R${priceNumber || "____"} per Day in Cape Town`
+    ? `${vehicleName} for Hire from $${priceNumber || "____"} per Day in Cape Town`
     : "Chauffeur Vehicle Hire in Cape Town";
 
   const metaDescription = car
@@ -516,8 +516,8 @@ Your driver will assist with luggage, route optimisation and smooth timing betwe
           {!loading && car && (
             <HeaderBlock>
               <Title>
-                {vehicleName} for Hire from{" "}
-                {priceNumber ? `R${priceNumber}` : "a competitive rate"} per Day
+                {vehicleName} for Hire from ${""}
+                {priceNumber ? `${priceNumber}` : "a competitive rate"} per Day
                 in Cape Town
               </Title>
               <SubTitle>
@@ -565,7 +565,7 @@ Your driver will assist with luggage, route optimisation and smooth timing betwe
 
                 {priceNumber && (
                   <>
-                    <PriceValue>R{priceNumber} / day</PriceValue>
+                    <PriceValue>${priceNumber} / day</PriceValue>
 
                     {/* ✅ Discount banner directly under price */}
                     <DiscountBanner>

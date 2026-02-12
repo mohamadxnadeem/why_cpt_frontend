@@ -4,6 +4,7 @@ import styled, { createGlobalStyle } from "styled-components";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import { Accordion } from "react-bootstrap-accordion";
+import Packages from "../components/Packages";
 
 import backgroundImage from "../assets/images/item-background/benz.jpg";
 import { FaWhatsapp } from "react-icons/fa";
@@ -299,6 +300,8 @@ const AirportTransfers = () => {
             <li>Concierge support & reservations</li>
           </IncludedList>
         </IncludedBox>
+
+         <Packages />
 
       
 
