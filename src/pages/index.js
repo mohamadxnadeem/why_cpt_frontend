@@ -34,11 +34,17 @@ import TopRestaurantsCapeTown from './TopRestaurantsCapeTown';
 import TopWineFarmsCapeTown from './BestWineFarms';
 import TopActivitiesCapeTown from './TopActivitiesCapeTown';
 
+import BestHotelsCapeTown from './BestHotelsCapeTown';
 
 
+// =============================================================
 
+// Portal Imports
 
+import Dashboard from "../portal/admin/pages/Dashboard";
+import PortalLogin from "../portal/auth/pages/Login";
 
+import BookingCreate from "../portal/admin/pages/BookingCreate";
 
 
 
@@ -46,55 +52,37 @@ const routes = [
   
   { path: '/', component: <AirportTransfers />},
   // Dynamic Pages
-  
   { path: '/experience/:id', component: <ItemDetails01 />},
-
   { path: '/car-hire/:id', component: <CarHireDetails />},
-
-  
   { path: '/accomodation/:id', component: <AccomodationDetails />},
-
   { path: '/accomodation/:id', component: <AccomodationDetails />},
-
   { path: '/1-Bedroom-Apartments/:id', component: <OneBedroomDetials />},
   { path: '/2-Bedroom-Apartments/:id', component: <TwoBedroomDetails />},
   { path: '/penthouse-apartments/:id', component: <PenthouseDetails />},
   { path: '/luxury-villas-in-cape-town/:id', component: <VillaDetails />},
-  { path: '/best-hotels/:id', component: <HotelDetails />},
-  
-  
+  { path: '/hotel/:id', component: <HotelDetails />},
   { path: '/travel-package/:id', component: <TravelPackage />},
-
   { path: '/stays/', component: <Stays />},
-
   { path: '/chauffeur-hire-cape-town', component: <AirportTransfers />},
-
   { path: '/where-to-get-cannabis', component: <WhereToGetCannabis />},
-
   { path: '/full-packages-to-cape-town', component: <FullPackages />},
-
   { path: '/top-3-tours', component: <Top3Tours />},
-
   { path: '/safari', component: <Safari />},
-
-  { path: '/accomodation', component: <LuxuryVillas />},
-  
+  { path: '/accomodation', component: <LuxuryVillas />}, 
   { path: '/student-accomodation', component: <StudentAccomodation />},
-
   { path: '/top-10-resturants-in-cape-town', component: <TopRestaurantsCapeTown />},
   { path: '/top-5-winefarms-in-Cape-Town', component: <TopWineFarmsCapeTown />},
   { path: '/best-activities-to-do-in-cape-town', component: <TopActivitiesCapeTown />},
-
-
-
   { path: '/event-venues', component: <EventVenues />},
   { path: '/garden-route', component: <GardenRoute />},
   { path: '/vehicle-hire', component: <VehicleHire />},
-
-
-  
+  { path: '/best-hotels-in-cape-town', component: <BestHotelsCapeTown />},
   { path: '/private-tours-cape-town', component: <PrivateToursCapeTown />},
 
+  // 
+  { path: "/portal/admin/dashboard", component: <Dashboard /> },
+  { path: "/portal/login", component: <PortalLogin /> },
+  { path: "/portal/admin/bookings/new", component: <BookingCreate /> },
 ]
 
 export default routes;

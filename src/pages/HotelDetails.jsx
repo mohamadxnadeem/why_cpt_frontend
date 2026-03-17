@@ -1,183 +1,238 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import { useParams } from 'react-router-dom';
-import Header from '../components/header/Header';
-import Footer from '../components/footer/Footer';
-import LiveAuction from '../components/layouts/home-3/LiveAuction';
-import Rating from '../components/Rating';
-import Loader from '../components/Loader';
-import SliderStyle3 from '../components/slider/SliderStyle3';
-import { Blurhash } from 'react-blurhash';
-import 'react-tabs/style/react-tabs.css';
-import parse from 'html-react-parser';
-import styled from 'styled-components';
-import emailjs from 'emailjs-com';
-import Tours from '../components/Tours';
-import { Helmet } from 'react-helmet';
+import React, { useState, useEffect, Suspense } from "react";
+import { useParams } from "react-router-dom";
+import Header from "../components/header/Header";
+import Footer from "../components/footer/Footer";
+import SliderStyle3 from "../components/slider/SliderStyle3";
+import { Blurhash } from "react-blurhash";
+import parse from "html-react-parser";
+import styled, { keyframes } from "styled-components";
+import { Helmet } from "react-helmet";
+import { Accordion } from "react-bootstrap-accordion";
+import { FaWhatsapp } from "react-icons/fa";
 
-const LoaderWrapper = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: black;
+const TestimonialCarousel = React.lazy(() =>
+  import("../components/TestimonialCarousel")
+);
+
+/* ================= SHIMMER ================= */
+
+const shimmer = keyframes`
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+`;
+
+const ShimmerBox = styled.div`
+  background: linear-gradient(90deg, #e3e3e3 0%, #f5f5f5 50%, #e3e3e3 100%);
+  background-size: 800px 100%;
+  animation: ${shimmer} 1.2s infinite;
+  border-radius: 12px;
+  height: ${(p) => p.h || "20px"};
+  width: ${(p) => p.w || "100%"};
+  margin-bottom: 12px;
+`;
+
+/* ================= EMERALD CTA (same vibe as other pages) ================= */
+
+const EmeraldBlock = styled.div`
+  background: linear-gradient(135deg, #0b5b33 0%, #063e23 100%);
+  color: white;
+  border-radius: 18px;
+  padding: 42px 32px;
+  margin: 40px 0;
+  text-align: center;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
+`;
+
+const EmeraldTitle = styled.h2`
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #fff;
+`;
+
+const EmeraldSub = styled.p`
+  font-size: 17px;
+  opacity: 0.95;
+  margin-bottom: 18px;
+  color: #fff;
+  white-space: pre-line;
+`;
+
+const ButtonRow = styled.div`
   display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+`;
+
+const WhatsAppButton = styled.a`
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000; // Ensure it appears above other content
+  gap: 10px;
+  background: #111;
+  padding: 13px 26px;
+  color: #fff !important;
+  font-weight: 700;
+  border-radius: 14px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: 0.3s ease;
+  border: 1px solid #111;
+
+  &:hover {
+    background: #222;
+    transform: translateY(-1px);
+  }
 `;
+
+const SecondaryButton = styled(WhatsAppButton)`
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+`;
+
+/* ================= PAGE ================= */
 
 const HotelDetails = () => {
   const { id } = useParams();
+
   const [itemData, setItemData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const [formError, setFormError] = useState('');
 
-  const [formData, setFormData] = useState({
-    name: '',
-    message: '',
-    serviceType: '',
-    email: '',
-  });
+  // ✅ Paid-only WhatsApp conversion tracking (Google Ads only via gclid)
+  const handleWhatsAppClick = (e, url) => {
+    if (e && e.preventDefault) e.preventDefault();
 
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://assets.calendly.com/assets/external/widget.js';
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-  const openCalendlyPopup = (e) => {
-    e.preventDefault();
-    if (isMobile) {
-      window.open('https://calendly.com/mohamadxnadeem/30min', '_blank');
-    } else if (window.Calendly) {
-      window.Calendly.initPopupWidget({ url: 'https://calendly.com/mohamadxnadeem/30min' });
-    } else {
-      console.error("Calendly is not loaded yet");
+    if (window.WCT_trackWhatsAppConversionAndOpen) {
+      return window.WCT_trackWhatsAppConversionAndOpen(url);
     }
+
+    window.open(url, "_blank", "noopener,noreferrer");
     return false;
   };
 
+  // WhatsApp templates
+  const WHATSAPP_NUMBER = "27636746131";
+  const buildWhatsAppUrl = (message) =>
+    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+  /* ================= FETCH ================= */
+
   useEffect(() => {
     fetch(`https://web-production-1ab9.up.railway.app/api/hotel/${id}/details/`)
-      .then((response) => response.json())
+      .then((res) => res.json())
       .then((data) => {
         setItemData(data);
         setLoading(false);
-        setFormData((prevFormData) => ({
-          ...prevFormData,
-          serviceType: ` ${data.accomodation.title}`,
-        }));
       })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
+      .catch((err) => console.error(err));
   }, [id]);
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!emailPattern.test(formData.email)) {
-      setFormError('Please enter a valid email address.');
-      return;
-    }
-
-    setFormError('');
-
-    emailjs
-      .send('service_ptqtluk', 'template_uyicl9l', formData, 'apNJP_9sXnff2q82W')
-      .then(
-        (result) => {
-          console.log('Email successfully sent!');
-          setFormSubmitted(true);
-        },
-        (error) => {
-          console.log('There was an error sending the email:', error);
-        }
-      );
-  };
-
-  const heroSliderData = itemData && itemData.cover_photos
-    ? itemData.cover_photos.map((coverPhoto) => ({
-        src: coverPhoto.image.cover_photos,
-        blurhash: coverPhoto.blurhash,
-      }))
-    : [];
-
-  if (loading) {
+  if (loading || !itemData) {
     return (
-      <LoaderWrapper>
-        <Loader />
-      </LoaderWrapper>
+      <div style={{ padding: "120px 20px" }}>
+        <ShimmerBox h="38px" w="42%" />
+        <ShimmerBox h="18px" w="60%" />
+        <ShimmerBox h="320px" />
+        <ShimmerBox h="18px" w="90%" />
+        <ShimmerBox h="18px" w="80%" />
+      </div>
     );
   }
 
+  const hotel = itemData.hotel;
+
+  const heroSliderData = (itemData.images || []).map((img) => ({
+    src: img.image.cover_photos,
+    blurhash: img.blurhash,
+  }));
+
+  /* ================= FAQ + Schema ================= */
+
+  const faqs = [
+    {
+      title: `Where is ${hotel.title} located?`,
+      text: `${hotel.title} is located in ${hotel.area}. This area is one of the most popular choices for luxury travellers in Cape Town, depending on your itinerary and vibe.`,
+    },
+    {
+      title: `How much does ${hotel.title} cost per night?`,
+      text: `Rates are seasonal. A typical guide is from ${hotel.currency} ${hotel.min_price}${
+        hotel.max_price ? ` up to ${hotel.currency} ${hotel.max_price}` : ""
+      } per night, depending on room type and dates.`,
+    },
+    {
+      title: `Can you arrange the hotel + chauffeur + experiences?`,
+      text: `Yes. We can handle your hotel recommendation, booking assistance, airport transfers, private chauffeur days, Winelands and Peninsula experiences — all through one WhatsApp concierge.`,
+    },
+  ];
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.title,
+      acceptedAnswer: { "@type": "Answer", text: f.text },
+    })),
+  };
+
+  /* ================= WhatsApp Messages ================= */
+
+  const enquiryMsg = `Hi Cape Town Concierge, I’m interested in ${hotel.title}.\nDates: ____ | Guests: ____ | Budget per night: ____ | Any special requests: ____`;
+
+  const bookMsg = `Hi Cape Town Concierge, please help me book ${hotel.title}.\nDates: ____ | Guests: ____ | Room preference: ____ | Budget per night: ____`;
+
+  const chauffeurMsg = `Hi Cape Town Concierge, please arrange ${hotel.title} + a private chauffeur for my trip.\nDates: ____ | Guests: ____ | Airport transfer: ____ | Chauffeur days needed: ____`;
+
+  const ctaIntro = `
+Want the best rates + the best room options for ${hotel.title}?
+
+Message us with your dates and we’ll:
+• confirm availability
+• recommend the best room type
+• assist with booking + chauffeur planning
+`.trim();
+
+  /* ================= UI ================= */
+
   return (
-    <div className='item-details'>
+    <div className="item-details">
       <Helmet>
-        <title>Don't miss out on this accomodation if you're in Cape Town</title>
-        <meta name="description" content={itemData.accomodation.title + ('click for more info')} />
-        <meta property="og:title" content="Look what I found" />
+        <title>{hotel.title} | Luxury Hotel in {hotel.area}</title>
+        <meta name="description" content={hotel.meta_description || `${hotel.title} in ${hotel.area}. View details, photos and book with Cape Town Concierge.`} />
+        <meta property="og:title" content={hotel.title} />
+        <meta property="og:description" content={hotel.meta_description || `${hotel.title} in ${hotel.area}.`} />
+        <meta property="og:image" content={hotel.og_image || (heroSliderData[0]?.src || "")} />
+        <script type="application/ld+json">{JSON.stringify(schema)}</script>
       </Helmet>
+
       <Header />
+
+      {/* HERO */}
       <section className="flat-title-page inner">
         <div className="overlay"></div>
         <div className="themesflat-container">
-          <div className="row">
-            <div className="col-md-12">
-              {!loading && ( // Hide the header while loading
-                <center>
-                  <div className="page-title-heading mg-bt-12">
-                    <h4 className="tf-title-heading ct style-2 fs-30 mg-bt-10" style={{ color: 'white' }}>
-                      {itemData.accomodation.title}
-                    </h4>
-                    <h1 className="heading text-center">
-                      <Rating value={itemData.average_rating} color={'#f8e825'} />
-                    </h1>
-                  </div>
-                </center>
-              )}
-              <div className="breadcrumbs style2">
-                <ul>
-                  <li>Based on {itemData.reviews.length} reviews</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          <center>
+            <h4
+              className="tf-title-heading ct style-2 fs-30 mg-bt-10"
+              style={{ color: "white" }}
+            >
+              {hotel.title}
+            </h4>
+            <p style={{ color: "white" }}>{hotel.area}</p>
+          </center>
         </div>
       </section>
 
-     
-
-      {/* <Link
-        
-        to={`/top-3-tours`}
-        className="sc-button loadmore style fl-button pri-3"
-      >
-      <span>Back</span>
-    </Link> */}
-
+      {/* SLIDER */}
       <SliderStyle3
         data={heroSliderData}
         renderImage={(src, blurhash) => (
-          <div style={{ position: 'relative' }}>
+          <div style={{ position: "relative" }}>
             <Blurhash
               hash={blurhash}
               width={500}
@@ -185,133 +240,117 @@ const HotelDetails = () => {
               resolutionX={32}
               resolutionY={32}
               punch={1}
-              style={{ position: 'absolute', top: 0, left: 0, zIndex: 1 }}
+              style={{ position: "absolute", top: 0, left: 0 }}
             />
-            <img
-              src={src}
-              alt="Cover"
-              style={{ width: '100%', height: 'auto', position: 'relative', zIndex: 2 }}
-              onError={(e) => {
-                console.error('Error loading image:', e);
-                e.target.style.display = 'none';
-              }}
-              onLoad={() => {
-                console.log('Image loaded successfully:', src);
-              }}
-            />
+            <img src={src} alt={hotel.title} />
           </div>
         )}
       />
 
-      <div className="tf-section tf-item-details">
+      {/* INFO */}
+      <div className="tf-section">
         <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <div className="content-center">
-                <div className="sc-item-details">
-                  <div>{parse(itemData.accomodation.body)}</div>
-                </div>
-              </div>
+          {hotel.short_description && <h3>{hotel.short_description}</h3>}
+
+          <p>
+            <strong>From:</strong> {hotel.currency} {hotel.min_price}
+            {hotel.max_price ? ` – ${hotel.currency} ${hotel.max_price}` : ""}{" "}
+            <strong>per night</strong>
+          </p>
+
+          {hotel.highlight && (
+            <p>
+              <strong>Highlight:</strong> {hotel.highlight}
+            </p>
+          )}
+
+          {/* TAGS */}
+          {!!(hotel.tags || []).length && (
+            <div style={{ marginBottom: 20 }}>
+              {hotel.tags.map((tag, i) => (
+                <span
+                  key={i}
+                  style={{
+                    marginRight: 10,
+                    background: "#eee",
+                    padding: "6px 12px",
+                    borderRadius: 20,
+                    display: "inline-block",
+                    marginBottom: 8,
+                  }}
+                >
+                  {tag}
+                </span>
+              ))}
             </div>
-          </div>
-          <div className="tf-section tf-tours">
-            <div className="container">
-              
-              <Tours />
-            </div>
-          </div>
- 
-          
+          )}
 
-          {/* <center>
-            <Link
-              to="#"
-              onClick={openCalendlyPopup}
-              className="sc-button loadmore style fl-button pri-3"
-            >
-              <span>Schedule Free Consultation with a Travel Expert</span>
-            </Link>
-          </center> */}
+          {/* BODY */}
+          <div>{parse(hotel.body || "")}</div>
 
-          <div className="tf-section tf-item-details">
-            <div className="container">
-              <div className="row">
-                <div className="col-md-12">
-                  <div className="content-center">
-                    <div className="sc-item-details">
-                      {formSubmitted ? (
-                        <div className="thank-you-message">
-                          <h2>Thank You!</h2>
-                          <p>Your enquiry has been successfully submitted. We will get back to you soon.</p>
-                        </div>
-                      ) : (
-                        <Fragment>
-                          {!loading && ( // Hide form header while loading
-                            <h1 className="tf-title-heading ct style-2 fs-30 mg-bt-10">
-                              Any Questions?
-                            </h1>
-                          )}
+          {/* EMERALD CTA */}
+          <EmeraldBlock>
+            <EmeraldTitle>Want Us To Book This For You?</EmeraldTitle>
+            <EmeraldSub>{ctaIntro}</EmeraldSub>
 
-                          <div className="form-inner">
-                            <form
-                              id="contactform"
-                              noValidate="novalidate"
-                              onSubmit={handleSubmit}
-                            >
-                              <div className="row">
-                                {!loading && ( // Conditionally render inputs based on loading state
-                                  <>
-                                    <div className="col-md-6">
-                                      <input
-                                        type="text"
-                                        name="name"
-                                        value={formData.name}
-                                        placeholder="Your Name"
-                                        onChange={handleChange}
-                                      />
-                                    </div>
-                                    <div className="col-md-6">
-                                      <input
-                                        type="email"
-                                        name="email"
-                                        value={formData.email}
-                                        placeholder="Your Email"
-                                        onChange={handleChange}
-                                      />
-                                      {formError && <p style={{ color: 'red' }}>{formError}</p>}
-                                    </div>
-                                    <div className="col-md-12">
-                                      <textarea
-                                        name="message"
-                                        value={formData.message}
-                                        placeholder="Your Message"
-                                        onChange={handleChange}
-                                      ></textarea>
-                                    </div>
-                                    <div className="col-md-12">
-                                      <button type="submit" className="sc-button loadmore style fl-button pri-3">
-                                        <span>Send Message</span>
-                                      </button>
-                                    </div>
-                                  </>
-                                )}
-                              </div>
-                            </form>
-                          </div>
-                        </Fragment>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            <ButtonRow>
+              <WhatsAppButton
+                href={buildWhatsAppUrl(bookMsg)}
+                target="_blank"
+                rel="noreferrer"
+                onClick={(e) => handleWhatsAppClick(e, buildWhatsAppUrl(bookMsg))}
+              >
+                <FaWhatsapp size={18} /> Book {hotel.title}
+              </WhatsAppButton>
 
-          <LiveAuction data={itemData.reviews} />
-          
-          <Footer />
+              <SecondaryButton
+                href={buildWhatsAppUrl(chauffeurMsg)}
+                target="_blank"
+                rel="noreferrer"
+                onClick={(e) =>
+                  handleWhatsAppClick(e, buildWhatsAppUrl(chauffeurMsg))
+                }
+              >
+                Hotel + Chauffeur
+              </SecondaryButton>
+
+              <SecondaryButton
+                href={buildWhatsAppUrl(enquiryMsg)}
+                target="_blank"
+                rel="noreferrer"
+                onClick={(e) =>
+                  handleWhatsAppClick(e, buildWhatsAppUrl(enquiryMsg))
+                }
+              >
+                Quick Enquiry
+              </SecondaryButton>
+            </ButtonRow>
+          </EmeraldBlock>
         </div>
       </div>
+
+      <Suspense fallback={<div style={{ height: 300 }} />}>
+        <TestimonialCarousel />
+      </Suspense>
+
+      {/* FAQ */}
+      <div className="tf-section">
+        <div className="container">
+          <h2 className="tf-title-heading ct style-2 fs-30 mg-bt-20">
+            Frequently Asked Questions
+          </h2>
+
+          <div className="flat-accordion2">
+            {faqs.map((item, i) => (
+              <Accordion key={i} title={item.title}>
+                <p>{item.text}</p>
+              </Accordion>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <Footer />
     </div>
   );
 };

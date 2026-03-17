@@ -21,6 +21,7 @@
     "react-bootstrap": "^2.9.0",
     "react-bootstrap-accordion": "^1.0.0",
     "react-countdown": "^2.3.2",
+    "react-day-picker": "^9.14.0",
     "react-dom": "^18.3.1",
     "react-flip-move": "^3.0.5",
     "react-ga": "^3.3.1",

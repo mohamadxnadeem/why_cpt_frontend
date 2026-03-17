@@ -194,6 +194,8 @@ const IncludedList = styled.ul`
 
 const AirportTransfers = () => {
   /* FAQ CONTENT (SEO-RICH) */
+
+
   const faqs = [
     {
       title: "How much does a private chauffeur cost in Cape Town?",
