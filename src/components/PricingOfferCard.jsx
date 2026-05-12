@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
+import { useCurrency } from "../contexts/CurrencyContext";
 
 /* Styling */
 const Wrapper = styled.div`
@@ -40,68 +41,29 @@ const CurrencySelector = styled.select`
   border: 1px solid #ddd;
 `;
 
-/* ─────────────────────────────────────────────── */
-
 const PricingOfferCard = ({ price }) => {
-  const [currency, setCurrency] = useState("ZAR");
-  const [convertedPrice, setConvertedPrice] = useState(price);
-
-  /*  
-    ► STATIC TEST RATES (Update this daily manually)
-    ► These rates are correct as of: "example day"
-    ► Purpose: Verify that conversion UI & logic works
-  */
-  const STATIC_RATES = {
-    ZAR: 1,
-    USD: 0.054, // 1 ZAR = 0.054 USD (example)
-    GBP: 0.043, // 1 ZAR = 0.043 GBP (example)
-    EUR: 0.050, // 1 ZAR = 0.050 EUR (example)
-  };
-
-  /* Currency Symbols */
-  const SYMBOLS = {
-    ZAR: "R",
-    USD: "$",
-    GBP: "£",
-    EUR: "€",
-  };
-
-  /* 👉 Convert price whenever currency changes */
-  useEffect(() => {
-    const rate = STATIC_RATES[currency];
-
-    if (!rate) {
-      setConvertedPrice(price);
-      return;
-    }
-
-    const newPrice = price * rate;
-    setConvertedPrice(newPrice);
-  }, [currency, price]);
+  const { currency, setCurrency, currencies, format } = useCurrency();
 
   return (
     <Wrapper>
       <PriceCardWrapper>
         <PriceTitle>Private Chauffeur Price Starting From</PriceTitle>
 
-        <PriceValue>
-          {SYMBOLS[currency]}
-          {Math.round(convertedPrice).toLocaleString()}
-        </PriceValue>
+        <PriceValue>{format(price)}</PriceValue>
 
         <Label>Price Includes vehicle, driver, fuel and toll fees</Label>
+        <Label>Price Excludes National Park Tickets, Activities and Meals</Label>
 
-         <Label>Price Excludes National Park Tickets, Activities and Meals</Label>
-
-        {/* Currency Dropdown */}
         <CurrencySelector
           value={currency}
           onChange={(e) => setCurrency(e.target.value)}
+          aria-label="Choose currency"
         >
-          <option value="ZAR">🇿🇦 ZAR — South African Rand</option>
-          <option value="USD">🇺🇸 USD — US Dollar</option>
-          <option value="GBP">🇬🇧 GBP — British Pound</option>
-          <option value="EUR">🇪🇺 EUR — Euro</option>
+          {currencies.map((c) => (
+            <option key={c.code} value={c.code}>
+              {c.symbol} {c.label}
+            </option>
+          ))}
         </CurrencySelector>
       </PriceCardWrapper>
     </Wrapper>

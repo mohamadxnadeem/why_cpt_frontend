@@ -6,6 +6,7 @@ import FlipMove from 'react-flip-move';
 import { Blurhash } from 'react-blurhash';
 import styled from 'styled-components';
 import Loader from '../Loader'; // Import the Loader component
+import { useCurrency } from '../../contexts/CurrencyContext';
 
 // Styled components
 const SlideContainer = styled.div`
@@ -43,6 +44,7 @@ const ImageStyled = styled.img`
 const TwoBedroom = forwardRef((ref) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { format } = useCurrency();
 
   useEffect(() => {
     fetch('https://web-production-1ab9.up.railway.app/api/two_bedroom/all/')
@@ -163,7 +165,7 @@ const TwoBedroom = forwardRef((ref) => {
                                       <div className="price" style={{ textAlign: 'left' }}>
                                        
                                         
-                                        <p>From ${item.accomodation.min_price} Per Night</p>
+                                        <p>From {format(item.accomodation.min_price)} Per Night</p>
 
                                         
                                        
