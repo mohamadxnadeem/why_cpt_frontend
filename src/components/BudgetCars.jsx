@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from "swiper";
 import FlipMove from "react-flip-move";
 import styled, { keyframes } from "styled-components";
+import { useCurrency } from "../contexts/CurrencyContext";
 
 // 💫 Shimmer animation
 const shimmer = keyframes`
@@ -68,6 +69,7 @@ const OfferLine = styled.div`
 const BudgetCars4Hire = forwardRef((props, ref) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { format } = useCurrency();
 
   // ✅ Load & refetch logic
   useEffect(() => {
@@ -219,7 +221,7 @@ const BudgetCars4Hire = forwardRef((props, ref) => {
                             color: "#0b5b33",
                           }}
                         >
-                          ${Math.round(item.car?.price || 0)} / Per Day
+                          {format(item.car?.price || 0)} / Per Day
                         </span>
                       </div>
 

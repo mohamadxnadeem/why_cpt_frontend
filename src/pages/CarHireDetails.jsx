@@ -11,6 +11,7 @@ import { Helmet } from "react-helmet";
 import TestimonialCarousel from "../components/TestimonialCarousel";
 import { FaWhatsapp } from "react-icons/fa";
 import { Accordion } from "react-bootstrap-accordion";
+import { useCurrency } from "../contexts/CurrencyContext";
 
 // ✨ Shimmer loader for hero gallery
 const LoaderWrapper = styled.div`
@@ -305,6 +306,7 @@ const CarHireDetails = () => {
 
   const [itemData, setItemData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { format } = useCurrency();
 
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formError, setFormError] = useState("");
@@ -374,15 +376,16 @@ const CarHireDetails = () => {
 
   // ✅ Dynamic SEO text bits
   const priceNumber = car?.price ? Math.round(car.price) : null;
+  const priceDisplay = priceNumber ? format(priceNumber) : null;
   const vehicleName = car?.title || "Chauffeur Vehicle";
 
   const pageTitle = car
-    ? `${vehicleName} for Hire from $${priceNumber || "____"} per Day in Cape Town`
+    ? `${vehicleName} for Hire from ${priceDisplay || "____"} per Day in Cape Town`
     : "Chauffeur Vehicle Hire in Cape Town";
 
   const metaDescription = car
     ? `Hire a chauffeur-driven ${vehicleName} in Cape Town from ${
-        priceNumber ? `R${priceNumber} per day` : "a competitive daily rate"
+        priceDisplay ? `${priceDisplay} per day` : "a competitive daily rate"
       }. Professional driver, fuel included and up to 10 hours / 200km per day. Perfect for airport transfers, business and private tours.`
     : "Book luxury chauffeur-driven vehicles in Cape Town with professional drivers, fuel included and customised daily itineraries.";
 
@@ -431,7 +434,7 @@ Some trips outside Cape Town or beyond the daily km allowance may carry a small 
       title: "How much does it cost per day to hire this chauffeur vehicle?",
       text: `
 Daily rates vary slightly by season, exact route and how many days you book — but for this vehicle you can generally expect a daily chauffeur rate starting from ${
-        priceNumber ? `around R${priceNumber}` : "a competitive rate"
+        priceDisplay ? `around ${priceDisplay}` : "a competitive rate"
       } per day for up to 10 hours / 200km.
 
 If you share a full-day hire between friends or family, it often works out more cost-effective (and far more convenient) than renting a car, paying for fuel, parking, tolls and navigation stress yourself.`,
@@ -516,8 +519,8 @@ Your driver will assist with luggage, route optimisation and smooth timing betwe
           {!loading && car && (
             <HeaderBlock>
               <Title>
-                {vehicleName} for Hire from ${""}
-                {priceNumber ? `${priceNumber}` : "a competitive rate"} per Day
+                {vehicleName} for Hire from{" "}
+                {priceDisplay ? priceDisplay : "a competitive rate"} per Day
                 in Cape Town
               </Title>
               <SubTitle>
@@ -565,7 +568,7 @@ Your driver will assist with luggage, route optimisation and smooth timing betwe
 
                 {priceNumber && (
                   <>
-                    <PriceValue>${priceNumber} / day</PriceValue>
+                    <PriceValue>{priceDisplay} / day</PriceValue>
 
                     {/* ✅ Discount banner directly under price */}
                     <DiscountBanner>

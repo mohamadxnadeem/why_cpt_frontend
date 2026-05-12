@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import routes from './pages/index';
 import ReactGA from "react-ga4";
 import { injectSpeedInsights } from '@vercel/speed-insights';
+import CurrencySelector from './components/CurrencySelector';
 
 function App() {
     const TRACKING_ID = 'G-LCC52EM33V'; // Tracking ID
@@ -43,11 +44,14 @@ function App() {
     }, []);
 
     return (
-        <Routes>
-            {routes.map((data, index) => (
-                <Route onUpdate={() => window.scrollTo(0, 0)} exact={true} path={data.path} element={data.component} key={index} />
-            ))}
-        </Routes>
+        <>
+            <Routes>
+                {routes.map((data, index) => (
+                    <Route onUpdate={() => window.scrollTo(0, 0)} exact={true} path={data.path} element={data.component} key={index} />
+                ))}
+            </Routes>
+            <CurrencySelector />
+        </>
     );
 }
 

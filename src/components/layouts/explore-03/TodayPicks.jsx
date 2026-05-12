@@ -4,9 +4,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import Rating from '../../Rating';
 import FlipMove from 'react-flip-move';
+import { useCurrency } from '../../../contexts/CurrencyContext';
 
 const TodayPicks = forwardRef((ref) => {
   const [data, setData] = useState([]);
+  const { format } = useCurrency();
 
   useEffect(() => {
     // Fetch data from your API
@@ -80,7 +82,7 @@ const TodayPicks = forwardRef((ref) => {
                                 <div className="meta-info">
                                   <div className="author">
                                     <div className="price">
-                                      <h5>Starting From ${item.experience.price}</h5>
+                                      <h5>Starting From {format(item.experience.price)}</h5>
                                     </div>
                                   </div>
                                 </div>

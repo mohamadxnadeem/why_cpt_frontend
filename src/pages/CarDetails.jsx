@@ -7,6 +7,7 @@ import LiveAuction from '../components/layouts/home-3/LiveAuction';
 import Rating from '../components/Rating';
 import Loader from '../components/Loader';
 import SliderStyle3 from '../components/slider/SliderStyle3';
+import { useCurrency } from '../contexts/CurrencyContext';
 
 
 
@@ -22,6 +23,7 @@ const CarDetails = () => {
   const { id } = useParams();
   const [itemData, setItemData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { format } = useCurrency();
 
 
   useEffect(() => {
@@ -88,7 +90,7 @@ const CarDetails = () => {
                                             <span className="heading">Prices Starting from</span>
                                             <div className="price">
                                                 <div className="price-box">
-                                                    <h5> ${itemData.car.price}</h5>
+                                                    <h5> {format(itemData.car.price)}</h5>
                                                 </div>
                                                 
                                             </div>

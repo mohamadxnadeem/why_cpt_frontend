@@ -6,10 +6,12 @@ import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import Rating from './Rating';
 import FlipMove from 'react-flip-move';
 import { Blurhash } from 'react-blurhash';
+import { useCurrency } from '../contexts/CurrencyContext';
 
 const TipsInCPT = forwardRef((ref) => {
   const [data, setData] = useState([]);
   const [blurhashArray, setBlurhashArray] = useState([]);
+  const { format } = useCurrency();
 
   useEffect(() => {
     // Fetch data from your API
@@ -119,7 +121,7 @@ const TipsInCPT = forwardRef((ref) => {
                                 <div className="meta-info">
                                   <div className="author">
                                     <div className="price">
-                                      <h5>Starting From ${item.car.price}</h5>
+                                      <h5>Starting From {format(item.car.price)}</h5>
                                     </div>
                                   </div>
                                 </div>

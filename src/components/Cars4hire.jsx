@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay, EffectFade } from 'swiper';
 import FlipMove from 'react-flip-move';
 import styled, { keyframes } from 'styled-components';
+import { useCurrency } from '../contexts/CurrencyContext';
 
 // 💫 Shimmer animation
 const shimmer = keyframes`
@@ -46,6 +47,7 @@ const ImageStyled = styled.img`
 const Cars4Hire = forwardRef((props, ref) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { format } = useCurrency();
 
   // ✅ Load & refetch logic
   useEffect(() => {
@@ -156,7 +158,7 @@ const Cars4Hire = forwardRef((props, ref) => {
                       <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '6px' }}>
                         <span style={{ fontSize: '15px', color: '#555' }}>Starting from:</span>
                         <span style={{ fontSize: '20px', fontWeight: '700', color: '#0b5b33' }}>
-                          ${Math.round(item.car?.price)} / Per Day
+                          {format(item.car?.price || 0)} / Per Day
                         </span>
                       </div>
 

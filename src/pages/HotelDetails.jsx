@@ -9,6 +9,7 @@ import styled, { keyframes } from "styled-components";
 import { Helmet } from "react-helmet";
 import { Accordion } from "react-bootstrap-accordion";
 import { FaWhatsapp } from "react-icons/fa";
+import { useCurrency } from "../contexts/CurrencyContext";
 
 const TestimonialCarousel = React.lazy(() =>
   import("../components/TestimonialCarousel")
@@ -102,6 +103,7 @@ const HotelDetails = () => {
 
   const [itemData, setItemData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { format } = useCurrency();
 
   // ✅ Paid-only WhatsApp conversion tracking (Google Ads only via gclid)
   const handleWhatsAppClick = (e, url) => {
@@ -160,8 +162,8 @@ const HotelDetails = () => {
     },
     {
       title: `How much does ${hotel.title} cost per night?`,
-      text: `Rates are seasonal. A typical guide is from ${hotel.currency} ${hotel.min_price}${
-        hotel.max_price ? ` up to ${hotel.currency} ${hotel.max_price}` : ""
+      text: `Rates are seasonal. A typical guide is from ${format(hotel.min_price)}${
+        hotel.max_price ? ` up to ${format(hotel.max_price)}` : ""
       } per night, depending on room type and dates.`,
     },
     {
@@ -253,8 +255,8 @@ Message us with your dates and we’ll:
           {hotel.short_description && <h3>{hotel.short_description}</h3>}
 
           <p>
-            <strong>From:</strong> {hotel.currency} {hotel.min_price}
-            {hotel.max_price ? ` – ${hotel.currency} ${hotel.max_price}` : ""}{" "}
+            <strong>From:</strong> {format(hotel.min_price)}
+            {hotel.max_price ? ` – ${format(hotel.max_price)}` : ""}{" "}
             <strong>per night</strong>
           </p>
 

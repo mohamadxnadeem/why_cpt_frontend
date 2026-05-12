@@ -6,6 +6,7 @@ import FlipMove from 'react-flip-move';
 import { Blurhash } from 'react-blurhash';
 import styled from 'styled-components';
 import Loader from './Loader'; // Import the Loader component
+import { useCurrency } from '../contexts/CurrencyContext';
 
 // Styled components
 const SlideContainer = styled.div`
@@ -43,6 +44,7 @@ const ImageStyled = styled.img`
 const SelfDrive = forwardRef((ref) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { format } = useCurrency();
 
   useEffect(() => {
     fetch('https://web-production-1ab9.up.railway.app/api/self-drive/all/')
@@ -159,7 +161,7 @@ const SelfDrive = forwardRef((ref) => {
                                       <div className="price" style={{ textAlign: 'left' }}>
                                        
                                         
-                                        <p>£{item.car.price} Per Day</p>
+                                        <p>{format(item.car.price)} Per Day</p>
 
                                         
                                        

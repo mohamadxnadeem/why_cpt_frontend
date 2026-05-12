@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import FlipMove from 'react-flip-move';
 import styled, { keyframes } from 'styled-components';
+import { useCurrency } from '../../contexts/CurrencyContext';
 
 // 💫 Unified shimmer animation
 const shimmer = keyframes`
@@ -48,6 +49,7 @@ const ImageStyled = styled.img`
 const OneBedroom = forwardRef((props, ref) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { format } = useCurrency();
 
   useEffect(() => {
     const cached = localStorage.getItem('oneBedroomData');
@@ -168,7 +170,7 @@ const OneBedroom = forwardRef((props, ref) => {
                                 <div className="author">
                                   <div className="price" style={{ textAlign: 'left' }}>
                                     <p>
-                                      From ${item.accomodation.min_price} per night
+                                      From {format(item.accomodation.min_price)} per night
                                     </p>
                                   </div>
                                 </div>

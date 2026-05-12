@@ -7,6 +7,7 @@ import Footer from "../components/footer/Footer";
 
 import { FaWhatsapp } from "react-icons/fa";
 import { Accordion } from "react-bootstrap-accordion";
+import { useCurrency } from "../contexts/CurrencyContext";
 
 // ✅ HERO IMAGE
 import backgroundImage from "../assets/images/item-background/benz.jpg";
@@ -284,6 +285,7 @@ const ShimmerLine = styled(ShimmerBox)`
    PAGE COMPONENT
 --------------------------------------------------------- */
 const BestHotelsCapeTown = () => {
+  const { format: formatCurrency } = useCurrency();
   // ✅ Paid-only WhatsApp conversion tracking (Google Ads only via gclid)
   const handleWhatsAppClick = (e, url) => {
     if (e && e.preventDefault) e.preventDefault();
@@ -419,20 +421,12 @@ Below is a curated shortlist of Cape Town’s most loved stays — and if you me
       ? hotels
       : hotels.filter((h) => (h.tags || []).includes(activeFilter));
 
-  const formatPrice = (value) => {
-    if (value === null || value === undefined || value === "") return null;
-    const n = Number(value);
-    if (Number.isNaN(n)) return value;
-    return new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(n);
-  };
-
   const priceLine = (h) => {
-    const min = formatPrice(h.min_price);
-    const max = formatPrice(h.max_price);
-    const cur = h.currency || "USD";
+    const hasMin = h.min_price !== null && h.min_price !== undefined && h.min_price !== "";
+    const hasMax = h.max_price !== null && h.max_price !== undefined && h.max_price !== "";
 
-    if (min && max) return `${cur} ${min} – ${max} per night`;
-    if (min) return `From ${cur} ${min} per night`;
+    if (hasMin && hasMax) return `${formatCurrency(h.min_price)} – ${formatCurrency(h.max_price)} per night`;
+    if (hasMin) return `From ${formatCurrency(h.min_price)} per night`;
     return "Rates on request";
   };
 
