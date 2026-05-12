@@ -47,25 +47,6 @@ const ImageStyled = styled.img`
   border-radius: 10px;
 `;
 
-/* ✅ GREEN DISCOUNT BADGE (same emerald) */
-const OfferLine = styled.div`
-  margin-top: 10px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 6px 12px;
-  border-radius: 8px;
-
-  background: #0b5b33;
-  color: #fff;
-
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1;
-  width: fit-content;
-`;
-
 const BudgetCars4Hire = forwardRef((props, ref) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -223,11 +204,6 @@ const BudgetCars4Hire = forwardRef((props, ref) => {
                         >
                           {format(item.car?.price || 0)} / Per Day
                         </span>
-                      </div>
-
-                      {/* ✅ DISCOUNT BADGE UNDER PRICE (same green) */}
-                      <div style={{ marginTop: "6px" }}>
-                        <OfferLine>Save up to 20% (5+ day bookings)</OfferLine>
                       </div>
 
                       <br></br>
