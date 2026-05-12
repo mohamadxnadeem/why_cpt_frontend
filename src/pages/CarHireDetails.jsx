@@ -168,51 +168,6 @@ const TagPill = styled.span`
   margin-top: 6px;
 `;
 
-/* ✅ Emerald discount banner (under the price) */
-const DiscountBanner = styled.div`
-  margin: 10px 0 16px;
-  padding: 14px 14px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, #0b5b33 0%, #063e23 100%);
-  color: #fff;
-  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
-  text-align: left;
-`;
-
-const DiscountTitle = styled.div`
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  margin-bottom: 8px;
-`;
-
-const DiscountGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 6px;
-
-  @media (min-width: 520px) {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-  }
-`;
-
-const DiscountPill = styled.div`
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 999px;
-  padding: 8px 10px;
-  font-size: 13px;
-  font-weight: 700;
-  text-align: center;
-`;
-
-const DiscountNote = styled.div`
-  margin-top: 10px;
-  font-size: 12px;
-  opacity: 0.92;
-`;
-
 // 🟢 Emerald CTA Block
 const EmeraldBlock = styled.div`
   background: linear-gradient(135deg, #0b5b33 0%, #063e23 100%);
@@ -393,7 +348,7 @@ const CarHireDetails = () => {
   const whatsappNumber = "27636746131"; // no '+' for wa.me
 
   const waText = car
-    ? `Hi Cape Town Concierge, I’d like to reserve ${vehicleName}. Date: ____ | Guests: ____ | Days: ____ | Budget: ____. (Do multi-day discounts apply?)`
+    ? `Hi Cape Town Concierge, I’d like to reserve ${vehicleName}. Date: ____ | Guests: ____ | Days: ____ | Budget: ____`
     : "Hi Cape Town Concierge, I’d like to reserve a private experience. Date: ____ | Guests: ____ | Days: ____ | Budget: ____";
 
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
@@ -569,20 +524,6 @@ Your driver will assist with luggage, route optimisation and smooth timing betwe
                 {priceNumber && (
                   <>
                     <PriceValue>{priceDisplay} / day</PriceValue>
-
-                    {/* ✅ Discount banner directly under price */}
-                    <DiscountBanner>
-                      <DiscountTitle>Multi-day savings</DiscountTitle>
-                      <DiscountGrid>
-                        <DiscountPill>5+ days: save up to 10%</DiscountPill>
-                        <DiscountPill>7+ days: save up to 15%</DiscountPill>
-                        <DiscountPill>10+ days: save up to 20%</DiscountPill>
-                      </DiscountGrid>
-                      <DiscountNote>
-                        Discounts depend on season, availability & route. Ask us
-                        on WhatsApp.
-                      </DiscountNote>
-                    </DiscountBanner>
 
                     <PriceLabel>
                       Includes up to <strong>10 hours</strong> and{" "}
